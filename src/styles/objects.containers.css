@@ -1,0 +1,10 @@
+.container {
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+}

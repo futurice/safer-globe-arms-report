@@ -37,6 +37,8 @@ The author of this document recommends Visual Studio Code, which this project is
 
 In addition, this project uses [`lint-staged`](https://github.com/okonet/lint-staged) as a pre-commit hook to help prevent you from committing bad code. Use the `--no-verify` argument to `git commit` if you really really need to commit code which fails linting for some reason.
 
+Both PostCSS and Autoprefixer have been included as well in order to help ensure consistent CSS styles across browsers and versions.
+
 ## Production workflow
 
 We use Heroku for deployment. Log in [here](https://dashboard.heroku.com/apps) if you need to, but you probably don't need to unless we run out of uptime credit and you need to buy some. The username and password are in the password safe.
@@ -54,6 +56,8 @@ So the workflow should be roughly as follows:
 5. View deployment to make sure it works
 6. If you need to make changes, push them to the same branch and go back to step 5
 7. When changes are approved, merge into master
+
+CSS management should follow ITCSS best practices found here: [http://www.creativebloq.com/web-design/manage-large-css-projects-itcss-101517528](Manage large CSS projects with ITCSS)
 
 ## Debugging in the Editor
 

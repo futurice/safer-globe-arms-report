@@ -1,0 +1,18 @@
+a, a:active, a:visited {
+  color: #900;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #a00;
+  text-decoration: underline;
+}
+
+.primary-nav a, .primary-nav a:active, .primary-nav a:visited, .primary-nav a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.primary-nav a.active {
+  border-bottom: 3px solid #000;
+}
