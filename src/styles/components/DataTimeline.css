@@ -1,0 +1,49 @@
+.peace-index-indicator {
+  background: #ccc;
+  height: 10px;
+}
+
+.timeline-item {
+  background: #f6f6f6;
+  flex: 1;
+  position: relative;
+  text-align: center;
+  transition: background .25s ease;
+}
+
+.timeline-item.active {
+  background: #2A79AA;
+  color: #fff;
+  font-weight: 700;
+}
+
+.timeline-item.active:after, .timeline-item.active:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.timeline-item.active:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: #2A79AA;
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+.timeline-item.active:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-top-color: #2A79AA;
+  border-width: 14px;
+  margin-left: -14px;
+}
+
+.timeline-item span {
+  display: inline-block;
+  font-size: .8rem;
+  padding: 5px;
+}

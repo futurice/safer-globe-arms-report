@@ -1,10 +1,10 @@
 .has-spacer:after {
-  background: #333;
+  background: #ccc;
   content: '';
   display: block;
   height: 1px;
   margin: 1rem 0;
-  width: 125px;
+  width: 100%;
 }
 
 .is-centered {
@@ -29,4 +29,12 @@
 
 .is-block {
   display: block;
+}
+
+.is-blue {
+  color: #2D80B5;
+}
+
+.no-bullets {
+  list-style: none;
 }

@@ -5,11 +5,11 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 /*
 Non-Component-Specific Stylesheets
 */
-import './styles/reset.css';
-import './styles/containers.css';
-import './styles/flex-styles.css';
-import './styles/headings.css';
-import './styles/text-types.css';
+import './styles/generic.reset.css';
+import './styles/objects.containers.css';
+import './styles/objects.flex-items.css';
+import './styles/elements.headings.css';
+import './styles/elements.links.css';
 
 /*
 Primary Route Components
@@ -24,7 +24,7 @@ import Downloads from './components/Downloads';
 /*
 Modifier stylesheet to override any preceeding styles when used
 */
-import './styles/modifiers.css';
+import './styles/util.modifiers.css';
 
 const AppRouter = () => (
   <Router>

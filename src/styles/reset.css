@@ -14,10 +14,6 @@ body {
   font: 1rem/1.25 'Raleway', sans-serif;
 }
 
-ol, ul {
-  list-style: none;
-}
-
 blockquote, q {
   quotes: none;
 }
@@ -39,4 +35,18 @@ img {
 
 p {
   margin: 1rem 0;
+}
+
+a, a:active, a:visited {
+  color: #2D80B5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #308AC1;
+  text-decoration: underline;
+}
+
+ol, ul {
+  list-style-position: inside;
 }

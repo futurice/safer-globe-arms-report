@@ -1,0 +1,26 @@
+.primary-nav {
+  border-bottom: 1px solid #dcdcdc;
+  height: 94px;
+  margin-bottom: 15px;
+}
+
+.primary-nav ul {
+  align-items: flex-end;
+}
+
+.primary-nav li {
+  padding: 15px;
+}
+
+.primary-nav a, .primary-nav a:active, .primary-nav a:visited, .primary-nav a:hover {
+  border-bottom: 3px solid transparent;
+  color: black;
+  display: inline-block;
+  padding: 0 5px;
+  text-decoration: none;
+  transition: border .25s ease;
+}
+
+.primary-nav a.active {
+  border-bottom: 3px solid #2D80B5;
+}

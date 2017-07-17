@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
-import './../styles/components.nav.css';
+import './../styles/components/Nav.css';
 
 class Nav extends Component {
   render() {
     return (
-      <nav className='primary-nav'>
-        <ul className='flex-container'>
+      <nav className="primary-nav">
+        <ul className="flex-container no-bullets">
           <li>
             <h1>
-              <Link to="/">ARMS Report
-                <span className='is-block'>SaferGlobe</span>
+              <Link to="/">
+                ARMS Report <span className="is-block is-blue">SaferGlobe</span>
               </Link>
             </h1>
           </li>
@@ -27,8 +27,8 @@ class Nav extends Component {
           <li>
             <NavLink to="/downloads">Downloads</NavLink>
           </li>
-          <li>
-            <span>FI | EN</span>
+          <li className="at-flex-end">
+            <span><a href="#">FI</a> | <a href="#">EN</a></span>
           </li>
         </ul>
       </nav>
