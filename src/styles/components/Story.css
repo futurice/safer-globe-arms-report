@@ -1,0 +1,38 @@
+.data-stories-container {
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.story-container {
+  align-items: flex-start;
+  background: #fff;
+  margin: 15px 0;
+  padding: 15px;
+}
+
+.story-container:nth-child(odd) {
+  background: #f6f6f6;
+}
+
+.story-text {
+  position: relative;
+}
+
+.story-year {
+  background: #2270a1;
+  color: #fff;
+  padding: 5px 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.story-image {
+  margin-left: 15px;
+  max-width: 500px;
+}
+
+.read-more {
+  text-align: right;
+}

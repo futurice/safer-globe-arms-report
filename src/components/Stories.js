@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Data extends Component {
+class Stories extends Component {
   render() {
     return (
       <section>
@@ -12,4 +12,4 @@ class Data extends Component {
   }
 }
 
-export default Data;
+export default Stories;

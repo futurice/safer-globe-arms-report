@@ -7,6 +7,7 @@ import DataTimeline from './DataTimeline';
 
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
+import './../styles/components/Story.css';
 
 class Data extends Component {
   render() {
@@ -63,17 +64,12 @@ class Data extends Component {
                 <p className="secondary-text">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
-                <SelectMenu
-                  id="filter-for-year"
-                  options={years}
-                  defaultOption="-- Filter by Year --"
-                  label="Filter by Year"
-                />
+
                 <SelectMenu
                   id="filter-for-country"
                   options={countries}
-                  defaultOption="-- Filter by Country --"
-                  label="Filter by Country"
+                  defaultOption="-- Search by Country --"
+                  label="Search by Country"
                 />
               </form>
             </section>
@@ -95,7 +91,7 @@ class Data extends Component {
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1,523M€</span>
+                  <span className="rank-headline is-block">Total: 1 523M€</span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -115,7 +111,7 @@ class Data extends Component {
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1,523M€</span>
+                  <span className="rank-headline is-block">Total: 1 523M€</span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -135,7 +131,7 @@ class Data extends Component {
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1,523M€</span>
+                  <span className="rank-headline is-block">Total: 1 523M€</span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -144,10 +140,67 @@ class Data extends Component {
 
             </section>
           </section>
-          <cite>* Rank ia based on totals from 2008 - 2016</cite>
+          <cite>* Rank is based on totals from 2008 - 2016</cite>
         </section>
         <section className="data-stories-container">
-          <h2 className="has-spacer">Stories</h2>
+          <h2 className="has-spacer">2016 Stories</h2>
+          <section className="story-container flex-container">
+            <div className="story-text">
+              <span className="story-year">27.11.2016</span>
+              <div className="story-text">
+                <h3>Misesn Lilleyawn utn Wiahent</h3>
+                <p>
+                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
+                </p>
+                <div className="read-more">
+                  <a href="#">Continue Reading</a>
+                </div>
+              </div>
+            </div>
+            <img
+              className="story-image"
+              src="https://www.walldevil.com/wallpapers/a86/wallpaper-gun-germany-outfitting-bundeswehr-soldier-assault-machine-rifle-wallpapers-archives.jpg"
+              alt="Story Title Headline"
+            />
+          </section>
+          <section className="story-container flex-container">
+            <div className="story-text">
+              <span className="story-year">03.10.2016</span>
+              <div className="story-text">
+                <h3>Misesn Lilleyawn utn Wiahent</h3>
+                <p>
+                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
+                </p>
+                <div className="read-more">
+                  <a href="#">Continue Reading</a>
+                </div>
+              </div>
+            </div>
+            <img
+              className="story-image"
+              src="http://www.cyborgdb.org/images/boe3.jpg"
+              alt="Story Title Headline"
+            />
+          </section>
+          <section className="story-container flex-container">
+            <div className="story-text">
+              <span className="story-year">15.07.2016</span>
+              <div className="story-text">
+                <h3>Misesn Lilleyawn utn Wiahent</h3>
+                <p>
+                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
+                </p>
+                <div className="read-more">
+                  <a href="#">Continue Reading</a>
+                </div>
+              </div>
+            </div>
+            <img
+              className="story-image"
+              src="http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg"
+              alt="Story Title Headline"
+            />
+          </section>
         </section>
       </section>
     );

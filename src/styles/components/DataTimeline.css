@@ -11,6 +11,11 @@
   transition: background .25s ease;
 }
 
+.timeline-item svg {
+  cursor: pointer;
+  margin: 6px 0;
+}
+
 .timeline-item.active {
   background: #2A79AA;
   color: #fff;
@@ -45,5 +50,5 @@
 .timeline-item span {
   display: inline-block;
   font-size: .8rem;
-  padding: 5px;
+  line-height: 32px;
 }

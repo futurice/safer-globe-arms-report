@@ -20,6 +20,7 @@ import Data from './components/Data';
 import Stories from './components/Stories';
 import About from './components/About';
 import Downloads from './components/Downloads';
+import Footer from './components/Footer';
 
 /*
 Modifier stylesheet to override any preceeding styles when used
@@ -28,14 +29,18 @@ import './styles/modifiers.css';
 
 const AppRouter = () => (
   <Router>
-    <div className="container">
-      <Nav />
+    <div>
+      <div className="container">
+        <Nav />
 
-      <Route exact path="/" component={Home} />
-      <Route exact path="/data" component={Data} />
-      <Route exact path="/stories" component={Stories} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/downloads" component={Downloads} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/data" component={Data} />
+        <Route exact path="/stories" component={Stories} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/downloads" component={Downloads} />
+
+      </div>
+      <Footer />
     </div>
   </Router>
 );

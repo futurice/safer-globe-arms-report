@@ -7,7 +7,9 @@ class DataTimeline extends Component {
       <div className="flex-container flex-spread at-flex-end">
         <div className="timeline-item">
           <div className="peace-index-indicator">&nbsp;</div>
-          <span className="timeline-item-year">Play</span>
+          <svg className="icon-play" id="icn-play" viewBox="0 0 26 26">
+            <path d="M10,19V7l9,6L10,19z" />
+          </svg>
         </div>
         <div className="timeline-item">
           <div className="peace-index-indicator">&nbsp;</div>

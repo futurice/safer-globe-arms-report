@@ -8,3 +8,12 @@
   color: rgba(255, 255, 255, .9);
   fill: rgba(255, 255, 255, .9);
 }
+
+.icon-play {
+  fill: #ffffff;
+  background: #FC8937;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 0 5px;
+}

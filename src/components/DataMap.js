@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import d3 from 'd3';
 
 class DataMap extends Component {
   render() {
@@ -11,10 +9,5 @@ class DataMap extends Component {
     );
   }
 }
-
-DataMap.propTypes = {
-  text: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
 
 export default DataMap;

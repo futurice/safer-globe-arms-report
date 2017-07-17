@@ -1,12 +1,11 @@
 .data-stats-container {
-  margin-bottom: 25px;
+  margin: 0 auto 25px auto;
+  width: 90%;
 }
 
 .stats-container {
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 auto;
-  width: 90%;
 }
 
 .stats-item {
