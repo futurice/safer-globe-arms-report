@@ -15,7 +15,9 @@
     "react-scripts": "1.0.7"
   },
   "dependencies": {
+    "babyparse": "^0.4.6",
     "d3": "^4.9.1",
+    "d3-request": "^1.0.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",

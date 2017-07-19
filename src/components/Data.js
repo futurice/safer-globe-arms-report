@@ -4,24 +4,23 @@ import RadioButton from './forms/RadioButton';
 import SelectMenu from './forms/SelectMenu';
 import DataMap from './DataMap';
 import DataTimeline from './DataTimeline';
+import StoryPreview from './StoryPreview';
 
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
-import './../styles/components/Story.css';
 
 class Data extends Component {
+  constructor() {
+    super();
+    this.state = {
+      countries: [
+        {value: 'usa', text: 'United States of America'},
+        {value: 'fra', text: 'France'},
+        {value: 'swe', text: 'Sweden'},
+      ],
+    };
+  }
   render() {
-    const countries = [
-      {value: 'usa', text: 'United States of America'},
-      {value: 'fra', text: 'France'},
-      {value: 'swe', text: 'Sweden'},
-    ];
-    const years = [
-      {value: 2016, text: 2016},
-      {value: 2015, text: 2015},
-      {value: 2014, text: 2014},
-    ];
-
     return (
       <section className="data-section-container">
         <section className="data-map-container flex-column-container">
@@ -30,7 +29,7 @@ class Data extends Component {
               <h3>United States of America</h3>
               <CountryDataList />
             </section>
-            <section className="flex-three">
+            <section className="flex-four map-container">
               <DataMap />
             </section>
             <section className="flex-one">
@@ -39,6 +38,7 @@ class Data extends Component {
                   id="filter-for-total"
                   name="filter-type"
                   label="Total"
+                  value="Total"
                   helpIcon={true}
                   checked={true}
                 />
@@ -50,6 +50,7 @@ class Data extends Component {
                   id="filter-for-defence"
                   name="filter-type"
                   label="Defence"
+                  value="Defence_Materiel"
                   helpIcon={true}
                 />
                 <p className="secondary-text">
@@ -59,6 +60,7 @@ class Data extends Component {
                   id="filter-for-civilian"
                   name="filter-type"
                   label="Civilian"
+                  value="Civilian_Arms"
                   helpIcon={true}
                 />
                 <p className="secondary-text">
@@ -67,7 +69,7 @@ class Data extends Component {
 
                 <SelectMenu
                   id="filter-for-country"
-                  options={countries}
+                  options={this.state.countries}
                   defaultOption="-- Search by Country --"
                   label="Search by Country"
                 />
@@ -144,63 +146,27 @@ class Data extends Component {
         </section>
         <section className="data-stories-container">
           <h2 className="has-spacer">2016 Stories</h2>
-          <section className="story-container flex-container">
-            <div className="story-text">
-              <span className="story-year">27.11.2016</span>
-              <div className="story-text">
-                <h3>Misesn Lilleyawn utn Wiahent</h3>
-                <p>
-                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
-                </p>
-                <div className="read-more">
-                  <a href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-            <img
-              className="story-image"
-              src="https://www.walldevil.com/wallpapers/a86/wallpaper-gun-germany-outfitting-bundeswehr-soldier-assault-machine-rifle-wallpapers-archives.jpg"
-              alt="Story Title Headline"
-            />
-          </section>
-          <section className="story-container flex-container">
-            <div className="story-text">
-              <span className="story-year">03.10.2016</span>
-              <div className="story-text">
-                <h3>Misesn Lilleyawn utn Wiahent</h3>
-                <p>
-                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
-                </p>
-                <div className="read-more">
-                  <a href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-            <img
-              className="story-image"
-              src="http://www.cyborgdb.org/images/boe3.jpg"
-              alt="Story Title Headline"
-            />
-          </section>
-          <section className="story-container flex-container">
-            <div className="story-text">
-              <span className="story-year">15.07.2016</span>
-              <div className="story-text">
-                <h3>Misesn Lilleyawn utn Wiahent</h3>
-                <p>
-                  In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum.
-                </p>
-                <div className="read-more">
-                  <a href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-            <img
-              className="story-image"
-              src="http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg"
-              alt="Story Title Headline"
-            />
-          </section>
+
+          {/* these stories will ultimately come from a JSON file */}
+
+          <StoryPreview
+            title="Misesn Lilleyawn utn Wiahent"
+            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
+            date="27.11.2016"
+            image="https://www.walldevil.com/wallpapers/a86/wallpaper-gun-germany-outfitting-bundeswehr-soldier-assault-machine-rifle-wallpapers-archives.jpg"
+          />
+          <StoryPreview
+            title="Misesn Lilleyawn utn Wiahent"
+            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
+            date="27.11.2016"
+            image="http://www.cyborgdb.org/images/boe3.jpg"
+          />
+          <StoryPreview
+            title="Misesn Lilleyawn utn Wiahent"
+            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
+            date="27.11.2016"
+            image="http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg"
+          />
         </section>
       </section>
     );

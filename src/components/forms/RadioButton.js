@@ -15,6 +15,7 @@ class RadioButton extends Component {
           type="radio"
           id={this.props.id}
           name={this.props.name}
+          value={this.props.value}
           defaultChecked={this.props.checked}
         />
         <label htmlFor={this.props.id}>
@@ -34,6 +35,7 @@ RadioButton.defaultProps = {
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   label: PropTypes.string.isRequired,
   helpIcon: PropTypes.bool,
