@@ -21,7 +21,13 @@
     "node": true
   },
   "rules": {
-    # "prettier/prettier": ["error", "fb"],
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "bracketSpacing": false,
+      "jsxBracketSameLine": true,
+      "parser": "flow"
+    }],
     "require-jsdoc": "off",
     "no-unused-vars": ["error", {"args": "after-used"}]
   }

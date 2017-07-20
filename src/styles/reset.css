@@ -50,3 +50,7 @@ a:hover {
 ol, ul {
   list-style-position: inside;
 }
+
+svg {
+  overflow: visible;
+}

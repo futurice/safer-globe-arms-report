@@ -6,6 +6,8 @@ import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
 import saferGlobe from './../data/safer-globe.csv';
 
+import './../styles/components/Tooltip.css';
+
 class DataMap extends Component {
   constructor() {
     super();
@@ -39,13 +41,13 @@ class DataMap extends Component {
     let rv = {};
     for (let i = 0; i < arr.length; ++i) {
       rv[arr[i].Countries] = {
-        Civilian_Arms: '0',
-        Defence_Materiel: '0',
-        Total: '0',
+        Civilian_Arms: 0,
+        Defence_Materiel: 0,
+        Total: 0,
       };
-      rv[arr[i].Countries]['Defence_Materiel'] = arr[i].Defence_Materiel;
-      rv[arr[i].Countries]['Total'] = arr[i].Total;
-      rv[arr[i].Countries]['Civilian_Arms'] = arr[i].Civilian_Arms;
+      rv[arr[i].Countries].Defence_Materiel = arr[i].Defence_Materiel;
+      rv[arr[i].Countries].Total = arr[i].Total;
+      rv[arr[i].Countries].Civilian_Arms = arr[i].Civilian_Arms;
     }
     return rv;
   }
@@ -58,8 +60,6 @@ class DataMap extends Component {
   }
 
   drawMap() {
-    let mapWidth = 960;
-    let mapHeight = 480;
     let radius = d3.scaleSqrt().domain([0, 60000000]).range([0, 50]);
 
     let tooltip = d3
@@ -68,11 +68,7 @@ class DataMap extends Component {
       .attr('class', 'tooltip')
       .style('opacity', 0);
 
-    let projection = d3
-      .geoEquirectangular()
-      .scale(153)
-      .translate([mapWidth / 2, mapHeight / 2])
-      .precision(0.1);
+    let projection = d3.geoEquirectangular().scale(153).precision(0.1);
 
     let path = d3.geoPath().projection(projection);
     let zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', () => {
@@ -82,13 +78,11 @@ class DataMap extends Component {
     let mapSVG = d3
       .select('.map-container')
       .append('svg')
-      .attr('width', mapWidth)
-      .attr('height', mapHeight);
+      .attr('xmlns', 'http://www.w3.org/2000/svg')
+      .attr('viewBox', '0 0 960 480');
 
     mapSVG
       .append('rect')
-      .attr('width', mapWidth)
-      .attr('height', mapHeight)
       .style('fill', 'none')
       .style('pointer-events', 'all')
       .call(zoom);
@@ -106,7 +100,9 @@ class DataMap extends Component {
     let defenceColor = '#EF8234';
     let civilianColor = '#555555';
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
-    let saferGlobeDataObject = this.convertToCountryObject(this.state.saferGlobeData);
+    let saferGlobeDataObject = this.convertToCountryObject(
+      this.state.saferGlobeData
+    );
     let SaferGlobeCountries = d3.keys(saferGlobeDataObject);
 
     // Drawing the countries as different svg paths
@@ -115,8 +111,8 @@ class DataMap extends Component {
       .data(
         topojson.feature(
           this.state.countryData,
-          this.state.countryData.objects.countries)
-        .features
+          this.state.countryData.objects.countries
+        ).features
       )
       .enter()
       .append('path')
@@ -135,8 +131,6 @@ class DataMap extends Component {
       .attr('fill', () => {
         return '#eaeaea';
       });
-    // .attr('stroke', '#333')
-    // .attr('stroke-width', 1);
 
     for (let i = 0; i < this.state.gpiData.length; i++) {
       let id = `#${this.state.gpiData[i].country
@@ -153,33 +147,44 @@ class DataMap extends Component {
         let idAlaska = '#Alaska__United_States_of_America_';
         zoomGroup
           .selectAll(idAlaska)
-          .attr('fill', threshold(parseFloat(this.state.gpiData[i].score_2016)));
+          .attr(
+            'fill',
+            threshold(parseFloat(this.state.gpiData[i].score_2016))
+          );
       }
 
       if (this.state.gpiData[i].country === 'France') {
         let idFrance = '#France__Sub_Region_';
         zoomGroup
           .selectAll(idFrance)
-          .attr('fill', threshold(parseFloat(this.state.gpiData[i].score_2016)));
+          .attr(
+            'fill',
+            threshold(parseFloat(this.state.gpiData[i].score_2016))
+          );
       }
     }
 
-    let features = topojson.feature(this.state.countryData, this.state.countryData.objects.countries).features;
+    let features = topojson.feature(
+      this.state.countryData,
+      this.state.countryData.objects.countries
+    ).features;
     let centroids = features.map(feature => {
       let centElement = {
         name: '',
         centroid: [],
-        Civilian_Arms: '0',
-        Defence_Materiel: '0',
-        Total: '0',
+        Civilian_Arms: 0,
+        Defence_Materiel: 0,
+        Total: 0,
       };
       centElement.centroid = path.centroid(feature);
       centElement.name = feature.properties.name;
 
       if (SaferGlobeCountries.indexOf(feature.properties.name) !== -1) {
-        centElement.Civilian_Arms = parseInt(saferGlobeDataObject[feature.properties.name]['Civilian_Arms']);
-        centElement.Defence_Materiel = parseInt(saferGlobeDataObject[feature.properties.name]['Defence_Materiel']);
-        centElement.Total = parseInt(saferGlobeDataObject[feature.properties.name]['Total']);
+        centElement.Civilian_Arms =
+          saferGlobeDataObject[feature.properties.name].Civilian_Arms;
+        centElement.Defence_Materiel =
+          saferGlobeDataObject[feature.properties.name].Defence_Materiel;
+        centElement.Total = saferGlobeDataObject[feature.properties.name].Total;
       }
       return centElement;
     });
@@ -203,7 +208,9 @@ class DataMap extends Component {
       .on('mouseover', d => {
         tooltip.transition().duration(200).style('opacity', 0.9);
         tooltip
-          .html(`${d.name}<br/>Total:${d.Total}<br/>Civilian Arms:${d.Civilian_Arms}<br/>Defence Materiel:${d.Defence_Materiel}`)
+          .html(
+            `${d.name}<br/>Total:${d.Total}<br/>Civilian Arms:${d.Civilian_Arms}<br/>Defence Materiel:${d.Defence_Materiel}`
+          )
           .style('left', `${d3.event.pageX}px`)
           .style('top', `${d3.event.pageY - 58}px`);
       })
@@ -230,7 +237,7 @@ class DataMap extends Component {
       .transition()
       .delay(2000)
       .attr('r', d => {
-        return radius(d['Total']);
+        return radius(d.Total);
       });
 
     zoomGroup
@@ -239,17 +246,20 @@ class DataMap extends Component {
       .attr('class', 'centroidArcDef')
       .attr('fill', defenceColor)
       .attr('fill-opacity', 1)
-      .attr('d', d3.arc()
-        .innerRadius(d => {
+      .attr(
+        'd',
+        d3
+          .arc()
+          .innerRadius(d => {
             return radius(d.Total) - 1;
-        })
-        .outerRadius(d => {
-          return radius(d.Total) + 1;
-          // Error somewhere here
-        })
-        .startAngle(0)
-        .endAngle(d => {
-          if (isNaN(d.Defence_Materiel)) return 0;
+          })
+          .outerRadius(d => {
+            return radius(d.Total) + 1;
+            // Error somewhere here
+          })
+          .startAngle(0)
+          .endAngle(d => {
+            if (isNaN(d.Defence_Materiel)) return 0;
             return 2 * Math.PI * (d.Defence_Materiel / d.Total);
           })
       );
@@ -261,91 +271,103 @@ class DataMap extends Component {
       .attr('class', 'centroidArcCiv')
       .attr('fill', civilianColor)
       .attr('fill-opacity', 1)
-      .attr('d', d3.arc()
-      .innerRadius(d => {
-      return radius(d['Total']) - 1;
-      })
-      .outerRadius(d => {
-        return radius(d['Total']) + 1;
-        // error somewhere here
-      })
-      .startAngle(d => {
-        if (isNaN(d['Defence_Materiel'])) return 0;
-        return 2 * Math.PI * (d['Defence_Materiel'] / d['Total']);
-      })
-      .endAngle(2 * Math.PI)
-    );
+      .attr(
+        'd',
+        d3
+          .arc()
+          .innerRadius(d => {
+            return radius(d.Total) - 1;
+          })
+          .outerRadius(d => {
+            return radius(d.Total) + 1;
+            // error somewhere here
+          })
+          .startAngle(d => {
+            if (isNaN(d.Defence_Materiel)) return 0;
+            return 2 * Math.PI * (d.Defence_Materiel / d.Total);
+          })
+          .endAngle(2 * Math.PI)
+      );
 
     // Using the SaferGlobe Data to determine the radius of circle for different countries
-    d3.selectAll("input[name='filter-type']").on('change', /* @this HTMLElement */ function() {
-      let btnValue = this.value;
-      d3
-        .selectAll('.centroidCircle')
-        .transition()
-        .delay(500)
-        .attr('r', d => {
-          if (isNaN(d[btnValue])) return 0;
-          return radius(d[btnValue]);
-        })
-        .attr('stroke-width', 2)
-        .attr('stroke', () => {
-          if (btnValue == 'Defence_Materiel') {
-            return defenceColor;
-          } else {
-            return civilianColor;
-          }
-        });
+    d3.selectAll("input[name='filter-type']").on(
+      'change',
+      /* @this HTMLElement */ function() {
+        let btnValue = this.value;
+        d3
+          .selectAll('.centroidCircle')
+          .transition()
+          .delay(500)
+          .attr('r', d => {
+            if (isNaN(d[btnValue])) return 0;
+            return radius(d[btnValue]);
+          })
+          .attr('stroke-width', 2)
+          .attr('stroke', () => {
+            if (btnValue === 'Defence_Materiel') {
+              return defenceColor;
+            } else {
+              return civilianColor;
+            }
+          });
 
-      if (btnValue !== 'Total') {
-        d3.selectAll('.centroidArcDef').remove();
-        d3.selectAll('.centroidArcCiv').remove();
-      } else {
-        zoomGroup
-          .selectAll('.gCentroid')
-          .append('path')
-          .attr('class', 'centroidArcDef')
-          .attr('fill', defenceColor)
-          .attr('fill-opacity', 1)
-          .attr('d', d3.arc()
-            .innerRadius(d => {
-              return radius(d['Total']) - 1;
-            })
-            .outerRadius(d => {
-              return radius(d['Total']) + 1;
-            })
-            .startAngle(0)
-            .endAngle(d => {
-              if (isNaN(d['Defence_Materiel'])) {
-                return 0;
-              }
-              return 2 * Math.PI * (d['Defence_Materiel'] / d['Total']);
-            })
-          );
+        if (btnValue !== 'Total') {
+          d3.selectAll('.centroidArcDef').remove();
+          d3.selectAll('.centroidArcCiv').remove();
+        } else {
+          zoomGroup
+            .selectAll('.gCentroid')
+            .append('path')
+            .attr('class', 'centroidArcDef')
+            .attr('fill', defenceColor)
+            .attr('fill-opacity', 1)
+            .attr(
+              'd',
+              d3
+                .arc()
+                .innerRadius(d => {
+                  return radius(d.Total) - 1;
+                })
+                .outerRadius(d => {
+                  return radius(d.Total) + 1;
+                })
+                .startAngle(0)
+                .endAngle(d => {
+                  if (isNaN(d.Defence_Materiel)) {
+                    return 0;
+                  }
+                  return 2 * Math.PI * (d.Defence_Materiel / d.Total);
+                })
+            );
 
-        // Drawing civilian arcs second
-        zoomGroup
-          .selectAll('.gCentroid')
-          .append('path')
-          .attr('class', 'centroidArcCiv')
-          .attr('fill', civilianColor)
-          .attr('fill-opacity', 1)
-          .attr('d', d3.arc()
-            .innerRadius(d => {
-              return radius(d['Total']) - 1;
-            })
-            .outerRadius(d => {
-              return radius(d['Total']) + 1;
-            })
-            .startAngle(d => {
-              if (isNaN(d['Defence_Materiel'])) {
-                return 0;
-              }
-              return 2 * Math.PI * (d['Defence_Materiel'] / d['Total']);
-            })
-          .endAngle(2 * Math.PI)
-          );
+          // Drawing civilian arcs second
+          zoomGroup
+            .selectAll('.gCentroid')
+            .append('path')
+            .attr('class', 'centroidArcCiv')
+            .attr('fill', civilianColor)
+            .attr('fill-opacity', 1)
+            .attr(
+              'd',
+              d3
+                .arc()
+                .innerRadius(d => {
+                  return radius(d.Total) - 1;
+                })
+                .outerRadius(d => {
+                  return radius(d.Total) + 1;
+                })
+                .startAngle(d => {
+                  if (isNaN(d.Defence_Materiel)) {
+                    return 0;
+                  }
+                  return 2 * Math.PI * (d.Defence_Materiel / d.Total);
+                })
+                .endAngle(2 * Math.PI)
+            );
+        }
       }
-    });
+    );
   } // End drawMap()
 
   render() {
