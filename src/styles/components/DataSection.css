@@ -3,4 +3,5 @@
   /* 139px - the height of the nav + margins + paddings */
   margin-bottom: 2rem;
   /* Create space between the following Stats section to acommodate the active Timeline down arrow */
+  position: relative;
 }

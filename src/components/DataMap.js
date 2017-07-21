@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import {csv} from 'd3-request';
@@ -18,8 +19,15 @@ class DataMap extends Component {
     this.state = {
       countryData: output,
       gpiData: null,
+      gpiYear: 2016,
       saferGlobeData: null,
     };
+  }
+
+  componentWillReceiveProps(newGPIYear) {
+    if (this.state.gpiYear !== newGPIYear.gpiYear) {
+      this.setState({gpiYear: newGPIYear.gpiYear});
+    }
   }
 
   componentWillMount() {
@@ -35,6 +43,8 @@ class DataMap extends Component {
       }
       this.setState({saferGlobeData: data});
     });
+
+    this.setState({gpiYear: this.props.gpiYear});
   }
 
   convertToCountryObject(arr) {
@@ -60,6 +70,8 @@ class DataMap extends Component {
   }
 
   drawMap() {
+    d3.select('.map-container').html('');
+
     let radius = d3.scaleSqrt().domain([0, 60000000]).range([0, 50]);
 
     let tooltip = d3
@@ -79,7 +91,8 @@ class DataMap extends Component {
       .select('.map-container')
       .append('svg')
       .attr('xmlns', 'http://www.w3.org/2000/svg')
-      .attr('viewBox', '0 0 960 480');
+      .attr('viewBox', '0 0 960 480')
+      .attr('class', 'svg-map');
 
     mapSVG
       .append('rect')
@@ -141,7 +154,12 @@ class DataMap extends Component {
 
       zoomGroup
         .selectAll(id)
-        .attr('fill', threshold(parseFloat(this.state.gpiData[i].score_2016)));
+        .attr(
+          'fill',
+          threshold(
+            parseFloat(this.state.gpiData[i][`score_${this.state.gpiYear}`])
+          )
+        );
 
       if (this.state.gpiData[i].country === 'United States of America') {
         let idAlaska = '#Alaska__United_States_of_America_';
@@ -390,5 +408,9 @@ class DataMap extends Component {
     }
   }
 }
+
+DataMap.propTypes = {
+  gpiYear: PropTypes.number.isRequired,
+};
 
 export default DataMap;

@@ -5,6 +5,11 @@ import SelectMenu from './forms/SelectMenu';
 import DataMap from './DataMap';
 import DataTimeline from './DataTimeline';
 import StoryPreview from './StoryPreview';
+import {csv} from 'd3-request';
+
+import output from './../data/output-v4.json';
+import gpi from './../data/gpi_2008-2016_v1.csv';
+import saferGlobe from './../data/safer-globe.csv';
 
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
@@ -12,15 +17,92 @@ import './../styles/components/DataStats.css';
 class Data extends Component {
   constructor() {
     super();
+    this.updateGPIYear = this.updateGPIYear.bind(this);
+    this.sortTopLists = this.sortTopLists.bind(this);
+    this.buildTopLists = this.buildTopLists.bind(this);
+    this.formatEuros = this.formatEuros.bind(this);
+
     this.state = {
       countries: [
         {value: 'usa', text: 'United States of America'},
         {value: 'fra', text: 'France'},
         {value: 'swe', text: 'Sweden'},
       ],
+      countryData: output,
+      gpiData: null,
+      activeYear: 2016,
+      saferGlobeData: null,
     };
   }
+
+  componentWillMount() {
+    csv(gpi, (error, data) => {
+      if (error) {
+        this.setState({loadError: true});
+      }
+      this.setState({gpiData: data});
+    });
+    csv(saferGlobe, (error, data) => {
+      if (error) {
+        this.setState({loadError: true});
+      }
+      this.setState({saferGlobeData: data});
+    });
+  }
+
+  updateGPIYear(newGPIYear) {
+    let activeYear = this.state.activeYear;
+    activeYear = newGPIYear;
+    this.setState({activeYear});
+  }
+
+  sortTopLists(type, count = 5) {
+    // Once we have yearly data, we will need to filter this further by the activeYear
+    let data = this.state.saferGlobeData;
+    let sorted = data.sort((a, b) => {
+      return Number(a[type]) < Number(b[type]) ? 1 : -1;
+    });
+    return this.buildTopLists(sorted, type, count);
+  }
+
+  buildTopLists(data, type, count = 5) {
+    const listItems = Object.keys(data.splice(0, count)).map(country => (
+      <li key={data[country].Countries}>
+        {data[country].Countries}
+        <span>- {this.formatEuros(data[country][type])}M€</span>
+      </li>
+    ));
+
+    return listItems;
+  }
+
+  formatEuros(value) {
+    // This is disgusting and needs to be optimized
+    // ALL THE METHODS!!!
+
+    return value
+      .split('')
+      .reverse()
+      .join('')
+      .replace(/(.{3})/g, '$1 ')
+      .split('')
+      .reverse()
+      .join('');
+  }
+
   render() {
+    let sortedListTotal = null;
+    let sortedListDefence = null;
+    let sortedListCivilian = null;
+    let accumulatedTotal = 0;
+    let accumulatedDefence = 0;
+    let accumulatedCivilian = 0;
+
+    if (this.state.saferGlobeData) {
+      sortedListTotal = this.sortTopLists('Total');
+      sortedListDefence = this.sortTopLists('Defence_Materiel');
+      sortedListCivilian = this.sortTopLists('Civilian_Arms');
+    }
     return (
       <section className="data-section-container">
         <section className="data-map-container flex-column-container">
@@ -30,7 +112,7 @@ class Data extends Component {
               <CountryDataList />
             </section>
             <section className="flex-four map-container">
-              <DataMap />
+              <DataMap gpiYear={this.state.activeYear} />
             </section>
             <section className="flex-one">
               <form>
@@ -76,24 +158,23 @@ class Data extends Component {
               </form>
             </section>
           </div>
-          <DataTimeline />
+          <DataTimeline updateGPIYear={this.updateGPIYear} />
         </section>
         <section className="data-stats-container">
-          <h2 className="has-spacer">2016 Statistics</h2>
+          <h2 className="has-spacer">{this.state.activeYear} Statistics</h2>
           <section className="stats-container flex-container">
             <section className="stats-item">
               <span className="stats-headline">Top Total</span>
               <ol className="stats-list has-spacer">
-                <li>United States of America <span>- 523M€</span></li>
-                <li>France <span>- 123M€</span></li>
-                <li>Sweden <span>- 75M€</span></li>
-                <li>Russia <span>- 65M€</span></li>
-                <li>China <span>- 52M€</span></li>
+                {sortedListTotal}
               </ol>
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1 523M€</span>
+                  <span className="rank-headline is-block">
+                    Total:
+                    {accumulatedTotal}M€
+                  </span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -104,16 +185,15 @@ class Data extends Component {
             <section className="stats-item">
               <span className="stats-headline">Top Defence</span>
               <ol className="stats-list has-spacer">
-                <li>United States of America <span>- 523M€</span></li>
-                <li>France <span>- 123M€</span></li>
-                <li>Sweden <span>- 75M€</span></li>
-                <li>Russia <span>- 65M€</span></li>
-                <li>China <span>- 52M€</span></li>
+                {sortedListDefence}
               </ol>
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1 523M€</span>
+                  <span className="rank-headline is-block">
+                    Total:
+                    {accumulatedDefence}M€
+                  </span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -124,16 +204,15 @@ class Data extends Component {
             <section className="stats-item">
               <span className="stats-headline">Top Civilian</span>
               <ol className="stats-list has-spacer">
-                <li>United States of America <span>- 523M€</span></li>
-                <li>France <span>- 123M€</span></li>
-                <li>Sweden <span>- 75M€</span></li>
-                <li>Russia <span>- 65M€</span></li>
-                <li>China <span>- 52M€</span></li>
+                {sortedListCivilian}
               </ol>
 
               <div className="flex-container rank-container">
                 <div className="ranking-value">
-                  <span className="rank-headline is-block">Total: 1 523M€</span>
+                  <span className="rank-headline is-block">
+                    Total:
+                    {accumulatedCivilian}M€
+                  </span>
                 </div>
                 <div className="ranking-value">
                   <span className="rank-headline is-block">Rank: 2nd*</span>
@@ -145,7 +224,7 @@ class Data extends Component {
           <cite>* Rank is based on totals from 2008 - 2016</cite>
         </section>
         <section className="data-stories-container">
-          <h2 className="has-spacer">2016 Stories</h2>
+          <h2 className="has-spacer">{this.state.activeYear} Stories</h2>
 
           {/* these stories will ultimately come from a JSON file */}
 

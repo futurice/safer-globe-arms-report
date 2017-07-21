@@ -5,6 +5,7 @@
 
 .timeline-item {
   background: #f6f6f6;
+  cursor: pointer;
   flex: 1;
   position: relative;
   text-align: center;
