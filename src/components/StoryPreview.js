@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './../styles/components/Stories.css';
 
 class StoryPreview extends Component {
   render() {
+    const testStory = {
+      id: 1234,
+      image: 'http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg',
+      date: '27.11.2016',
+      title: 'Misesn Lilleyawn utn Wiahent',
+      story: 'Story Text',
+    };
+
     return (
       <section className="story-container flex-container">
         <div className="story-text">
@@ -15,7 +24,7 @@ class StoryPreview extends Component {
               {this.props.preview}
             </p>
             <div className="read-more">
-              <a href="#">Continue Reading</a>
+              <Link to="/stories/01">Continue Reading</Link>
             </div>
           </div>
         </div>

@@ -5,3 +5,15 @@
   /* Create space between the following Stats section to acommodate the active Timeline down arrow */
   position: relative;
 }
+
+.country-data-container {
+  background: rgba(255, 255, 255, .85);
+  padding-right: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.data-filter-container {
+  background: rgba(255, 255, 255, .85);
+  padding-left: 1rem;
+}

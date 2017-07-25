@@ -21,6 +21,7 @@ class Data extends Component {
     this.sortTopLists = this.sortTopLists.bind(this);
     this.buildTopLists = this.buildTopLists.bind(this);
     this.formatEuros = this.formatEuros.bind(this);
+    this.accumulateTotal = this.accumulateTotal.bind(this);
 
     this.state = {
       countries: [
@@ -66,7 +67,7 @@ class Data extends Component {
   }
 
   buildTopLists(data, type, count = 5) {
-    const listItems = Object.keys(data.splice(0, count)).map(country => (
+    const listItems = Object.keys(data.slice(0, count)).map(country => (
       <li key={data[country].Countries}>
         {data[country].Countries}
         <span>- {this.formatEuros(data[country][type])}M€</span>
@@ -90,6 +91,18 @@ class Data extends Component {
       .join('');
   }
 
+  accumulateTotal(type) {
+    let total = 0;
+
+    this.state.saferGlobeData.map(country => {
+      total += Number(country[type]);
+    });
+
+    total = this.formatEuros(total.toString());
+
+    return total;
+  }
+
   render() {
     let sortedListTotal = null;
     let sortedListDefence = null;
@@ -102,19 +115,22 @@ class Data extends Component {
       sortedListTotal = this.sortTopLists('Total');
       sortedListDefence = this.sortTopLists('Defence_Materiel');
       sortedListCivilian = this.sortTopLists('Civilian_Arms');
+      accumulatedTotal = this.accumulateTotal('Total');
+      accumulatedDefence = this.accumulateTotal('Defence_Materiel');
+      accumulatedCivilian = this.accumulateTotal('Civilian_Arms');
     }
     return (
       <section className="data-section-container">
         <section className="data-map-container flex-column-container">
           <div className="flex-container">
-            <section className="flex-one">
+            <section className="flex-one country-data-container">
               <h3>United States of America</h3>
               <CountryDataList />
             </section>
-            <section className="flex-four map-container">
+            <section className="flex-five map-container">
               <DataMap gpiYear={this.state.activeYear} />
             </section>
-            <section className="flex-one">
+            <section className="flex-one data-filter-container">
               <form>
                 <RadioButton
                   id="filter-for-total"
@@ -173,7 +189,7 @@ class Data extends Component {
                 <div className="ranking-value">
                   <span className="rank-headline is-block">
                     Total:
-                    {accumulatedTotal}M€
+                    <span> {accumulatedTotal}M€</span>
                   </span>
                 </div>
                 <div className="ranking-value">
@@ -192,7 +208,7 @@ class Data extends Component {
                 <div className="ranking-value">
                   <span className="rank-headline is-block">
                     Total:
-                    {accumulatedDefence}M€
+                    <span> {accumulatedDefence}M€</span>
                   </span>
                 </div>
                 <div className="ranking-value">
@@ -211,7 +227,7 @@ class Data extends Component {
                 <div className="ranking-value">
                   <span className="rank-headline is-block">
                     Total:
-                    {accumulatedCivilian}M€
+                    <span> {accumulatedCivilian}M€</span>
                   </span>
                 </div>
                 <div className="ranking-value">
