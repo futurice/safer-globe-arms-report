@@ -6,14 +6,6 @@ import './../styles/components/Stories.css';
 
 class StoryPreview extends Component {
   render() {
-    const testStory = {
-      id: 1234,
-      image: 'http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg',
-      date: '27.11.2016',
-      title: 'Misesn Lilleyawn utn Wiahent',
-      story: 'Story Text',
-    };
-
     return (
       <section className="story-container flex-container">
         <div className="story-text">
@@ -41,6 +33,8 @@ class StoryPreview extends Component {
 StoryPreview.propTypes = {
   title: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
+  engPreview: PropTypes.string,
+  body: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };

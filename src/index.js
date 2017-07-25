@@ -27,6 +27,11 @@ Modifier stylesheet to override any preceeding styles when used
 */
 import './styles/modifiers.css';
 
+
+/*
+The project is using React Router 4
+Docs can be found here: https://reacttraining.com/react-router/web/
+*/
 const AppRouter = () => (
   <Router>
     <div>

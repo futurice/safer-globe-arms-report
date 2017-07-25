@@ -5,7 +5,15 @@ import './../styles/components/Button.css';
 import './../styles/icons.css';
 
 /*
- Extract out the SVG portion into an SVG component library
+ Using the Button component requires two props, 1) text and 2) type
+
+ 1) The text will be the text that will be displayed on the Button
+ 2) The type will be 'primary', 'secondary', 'tertiary' whatever level of button that should be used
+    The type determines the button's appearance based on CSS styles in ./../styles/components/Button.css
+*/
+
+/*
+ TODO: Extract out the SVG portion into an SVG component library
  <SVG type="download" />
 */
 

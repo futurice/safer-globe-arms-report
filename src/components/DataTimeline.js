@@ -2,6 +2,16 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './../styles/components/DataTimeline.css';
 
+/*
+  This component builds the timeline that sits at the bottom of the screen on the data page.
+
+  It received one prop from the parent <Data> component. It is required and is called updateGPIYear. (See Proptypes at the bottom)
+  This prop is a method which exists on the parent <Data> component that we pass down to allow the timeline the ability to update
+  the gpiYear on the parent component.
+
+  This component contains a method called processNewGPIYear() which updates its own state before updating the parent state via the props method
+*/
+
 class DataTimeline extends Component {
   constructor() {
     super();

@@ -14,6 +14,25 @@ import saferGlobe from './../data/safer-globe.csv';
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
 
+/*
+  This Data component controls the full Data page. This can be seen in the router in index.js
+
+  This component loads the data for GPI and SaferGlobe in the componentWillMount lifecycle hook
+
+  The default activeYear is set to 2016. But upon clicking on a timeline item, the updateGPIYear method is called.
+  This method updates this component's state with the selected year and that change is then passed down to child components
+  and re-rendered
+
+  For example, whenever a year other than 2016 is clicked, say 2015, the state.activeYear value is updated, and then the
+  <DataMap> component is re-rendered with the updated state
+
+  The countries for now are hardcoded but I intend those to ultimately load from a json file
+
+  This component also sorts the top five lists for total, defence, and civilian spending as well as formats the Euro values
+  See: sortTopLists() and formatEuros();
+
+*/
+
 class Data extends Component {
   constructor() {
     super();

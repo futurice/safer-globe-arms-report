@@ -9,6 +9,19 @@ import saferGlobe from './../data/safer-globe.csv';
 
 import './../styles/components/Tooltip.css';
 
+/*
+  This component builds the primary data map.
+
+  The state.gpiYear is default set to 2016 but this once we have the full data set, this would be good to default
+  to whatever the last year is in the data set.
+
+  Using that year, the initial map is built and colored.
+
+  Note that every time the GPI year is updated, the map is cleared and drawn again from scratch
+
+  This component received one required prop from the <Data> component called this.props.gpiYear. (See Proptypes at the bottom)
+*/
+
 class DataMap extends Component {
   constructor() {
     super();
