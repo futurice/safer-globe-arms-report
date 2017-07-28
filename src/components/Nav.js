@@ -16,7 +16,7 @@ class Nav extends Component {
             </h1>
           </li>
           <li>
-            <NavLink to="/data">Data</NavLink>
+            <NavLink to="/">Data</NavLink>
           </li>
           <li>
             <NavLink to="/stories">Stories</NavLink>
