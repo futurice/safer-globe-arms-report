@@ -348,6 +348,9 @@ class DataMap extends Component {
           .endAngle(2 * Math.PI)
       );
 
+    d3.selectAll("input[name='countryList']").on('change', () => {
+      console.log('changed');
+    });
     // Using the SaferGlobe Data to determine the radius of circle for different countries
     d3.selectAll("input[name='filter-type']").on(
       'change',

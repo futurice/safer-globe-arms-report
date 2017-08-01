@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import RadioButton from './forms/RadioButton';
 // import Button from './Button';
 
 import './../styles/components/CountryDataList.css';
@@ -39,33 +40,59 @@ class CountryDataList extends Component {
     return (
       <div>
         <h3>{country.name}</h3>
+        <RadioButton
+          checked={true}
+          id="total"
+          name="countryList"
+          value="total"
+          label="total"
+        />
+        <RadioButton
+          id="defence"
+          name="countryList"
+          value="defence"
+          label="defence"
+        />
+        <RadioButton
+          id="civilian"
+          name="countryList"
+          value="civilian"
+          label="civilian"
+        />
         <ul className="country-data-list no-bullets">
           <li className="has-spacer">
-            <span className="is-block">
-              <span className="is-strong">Total:</span> {country.total.value}
-            </span>
-            <span className="is-block">
-              <span className="is-strong">Ranking:</span> {country.total.rank}
-            </span>
+            <div id="totalSparkLine">
+              <span className="is-block">
+                <span className="is-strong">Total:</span> {country.total.value}
+              </span>
+              <span className="is-block">
+                <span className="is-strong">Ranking:</span> {country.total.rank}
+              </span>
+            </div>
           </li>
           <li className="has-spacer">
-            <span className="is-block">
-              <span className="is-strong">Defence:</span>
-              {country.defence.value}
-            </span>
-            <span className="is-block">
-              <span className="is-strong">Ranking:</span> {country.defence.rank}
-            </span>
+            <div id="defenceSparkLine">
+              <span className="is-block">
+                <span className="is-strong">Defence:</span>
+                {country.defence.value}
+              </span>
+              <span className="is-block">
+                <span className="is-strong">Ranking:</span>
+                {country.defence.rank}
+              </span>
+            </div>
           </li>
           <li className="has-spacer">
-            <span className="is-block">
-              <span className="is-strong">Civilian:</span>
-              {country.civilian.value}
-            </span>
-            <span className="is-block">
-              <span className="is-strong">Ranking:</span>
-              {country.civilian.rank}
-            </span>
+            <div id="civilianSparkLine">
+              <span className="is-block">
+                <span className="is-strong">Civilian:</span>
+                {country.civilian.value}
+              </span>
+              <span className="is-block">
+                <span className="is-strong">Ranking:</span>
+                {country.civilian.rank}
+              </span>
+            </div>
           </li>
         </ul>
       </div>
