@@ -10,7 +10,6 @@ class Stories extends Component {
     super();
     this.state = {
       stories: [],
-      previews: true,
     };
   }
 
@@ -25,7 +24,6 @@ class Stories extends Component {
 
   renderFullStory({match}) {
     const id = match.params.id;
-    this.setState({previews: false});
     return (
       <div>
         <FullStory
@@ -40,22 +38,18 @@ class Stories extends Component {
   }
 
   renderPreviews() {
-    if (this.state.previews) {
-      return this.state.stories.map((x, i) => {
-        return (
-          <StoryPreview
-            key={i}
-            title={x.title}
-            preview={x.preview}
-            date={x.date}
-            image={x.image}
-            body={x.body}
-          />
-        );
-      });
-    } else {
-      return;
-    }
+    return this.state.stories.map((x, i) => {
+      return (
+        <StoryPreview
+          key={i}
+          title={x.title}
+          preview={x.preview}
+          date={x.date}
+          image={x.image}
+          body={x.body}
+        />
+      );
+    });
   }
 
   render() {
