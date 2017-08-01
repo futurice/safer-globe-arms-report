@@ -107,24 +107,25 @@ class DataMap extends Component {
       .attr('viewBox', '0 0 960 480')
       .attr('class', 'svg-map');
 
-    mapSVG
+    let zoomGroup = mapSVG.append('g').call(zoom);
+
+    zoomGroup
       .append('rect')
       .style('fill', 'none')
       .style('pointer-events', 'all')
-      .call(zoom);
-
-    let zoomGroup = mapSVG.append('g').call(zoom);
+      .attr("width",960)
+      .attr("height",480);
     let domain = [1, 1.47, 1.91, 2.37, 2.9, 6]; // Domain to define bins for GPI
     let colorList = [
       '#999999',
-      '#C4DAE7',
-      '#9EC2D8',
-      '#77A9C8',
-      '#5091B9',
-      '#2A79AA',
+      "#C6E9F0",
+      "#A7D3E5",
+      "#7FA2CE",
+      "#7A6CA8",
+      "#7D2F6A"
     ];
-    let defenceColor = '#EF8234';
-    let civilianColor = '#555555';
+    let civilianColor = '#ff8e39';
+    let defenceColor = '#d6004d';
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
     let saferGlobeDataObject = this.convertToCountryObject(
       this.state.saferGlobeData
@@ -231,6 +232,9 @@ class DataMap extends Component {
       .filter(d => {
         return SaferGlobeCountries.indexOf(d.name) !== -1;
       })
+      .filter(d => {
+        return d.Total !== "0";
+      })
       .append('g')
       .attr('class', 'gCentroid')
       .attr('transform', d => {
@@ -252,7 +256,8 @@ class DataMap extends Component {
       })
       .on('mouseout', () => {
         tooltip.transition().duration(500).style('opacity', 0);
-      });
+      })
+      .on("click",(d)=> console.log(d));
 
     zoomGroup
       .selectAll('.gCentroid')
@@ -282,6 +287,7 @@ class DataMap extends Component {
         d3
           .arc()
           .innerRadius(d => {
+            console.log(d);
             return radius(d.Total) - 1;
           })
           .outerRadius(d => {
