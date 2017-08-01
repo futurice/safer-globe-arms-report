@@ -2,32 +2,71 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import StoryPreview from './StoryPreview';
 import FullStory from './FullStory';
+import stories from './../data/stories/stories.csv';
+import {csv} from 'd3-request';
 
 class Stories extends Component {
+  constructor() {
+    super();
+    this.state = {
+      stories: [],
+      previews: true,
+    };
+  }
+
+  componentWillMount() {
+    csv(stories, (error, data) => {
+      if (error) {
+        this.setState({loadError: true});
+      }
+      this.setState({stories: data});
+    });
+  }
+
+  renderFullStory({match}) {
+    const id = match.params.id;
+    this.setState({previews: false});
+    return (
+      <div>
+        <FullStory
+          preview="poop"
+          image="http://www.topgunprague.com/wp-content/uploads/2011/06/AK-47.png"
+          body={id}
+          id={id}
+          date="09.12.2019"
+        />
+      </div>
+    );
+  }
+
+  renderPreviews() {
+    if (this.state.previews) {
+      return this.state.stories.map((x, i) => {
+        return (
+          <StoryPreview
+            key={i}
+            title={x.title}
+            preview={x.preview}
+            date={x.date}
+            image={x.image}
+            body={x.body}
+          />
+        );
+      });
+    } else {
+      return;
+    }
+  }
+
   render() {
     return (
       <Router>
         <section>
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="https://www.walldevil.com/wallpapers/a86/wallpaper-gun-germany-outfitting-bundeswehr-soldier-assault-machine-rifle-wallpapers-archives.jpg"
+          <Route
+            path="/stories/:id"
+            component={this.renderFullStory.bind(this)}
           />
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="http://www.cyborgdb.org/images/boe3.jpg"
-          />
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg"
-          />
-
-          <Route path="/stories/:id" component={FullStory} />
+          {this.renderPreviews()}
         </section>
       </Router>
     );

@@ -43,6 +43,14 @@ class DataMap extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.state.saferGlobeData && this.props.gpiYear === nextProps.gpiYear) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   componentWillMount() {
     csv(gpi, (error, data) => {
       if (error) {
@@ -82,7 +90,7 @@ class DataMap extends Component {
     );
   }
 
-  drawMap() {
+  drawMap(displayData) {
     d3.select('.map-container').html('');
 
     let radius = d3.scaleSqrt().domain([0, 60000000]).range([0, 50]);
@@ -113,16 +121,16 @@ class DataMap extends Component {
       .append('rect')
       .style('fill', 'none')
       .style('pointer-events', 'all')
-      .attr("width",960)
-      .attr("height",480);
+      .attr('width', 960)
+      .attr('height', 480);
     let domain = [1, 1.47, 1.91, 2.37, 2.9, 6]; // Domain to define bins for GPI
     let colorList = [
       '#999999',
-      "#C6E9F0",
-      "#A7D3E5",
-      "#7FA2CE",
-      "#7A6CA8",
-      "#7D2F6A"
+      '#C6E9F0',
+      '#A7D3E5',
+      '#7FA2CE',
+      '#7A6CA8',
+      '#7D2F6A',
     ];
     let civilianColor = '#ff8e39';
     let defenceColor = '#d6004d';
@@ -232,9 +240,7 @@ class DataMap extends Component {
       .filter(d => {
         return SaferGlobeCountries.indexOf(d.name) !== -1;
       })
-      .filter(d => {
-        return d.Total !== "0";
-      })
+      .filter(d => d.Total !== '0')
       .append('g')
       .attr('class', 'gCentroid')
       .attr('transform', d => {
@@ -257,7 +263,23 @@ class DataMap extends Component {
       .on('mouseout', () => {
         tooltip.transition().duration(500).style('opacity', 0);
       })
-      .on("click",(d)=> console.log(d));
+      .on('click', c => {
+        displayData({
+          name: c.name,
+          total: {
+            value: c.Total,
+            rank: '?',
+          },
+          defence: {
+            value: c.Defence_Materiel,
+            rank: '?',
+          },
+          civilian: {
+            value: c.Civilian_Arms,
+            rank: '?',
+          },
+        });
+      });
 
     zoomGroup
       .selectAll('.gCentroid')
@@ -415,7 +437,7 @@ class DataMap extends Component {
     ) {
       return (
         <div>
-          {this.drawMap()}
+          {this.drawMap(this.props.displayData)}
         </div>
       );
     } else {
@@ -430,6 +452,7 @@ class DataMap extends Component {
 
 DataMap.propTypes = {
   gpiYear: PropTypes.number.isRequired,
+  displayData: PropTypes.function.isRequired,
 };
 
 export default DataMap;

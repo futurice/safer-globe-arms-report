@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import CountryDataList from './CountryDataList';
-import RadioButton from './forms/RadioButton';
-import SelectMenu from './forms/SelectMenu';
+// import RadioButton from './forms/RadioButton';
+// import SelectMenu from './forms/SelectMenu';
 import DataMap from './DataMap';
 import DataTimeline from './DataTimeline';
-import StoryPreview from './StoryPreview';
+// import StoryPreview from './StoryPreview';
 import {csv} from 'd3-request';
+import {CSVLink} from 'react-csv';
 
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
@@ -33,6 +34,16 @@ import './../styles/components/DataStats.css';
 
 */
 
+function compare(a, b) {
+  if (a.text < b.text) {
+    return -1;
+  }
+  if (a.text > b.text) {
+    return 1;
+  }
+  return 0;
+}
+
 class Data extends Component {
   constructor() {
     super();
@@ -43,15 +54,26 @@ class Data extends Component {
     this.accumulateTotal = this.accumulateTotal.bind(this);
 
     this.state = {
-      countries: [
-        {value: 'usa', text: 'United States of America'},
-        {value: 'fra', text: 'France'},
-        {value: 'swe', text: 'Sweden'},
-      ],
+      countries: [],
       countryData: output,
       gpiData: null,
       activeYear: 2016,
-      saferGlobeData: null,
+      saferGlobeData: [],
+      selectedCountry: {
+        name: 'Totals',
+        total: {
+          value: '29.5M€',
+          rank: '',
+        },
+        defence: {
+          value: '29.5M€',
+          rank: '',
+        },
+        civilian: {
+          value: '29.5M€',
+          rank: '',
+        },
+      },
     };
   }
 
@@ -66,7 +88,16 @@ class Data extends Component {
       if (error) {
         this.setState({loadError: true});
       }
-      this.setState({saferGlobeData: data});
+      const countryList = data.filter(x => parseInt(x.Total) !== 0).map(y => {
+        return {
+          value: y.Countries,
+          text: y.Countries,
+        };
+      });
+      this.setState({
+        saferGlobeData: data,
+        countries: countryList.sort(compare),
+      });
     });
   }
 
@@ -122,7 +153,12 @@ class Data extends Component {
     return total;
   }
 
+  displayActiveCountry(selectedCountry) {
+    this.setState({selectedCountry});
+  }
+
   render() {
+    /*
     let sortedListTotal = null;
     let sortedListDefence = null;
     let sortedListCivilian = null;
@@ -138,149 +174,27 @@ class Data extends Component {
       accumulatedDefence = this.accumulateTotal('Defence_Materiel');
       accumulatedCivilian = this.accumulateTotal('Civilian_Arms');
     }
+    */
     return (
       <section className="data-section-container">
         <section className="data-map-container flex-column-container">
           <div className="flex-container">
             <section className="flex-one country-data-container">
-              <h3>United States of America</h3>
-              <CountryDataList />
+              <CountryDataList country={this.state.selectedCountry} />
+              <CSVLink
+                data={this.state.saferGlobeData}
+                filename={'data-dump.csv'}>
+                Download Data
+              </CSVLink>
             </section>
             <section className="flex-five map-container">
-              <DataMap gpiYear={this.state.activeYear} />
-            </section>
-            <section className="flex-one data-filter-container">
-              <form>
-                <RadioButton
-                  id="filter-for-total"
-                  name="filter-type"
-                  label="Total"
-                  value="Total"
-                  helpIcon={true}
-                  checked={true}
-                />
-                <p className="secondary-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-
-                <RadioButton
-                  id="filter-for-defence"
-                  name="filter-type"
-                  label="Defence"
-                  value="Defence_Materiel"
-                  helpIcon={true}
-                />
-                <p className="secondary-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-                <RadioButton
-                  id="filter-for-civilian"
-                  name="filter-type"
-                  label="Civilian"
-                  value="Civilian_Arms"
-                  helpIcon={true}
-                />
-                <p className="secondary-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-
-                <SelectMenu
-                  id="filter-for-country"
-                  options={this.state.countries}
-                  defaultOption="-- Search by Country --"
-                  label="Search by Country"
-                />
-              </form>
+              <DataMap
+                displayData={this.displayActiveCountry.bind(this)}
+                gpiYear={this.state.activeYear}
+              />
             </section>
           </div>
           <DataTimeline updateGPIYear={this.updateGPIYear} />
-        </section>
-        <section className="data-stats-container">
-          <h2 className="has-spacer">{this.state.activeYear} Statistics</h2>
-          <section className="stats-container flex-container">
-            <section className="stats-item">
-              <span className="stats-headline">Top Total</span>
-              <ol className="stats-list has-spacer">
-                {sortedListTotal}
-              </ol>
-
-              <div className="flex-container rank-container">
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">
-                    Total:
-                    <span> {accumulatedTotal}M€</span>
-                  </span>
-                </div>
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">Rank: 2nd*</span>
-                </div>
-              </div>
-
-            </section>
-            <section className="stats-item">
-              <span className="stats-headline">Top Defence</span>
-              <ol className="stats-list has-spacer">
-                {sortedListDefence}
-              </ol>
-
-              <div className="flex-container rank-container">
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">
-                    Total:
-                    <span> {accumulatedDefence}M€</span>
-                  </span>
-                </div>
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">Rank: 2nd*</span>
-                </div>
-              </div>
-
-            </section>
-            <section className="stats-item">
-              <span className="stats-headline">Top Civilian</span>
-              <ol className="stats-list has-spacer">
-                {sortedListCivilian}
-              </ol>
-
-              <div className="flex-container rank-container">
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">
-                    Total:
-                    <span> {accumulatedCivilian}M€</span>
-                  </span>
-                </div>
-                <div className="ranking-value">
-                  <span className="rank-headline is-block">Rank: 2nd*</span>
-                </div>
-              </div>
-
-            </section>
-          </section>
-          <cite>* Rank is based on totals from 2008 - 2016</cite>
-        </section>
-        <section className="data-stories-container">
-          <h2 className="has-spacer">{this.state.activeYear} Stories</h2>
-
-          {/* these stories will ultimately come from a JSON file */}
-
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="https://www.walldevil.com/wallpapers/a86/wallpaper-gun-germany-outfitting-bundeswehr-soldier-assault-machine-rifle-wallpapers-archives.jpg"
-          />
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="http://www.cyborgdb.org/images/boe3.jpg"
-          />
-          <StoryPreview
-            title="Misesn Lilleyawn utn Wiahent"
-            preview="In accumsan ullamcorper facilisis. Duis vel placerat nulla. Duis vel quam eu turpis consectetur maximus vitae eu nulla. Nullam non bibendum ante, sed vulputate libero. Suspendisse et arcu et felis scelerisque mollis vel at dolor. Curabitur vulputate tellus vitae dapibus maximus. Etiam condimentum nisl maximus, eleifend ex id, porta nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at neque pharetra, rutrum risus non, condimentum velit. Suspendisse sagittis metus eu arcu pulvinar condimentum."
-            date="27.11.2016"
-            image="http://one-europe.info/user/files/Hanna/Global%20Peace%20Index.jpg"
-          />
         </section>
       </section>
     );

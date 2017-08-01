@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 
 import './../styles/components/Stories.css';
 
@@ -13,7 +14,7 @@ class StoryPreview extends Component {
           <div className="story-text">
             <h3>{this.props.title}</h3>
             <p>
-              {this.props.preview}
+              <ReactMarkdown source={this.props.preview} />
             </p>
             <div className="read-more">
               <Link to="/stories/01">Continue Reading</Link>

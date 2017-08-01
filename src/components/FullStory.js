@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 import './../styles/components/Stories.css';
 
 class FullStory extends Component {
@@ -8,24 +7,24 @@ class FullStory extends Component {
     return (
       <section className="story-container flex-container">
         <div className="story-text">
-          <span className="story-year">{this.props.story.date}</span>
+          <span className="story-year">{this.props.date}</span>
           <div className="story-text">
-            <h3>{this.props.story.title}</h3>
+            <h3>{this.props.title}</h3>
             <p>
-              {this.props.story.preview}
+              {this.props.preview}
             </p>
             <p>
-              {this.props.story.preview}
+              {this.props.preview}
             </p>
             <p>
-              {this.props.story.preview}
+              {this.props.preview}
             </p>
           </div>
         </div>
         <img
           className="story-image"
-          src={this.props.story.image}
-          alt={this.props.story.title}
+          src={this.props.image}
+          alt={this.props.title}
         />
       </section>
     );
@@ -33,7 +32,12 @@ class FullStory extends Component {
 }
 
 FullStory.propTypes = {
-  story: PropTypes.object.required,
+  body: PropTypes.string.required,
+  date: PropTypes.string.required,
+  title: PropTypes.string.required,
+  preview: PropTypes.string.required,
+  body: PropTypes.object.required,
+  image: PropTypes.string.required,
 };
 
 export default FullStory;

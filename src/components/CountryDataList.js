@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Button from './Button';
+// import Button from './Button';
 
 import './../styles/components/CountryDataList.css';
 
@@ -34,38 +34,46 @@ import './../styles/components/CountryDataList.css';
 
 class CountryDataList extends Component {
   render() {
+    const {country} = this.props;
     return (
-      <ul className="country-data-list no-bullets">
-        <li className="has-spacer">
-          <span className="is-block">
-            <span className="is-strong">Total:</span> 29,5M€
-          </span>
-          <span className="is-block">
-            <span className="is-strong">Ranking:</span> 3rd
-          </span>
-        </li>
-        <li className="has-spacer">
-          <span className="is-block">
-            <span className="is-strong">Defence:</span> 2,2M€
-          </span>
-          <span className="is-block">
-            <span className="is-strong">Ranking:</span> 26th
-          </span>
-        </li>
-        <li className="has-spacer">
-          <span className="is-block">
-            <span className="is-strong">Civilian:</span> 27,3M€
-          </span>
-          <span className="is-block">
-            <span className="is-strong">Ranking:</span> 1st
-          </span>
-        </li>
-        <li>
-          <Button text="Download Data" type="primary" />
-        </li>
-      </ul>
+      <div>
+        <h3>{country.name}</h3>
+        <ul className="country-data-list no-bullets">
+          <li className="has-spacer">
+            <span className="is-block">
+              <span className="is-strong">Total:</span> {country.total.value}
+            </span>
+            <span className="is-block">
+              <span className="is-strong">Ranking:</span> {country.total.rank}
+            </span>
+          </li>
+          <li className="has-spacer">
+            <span className="is-block">
+              <span className="is-strong">Defence:</span>
+              {country.defence.value}
+            </span>
+            <span className="is-block">
+              <span className="is-strong">Ranking:</span> {country.defence.rank}
+            </span>
+          </li>
+          <li className="has-spacer">
+            <span className="is-block">
+              <span className="is-strong">Civilian:</span>
+              {country.civilian.value}
+            </span>
+            <span className="is-block">
+              <span className="is-strong">Ranking:</span>
+              {country.civilian.rank}
+            </span>
+          </li>
+        </ul>
+      </div>
     );
   }
 }
+
+CountryDataList.propTypes = {
+  country: PropTypes.object.isRequired,
+};
 
 export default CountryDataList;

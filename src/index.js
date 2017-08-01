@@ -15,18 +15,17 @@ import './styles/text-types.css';
 Primary Route Components
 */
 import Nav from './components/Nav';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Data from './components/Data';
 import Stories from './components/Stories';
 import About from './components/About';
 import Downloads from './components/Downloads';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 /*
 Modifier stylesheet to override any preceeding styles when used
 */
 import './styles/modifiers.css';
-
 
 /*
 The project is using React Router 4
@@ -38,14 +37,12 @@ const AppRouter = () => (
       <div className="container">
         <Nav />
 
-        <Route exact path="/" component={Home} />
-        <Route exact path="/data" component={Data} />
+        <Route exact path="/" component={Data} />
         <Route exact path="/stories" component={Stories} />
         <Route exact path="/about" component={About} />
         <Route exact path="/downloads" component={Downloads} />
 
       </div>
-      <Footer />
     </div>
   </Router>
 );
