@@ -452,7 +452,7 @@ class DataMap extends Component {
 
 DataMap.propTypes = {
   gpiYear: PropTypes.number.isRequired,
-  displayData: PropTypes.function.isRequired,
+  displayData: PropTypes.func.isRequired,
 };
 
 export default DataMap;
