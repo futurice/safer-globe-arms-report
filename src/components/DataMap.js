@@ -93,6 +93,9 @@ class DataMap extends Component {
   drawMap(displayData) {
     d3.select('.map-container').html('');
 
+    let tooltipFigure = figure =>
+      (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
+
     let radius = d3.scaleSqrt().domain([0, 60000000]).range([0, 50]);
 
     let tooltip = d3
@@ -121,6 +124,15 @@ class DataMap extends Component {
       .attr('xmlns', 'http://www.w3.org/2000/svg')
       .attr('viewBox', '0 0 960 480')
       .attr('class', 'svg-map');
+
+    /* adding fonts
+    mapSVG
+      .append('defs')
+      .append('style')
+      .attr('type', 'text/css')
+      .text(
+        "@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');"
+      );*/
 
     let zoomGroup = mapSVG.append('g').call(zoom);
 
@@ -334,7 +346,10 @@ class DataMap extends Component {
         tooltip.transition().duration(200).style('opacity', 0.9);
         tooltip
           .html(
-            `${d.name}<br/>Total:${d.Total}<br/>Civilian Arms:${d.Civilian_Arms}<br/>Defence Materiel:${d.Defence_Materiel}`
+            `<h1>${d.name}</h1>
+            <span class="defence"> <h2>Defence Materiel: </h2> <h3>${tooltipFigure(d.Defence_Materiel)} M€</h3></br></span>
+            <span class="civilian"><h2>Civilian Arms: </h2> <h3>${tooltipFigure(d.Civilian_Arms)} M€</h3> </br></span>
+            <span class="total"> <h2>Total: </h2> <h3>${tooltipFigure(d.Total)} M€</h3></span>`
           )
           .style('left', `${d3.event.pageX}px`)
           .style('top', `${d3.event.pageY - 58}px`);
