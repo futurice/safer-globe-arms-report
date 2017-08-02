@@ -14,6 +14,7 @@ import saferGlobe from './../data/safer-globe.csv';
 
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
+import './../styles/icons.css';
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
