@@ -104,8 +104,15 @@ class DataMap extends Component {
     let projection = d3.geoEquirectangular().scale(153).precision(0.1);
 
     let path = d3.geoPath().projection(projection);
-    let zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', () => {
-      this.zoomMap(zoomGroup);
+
+    let zoom = d3.zoom().scaleExtent([1, 10]).on('zoom', () => {
+      zoomGroup.attr('transform', d3.event.transform);
+      zoomGroup
+        .selectAll('.centroidArcDef')
+        .attr('stroke-width', 2 / d3.event.transform.k);
+      zoomGroup
+        .selectAll('.centroidArcCiv')
+        .attr('stroke-width', 2 / d3.event.transform.k);
     });
 
     let mapSVG = d3
@@ -139,7 +146,33 @@ class DataMap extends Component {
       this.state.saferGlobeData
     );
     let SaferGlobeCountries = d3.keys(saferGlobeDataObject);
-
+    /*
+    let clicked = d => {
+      let x, y, k;
+      let width = 960;
+      let height =  480;
+      console.log(d);
+      if (d && centered !== d) {
+        let centroid = path.centroid(d);
+        x = centroid[0];
+        y = centroid[1];
+        k = 3;
+        centered = d;
+        cl = true;
+      } else {
+        x = width / 2;
+        y = height / 2;
+        k = 1;
+        centered = null;
+        cl = false;
+      }
+      console.log(x);
+      zoomGroup.transition()
+          .duration(750)
+          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+          .style("stroke-width", 1.5 / k + "px");
+    }
+    */
     // Drawing the countries as different svg paths
     zoomGroup
       .selectAll('.land')
@@ -165,6 +198,35 @@ class DataMap extends Component {
       .attr('d', path)
       .attr('fill', () => {
         return '#eaeaea';
+      })
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 0.25)
+      .on('mouseover', d => {
+        d3.selectAll('.land').attr('opacity', 0.3);
+        d3
+          .select(
+            `#${d.properties.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}`
+          )
+          .attr('opacity', 1);
+        if (d.properties.name === 'Alaska (United States of America)') {
+          d3.select('#United_States_of_America').attr('opacity', 1);
+        }
+        if (d.properties.name === 'United States of America') {
+          d3.select('#Alaska__United_States_of_America_').attr('opacity', 1);
+        }
+        if (d.properties.name === 'France') {
+          d3.select('#France__Sub_Region_').attr('opacity', 1);
+        }
+        if (d.properties.name === 'France (Sub Region)') {
+          d3.select('#France').attr('opacity', 1);
+        }
+      })
+      .on('mouseout', () => {
+        d3.selectAll('.land').attr('opacity', 1);
       });
 
     for (let i = 0; i < this.state.gpiData.length; i++) {
@@ -230,7 +292,7 @@ class DataMap extends Component {
     });
 
     let centroidSorted = centroids.sort((a, b) => {
-      return d3.descending(a.Total, b.Total);
+      return d3.descending(parseFloat(a.Total), parseFloat(b.Total));
     });
 
     zoomGroup
@@ -247,6 +309,28 @@ class DataMap extends Component {
         return `translate(${d.centroid[0]}, ${d.centroid[1]})`;
       })
       .on('mouseover', d => {
+        d3.selectAll('.land').attr('opacity', 0.3);
+        d3
+          .select(
+            `#${d.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}`
+          )
+          .attr('opacity', 1);
+        if (d.name === 'Alaska (United States of America)') {
+          d3.select('#United_States_of_America').attr('opacity', 1);
+        }
+        if (d.name === 'United States of America') {
+          d3.select('#Alaska__United_States_of_America_').attr('opacity', 1);
+        }
+        if (d.name === 'France') {
+          d3.select('#France__Sub_Region_').attr('opacity', 1);
+        }
+        if (d.name === 'France (Sub Region)') {
+          d3.select('#France').attr('opacity', 1);
+        }
         tooltip.transition().duration(200).style('opacity', 0.9);
         tooltip
           .html(
@@ -261,6 +345,7 @@ class DataMap extends Component {
           .style('top', `${d3.event.pageY - 58}px`);
       })
       .on('mouseout', () => {
+        d3.selectAll('.land').attr('opacity', 1);
         tooltip.transition().duration(500).style('opacity', 0);
       })
       .on('click', c => {
@@ -302,18 +387,19 @@ class DataMap extends Component {
       .selectAll('.gCentroid')
       .append('path')
       .attr('class', 'centroidArcDef')
-      .attr('fill', defenceColor)
-      .attr('fill-opacity', 1)
+      .attr('stroke', defenceColor)
+      .attr('stroke-width', 2)
+      .attr('fill-opacity', 0)
       .attr(
         'd',
         d3
           .arc()
           .innerRadius(d => {
             console.log(d);
-            return radius(d.Total) - 1;
+            return radius(d.Total);
           })
           .outerRadius(d => {
-            return radius(d.Total) + 1;
+            return radius(d.Total);
             // Error somewhere here
           })
           .startAngle(0)
@@ -328,17 +414,18 @@ class DataMap extends Component {
       .selectAll('.gCentroid')
       .append('path')
       .attr('class', 'centroidArcCiv')
-      .attr('fill', civilianColor)
-      .attr('fill-opacity', 1)
+      .attr('stroke', civilianColor)
+      .attr('stroke-width', 2)
+      .attr('fill-opacity', 0)
       .attr(
         'd',
         d3
           .arc()
           .innerRadius(d => {
-            return radius(d.Total) - 1;
+            return radius(d.Total);
           })
           .outerRadius(d => {
-            return radius(d.Total) + 1;
+            return radius(d.Total);
             // error somewhere here
           })
           .startAngle(d => {
