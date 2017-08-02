@@ -93,6 +93,15 @@ class DataMap extends Component {
   drawMap(displayData) {
     d3.select('.map-container').html('');
 
+    const scl = 180;
+    const wid = parseInt(
+      d3.selectAll('section.map-container').style('width'),
+      10
+    );
+    const hght = parseInt(
+      d3.selectAll('section.map-container').style('height'),
+      10
+    );
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
 
@@ -104,7 +113,11 @@ class DataMap extends Component {
       .attr('class', 'tooltip')
       .style('opacity', 0);
 
-    let projection = d3.geoEquirectangular().scale(153).precision(0.1);
+    let projection = d3
+      .geoEquirectangular()
+      .precision(0.1)
+      .scale(scl)
+      .translate([wid / 2, hght / 2 + 140]);
 
     let path = d3.geoPath().projection(projection);
 
@@ -154,7 +167,8 @@ class DataMap extends Component {
       .select('.map-container')
       .append('svg')
       .attr('xmlns', 'http://www.w3.org/2000/svg')
-      .attr('viewBox', '0 0 960 480')
+      .attr('width', wid)
+      .attr('height', hght)
       .attr('class', 'svg-map');
 
     /* adding fonts
@@ -172,8 +186,8 @@ class DataMap extends Component {
       .append('rect')
       .style('fill', 'none')
       .style('pointer-events', 'all')
-      .attr('width', 960)
-      .attr('height', 480);
+      .attr('width', wid)
+      .attr('height', hght);
     let domain = [1, 1.47, 1.91, 2.37, 2.9, 6]; // Domain to define bins for GPI
     let colorList = [
       '#999999',
