@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './../styles/components/Stories.css';
+import ReactMarkdown from 'react-markdown';
 
 class FullStory extends Component {
   render() {
@@ -10,15 +11,7 @@ class FullStory extends Component {
           <span className="story-year">{this.props.date}</span>
           <div className="story-text">
             <h3>{this.props.title}</h3>
-            <p>
-              {this.props.preview}
-            </p>
-            <p>
-              {this.props.preview}
-            </p>
-            <p>
-              {this.props.preview}
-            </p>
+            <ReactMarkdown source={this.props.body} />
           </div>
         </div>
         <img

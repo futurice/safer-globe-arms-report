@@ -29,6 +29,7 @@ class Stories extends Component {
       return (
         <div>
           <FullStory
+            title={fullStory.title}
             preview={fullStory.preview}
             image={fullStory.image}
             body={fullStory.body}
@@ -76,7 +77,7 @@ class Stories extends Component {
 }
 
 Stories.propTypes = {
-  match: PropTypes.string,
+  match: PropTypes.object,
 };
 
 export default Stories;
