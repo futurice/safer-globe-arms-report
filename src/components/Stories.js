@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
 import StoryPreview from './StoryPreview';
 import FullStory from './FullStory';
 import stories from './../data/stories/stories.csv';
 import {csv} from 'd3-request';
+import PropTypes from 'prop-types';
 
 class Stories extends Component {
   constructor() {
@@ -22,19 +22,24 @@ class Stories extends Component {
     });
   }
 
-  renderFullStory({match}) {
-    const id = match.params.id;
-    return (
-      <div>
-        <FullStory
-          preview="poop"
-          image="http://www.topgunprague.com/wp-content/uploads/2011/06/AK-47.png"
-          body={id}
-          id={id}
-          date="09.12.2019"
-        />
-      </div>
-    );
+  renderFullStory(match, stories) {
+    const id = parseInt(match.params.id);
+    const fullStory = stories.find(x => x.id == id);
+    if (fullStory) {
+      return (
+        <div>
+          <FullStory
+            preview={fullStory.preview}
+            image={fullStory.image}
+            body={fullStory.body}
+            id="id"
+            date={fullStory.date}
+          />
+        </div>
+      );
+    } else {
+      return <div>Article not found.</div>;
+    }
   }
 
   renderPreviews() {
@@ -47,24 +52,31 @@ class Stories extends Component {
           date={x.date}
           image={x.image}
           body={x.body}
+          id={x.id}
         />
       );
     });
   }
 
   render() {
-    return (
-      <Router>
+    if (!this.props.match.params.id) {
+      return (
         <section>
-          <Route
-            path="/stories/:id"
-            component={this.renderFullStory.bind(this)}
-          />
           {this.renderPreviews()}
         </section>
-      </Router>
-    );
+      );
+    } else {
+      return (
+        <section>
+          {this.renderFullStory(this.props.match, this.state.stories)}
+        </section>
+      );
+    }
   }
 }
+
+Stories.propTypes = {
+  match: PropTypes.string,
+};
 
 export default Stories;

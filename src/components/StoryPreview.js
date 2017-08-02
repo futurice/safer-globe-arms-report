@@ -13,11 +13,9 @@ class StoryPreview extends Component {
           <span className="story-year">{this.props.date}</span>
           <div className="story-text">
             <h3>{this.props.title}</h3>
-            <p>
-              <ReactMarkdown source={this.props.preview} />
-            </p>
+            <ReactMarkdown source={this.props.preview} />
             <div className="read-more">
-              <Link to="/stories/01">Continue Reading</Link>
+              <Link to={'/stories/' + this.props.id}>Continue Reading</Link>
             </div>
           </div>
         </div>
@@ -38,6 +36,7 @@ StoryPreview.propTypes = {
   body: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default StoryPreview;

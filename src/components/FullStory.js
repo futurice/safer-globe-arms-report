@@ -32,12 +32,12 @@ class FullStory extends Component {
 }
 
 FullStory.propTypes = {
-  body: PropTypes.string.required,
-  date: PropTypes.string.required,
-  title: PropTypes.string.required,
-  preview: PropTypes.string.required,
-  body: PropTypes.object.required,
-  image: PropTypes.string.required,
+  body: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default FullStory;

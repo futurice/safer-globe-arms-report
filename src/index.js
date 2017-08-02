@@ -29,6 +29,7 @@ import './styles/modifiers.css';
 
 /*
 The project is using React Router 4
+        <Route exact path="/stories" component={Stories} />
 Docs can be found here: https://reacttraining.com/react-router/web/
 */
 const AppRouter = () => (
@@ -38,7 +39,12 @@ const AppRouter = () => (
         <Nav />
 
         <Route exact path="/" component={Data} />
-        <Route exact path="/stories" component={Stories} />
+        <Route exact path="/stories" render={props => <Stories {...props} />} />
+        <Route
+          exact
+          path="/stories/:id"
+          render={props => <Stories {...props} />}
+        />
         <Route exact path="/about" component={About} />
         <Route exact path="/downloads" component={Downloads} />
 
