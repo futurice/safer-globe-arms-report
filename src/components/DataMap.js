@@ -108,15 +108,47 @@ class DataMap extends Component {
 
     let path = d3.geoPath().projection(projection);
 
+    let strokeWid = 1;
+
     let zoom = d3.zoom().scaleExtent([1, 10]).on('zoom', () => {
       zoomGroup.attr('transform', d3.event.transform);
       zoomGroup
         .selectAll('.centroidArcDef')
-        .attr('stroke-width', 2 / d3.event.transform.k);
+        .attr('stroke-width', 1 / d3.event.transform.k);
+      strokeWid = 1 / d3.event.transform.k;
       zoomGroup
         .selectAll('.centroidArcCiv')
-        .attr('stroke-width', 2 / d3.event.transform.k);
+        .attr('stroke-width', 1 / d3.event.transform.k);
     });
+
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      let angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+
+      return {
+        x: centerX + radius * Math.cos(angleInRadians),
+        y: centerY + radius * Math.sin(angleInRadians),
+      };
+    }
+
+    function describeArc(x, y, radius, startAngle, endAngle) {
+      let start = polarToCartesian(x, y, radius, endAngle);
+      let end = polarToCartesian(x, y, radius, startAngle);
+      let largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+      let d = [
+        'M',
+        start.x,
+        start.y,
+        'A',
+        radius,
+        radius,
+        0,
+        largeArcFlag,
+        0,
+        end.x,
+        end.y,
+      ].join(' ');
+      return d;
+    }
 
     let mapSVG = d3
       .select('.map-container')
@@ -195,12 +227,10 @@ class DataMap extends Component {
         ).features
       )
       .enter()
+      .filter(d => d.properties.name !== null)
       .append('path')
       .attr('class', 'land')
       .attr('id', function(d) {
-        if (d.properties.name == null) {
-          return 'undefined';
-        }
         return d.properties.name
           .replace(/ /g, '_')
           .replace('(', '_')
@@ -208,13 +238,13 @@ class DataMap extends Component {
           .replace("'", '_'); // Giving different ID to each country path so it can be called later
       })
       .attr('d', path)
-      .attr('fill', () => {
-        return '#eaeaea';
-      })
+      .attr('fill', '#aaa')
+      .attr('fill-opacity', 0.75)
       .attr('stroke', '#fff')
-      .attr('stroke-width', 0.25)
+      .attr('stroke-width', 0.5)
       .on('mouseover', d => {
-        d3.selectAll('.land').attr('opacity', 0.3);
+        console.log(strokeWid);
+        d3.selectAll('.land').attr('fill-opacity', 0.5);
         d3
           .select(
             `#${d.properties.name
@@ -223,22 +253,54 @@ class DataMap extends Component {
               .replace(')', '_')
               .replace("'", '_')}`
           )
+          .attr('fill-opacity', 1);
+        d3.selectAll('.centroidArcCiv').attr('opacity', 0.3);
+        d3.selectAll('.centroidArcDef').attr('opacity', 0.3);
+        d3
+          .select(
+            `#${d.properties.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}centroidArcCiv`
+          )
+          .attr('stroke-width', 2)
+          .attr('opacity', 1);
+        d3
+          .select(
+            `#${d.properties.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}centroidArcDef`
+          )
+          .attr('stroke-width', 2)
           .attr('opacity', 1);
         if (d.properties.name === 'Alaska (United States of America)') {
-          d3.select('#United_States_of_America').attr('opacity', 1);
+          d3.select('#United_States_of_America').attr('fill-opacity', 1);
         }
         if (d.properties.name === 'United States of America') {
-          d3.select('#Alaska__United_States_of_America_').attr('opacity', 1);
+          d3
+            .select('#Alaska__United_States_of_America_')
+            .attr('fill-opacity', 1);
         }
         if (d.properties.name === 'France') {
-          d3.select('#France__Sub_Region_').attr('opacity', 1);
+          d3.select('#France__Sub_Region_').attr('fill-opacity', 1);
         }
         if (d.properties.name === 'France (Sub Region)') {
-          d3.select('#France').attr('opacity', 1);
+          d3.select('#France').attr('fill-opacity', 1);
         }
       })
       .on('mouseout', () => {
-        d3.selectAll('.land').attr('opacity', 1);
+        d3.selectAll('.land').attr('fill-opacity', 0.75);
+        d3
+          .selectAll('.centroidArcCiv')
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
+        d3
+          .selectAll('.centroidArcDef')
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
       });
 
     for (let i = 0; i < this.state.gpiData.length; i++) {
@@ -247,7 +309,6 @@ class DataMap extends Component {
         .replace('(', '_')
         .replace(')', '_')
         .replace("'", '_')}`;
-
       zoomGroup
         .selectAll(id)
         .attr(
@@ -256,7 +317,6 @@ class DataMap extends Component {
             parseFloat(this.state.gpiData[i][`score_${this.state.gpiYear}`])
           )
         );
-
       if (this.state.gpiData[i].country === 'United States of America') {
         let idAlaska = '#Alaska__United_States_of_America_';
         zoomGroup
@@ -331,6 +391,28 @@ class DataMap extends Component {
               .replace("'", '_')}`
           )
           .attr('opacity', 1);
+        d3.selectAll('.centroidArcCiv').attr('opacity', 0.3);
+        d3.selectAll('.centroidArcDef').attr('opacity', 0.3);
+        d3
+          .select(
+            `#${d.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}centroidArcCiv`
+          )
+          .attr('stroke-width', 2)
+          .attr('opacity', 1);
+        d3
+          .select(
+            `#${d.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}centroidArcDef`
+          )
+          .attr('stroke-width', 2)
+          .attr('opacity', 1);
         if (d.name === 'Alaska (United States of America)') {
           d3.select('#United_States_of_America').attr('opacity', 1);
         }
@@ -362,6 +444,14 @@ class DataMap extends Component {
       .on('mouseout', () => {
         d3.selectAll('.land').attr('opacity', 1);
         tooltip.transition().duration(500).style('opacity', 0);
+        d3
+          .selectAll('.centroidArcCiv')
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
+        d3
+          .selectAll('.centroidArcDef')
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
       })
       .on('click', c => {
         displayData({
@@ -401,54 +491,51 @@ class DataMap extends Component {
     zoomGroup
       .selectAll('.gCentroid')
       .append('path')
+      .attr('id', d => {
+        return `${d.name
+          .replace(/ /g, '_')
+          .replace('(', '_')
+          .replace(')', '_')
+          .replace("'", '_')}centroidArcDef`; // Giving different ID to each country path so it can be called later
+      })
       .attr('class', 'centroidArcDef')
       .attr('stroke', defenceColor)
-      .attr('stroke-width', 2)
+      .attr('stroke-width', 1)
       .attr('fill-opacity', 0)
-      .attr(
-        'd',
-        d3
-          .arc()
-          .innerRadius(d => {
-            console.log(d);
-            return radius(d.Total);
-          })
-          .outerRadius(d => {
-            return radius(d.Total);
-            // Error somewhere here
-          })
-          .startAngle(0)
-          .endAngle(d => {
-            if (isNaN(d.Defence_Materiel)) return 0;
-            return 2 * Math.PI * (d.Defence_Materiel / d.Total);
-          })
-      );
+      .attr('d', d => {
+        let endAngl = 0;
+        if (isNaN(d.Defence_Materiel)) {
+          endAngl = 0;
+        } else {
+          endAngl = 359.9999 * (d.Defence_Materiel / d.Total);
+        }
+        return describeArc(0, 0, radius(d.Total), 0, endAngl);
+      });
 
     // Drawing civilian arcs second
     zoomGroup
       .selectAll('.gCentroid')
       .append('path')
       .attr('class', 'centroidArcCiv')
+      .attr('id', d => {
+        return `${d.name
+          .replace(/ /g, '_')
+          .replace('(', '_')
+          .replace(')', '_')
+          .replace("'", '_')}centroidArcCiv`; // Giving different ID to each country path so it can be called later
+      })
       .attr('stroke', civilianColor)
-      .attr('stroke-width', 2)
+      .attr('stroke-width', 1)
       .attr('fill-opacity', 0)
-      .attr(
-        'd',
-        d3
-          .arc()
-          .innerRadius(d => {
-            return radius(d.Total);
-          })
-          .outerRadius(d => {
-            return radius(d.Total);
-            // error somewhere here
-          })
-          .startAngle(d => {
-            if (isNaN(d.Defence_Materiel)) return 0;
-            return 2 * Math.PI * (d.Defence_Materiel / d.Total);
-          })
-          .endAngle(2 * Math.PI)
-      );
+      .attr('d', d => {
+        let strtAngl = 0;
+        if (isNaN(d.Defence_Materiel)) {
+          strtAngl = 0;
+        } else {
+          strtAngl = 359.9999 * (d.Defence_Materiel / d.Total);
+        }
+        return describeArc(0, 0, radius(d.Total), strtAngl, 359.9999);
+      });
 
     d3.selectAll("input[name='countryList']").on('change', () => {
       console.log('changed');
@@ -484,25 +571,18 @@ class DataMap extends Component {
             .append('path')
             .attr('class', 'centroidArcDef')
             .attr('fill', defenceColor)
-            .attr('fill-opacity', 1)
-            .attr(
-              'd',
-              d3
-                .arc()
-                .innerRadius(d => {
-                  return radius(d.Total) - 1;
-                })
-                .outerRadius(d => {
-                  return radius(d.Total) + 1;
-                })
-                .startAngle(0)
-                .endAngle(d => {
-                  if (isNaN(d.Defence_Materiel)) {
-                    return 0;
-                  }
-                  return 2 * Math.PI * (d.Defence_Materiel / d.Total);
-                })
-            );
+            .attr('stroke', defenceColor)
+            .attr('stroke-width', 1)
+            .attr('fill-opacity', 0)
+            .attr('d', d => {
+              let endAngl = 0;
+              if (isNaN(d.Defence_Materiel)) {
+                endAngl = 0;
+              } else {
+                endAngl = 359.9999 * (d.Defence_Materiel / d.Total);
+              }
+              return describeArc(0, 0, radius(d.Total), 0, endAngl);
+            });
 
           // Drawing civilian arcs second
           zoomGroup
@@ -510,25 +590,18 @@ class DataMap extends Component {
             .append('path')
             .attr('class', 'centroidArcCiv')
             .attr('fill', civilianColor)
-            .attr('fill-opacity', 1)
-            .attr(
-              'd',
-              d3
-                .arc()
-                .innerRadius(d => {
-                  return radius(d.Total) - 1;
-                })
-                .outerRadius(d => {
-                  return radius(d.Total) + 1;
-                })
-                .startAngle(d => {
-                  if (isNaN(d.Defence_Materiel)) {
-                    return 0;
-                  }
-                  return 2 * Math.PI * (d.Defence_Materiel / d.Total);
-                })
-                .endAngle(2 * Math.PI)
-            );
+            .attr('stroke', civilianColor)
+            .attr('stroke-width', 1)
+            .attr('fill-opacity', 0)
+            .attr('d', d => {
+              let strtAngl = 0;
+              if (isNaN(d.Defence_Materiel)) {
+                strtAngl = 0;
+              } else {
+                strtAngl = 359.9999 * (d.Defence_Materiel / d.Total);
+              }
+              return describeArc(0, 0, radius(d.Total), strtAngl, 359.9999);
+            });
         }
       }
     );
