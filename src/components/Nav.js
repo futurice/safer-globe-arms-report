@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import intl from 'react-intl-universal';
 
 import './../styles/components/Nav.css';
 
@@ -16,19 +17,19 @@ class Nav extends Component {
             </h1>
           </li>
           <li>
-            <NavLink exact to="/">Data</NavLink>
+            <NavLink exact to="/">{intl.get('DATA')}</NavLink>
           </li>
           <li>
-            <NavLink to="/stories">Stories</NavLink>
+            <NavLink to="/stories">{intl.get('STORIES')}</NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/about">{intl.get('ABOUT')}</NavLink>
           </li>
           <li>
-            <NavLink to="/downloads">Downloads</NavLink>
+            <NavLink to="/downloads">{intl.get('DOWNLOADS')}</NavLink>
           </li>
           <li className="at-flex-end">
-            <span><a href="#">FI</a> | <a href="#">EN</a></span>
+            <span><a href='?lang=fi'>FI</a> | <a href='?lang=en-US'>EN</a></span>
           </li>
         </ul>
       </nav>

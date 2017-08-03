@@ -7,6 +7,7 @@ import DataTimeline from './DataTimeline';
 // import StoryPreview from './StoryPreview';
 import {csv} from 'd3-request';
 import {CSVLink} from 'react-csv';
+import intl from 'react-intl-universal';
 
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
@@ -45,6 +46,29 @@ function compare(a, b) {
   return 0;
 }
 
+function formatEuros(value) {
+  // This is disgusting and needs to be optimized
+  // ALL THE METHODS!!!
+
+  return value
+    .split('')
+    .reverse()
+    .join('')
+    .replace(/(.{3})/g, '$1 ')
+    .split('')
+    .reverse()
+    .join('');
+}
+
+
+function accumulateTotal(data, type) {
+  let total = data.reduce((sum, value) => {
+    return Number(value[type]) + sum;
+  }, 0);
+  return formatEuros(total.toString());
+}
+
+
 class Data extends Component {
   constructor() {
     super();
@@ -53,26 +77,23 @@ class Data extends Component {
     this.buildTopLists = this.buildTopLists.bind(this);
     this.formatEuros = this.formatEuros.bind(this);
     this.accumulateTotal = this.accumulateTotal.bind(this);
-
+    const activeYear = 2016;
     this.state = {
       countries: [],
       countryData: output,
       gpiData: null,
-      activeYear: 2016,
+      activeYear: activeYear,
       saferGlobeData: [],
       selectedCountry: {
-        name: 'Totals',
+        name: `${intl.get('TOTALS')} - ${activeYear}`,
         total: {
-          value: '29.5M€',
-          rank: '',
+          value: '',
         },
         defence: {
-          value: '29.5M€',
-          rank: '',
+          value: '',
         },
         civilian: {
-          value: '29.5M€',
-          rank: '',
+          value: '',
         },
       },
     };
@@ -89,7 +110,7 @@ class Data extends Component {
       if (error) {
         this.setState({loadError: true});
       }
-      const countryList = data.filter(x => parseInt(x.Total) !== 0).map(y => {
+      const countryList = data.filter(x => parseInt(x.Total, 10) !== 0).map(y => {
         return {
           value: y.Countries,
           text: y.Countries,
@@ -98,6 +119,18 @@ class Data extends Component {
       this.setState({
         saferGlobeData: data,
         countries: countryList.sort(compare),
+        selectedCountry: {
+          name: `${intl.get('TOTALS')} - ${this.state.activeYear}`,
+          total: {
+            value: accumulateTotal(data, 'Total'),
+          },
+          defence: {
+            value: accumulateTotal(data, 'Defence_Materiel'),
+          },
+          civilian: {
+            value: accumulateTotal(data, 'Civilian_Arms'),
+          }
+        }
       });
     });
   }
@@ -145,7 +178,7 @@ class Data extends Component {
   accumulateTotal(type) {
     let total = 0;
 
-    this.state.saferGlobeData.map(country => {
+    this.state.saferGlobeData.forEach(country => {
       total += Number(country[type]);
     });
 
@@ -177,15 +210,15 @@ class Data extends Component {
     }
     */
     return (
-      <section className="data-section-container">
+      <section className="data-section-container" style={{overflow: 'hidden'}}>
         <section className="data-map-container flex-column-container">
-          <div className="flex-container">
+          <div className="flex-container" style={{paddingLeft: '15px'}}>
             <section className="flex-one country-data-container">
               <CountryDataList country={this.state.selectedCountry} />
               <CSVLink
                 data={this.state.saferGlobeData}
                 filename={'data-dump.csv'}>
-                Download Data
+                {intl.get('DOWNLOAD_DATA')}
               </CSVLink>
             </section>
             <section className="flex-five map-container">

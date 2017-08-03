@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './forms/RadioButton';
+import intl from 'react-intl-universal';
 // import Button from './Button';
 
 import './../styles/components/CountryDataList.css';
@@ -45,52 +46,41 @@ class CountryDataList extends Component {
           id="total"
           name="countryList"
           value="total"
-          label="total"
+          label={intl.get('TOTAL')}
         />
         <RadioButton
           id="defence"
           name="countryList"
           value="defence"
-          label="defence"
+          label={intl.get('DEFENCE')}
         />
         <RadioButton
           id="civilian"
           name="countryList"
           value="civilian"
-          label="civilian"
+          label={intl.get('CIVILIAN')}
         />
         <ul className="country-data-list no-bullets">
           <li className="has-spacer">
             <div id="totalSparkLine">
               <span className="is-block">
-                <span className="is-strong">Total:</span> {country.total.value}
-              </span>
-              <span className="is-block">
-                <span className="is-strong">Ranking:</span> {country.total.rank}
+                <span className="is-strong">{intl.get('TOTALS')}</span> {country.total.value}
               </span>
             </div>
           </li>
           <li className="has-spacer">
             <div id="defenceSparkLine">
               <span className="is-block">
-                <span className="is-strong">Defence:</span>
+                <span className="is-strong">{intl.get('DEFENCE')}</span>
                 {country.defence.value}
-              </span>
-              <span className="is-block">
-                <span className="is-strong">Ranking:</span>
-                {country.defence.rank}
               </span>
             </div>
           </li>
           <li className="has-spacer">
             <div id="civilianSparkLine">
               <span className="is-block">
-                <span className="is-strong">Civilian:</span>
+                <span className="is-strong">{intl.get('CIVILIAN')}</span>
                 {country.civilian.value}
-              </span>
-              <span className="is-block">
-                <span className="is-strong">Ranking:</span>
-                {country.civilian.rank}
               </span>
             </div>
           </li>
