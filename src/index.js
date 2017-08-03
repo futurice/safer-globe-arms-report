@@ -46,7 +46,7 @@ const locales = {
     DEFENCE: 'Defence',
     CIVILIAN: 'Civilian',
   },
-  'fi': {
+  fi: {
     DATA: 'Data',
     DOWNLOAD_DATA: 'Lataa tiedot',
     STORIES: 'Artikkelit',
@@ -56,15 +56,19 @@ const locales = {
     TOTAL: 'Yhteensä',
     DEFENCE: 'Puolustus',
     CIVILIAN: 'Siviili',
-    },
+  },
 };
 
 class AppRouter extends Component {
-  state = {initDone: false};
+  constructor() {
+    super();
+    this.state = {initDone: false};
+  }
 
   loadLocales() {
     // init method will load CLDR locale data according to currentLocale
     // react-intl-universal is singleton, so you should init it only once in your app
+
     intl.init({
       currentLocale: intl.determineLocale({urlLocaleKey: 'lang'}),
       locales,
