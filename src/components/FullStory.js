@@ -28,7 +28,6 @@ FullStory.propTypes = {
   body: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
