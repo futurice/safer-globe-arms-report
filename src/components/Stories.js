@@ -23,8 +23,8 @@ class Stories extends Component {
   }
 
   renderFullStory(match, stories) {
-    const id = parseInt(match.params.id);
-    const fullStory = stories.find(x => x.id == id);
+    const id = parseInt(match.params.id, 10);
+    const fullStory = stories.find(x => x.id === id);
     if (fullStory) {
       return (
         <div>
