@@ -4,12 +4,15 @@ import FullStory from './FullStory';
 import stories from './../data/stories/stories.csv';
 import {csv} from 'd3-request';
 import PropTypes from 'prop-types';
+import SelectMenu from './forms/SelectMenu';
 
 class Stories extends Component {
   constructor() {
     super();
     this.state = {
       stories: [],
+      filteredStories: [],
+      tags: [],
     };
   }
 
@@ -18,7 +21,12 @@ class Stories extends Component {
       if (error) {
         this.setState({loadError: true});
       }
-      this.setState({stories: data});
+      const tags = data.map(x => x.tags.split(','));
+      this.setState({
+        stories: data,
+        filteredStories: data,
+        tags: [].concat.apply([''], tags),
+      });
     });
   }
 
@@ -43,7 +51,7 @@ class Stories extends Component {
   }
 
   renderPreviews() {
-    return this.state.stories.map((x, i) => {
+    return this.state.filteredStories.map((x, i) => {
       return (
         <StoryPreview
           key={i}
@@ -53,21 +61,38 @@ class Stories extends Component {
           image={x.image}
           body={x.body}
           id={x.id}
+          tags={x.tags}
         />
       );
     });
+  }
+
+  handleChange(e) {
+    const filteredStories = e.target.value.length === 0
+      ? this.state.stories
+      : this.state.stories.filter(x =>
+          x.tags.split(',').includes(e.target.value)
+        );
+    this.setState({filteredStories});
   }
 
   render() {
     if (!this.props.match.params.id) {
       return (
         <section>
+          <SelectMenu
+            onChange={this.handleChange.bind(this)}
+            options={this.state.tags.map(x => ({value: x, text: x}))}
+            id="tagFilter"
+            label="Select tag"
+          />
           {this.renderPreviews()}
         </section>
       );
     } else {
       return (
         <section>
+
           {this.renderFullStory(this.props.match, this.state.stories)}
         </section>
       );

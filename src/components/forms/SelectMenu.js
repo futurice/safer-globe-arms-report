@@ -22,7 +22,10 @@ class SelectMenu extends Component {
           {this.props.label}
           {helpIcon}
         </label>
-        <select className="select-filter" id={this.props.id}>
+        <select
+          onChange={this.props.onChange}
+          className="select-filter"
+          id={this.props.id}>
           {defaultOption}
 
           {this.props.options.map(option => (
@@ -47,6 +50,7 @@ SelectMenu.propTypes = {
   helpIcon: PropTypes.bool,
   defaultOption: PropTypes.string,
   options: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default SelectMenu;

@@ -18,6 +18,7 @@ class StoryPreview extends Component {
               <Link to={'/stories/' + this.props.id}>Continue Reading</Link>
             </div>
           </div>
+          Tags: {this.props.tags.split(',').join(', ')}
         </div>
         <img
           className="story-image"
@@ -37,6 +38,7 @@ StoryPreview.propTypes = {
   date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
 };
 
 export default StoryPreview;
