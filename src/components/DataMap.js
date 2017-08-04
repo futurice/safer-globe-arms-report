@@ -43,7 +43,7 @@ class DataMap extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate() {
     if (this.state.saferGlobeData && this.props.gpiYear) {
       return false;
     } else {

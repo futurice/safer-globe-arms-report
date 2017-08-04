@@ -60,14 +60,12 @@ function formatEuros(value) {
     .join('');
 }
 
-
 function accumulateTotal(data, type) {
   let total = data.reduce((sum, value) => {
     return Number(value[type]) + sum;
   }, 0);
   return formatEuros(total.toString());
 }
-
 
 class Data extends Component {
   constructor() {
@@ -110,12 +108,14 @@ class Data extends Component {
       if (error) {
         this.setState({loadError: true});
       }
-      const countryList = data.filter(x => parseInt(x.Total, 10) !== 0).map(y => {
-        return {
-          value: y.Countries,
-          text: y.Countries,
-        };
-      });
+      const countryList = data
+        .filter(x => parseInt(x.Total, 10) !== 0)
+        .map(y => {
+          return {
+            value: y.Countries,
+            text: y.Countries,
+          };
+        });
       this.setState({
         saferGlobeData: data,
         countries: countryList.sort(compare),
@@ -129,8 +129,8 @@ class Data extends Component {
           },
           civilian: {
             value: accumulateTotal(data, 'Civilian_Arms'),
-          }
-        }
+          },
+        },
       });
     });
   }

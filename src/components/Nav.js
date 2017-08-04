@@ -29,7 +29,9 @@ class Nav extends Component {
             <NavLink to="/downloads">{intl.get('DOWNLOADS')}</NavLink>
           </li>
           <li className="at-flex-end">
-            <span><a href='?lang=fi'>FI</a> | <a href='?lang=en-US'>EN</a></span>
+            <span>
+              <a href="?lang=fi">FI</a> | <a href="?lang=en-US">EN</a>
+            </span>
           </li>
         </ul>
       </nav>

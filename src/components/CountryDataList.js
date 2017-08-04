@@ -64,7 +64,9 @@ class CountryDataList extends Component {
           <li className="has-spacer">
             <div id="totalSparkLine">
               <span className="is-block">
-                <span className="is-strong">{intl.get('TOTALS')}</span> {country.total.value}
+                <span className="is-strong">{intl.get('TOTALS')}</span>
+                {' '}
+                {country.total.value}
               </span>
             </div>
           </li>

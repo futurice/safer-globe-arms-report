@@ -69,13 +69,14 @@ class AppRouter extends Component {
     // init method will load CLDR locale data according to currentLocale
     // react-intl-universal is singleton, so you should init it only once in your app
 
-    intl.init({
-      currentLocale: intl.determineLocale({urlLocaleKey: 'lang'}),
-      locales,
-    })
-    .then(() => {
-      this.setState({initDone: true});
-    });
+    intl
+      .init({
+        currentLocale: intl.determineLocale({urlLocaleKey: 'lang'}),
+        locales,
+      })
+      .then(() => {
+        this.setState({initDone: true});
+      });
   }
 
   componentDidMount() {
@@ -91,7 +92,11 @@ class AppRouter extends Component {
             <Route path="/" render={props => <Nav {...props} />} />
 
             <Route exact path="/" component={Data} />
-            <Route exact path="/stories" render={props => <Stories {...props} />} />
+            <Route
+              exact
+              path="/stories"
+              render={props => <Stories {...props} />}
+            />
             <Route
               exact
               path="/stories/:id"
