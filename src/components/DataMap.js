@@ -86,45 +86,37 @@ class DataMap extends Component {
   zoomMap(mapSVG) {
     mapSVG.attr(
       'transform',
-      `translate(${d3.event.transform.x}, ${d3.event.transform.y}) scale(${d3.event.transform.k})`
+      `translate(${d3.event.translate}) scale(${d3.event.transform.k})`
     );
   }
 
   drawMap(displayData) {
     d3.select('.map-container').html('');
-
     const scl = 180;
-    const wid = parseInt(
-      d3.selectAll('section.map-container').style('width'),
-      10
-    );
-    const hght = parseInt(
-      d3.selectAll('section.map-container').style('height'),
-      10
-    );
+    const wid = Math.max(1024, window.innerWidth) - 150;
+    const hght = Math.max(500, window.innerHeight) - 93;
+    let tooltipHover = false;
+    let scaleValue = 1;
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
 
     let radius = d3.scaleSqrt().domain([0, 60000000]).range([0, 50]);
 
-    let tooltip = d3
-      .select('body')
-      .append('div')
-      .attr('class', 'tooltip')
-      .style('opacity', 0);
-
     let projection = d3
       .geoEquirectangular()
-      .precision(0.1)
       .scale(scl)
-      .translate([wid / 2, hght / 2 + 140]);
+      .translate([wid / 2, hght / 2]);
 
     let path = d3.geoPath().projection(projection);
 
     let strokeWid = 1;
 
     let zoom = d3.zoom().scaleExtent([1, 10]).on('zoom', () => {
-      zoomGroup.attr('transform', d3.event.transform);
+      zoomGroup.attr(
+        'transform',
+        `translate(${d3.event.transform.x},${d3.event.transform.y})scale(${d3.event.transform.k})`
+      );
+      scaleValue = d3.event.transform.k;
       zoomGroup
         .selectAll('.centroidArcDef')
         .attr('stroke-width', 1 / d3.event.transform.k);
@@ -163,31 +155,154 @@ class DataMap extends Component {
       return d;
     }
 
+    function hover(cntryNm, xPos) {
+      d3
+        .selectAll('.land')
+        .transition()
+        .duration(200)
+        .attr('fill-opacity', 0.3);
+      if (
+        !d3
+          .select(
+            `#${cntryNm
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}gCentroid`
+          )
+          .empty()
+      ) {
+        let values = d3
+          .select(
+            `#${cntryNm
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}gCentroid`
+          )
+          .datum();
+        if (xPos > wid) {
+          d3
+            .selectAll('.tooltipSvg')
+            .attr(
+              'transform',
+              `translate(${values.centroid[0] - radius(+values.Total) - 5}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
+            )
+            .attr('opacity', 0.9);
+        } else {
+          d3
+            .selectAll('.tooltipSvg')
+            .attr(
+              'transform',
+              `translate(${values.centroid[0] + radius(+values.Total) + 5}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
+            )
+            .attr('opacity', 0.9);
+        }
+        d3.selectAll('.countryName').text(values.name);
+        d3
+          .selectAll('.defMatValue')
+          .text(`${tooltipFigure(values.Defence_Materiel)} M€`);
+        d3
+          .selectAll('.civArmsValue')
+          .text(`${tooltipFigure(values.Civilian_Arms)} M€`);
+        d3.selectAll('.totalValue').text(`${tooltipFigure(values.Total)} M€`);
+      }
+      d3
+        .select(
+          `#${cntryNm
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')}`
+        )
+        .transition()
+        .duration(200)
+        .attr('fill-opacity', 0.7);
+      d3
+        .selectAll('.centroidArcCiv')
+        .transition()
+        .duration(200)
+        .attr('opacity', 0.3)
+        .attr('stroke-width', strokeWid);
+      d3
+        .selectAll('.centroidArcDef')
+        .transition()
+        .duration(200)
+        .attr('opacity', 0.3)
+        .attr('stroke-width', strokeWid);
+      d3
+        .select(
+          `#${cntryNm
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')}centroidArcCiv`
+        )
+        .transition()
+        .duration(200)
+        .attr('stroke-width', 2)
+        .attr('opacity', 1);
+      d3
+        .select(
+          `#${cntryNm
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')}centroidArcDef`
+        )
+        .transition()
+        .duration(200)
+        .attr('stroke-width', 2)
+        .attr('opacity', 1);
+      if (cntryNm === 'Alaska (United States of America)') {
+        d3
+          .select('#United_States_of_America')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.7);
+      }
+      if (cntryNm === 'United States of America') {
+        d3
+          .select('#Alaska__United_States_of_America_')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.7);
+      }
+      if (cntryNm === 'France') {
+        d3
+          .select('#France__Sub_Region_')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.7);
+      }
+      if (cntryNm === 'France (Sub Region)') {
+        d3
+          .select('#France')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.7);
+      }
+    }
+
     let mapSVG = d3
       .select('.map-container')
       .append('svg')
       .attr('xmlns', 'http://www.w3.org/2000/svg')
       .attr('width', wid)
       .attr('height', hght)
-      .attr('class', 'svg-map');
+      .attr('class', 'svg-map')
+      .append('g');
 
-    /* adding fonts
-    mapSVG
-      .append('defs')
-      .append('style')
-      .attr('type', 'text/css')
-      .text(
-        "@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');"
-      );*/
+    let zoomGroup = mapSVG.append('g');
 
-    let zoomGroup = mapSVG.append('g').call(zoom);
+    mapSVG.call(zoom);
 
     zoomGroup
       .append('rect')
-      .style('fill', 'none')
-      .style('pointer-events', 'all')
       .attr('width', wid)
-      .attr('height', hght);
+      .attr('height', hght)
+      .style('fill', 'none')
+      .style('pointer-events', 'all');
     let domain = [1, 1.47, 1.91, 2.37, 2.9, 6]; // Domain to define bins for GPI
     let colorList = [
       '#999999',
@@ -204,33 +319,7 @@ class DataMap extends Component {
       this.state.saferGlobeData
     );
     let SaferGlobeCountries = d3.keys(saferGlobeDataObject);
-    /*
-    let clicked = d => {
-      let x, y, k;
-      let width = 960;
-      let height =  480;
-      console.log(d);
-      if (d && centered !== d) {
-        let centroid = path.centroid(d);
-        x = centroid[0];
-        y = centroid[1];
-        k = 3;
-        centered = d;
-        cl = true;
-      } else {
-        x = width / 2;
-        y = height / 2;
-        k = 1;
-        centered = null;
-        cl = false;
-      }
-      console.log(x);
-      zoomGroup.transition()
-          .duration(750)
-          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-          .style("stroke-width", 1.5 / k + "px");
-    }
-    */
+
     // Drawing the countries as different svg paths
     zoomGroup
       .selectAll('.land')
@@ -253,68 +342,47 @@ class DataMap extends Component {
       })
       .attr('d', path)
       .attr('fill', '#aaa')
-      .attr('fill-opacity', 0.75)
+      .attr('fill-opacity', 0.6)
       .attr('stroke', '#fff')
       .attr('stroke-width', 0.5)
       .on('mouseover', d => {
-        console.log(strokeWid);
-        d3.selectAll('.land').attr('fill-opacity', 0.5);
-        d3
-          .select(
-            `#${d.properties.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}`
-          )
-          .attr('fill-opacity', 1);
-        d3.selectAll('.centroidArcCiv').attr('opacity', 0.3);
-        d3.selectAll('.centroidArcDef').attr('opacity', 0.3);
-        d3
-          .select(
-            `#${d.properties.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}centroidArcCiv`
-          )
-          .attr('stroke-width', 2)
-          .attr('opacity', 1);
-        d3
-          .select(
-            `#${d.properties.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}centroidArcDef`
-          )
-          .attr('stroke-width', 2)
-          .attr('opacity', 1);
         if (d.properties.name === 'Alaska (United States of America)') {
-          d3.select('#United_States_of_America').attr('fill-opacity', 1);
-        }
-        if (d.properties.name === 'United States of America') {
-          d3
-            .select('#Alaska__United_States_of_America_')
-            .attr('fill-opacity', 1);
-        }
-        if (d.properties.name === 'France') {
-          d3.select('#France__Sub_Region_').attr('fill-opacity', 1);
+          hover('United States of America', d3.event.x);
         }
         if (d.properties.name === 'France (Sub Region)') {
-          d3.select('#France').attr('fill-opacity', 1);
+          hover('France', d3.event.x);
+        }
+        if (
+          d.properties.name !== 'France (Sub Region)' &&
+          d.properties.name !== 'Alaska (United States of America)'
+        ) {
+          hover(d.properties.name, d3.event.x);
         }
       })
       .on('mouseout', () => {
-        d3.selectAll('.land').attr('fill-opacity', 0.75);
-        d3
-          .selectAll('.centroidArcCiv')
-          .attr('opacity', 1)
-          .attr('stroke-width', strokeWid);
-        d3
-          .selectAll('.centroidArcDef')
-          .attr('opacity', 1)
-          .attr('stroke-width', strokeWid);
+        if (!tooltipHover) {
+          d3
+            .selectAll('.land')
+            .transition()
+            .duration(200)
+            .attr('fill-opacity', 0.6);
+          d3
+            .selectAll('.tooltipSvg')
+            .attr('transform', 'translate(-100,-100)')
+            .attr('opacity', 0);
+          d3
+            .selectAll('.centroidArcCiv')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1)
+            .attr('stroke-width', strokeWid);
+          d3
+            .selectAll('.centroidArcDef')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1)
+            .attr('stroke-width', strokeWid);
+        }
       });
 
     for (let i = 0; i < this.state.gpiData.length; i++) {
@@ -391,81 +459,57 @@ class DataMap extends Component {
       .filter(d => d.Total !== '0')
       .append('g')
       .attr('class', 'gCentroid')
+      .attr(
+        'id',
+        d =>
+          `${d.name
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')}gCentroid`
+      )
       .attr('transform', d => {
         return `translate(${d.centroid[0]}, ${d.centroid[1]})`;
       })
       .on('mouseover', d => {
-        d3.selectAll('.land').attr('opacity', 0.3);
-        d3
-          .select(
-            `#${d.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}`
-          )
-          .attr('opacity', 1);
-        d3.selectAll('.centroidArcCiv').attr('opacity', 0.3);
-        d3.selectAll('.centroidArcDef').attr('opacity', 0.3);
-        d3
-          .select(
-            `#${d.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}centroidArcCiv`
-          )
-          .attr('stroke-width', 2)
-          .attr('opacity', 1);
-        d3
-          .select(
-            `#${d.name
-              .replace(/ /g, '_')
-              .replace('(', '_')
-              .replace(')', '_')
-              .replace("'", '_')}centroidArcDef`
-          )
-          .attr('stroke-width', 2)
-          .attr('opacity', 1);
+        console.log(d3.event.x);
         if (d.name === 'Alaska (United States of America)') {
-          d3.select('#United_States_of_America').attr('opacity', 1);
-        }
-        if (d.name === 'United States of America') {
-          d3.select('#Alaska__United_States_of_America_').attr('opacity', 1);
-        }
-        if (d.name === 'France') {
-          d3.select('#France__Sub_Region_').attr('opacity', 1);
+          hover('United States of America', d3.event.x);
         }
         if (d.name === 'France (Sub Region)') {
-          d3.select('#France').attr('opacity', 1);
+          hover('France', d3.event.x);
         }
-        tooltip.transition().duration(200).style('opacity', 0.9);
-        tooltip
-          .html(
-            `<h1>${d.name}</h1>
-            <span class="defence"> <h2>Defence Materiel: </h2> <h3>${tooltipFigure(d.Defence_Materiel)} M€</h3></br></span>
-            <span class="civilian"><h2>Civilian Arms: </h2> <h3>${tooltipFigure(d.Civilian_Arms)} M€</h3> </br></span>
-            <span class="total"> <h2>Total: </h2> <h3>${tooltipFigure(d.Total)} M€</h3></span>`
-          )
-          .style('left', `${d3.event.pageX}px`)
-          .style('top', `${d3.event.pageY - 58}px`);
-      })
-      .on('mousemove', () => {
-        tooltip
-          .style('left', `${d3.event.pageX}px`)
-          .style('top', `${d3.event.pageY - 58}px`);
+        if (
+          d.name !== 'France (Sub Region)' &&
+          d.name !== 'Alaska (United States of America)'
+        ) {
+          hover(d.name, d3.event.x);
+        }
       })
       .on('mouseout', () => {
-        d3.selectAll('.land').attr('opacity', 1);
-        tooltip.transition().duration(500).style('opacity', 0);
-        d3
-          .selectAll('.centroidArcCiv')
-          .attr('opacity', 1)
-          .attr('stroke-width', strokeWid);
-        d3
-          .selectAll('.centroidArcDef')
-          .attr('opacity', 1)
-          .attr('stroke-width', strokeWid);
+        if (!tooltipHover) {
+          d3
+            .selectAll('.land')
+            .transition()
+            .duration(200)
+            .attr('fill-opacity', 0.6);
+          d3
+            .selectAll('.tooltipSvg')
+            .attr('transform', 'translate(-100,-100)')
+            .attr('opacity', 0);
+          d3
+            .selectAll('.centroidArcCiv')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1)
+            .attr('stroke-width', strokeWid);
+          d3
+            .selectAll('.centroidArcDef')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1)
+            .attr('stroke-width', strokeWid);
+        }
       })
       .on('click', c => {
         displayData({
@@ -489,6 +533,15 @@ class DataMap extends Component {
       .selectAll('.gCentroid')
       .append('circle')
       .attr('class', 'centroidCircle')
+      .attr(
+        'id',
+        d =>
+          `#${d.name
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')}centroidCircle`
+      )
       .attr('fill', '#fff')
       .attr('stroke', '#ff0000')
       .attr('stroke-width', 0)
@@ -551,13 +604,125 @@ class DataMap extends Component {
         return describeArc(0, 0, radius(d.Total), strtAngl, 359.9999);
       });
 
+    let tooltipSvg = zoomGroup
+      .append('g')
+      .attr('class', 'tooltipSvg')
+      .attr('transform', 'translate(-100,-100)')
+      .attr('opacity', 0);
+
+    tooltipSvg
+      .on('mouseover', () => {
+        tooltipHover = true;
+      })
+      .on('mousemove', () => {
+        console.log(tooltipHover);
+        tooltipHover = true;
+      })
+      .on('mouseout', () => {
+        tooltipHover = false;
+      });
+
+    tooltipSvg
+      .append('rect')
+      .attr('width', 200)
+      .attr('height', 90)
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('rx', 2)
+      .attr('ry', 2)
+      .attr('fill', '#fff')
+      .attr('stroke', '#eee')
+      .attr('stroke-width', 1);
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'countryName')
+      .text('Hello World')
+      .attr('x', 10)
+      .attr('y', 20)
+      .attr('font-size', '14px')
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#333')
+      .attr('text-anchor', 'start');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'defMat')
+      .text('Defence Materiel')
+      .attr('x', 10)
+      .attr('y', 40)
+      .attr('font-size', '12px')
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#d6004d')
+      .attr('text-anchor', 'start');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'civArms')
+      .text('Civilian Arms')
+      .attr('x', 10)
+      .attr('y', 60)
+      .attr('font-size', '12px')
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#ff8e39')
+      .attr('text-anchor', 'start');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'defMatValue')
+      .text('00000')
+      .attr('x', 190)
+      .attr('y', 40)
+      .attr('font-size', '12px')
+      .attr('font-weight', 700)
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#d6004d')
+      .attr('text-anchor', 'end');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'civArmsValue')
+      .text('00000')
+      .attr('x', 190)
+      .attr('y', 60)
+      .attr('font-size', '12px')
+      .attr('font-weight', 700)
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#ff8e39')
+      .attr('text-anchor', 'end');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'total')
+      .text('Total')
+      .attr('x', 10)
+      .attr('y', 80)
+      .attr('font-size', '12px')
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#333')
+      .attr('text-anchor', 'start');
+
+    tooltipSvg
+      .append('text')
+      .attr('class', 'totalValue')
+      .text('00000')
+      .attr('x', 190)
+      .attr('y', 80)
+      .attr('font-size', '12px')
+      .attr('font-weight', 700)
+      .attr('font-family', 'Roboto Slab')
+      .attr('fill', '#333')
+      .attr('text-anchor', 'end');
+
     d3.selectAll("input[name='countryList']").on('change', () => {
       console.log('changed');
     });
+
     // Using the SaferGlobe Data to determine the radius of circle for different countries
     d3.selectAll("input[name='filter-type']").on(
       'change',
-      /* @this HTMLElement */ function() {
+      /* @this HTMLElement */
+      function() {
         let btnValue = this.value;
         d3
           .selectAll('.centroidCircle')
@@ -616,6 +781,8 @@ class DataMap extends Component {
               }
               return describeArc(0, 0, radius(d.Total), strtAngl, 359.9999);
             });
+
+          //  tooltip
         }
       }
     );
