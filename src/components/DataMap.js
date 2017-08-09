@@ -95,7 +95,6 @@ class DataMap extends Component {
     const scl = 218;
     const wid = Math.max(1024, window.innerWidth) - 150;
     const hght = Math.max(500, window.innerHeight) - 93;
-    let tooltipHover = false;
     let scaleValue = 1;
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
@@ -302,7 +301,30 @@ class DataMap extends Component {
       .attr('width', wid)
       .attr('height', hght)
       .style('fill', 'none')
-      .style('pointer-events', 'all');
+      .style('pointer-events', 'all')
+      .on('mouseover', () => {
+        d3
+          .selectAll('.land')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.6);
+        d3
+          .selectAll('.tooltipSvg')
+          .attr('transform', 'translate(-100,-100)')
+          .attr('opacity', 0);
+        d3
+          .selectAll('.centroidArcCiv')
+          .transition()
+          .duration(200)
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
+        d3
+          .selectAll('.centroidArcDef')
+          .transition()
+          .duration(200)
+          .attr('opacity', 1)
+          .attr('stroke-width', strokeWid);
+      });
     let domain = [1, 1.47, 1.91, 2.37, 2.9, 6]; // Domain to define bins for GPI
     let colorList = [
       '#999999',
@@ -346,6 +368,10 @@ class DataMap extends Component {
       .attr('stroke', '#fff')
       .attr('stroke-width', 0.5)
       .on('mouseover', d => {
+        d3
+          .selectAll('.tooltipSvg')
+          .attr('transform', 'translate(-100,-100)')
+          .attr('opacity', 0);
         if (d.properties.name === 'Alaska (United States of America)') {
           hover('United States of America', d3.event.x);
         }
@@ -357,31 +383,6 @@ class DataMap extends Component {
           d.properties.name !== 'Alaska (United States of America)'
         ) {
           hover(d.properties.name, d3.event.x);
-        }
-      })
-      .on('mouseout', () => {
-        if (!tooltipHover) {
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', 0.6);
-          d3
-            .selectAll('.tooltipSvg')
-            .attr('transform', 'translate(-100,-100)')
-            .attr('opacity', 0);
-          d3
-            .selectAll('.centroidArcCiv')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1)
-            .attr('stroke-width', strokeWid);
-          d3
-            .selectAll('.centroidArcDef')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1)
-            .attr('stroke-width', strokeWid);
         }
       });
 
@@ -486,31 +487,6 @@ class DataMap extends Component {
           hover(d.name, d3.event.x);
         }
       })
-      .on('mouseout', () => {
-        if (!tooltipHover) {
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', 0.6);
-          d3
-            .selectAll('.tooltipSvg')
-            .attr('transform', 'translate(-100,-100)')
-            .attr('opacity', 0);
-          d3
-            .selectAll('.centroidArcCiv')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1)
-            .attr('stroke-width', strokeWid);
-          d3
-            .selectAll('.centroidArcDef')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1)
-            .attr('stroke-width', strokeWid);
-        }
-      })
       .on('click', c => {
         displayData({
           name: c.name,
@@ -609,18 +585,6 @@ class DataMap extends Component {
       .attr('class', 'tooltipSvg')
       .attr('transform', 'translate(-100,-100)')
       .attr('opacity', 0);
-
-    tooltipSvg
-      .on('mouseover', () => {
-        tooltipHover = true;
-      })
-      .on('mousemove', () => {
-        console.log(tooltipHover);
-        tooltipHover = true;
-      })
-      .on('mouseout', () => {
-        tooltipHover = false;
-      });
 
     tooltipSvg
       .append('rect')
