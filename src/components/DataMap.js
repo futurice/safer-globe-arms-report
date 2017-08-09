@@ -92,7 +92,7 @@ class DataMap extends Component {
 
   drawMap(displayData) {
     d3.select('.map-container').html('');
-    const scl = 180;
+    const scl = 218;
     const wid = Math.max(1024, window.innerWidth) - 150;
     const hght = Math.max(500, window.innerHeight) - 93;
     let tooltipHover = false;
@@ -105,7 +105,7 @@ class DataMap extends Component {
     let projection = d3
       .geoEquirectangular()
       .scale(scl)
-      .translate([wid / 2, hght / 2]);
+      .translate([wid / 2.2, hght / 1.85]);
 
     let path = d3.geoPath().projection(projection);
 
@@ -181,12 +181,12 @@ class DataMap extends Component {
               .replace("'", '_')}gCentroid`
           )
           .datum();
-        if (xPos > wid) {
+        if (xPos > wid - 100) {
           d3
             .selectAll('.tooltipSvg')
             .attr(
               'transform',
-              `translate(${values.centroid[0] - radius(+values.Total) - 5}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
+              `translate(${values.centroid[0] - radius(+values.Total) - 5 - 200}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
             )
             .attr('opacity', 0.9);
         } else {
