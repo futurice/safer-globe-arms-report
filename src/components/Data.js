@@ -212,7 +212,7 @@ class Data extends Component {
     return (
       <section className="data-section-container" style={{overflow: 'hidden'}}>
         <section className="data-map-container flex-column-container">
-          <div className="flex-container" style={{paddingLeft: '15px'}}>
+          <div className="flex-container">
             <section className="flex-one country-data-container">
               <CountryDataList country={this.state.selectedCountry} />
               <CSVLink

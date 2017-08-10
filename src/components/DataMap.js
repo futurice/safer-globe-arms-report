@@ -104,7 +104,7 @@ class DataMap extends Component {
     let projection = d3
       .geoEquirectangular()
       .scale(scl)
-      .translate([wid / 1.9, hght / 1.8]);
+      .translate([wid / 1.88, hght / 1.9]);
 
     let path = d3.geoPath().projection(projection);
 
