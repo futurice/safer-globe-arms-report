@@ -40,26 +40,27 @@ class CountryDataList extends Component {
     const {country} = this.props;
     return (
       <div>
-        <h3>{country.name}</h3>
+        <h1><span className="is-strong">Finnish Arms Export</span></h1>
         <RadioButton
           checked={true}
           id="total"
           name="countryList"
           value="total"
-          label={intl.get('TOTAL')}
+          label="Total"
         />
         <RadioButton
           id="defence"
           name="countryList"
           value="defence"
-          label={intl.get('DEFENCE')}
+          label="Defence"
         />
         <RadioButton
           id="civilian"
           name="countryList"
           value="civilian"
-          label={intl.get('CIVILIAN')}
+          label="Civilian"
         />
+        <h3>{country.name}</h3>
         <ul className="country-data-list no-bullets">
           <li className="has-spacer">
             <div id="totalSparkLine">

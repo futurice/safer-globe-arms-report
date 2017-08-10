@@ -35,6 +35,10 @@
   color: #2D80B5;
 }
 
+.is-light {
+  font-weight: 300;
+}
+
 .no-bullets {
   list-style: none;
 }

@@ -12,7 +12,12 @@ class Nav extends Component {
           <li>
             <h1>
               <Link to="/">
-                ARMS Report <span className="is-block is-blue">SaferGlobe</span>
+                <span className="is-strong">
+                  SaferGlobe
+                </span>
+                <span className="is-light">
+                  | ARMS Report
+                </span>
               </Link>
             </h1>
           </li>

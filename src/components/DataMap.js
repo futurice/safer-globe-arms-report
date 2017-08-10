@@ -92,9 +92,9 @@ class DataMap extends Component {
 
   drawMap(displayData) {
     d3.select('.map-container').html('');
-    const scl = 218;
-    const wid = Math.max(1024, window.innerWidth) - 150;
-    const hght = Math.max(500, window.innerHeight) - 93;
+    const scl = 215;
+    const wid = Math.max(1024, window.innerWidth);
+    const hght = window.innerHeight - 65 - 30;
     let scaleValue = 1;
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
@@ -104,7 +104,7 @@ class DataMap extends Component {
     let projection = d3
       .geoEquirectangular()
       .scale(scl)
-      .translate([wid / 2.2, hght / 1.85]);
+      .translate([wid / 1.9, hght / 1.8]);
 
     let path = d3.geoPath().projection(projection);
 

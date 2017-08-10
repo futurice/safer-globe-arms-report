@@ -11,7 +11,7 @@ body {
   -webkit-backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
-  font: 1rem/1.25 'Lato', sans-serif;
+  font: 1rem/1.25 'Source Sans Pro', sans-serif;
 }
 
 blockquote, q {
@@ -30,7 +30,8 @@ img {
 }
 
 *, *:after, *:before {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 p {
