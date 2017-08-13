@@ -33,8 +33,24 @@ import './../styles/components/CountryDataList.css';
   }
 
 §Then those values could be dropped into this component by using {this.props.country.total.value} instead of where 29,5M€ is hardcoded below
-*/
 
+
+let country = {
+  'name': 'United States of America',
+  'total': {
+    'value': '29.5M€',
+    'rank': '1st'
+  },
+  'defence': {
+    'value': '29.5M€',
+    'rank': '2nd'
+  },
+  'civilian': {
+    'value': '29.5M€',
+    'rank': '1st'
+  }
+}
+*/
 class CountryDataList extends Component {
   render() {
     const {country} = this.props;
@@ -60,34 +76,54 @@ class CountryDataList extends Component {
           value="civilian"
           label="Civilian"
         />
-        <h3>{country.name}</h3>
-        <ul className="country-data-list no-bullets">
-          <li className="has-spacer">
-            <div id="totalSparkLine">
-              <span className="is-block">
-                <span className="is-strong">{intl.get('TOTALS')}</span>
-                {' '}
-                {country.total.value}
-              </span>
-            </div>
-          </li>
-          <li className="has-spacer">
-            <div id="defenceSparkLine">
-              <span className="is-block">
-                <span className="is-strong">{intl.get('DEFENCE')}</span>
-                {country.defence.value}
-              </span>
-            </div>
-          </li>
-          <li className="has-spacer">
-            <div id="civilianSparkLine">
-              <span className="is-block">
-                <span className="is-strong">{intl.get('CIVILIAN')}</span>
-                {country.civilian.value}
-              </span>
-            </div>
-          </li>
-        </ul>
+        <h3 className="CountryName is-strong">{country.name}</h3>
+        <h4 className="CountryDetails">{country.total.value}</h4>
+        <div>
+          <h3>Top 5 Importers</h3>
+          <ul className="country-data-list no-bullets">
+            <li className="has-spacer">
+              <div id="totalSparkLine">
+                <span className="is-block">
+                  <span className="is-strong">{intl.get('TOTALS')}</span>
+                  {' '}
+                  {country.total.value}
+                </span>
+              </div>
+            </li>
+            <li className="has-spacer">
+              <div id="defenceSparkLine">
+                <span className="is-block">
+                  <span className="is-strong">{intl.get('DEFENCE')}</span>
+                  {country.defence.value}
+                </span>
+              </div>
+            </li>
+            <li className="has-spacer">
+              <div id="civilianSparkLine">
+                <span className="is-block">
+                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
+                  {country.civilian.value}
+                </span>
+              </div>
+            </li>
+            <li className="has-spacer">
+              <div id="civilianSparkLine">
+                <span className="is-block">
+                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
+                  {country.civilian.value}
+                </span>
+              </div>
+            </li>
+            <li className="has-spacer">
+              <div id="civilianSparkLine">
+                <span className="is-block">
+                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
+                  {country.civilian.value}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
