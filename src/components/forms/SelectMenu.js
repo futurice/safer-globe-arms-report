@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+<<<<<<< HEAD
 import List, { ListItem, ListItemText } from 'material-ui/List';
+=======
+import Button from 'material-ui/Button';
+>>>>>>> Articles almost done
 import Menu, { MenuItem } from 'material-ui/Menu';
 
 // import HelpIcon from './../HelpIcon';

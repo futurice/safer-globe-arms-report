@@ -33,3 +33,13 @@
     margin-top: 0;
   }
 }
+
+.select-menu:after {
+	content: '\2329';
+    position: absolute;
+    right: 15px;
+    transform: rotate(-90deg);
+    font-size: 2rem;
+    font-weight: 500;
+    top: 7px;
+}
