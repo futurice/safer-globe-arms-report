@@ -1,31 +1,43 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
-import './../styles/components/Stories.css';
+import './../styles/components/StoryPreview.css';
 
 class StoryPreview extends Component {
+  renderTags() {
+    return this.props.tags
+      .split(',')
+      .reduce((ary, cur) => {
+        ary.push(`#${cur}`);
+
+        return ary;
+      }, [])
+      .join(', ');
+  }
+
   render() {
     return (
-      <section className="story-container flex-container">
-        <div className="story-text">
-          <span className="story-year">{this.props.date}</span>
+      <article className="story-container flex-container">
+        <Link to={'/stories/' + this.props.id}>
+          <img
+            className="story-image"
+            src={this.props.image}
+            alt={this.props.title}
+          />
+          <span className="story-year">
+            {this.props.date}
+          </span>
           <div className="story-text">
-            <h3>{this.props.title}</h3>
+            <h3>
+              {this.props.title}
+            </h3>
             <ReactMarkdown source={this.props.preview} />
-            <div className="read-more">
-              <Link to={'/stories/' + this.props.id}>Continue Reading</Link>
-            </div>
+            {this.renderTags()}
           </div>
-          Tags: {this.props.tags.split(',').join(', ')}
-        </div>
-        <img
-          className="story-image"
-          src={this.props.image}
-          alt={this.props.title}
-        />
-      </section>
+        </Link>
+      </article>
     );
   }
 }
@@ -37,7 +49,7 @@ StoryPreview.propTypes = {
   body: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   tags: PropTypes.string.isRequired,
 };
 

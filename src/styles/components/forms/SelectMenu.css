@@ -1,5 +1,23 @@
-.select-filter {
+.select-menu {
   font-size: 1rem;
   margin-bottom: 15px;
   width: 100%;
+  border: 1px solid #666666;
+  position: relative;
+}
+
+.select-menu:after {
+	content: '\2329';
+    position: absolute;
+    right: 15px;
+    transform: rotate(-90deg);
+    font-size: 2rem;
+    font-weight: 500;
+    top: 7px;
+}
+
+.select-menu button {
+	width: 100%;
+    justify-content: left;
+    z-index: 900;
 }

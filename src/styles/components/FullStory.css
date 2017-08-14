@@ -1,0 +1,44 @@
+.full-story-container {
+  justify-content: space-between;
+  display: flex;
+  position: relative;
+  margin: 25px;
+  flex-direction: column;
+}
+
+.full-story-container .story-year {
+	left: 0;
+}
+
+.story-image {
+	position: relative;
+}
+
+.story-image img {
+	width: 100%;
+}
+
+.story-tags {
+	position: absolute;
+	right: 0;
+	bottom: 25px;
+	background: #dddad4;
+	color: #4d4d4d;
+	padding: 15px 20px;
+	opacity: 0.8;
+}
+
+.story-share {
+	display: flex;
+    align-self: flex-end;
+    margin: 5px 0;
+}
+
+.story-share div {
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.story-share div:last-child {
+	margin-right: 0;
+}

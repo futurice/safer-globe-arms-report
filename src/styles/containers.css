@@ -4,3 +4,7 @@
   position: relative;
   width: 100%;
 }
+
+.content-wrapper {
+	margin-top: 94px;
+}

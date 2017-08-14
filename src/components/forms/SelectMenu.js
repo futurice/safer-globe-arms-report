@@ -1,40 +1,64 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import HelpIcon from './../HelpIcon';
+
+import Button from 'material-ui/Button';
+import Menu, { MenuItem } from 'material-ui/Menu';
+
+// import HelpIcon from './../HelpIcon';
 import './../../styles/components/forms/SelectMenu.css';
 
 class SelectMenu extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+      anchorEl: null,
+    };
+  }
+
+  handleClick(val) {
+    this.props.onChange(this.props.id, val);
+
+    this.closeMenu();
+  }
+
+  openMenu(event) {
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+    });
+  }
+
+  closeMenu() {
+    this.setState({
+      open: false,
+      anchorEl: null,
+    });
+  }
+
   render() {
-    let helpIcon;
-    let defaultOption;
-
-    if (this.props.helpIcon) {
-      helpIcon = <HelpIcon id={this.props.id} />;
-    }
-
-    if (this.props.defaultOption) {
-      defaultOption = <option value="">{this.props.defaultOption}</option>;
-    }
-
     return (
-      <div>
-        <label htmlFor={this.props.id} className="is-hidden">
+      <div className="select-menu">
+        <Button
+          aria-owns={this.state.open ? `menu_${this.props.id}` : null}
+          aria-haspopup="true"
+          onClick={this.openMenu}
+        >
           {this.props.label}
-          {helpIcon}
-        </label>
-        <select
-          onChange={this.props.onChange}
-          className="select-filter"
-          id={this.props.id}>
-          {defaultOption}
-
-          {this.props.options.map(option => (
-            <option key={option.value} value={option.value}>
+        </Button>
+        <Menu
+          id={`menu_${this.props.id}`}
+          anchorEl={this.state.anchorEl}
+          open={this.state.open}
+          onRequestClose={this.closeMenu}
+        >
+          {this.props.options.map((option, i) =>
+            <MenuItem key={i} onClick={() => this.handleClick(option.value)}>
               {option.text}
-            </option>
-          ))}
-
-        </select>
+            </MenuItem>,
+          )}
+        </Menu>
       </div>
     );
   }

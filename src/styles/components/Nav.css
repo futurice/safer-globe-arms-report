@@ -2,6 +2,11 @@
   border-bottom: 1px solid #dcdcdc;
   height: 70px;
   padding: 19px 15px;
+  height: 94px;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 999;
 }
 
 .primary-nav ul {

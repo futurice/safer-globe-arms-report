@@ -48,6 +48,10 @@ const locales = {
     TOP5COUNTRIES: 'Top 5 Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
+    SEARCH: 'Search',
+    YEAR: 'Year',
+    COUNTRY: 'Country',
+    MANUFACTURER: 'Manufacturer',
   },
   fi: {
     DATA: 'Data',
@@ -62,6 +66,10 @@ const locales = {
     TOP5COUNTRIES: 'Suurimmat 5 maata',
     WORLD: 'Maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
+    SEARCH: 'Haku',
+    YEAR: 'Vuosi',
+    COUNTRY: 'Maa',
+    MANUFACTURER: 'Valmistaja',
   },
 };
 
@@ -96,7 +104,6 @@ class AppRouter extends Component {
         <div>
           <div className="container">
             <Route path="/" render={props => <Nav {...props} />} />
-
             <Route exact path="/" component={Data} />
             <Route
               exact

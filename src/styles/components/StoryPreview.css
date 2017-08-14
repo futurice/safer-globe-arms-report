@@ -1,0 +1,48 @@
+.stories-container {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.stories-container article {
+  max-width: 400px;
+  margin: 25px;
+  box-sizing: content-box;
+}
+
+.stories-container .story-container {
+  align-items: flex-start;
+  background: #fff;
+  flex-direction: column;
+  position: relative;
+  border: 4px solid #666666;
+}
+
+.story-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.stories-container .story-text {
+  position: relative;
+  padding: 20px 15px;
+}
+
+.stories-container .story-text p {
+  margin-bottom: 40px;
+}
+
+.story-year {
+  background: #dddad4;
+  color: #4d4d4d;
+  padding: 15px 20px;
+  position: absolute;
+  left: -4px;
+  top: 20px;
+}
+
+.story-image {
+  width: 100%;
+}
