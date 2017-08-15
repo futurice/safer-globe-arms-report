@@ -1,13 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CountryDataList from './CountryDataList';
+import TopFiveCountries from './TopFiveCountries';
 // import RadioButton from './forms/RadioButton';
 // import SelectMenu from './forms/SelectMenu';
 import DataMap from './DataMap';
 import DataTimeline from './DataTimeline';
+import MapLegends from './MapLegends';
 // import StoryPreview from './StoryPreview';
-import {csv} from 'd3-request';
-import {CSVLink} from 'react-csv';
+import { csv } from 'd3-request';
+import { CSVLink } from 'react-csv';
 import intl from 'react-intl-universal';
+import Button from 'material-ui/Button';
 
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
@@ -46,68 +49,59 @@ function compare(a, b) {
   return 0;
 }
 
-function formatEuros(value) {
-  // This is disgusting and needs to be optimized
-  // ALL THE METHODS!!!
-
-  return value
-    .split('')
-    .reverse()
-    .join('')
-    .replace(/(.{3})/g, '$1 ')
-    .split('')
-    .reverse()
-    .join('');
-}
-
 function accumulateTotal(data, type) {
   let total = data.reduce((sum, value) => {
     return Number(value[type]) + sum;
   }, 0);
-  return formatEuros(total.toString());
+
+  return total;
 }
 
 class Data extends Component {
   constructor() {
     super();
-    this.updateGPIYear = this.updateGPIYear.bind(this);
-    this.sortTopLists = this.sortTopLists.bind(this);
-    this.buildTopLists = this.buildTopLists.bind(this);
-    this.formatEuros = this.formatEuros.bind(this);
-    this.accumulateTotal = this.accumulateTotal.bind(this);
+
     const activeYear = 2016;
+
     this.state = {
       countries: [],
       countryData: output,
       gpiData: null,
       activeYear: activeYear,
       saferGlobeData: [],
-      selectedCountry: {
+      totals: {
         name: `${intl.get('TOTALS')} - ${activeYear}`,
         total: {
-          value: '',
+          value: 0,
         },
         defence: {
-          value: '',
+          value: 0,
         },
         civilian: {
-          value: '',
+          value: 0,
         },
       },
     };
+
+    this.updateGPIYear = this.updateGPIYear.bind(this);
+    this.sortTopLists = this.sortTopLists.bind(this);
+    this.buildTopLists = this.buildTopLists.bind(this);
+    this.accumulateTotal = this.accumulateTotal.bind(this);
   }
 
   componentWillMount() {
     csv(gpi, (error, data) => {
       if (error) {
-        this.setState({loadError: true});
+        this.setState({ loadError: true });
       }
-      this.setState({gpiData: data});
+      this.setState({ gpiData: data });
     });
+
     csv(saferGlobe, (error, data) => {
       if (error) {
-        this.setState({loadError: true});
+        this.setState({ loadError: true });
       }
+
       const countryList = data
         .filter(x => parseInt(x.Total, 10) !== 0)
         .map(y => {
@@ -116,11 +110,12 @@ class Data extends Component {
             text: y.Countries,
           };
         });
+
       this.setState({
         saferGlobeData: data,
         countries: countryList.sort(compare),
-        selectedCountry: {
-          name: `${intl.get('TOTALS')} - ${this.state.activeYear}`,
+        totals: {
+          name: `${this.state.activeYear} | ${intl.get('WORLD')}`,
           total: {
             value: accumulateTotal(data, 'Total'),
           },
@@ -136,9 +131,7 @@ class Data extends Component {
   }
 
   updateGPIYear(newGPIYear) {
-    let activeYear = this.state.activeYear;
-    activeYear = newGPIYear;
-    this.setState({activeYear});
+    this.setState({ activeYear: newGPIYear });
   }
 
   sortTopLists(type, count = 5) {
@@ -151,28 +144,18 @@ class Data extends Component {
   }
 
   buildTopLists(data, type, count = 5) {
-    const listItems = Object.keys(data.slice(0, count)).map(country => (
+    const listItems = Object.keys(data.slice(0, count)).map(country => {
+      return data[country];
+    });
+
+    /*.map(country => (
       <li key={data[country].Countries}>
         {data[country].Countries}
-        <span>- {this.formatEuros(data[country][type])}M€</span>
+        <span>- {formatEuros(data[country][type])}M€</span>
       </li>
-    ));
+    ));*/
 
     return listItems;
-  }
-
-  formatEuros(value) {
-    // This is disgusting and needs to be optimized
-    // ALL THE METHODS!!!
-
-    return value
-      .split('')
-      .reverse()
-      .join('')
-      .replace(/(.{3})/g, '$1 ')
-      .split('')
-      .reverse()
-      .join('');
   }
 
   accumulateTotal(type) {
@@ -182,42 +165,49 @@ class Data extends Component {
       total += Number(country[type]);
     });
 
-    total = this.formatEuros(total.toString());
-
     return total;
   }
 
   displayActiveCountry(selectedCountry) {
-    this.setState({selectedCountry});
+    this.setState({ selectedCountry });
   }
 
   render() {
-    /*
     let sortedListTotal = null;
-    let sortedListDefence = null;
-    let sortedListCivilian = null;
-    let accumulatedTotal = 0;
-    let accumulatedDefence = 0;
-    let accumulatedCivilian = 0;
+    //let sortedListDefence = null;
+    //let sortedListCivilian = null;
+    //let accumulatedTotal = 0;
+    //let accumulatedDefence = 0;
+    //let accumulatedCivilian = 0;
 
     if (this.state.saferGlobeData) {
       sortedListTotal = this.sortTopLists('Total');
-      sortedListDefence = this.sortTopLists('Defence_Materiel');
-      sortedListCivilian = this.sortTopLists('Civilian_Arms');
-      accumulatedTotal = this.accumulateTotal('Total');
-      accumulatedDefence = this.accumulateTotal('Defence_Materiel');
-      accumulatedCivilian = this.accumulateTotal('Civilian_Arms');
+      //sortedListDefence = this.sortTopLists('Defence_Materiel');
+      //sortedListCivilian = this.sortTopLists('Civilian_Arms');
+      //accumulatedTotal = this.accumulateTotal('Total');
+      //accumulatedDefence = this.accumulateTotal('Defence_Materiel');
+      //accumulatedCivilian = this.accumulateTotal('Civilian_Arms');
     }
-    */
+
     return (
-      <section className="data-section-container" style={{overflow: 'hidden'}}>
+      <section
+        className="data-section-container"
+        style={{ overflow: 'hidden' }}
+      >
         <section className="data-map-container flex-column-container">
           <div className="flex-container">
             <section className="flex-one country-data-container">
-              <CountryDataList country={this.state.selectedCountry} />
+              {this.state.selectedCountry
+                ? <CountryDataList country={this.state.selectedCountry} />
+                : <TopFiveCountries
+                    year={this.state.activeYear}
+                    countries={sortedListTotal}
+                    totals={this.state.totals}
+                  />}
               <CSVLink
                 data={this.state.saferGlobeData}
-                filename={'data-dump.csv'}>
+                filename={'data-dump.csv'}
+              >
                 {intl.get('DOWNLOAD_DATA')}
               </CSVLink>
             </section>
@@ -227,6 +217,10 @@ class Data extends Component {
                 gpiYear={this.state.activeYear}
               />
             </section>
+            <Button raised className="map-container__reset">
+              {intl.get('RESET_ZOOM')}
+            </Button>
+            <MapLegends />
           </div>
           <DataTimeline updateGPIYear={this.updateGPIYear} />
         </section>

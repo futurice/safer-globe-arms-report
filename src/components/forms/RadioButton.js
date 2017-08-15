@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HelpIcon from './../HelpIcon';
 import './../../styles/components/forms/RadioButton.css';
@@ -9,6 +9,7 @@ class RadioButton extends Component {
     if (this.props.helpIcon) {
       helpIcon = <HelpIcon id={this.props.id} />;
     }
+
     return (
       <div>
         <input
@@ -18,7 +19,10 @@ class RadioButton extends Component {
           value={this.props.value}
           defaultChecked={this.props.checked}
         />
-        <label htmlFor={this.props.id}>
+        <label
+          htmlFor={this.props.id}
+          onClick={() => this.props.onClick(this.props.value)}
+        >
           {this.props.label}
           {helpIcon}
         </label>
@@ -28,8 +32,9 @@ class RadioButton extends Component {
 }
 
 RadioButton.defaultProps = {
-  checked: false,
+  checked: PropTypes.boolean,
   helpIcon: false,
+  onClick: PropTypes.func.isRequired,
 };
 
 RadioButton.propTypes = {
