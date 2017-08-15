@@ -27,8 +27,9 @@
     "react-intl-universal": "^1.2.1"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint"
+    "*.{js,jsx}": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
     ]
   },
   "scripts": {
@@ -38,7 +39,8 @@
     "fix": "eslint --fix src",
     "precommit": "lint-staged",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --single-quote --trailing-comma all --write \"{,!(node_modules|build)/**/}*.js*\""
   },
   "browserslist": [
     "last 3 versions"
