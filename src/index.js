@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import intl from 'react-intl-universal';
 
 /*
@@ -45,6 +45,9 @@ const locales = {
     TOTAL: 'Total',
     DEFENCE: 'Defence',
     CIVILIAN: 'Civilian',
+    TOP5COUNTRIES: 'Top 5 Countries',
+    WORLD: 'World',
+    RESET_ZOOM: 'Reset zoom',
   },
   fi: {
     DATA: 'Data',
@@ -56,13 +59,16 @@ const locales = {
     TOTAL: 'Yhteensä',
     DEFENCE: 'Puolustus',
     CIVILIAN: 'Siviili',
+    TOP5COUNTRIES: 'Suurimmat 5 maata',
+    WORLD: 'Maailma',
+    RESET_ZOOM: 'Nollaa tarkennus',
   },
 };
 
 class AppRouter extends Component {
   constructor() {
     super();
-    this.state = {initDone: false};
+    this.state = { initDone: false };
   }
 
   loadLocales() {
@@ -71,11 +77,11 @@ class AppRouter extends Component {
 
     intl
       .init({
-        currentLocale: intl.determineLocale({urlLocaleKey: 'lang'}),
+        currentLocale: intl.determineLocale({ urlLocaleKey: 'lang' }),
         locales,
       })
       .then(() => {
-        this.setState({initDone: true});
+        this.setState({ initDone: true });
       });
   }
 
@@ -104,7 +110,6 @@ class AppRouter extends Component {
             />
             <Route exact path="/about" component={About} />
             <Route exact path="/downloads" component={Downloads} />
-
           </div>
         </div>
       </Router>

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
-import {csv} from 'd3-request';
+import { csv } from 'd3-request';
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
 import saferGlobe from './../data/safer-globe.csv';
@@ -39,7 +39,7 @@ class DataMap extends Component {
 
   componentWillReceiveProps(newGPIYear) {
     if (this.state.gpiYear !== newGPIYear.gpiYear) {
-      this.setState({gpiYear: newGPIYear.gpiYear});
+      this.setState({ gpiYear: newGPIYear.gpiYear });
     }
   }
 
@@ -54,18 +54,18 @@ class DataMap extends Component {
   componentWillMount() {
     csv(gpi, (error, data) => {
       if (error) {
-        this.setState({loadError: true});
+        this.setState({ loadError: true });
       }
-      this.setState({gpiData: data});
+      this.setState({ gpiData: data });
     });
     csv(saferGlobe, (error, data) => {
       if (error) {
-        this.setState({loadError: true});
+        this.setState({ loadError: true });
       }
-      this.setState({saferGlobeData: data});
+      this.setState({ saferGlobeData: data });
     });
 
-    this.setState({gpiYear: this.props.gpiYear});
+    this.setState({ gpiYear: this.props.gpiYear });
   }
 
   convertToCountryObject(arr) {
@@ -86,7 +86,7 @@ class DataMap extends Component {
   zoomMap(mapSVG) {
     mapSVG.attr(
       'transform',
-      `translate(${d3.event.translate}) scale(${d3.event.transform.k})`
+      `translate(${d3.event.translate}) scale(${d3.event.transform.k})`,
     );
   }
 
@@ -113,7 +113,8 @@ class DataMap extends Component {
     let zoom = d3.zoom().scaleExtent([1, 10]).on('zoom', () => {
       zoomGroup.attr(
         'transform',
-        `translate(${d3.event.transform.x},${d3.event.transform.y})scale(${d3.event.transform.k})`
+        `translate(${d3.event.transform.x},${d3.event.transform.y})scale(${d3
+          .event.transform.k})`,
       );
       scaleValue = d3.event.transform.k;
       zoomGroup
@@ -167,7 +168,7 @@ class DataMap extends Component {
               .replace(/ /g, '_')
               .replace('(', '_')
               .replace(')', '_')
-              .replace("'", '_')}gCentroid`
+              .replace("'", '_')}gCentroid`,
           )
           .empty()
       ) {
@@ -177,7 +178,7 @@ class DataMap extends Component {
               .replace(/ /g, '_')
               .replace('(', '_')
               .replace(')', '_')
-              .replace("'", '_')}gCentroid`
+              .replace("'", '_')}gCentroid`,
           )
           .datum();
         if (xPos > wid - 100) {
@@ -185,7 +186,11 @@ class DataMap extends Component {
             .selectAll('.tooltipSvg')
             .attr(
               'transform',
-              `translate(${values.centroid[0] - radius(+values.Total) - 5 - 200}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
+              `translate(${values.centroid[0] -
+                radius(+values.Total) -
+                5 -
+                200}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 /
+                scaleValue})`,
             )
             .attr('opacity', 0.9);
         } else {
@@ -193,7 +198,10 @@ class DataMap extends Component {
             .selectAll('.tooltipSvg')
             .attr(
               'transform',
-              `translate(${values.centroid[0] + radius(+values.Total) + 5}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 / scaleValue})`
+              `translate(${values.centroid[0] +
+                radius(+values.Total) +
+                5}, ${values.centroid[1] - 45 / scaleValue}) scale(${1 /
+                scaleValue})`,
             )
             .attr('opacity', 0.9);
         }
@@ -212,7 +220,7 @@ class DataMap extends Component {
             .replace(/ /g, '_')
             .replace('(', '_')
             .replace(')', '_')
-            .replace("'", '_')}`
+            .replace("'", '_')}`,
         )
         .transition()
         .duration(200)
@@ -235,7 +243,7 @@ class DataMap extends Component {
             .replace(/ /g, '_')
             .replace('(', '_')
             .replace(')', '_')
-            .replace("'", '_')}centroidArcCiv`
+            .replace("'", '_')}centroidArcCiv`,
         )
         .transition()
         .duration(200)
@@ -247,7 +255,7 @@ class DataMap extends Component {
             .replace(/ /g, '_')
             .replace('(', '_')
             .replace(')', '_')
-            .replace("'", '_')}centroidArcDef`
+            .replace("'", '_')}centroidArcDef`,
         )
         .transition()
         .duration(200)
@@ -338,7 +346,7 @@ class DataMap extends Component {
     let defenceColor = '#d6004d';
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
     let saferGlobeDataObject = this.convertToCountryObject(
-      this.state.saferGlobeData
+      this.state.saferGlobeData,
     );
     let SaferGlobeCountries = d3.keys(saferGlobeDataObject);
 
@@ -348,8 +356,8 @@ class DataMap extends Component {
       .data(
         topojson.feature(
           this.state.countryData,
-          this.state.countryData.objects.countries
-        ).features
+          this.state.countryData.objects.countries,
+        ).features,
       )
       .enter()
       .filter(d => d.properties.name !== null)
@@ -397,8 +405,8 @@ class DataMap extends Component {
         .attr(
           'fill',
           threshold(
-            parseFloat(this.state.gpiData[i][`score_${this.state.gpiYear}`])
-          )
+            parseFloat(this.state.gpiData[i][`score_${this.state.gpiYear}`]),
+          ),
         );
       if (this.state.gpiData[i].country === 'United States of America') {
         let idAlaska = '#Alaska__United_States_of_America_';
@@ -406,7 +414,7 @@ class DataMap extends Component {
           .selectAll(idAlaska)
           .attr(
             'fill',
-            threshold(parseFloat(this.state.gpiData[i].score_2016))
+            threshold(parseFloat(this.state.gpiData[i].score_2016)),
           );
       }
 
@@ -416,14 +424,14 @@ class DataMap extends Component {
           .selectAll(idFrance)
           .attr(
             'fill',
-            threshold(parseFloat(this.state.gpiData[i].score_2016))
+            threshold(parseFloat(this.state.gpiData[i].score_2016)),
           );
       }
     }
 
     let features = topojson.feature(
       this.state.countryData,
-      this.state.countryData.objects.countries
+      this.state.countryData.objects.countries,
     ).features;
     let centroids = features.map(feature => {
       let centElement = {
@@ -467,7 +475,7 @@ class DataMap extends Component {
             .replace(/ /g, '_')
             .replace('(', '_')
             .replace(')', '_')
-            .replace("'", '_')}gCentroid`
+            .replace("'", '_')}gCentroid`,
       )
       .attr('transform', d => {
         return `translate(${d.centroid[0]}, ${d.centroid[1]})`;
@@ -516,7 +524,7 @@ class DataMap extends Component {
             .replace(/ /g, '_')
             .replace('(', '_')
             .replace(')', '_')
-            .replace("'", '_')}centroidCircle`
+            .replace("'", '_')}centroidCircle`,
       )
       .attr('fill', '#fff')
       .attr('stroke', '#ff0000')
@@ -748,7 +756,7 @@ class DataMap extends Component {
 
           //  tooltip
         }
-      }
+      },
     );
   } // End drawMap()
 
@@ -764,11 +772,7 @@ class DataMap extends Component {
         </div>
       );
     } else {
-      return (
-        <div>
-          Loading Map...
-        </div>
-      );
+      return <div style={{ textAlign: 'center' }}>Loading Map...</div>;
     }
   }
 }

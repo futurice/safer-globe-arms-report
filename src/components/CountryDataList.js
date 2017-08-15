@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import RadioButton from './forms/RadioButton';
 import intl from 'react-intl-universal';
+import Divider from 'material-ui/Divider';
 // import Button from './Button';
+
+import RadioButton from './forms/RadioButton';
+import DataListTabs from './DataListTabs';
+import DataListTotal from './DataListTotal';
 
 import './../styles/components/CountryDataList.css';
 
@@ -51,36 +55,43 @@ let country = {
   }
 }
 */
+const styles = {
+  divider: {
+    margin: '1rem -1rem',
+    clear: 'both',
+  },
+};
+
 class CountryDataList extends Component {
   render() {
-    const {country} = this.props;
+    const { country } = this.props;
+
     return (
       <div>
-        <h1><span className="is-strong">Finnish Arms Export</span></h1>
-        <RadioButton
-          checked={true}
-          id="total"
-          name="countryList"
-          value="total"
-          label="Total"
-        />
-        <RadioButton
-          id="defence"
-          name="countryList"
-          value="defence"
-          label="Defence"
-        />
-        <RadioButton
-          id="civilian"
-          name="countryList"
-          value="civilian"
-          label="Civilian"
-        />
-        <h3 className="CountryName is-strong">{country.name}</h3>
-        <h4 className="CountryDetails">{country.total.value}</h4>
-        <div>
-          <h3>Top 5 Importers</h3>
-          <ul className="country-data-list no-bullets">
+        <h1>
+          <span className="is-strong">Finnish Arms Export</span>
+        </h1>
+        <DataListTabs onClick={() => {}} />
+        <Divider style={styles.divider} />
+        <h3 className="CountryName">
+          {country.name}
+        </h3>
+        <DataListTotal total={country.total.value} />
+        <Divider style={styles.divider} />
+      </div>
+    );
+  }
+}
+
+CountryDataList.propTypes = {
+  country: PropTypes.object.isRequired,
+  topFive: PropTypes.array.isRequired,
+};
+
+export default CountryDataList;
+
+/*
+<ul className="country-data-list no-bullets">
             <li className="has-spacer">
               <div id="totalSparkLine">
                 <span className="is-block">
@@ -123,14 +134,4 @@ class CountryDataList extends Component {
               </div>
             </li>
           </ul>
-        </div>
-      </div>
-    );
-  }
-}
-
-CountryDataList.propTypes = {
-  country: PropTypes.object.isRequired,
-};
-
-export default CountryDataList;
+*/
