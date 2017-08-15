@@ -18,17 +18,19 @@
     "babyparse": "^0.4.6",
     "d3": "^4.9.1",
     "d3-request": "^1.0.5",
+    "material-ui": "^1.0.0-beta.5",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1",
-    "topojson": "^3.0.0",
     "react-csv": "^1.0.8",
+    "react-dom": "^15.5.4",
+    "react-intl-universal": "^1.2.1",
     "react-markdown": "^2.5.0",
-    "react-intl-universal": "^1.2.1"
+    "react-router-dom": "^4.1.1",
+    "topojson": "^3.0.0"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint"
+    "*.{js,jsx}": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
     ]
   },
   "scripts": {
@@ -38,7 +40,8 @@
     "fix": "eslint --fix src",
     "precommit": "lint-staged",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --single-quote --trailing-comma all --write \"{,!(node_modules|build)/**/}*.js*\""
   },
   "browserslist": [
     "last 3 versions"
