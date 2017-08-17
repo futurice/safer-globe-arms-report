@@ -37,10 +37,6 @@ The author of this document recommends Visual Studio Code, which this project is
 
 In addition, this project uses [`lint-staged`](https://github.com/okonet/lint-staged) as a pre-commit hook to help prevent you from committing bad code. Use the `--no-verify` argument to `git commit` if you really really need to commit code which fails linting for some reason.
 
-Both PostCSS and Autoprefixer have been included as well in order to help ensure consistent CSS styles across browsers and versions.
-
-[Unofficial Color Palette](https://coolors.co/555555-ef8234-2a79aa-cccccc-ffffff)
-
 ## Production workflow
 
 We use Heroku for deployment. Log in [here](https://dashboard.heroku.com/apps) if you need to, but you probably don't need to unless we run out of uptime credit and you need to buy some. The username and password are in the password safe.
