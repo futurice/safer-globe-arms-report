@@ -1,0 +1,29 @@
+.peace-index-indicator {
+  background: #ccc;
+  height: 10px;
+}
+
+.timeline-item {
+  background: #f6f6f6;
+  cursor: pointer;
+  flex: 1;
+  position: relative;
+  text-align: center;
+  transition: background .25s ease;
+}
+
+.timeline-item svg {
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.timeline-item.active {
+  background: #2A79AA;
+  color: #fff;
+  font-weight: 700;
+}
+.timeline-item span {
+  display: inline-block;
+  font-size: .8rem;
+  line-height: 32px;
+}

@@ -1,0 +1,43 @@
+.tooltip {
+  background: white;
+  border-radius: 8px;
+  border: 0px;
+  padding: 5px 10px;
+  pointer-events: none;
+  position: absolute;
+  width: 200px;
+}
+
+.tooltip h1{
+  font-size: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #666666;
+}
+
+.tooltip h2{
+  font-size: .9rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: left;
+  float:left;
+  clear:left;
+}
+
+.tooltip h3{
+  font-size: .9rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: right;
+  float: right;
+  clear:right;
+}
+
+.tooltip, .total{
+  color:#666666;
+}
+
+.tooltip, .defence{
+  color: #d6004d;
+}
+
+.tooltip, .civilian{
+  color:#ff8e39;
+}
