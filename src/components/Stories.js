@@ -19,7 +19,6 @@ class Stories extends Component {
   constructor(props) {
     super(props);
 
-
     const search = this.props.location.search || '';
     let hashes = search
       .slice(search.indexOf('?') + 1)
@@ -28,7 +27,6 @@ class Stories extends Component {
         let [key, val] = hash.split('=');
         return Object.assign(params, { [key]: decodeURIComponent(val) });
       }, {});
-
 
     this.state = {
       stories: [],
