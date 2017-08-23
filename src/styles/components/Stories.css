@@ -4,29 +4,34 @@
 }
 
 .stories-search-wrapper {
-	flex: 0 0 350px;
-	padding: 25px;
+	flex: 0 0 264px;
 }
 
 .stories-search {
 	position: fixed;
-	width: 300px;
+	width: 264px;
+	padding: 16px;
 }
 
 .stories-search > * {
-	margin-bottom: 15px;
+	margin-bottom: 15px !important;
+}
+
+.stories-search__text {
+	flex-direction: row !important;
+	align-items: center;
+	width: 100%;
 }
 
 .search-title {
-	background: #666666;
-	color: #ffffff;
-	padding: 15px;
-	font-weight: 600;
-	font-size: 1.2rem;
+	font-weight: 500;
+	font-size: 1.25rem;
+	color: #333333;
 }
 
 .search-keyword {
 	width: 100%;
+	margin-right: 10px !important;
 }
 
 .search-keyword div {
@@ -38,6 +43,22 @@
 }
 
 .search-keyword input {
-	padding: 16px 10px;
+	padding: 18px 10px;
     box-sizing: border-box;
+}
+
+.stories-search .select-menu {
+	width: calc(100% - 34px);
+}
+
+.stories-search .divider {
+	margin: 5px 0 20px 0 !important;
+	left: -16px;
+	position: relative;
+	width: calc(100% + 33px);
+
+}
+
+.search-filter {
+	font-size: 1rem;
 }

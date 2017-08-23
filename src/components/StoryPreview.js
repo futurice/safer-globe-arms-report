@@ -19,21 +19,21 @@ class StoryPreview extends Component {
 
   render() {
     return (
-      <article className="story-container flex-container">
+      <article className="story-container flex-container box-shadow">
         <Link to={'/stories/' + this.props.id}>
           <img
             className="story-image"
             src={this.props.image}
             alt={this.props.title}
           />
-          <span className="story-year">
+          <span className="story-date">
             {this.props.date}
           </span>
           <div className="story-text">
             <h3>
               {this.props.title}
             </h3>
-            <ReactMarkdown source={this.props.preview} />
+            <ReactMarkdown source={this.props.body} />
             {this.renderTags()}
           </div>
         </Link>
@@ -44,7 +44,6 @@ class StoryPreview extends Component {
 
 StoryPreview.propTypes = {
   title: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired,
   engPreview: PropTypes.string,
   body: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

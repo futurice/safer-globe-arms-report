@@ -60,3 +60,13 @@ svg {
 *:focus {
   outline: 0;
 }
+
+.not-found {
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
+}

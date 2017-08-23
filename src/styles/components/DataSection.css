@@ -1,6 +1,6 @@
 .data-map-container {
-  height: calc(100vh - 70px);
-  /* 70px - the height of the nav */
+  height: calc(100vh - 94px);
+  /* 94px - the height of the nav */
   /* Create space between the following Stats section to acommodate the active Timeline down arrow */
   position: relative;
   background: rgba(250, 250, 250, 1);

@@ -18,6 +18,16 @@
           flex-direction: column;
 }
 
+.flex-column-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
 .flex-spread {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;

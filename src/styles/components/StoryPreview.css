@@ -7,8 +7,9 @@
 }
 
 .stories-container article {
-  max-width: 400px;
-  margin: 25px;
+  max-width: 365px;
+  margin-left: 16px;
+  margin-bottom: 16px;
   box-sizing: content-box;
 }
 
@@ -17,7 +18,6 @@
   background: #fff;
   flex-direction: column;
   position: relative;
-  border: 4px solid #666666;
 }
 
 .story-container a {
@@ -31,16 +31,23 @@
 }
 
 .stories-container .story-text p {
+  margin-top: 0;
   margin-bottom: 40px;
 }
 
-.story-year {
-  background: #dddad4;
+.stories-container .story-text h3 {
+  font-size: 1.1rem;
+  margin-bottom: 7px;
+}
+
+.story-date {
+  background: #fff;
   color: #4d4d4d;
   padding: 15px 20px;
   position: absolute;
-  left: -4px;
+  left: 0;
   top: 20px;
+  opacity: 0.75;
 }
 
 .story-image {

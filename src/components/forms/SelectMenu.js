@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from 'material-ui/Button';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Menu, { MenuItem } from 'material-ui/Menu';
 
 // import HelpIcon from './../HelpIcon';
@@ -11,15 +11,23 @@ class SelectMenu extends Component {
   constructor(props) {
     super(props);
 
+    const value = props.value
+      ? !isNaN(props.value) ? parseInt(props.value, 10) : props.value
+      : null;
+    const selectedIndex = value
+      ? props.options.findIndex(x => x.value === value)
+      : -1;
+
     this.state = {
       open: false,
       anchorEl: null,
+      selectedIndex: selectedIndex !== -1 ? selectedIndex : null,
     };
   }
 
-  handleClick(val) {
+  handleClick(index, val) {
+    this.setState({ selectedIndex: index });
     this.props.onChange(this.props.id, val);
-
     this.closeMenu();
   }
 
@@ -38,23 +46,41 @@ class SelectMenu extends Component {
   }
 
   render() {
+    const defaultLabel =
+      this.props.options.length && this.state.selectedIndex !== null
+        ? this.props.options[this.state.selectedIndex].text
+        : this.props.label;
+
     return (
       <div className="select-menu">
-        <Button
-          aria-owns={this.state.open ? `menu_${this.props.id}` : null}
-          aria-haspopup="true"
-          onClick={this.openMenu}
-        >
-          {this.props.label}
-        </Button>
+        <List disablePadding={true}>
+          <ListItem
+            button
+            style={{ paddingTop: '8px', paddingBottom: '8px' }}
+            aria-haspopup="true"
+            aria-controls={this.state.open ? `menu_${this.props.id}` : null}
+            aria-label={this.props.label}
+            onClick={this.openMenu.bind(this)}
+          >
+            <ListItemText primary={defaultLabel} />
+          </ListItem>
+        </List>
         <Menu
-          id={`menu_${this.props.id}`}
+          id={this.state.open ? `menu_${this.props.id}` : null}
           anchorEl={this.state.anchorEl}
           open={this.state.open}
-          onRequestClose={this.closeMenu}
+          onRequestClose={this.closeMenu.bind(this)}
         >
-          {this.props.options.map((option, i) =>
-            <MenuItem key={i} onClick={() => this.handleClick(option.value)}>
+          <MenuItem
+            selected={this.state.selectedIndex === null}
+            onClick={event => this.handleClick(null, '')}
+          />
+          {this.props.options.map((option, index) =>
+            <MenuItem
+              key={index}
+              selected={index === this.state.selectedIndex}
+              onClick={event => this.handleClick(index, option.value)}
+            >
               {option.text}
             </MenuItem>,
           )}
@@ -72,6 +98,7 @@ SelectMenu.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   helpIcon: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   defaultOption: PropTypes.string,
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func,

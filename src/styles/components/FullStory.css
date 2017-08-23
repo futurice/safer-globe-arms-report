@@ -1,13 +1,17 @@
 .full-story-container {
-  justify-content: space-between;
-  display: flex;
-  position: relative;
-  margin: 25px;
-  flex-direction: column;
+	justify-content: space-between;
+	display: flex;
+	position: relative;
+	margin: 0 16px;
+	flex-direction: column;
+	max-width: 714px;
+	width: 100%;
+	margin-right: 68px;
 }
 
-.full-story-container .story-year {
+.full-story-container .story-date {
 	left: 0;
+	margin-top: 49px;
 }
 
 .story-image {
@@ -22,7 +26,7 @@
 	position: absolute;
 	right: 0;
 	bottom: 25px;
-	background: #dddad4;
+	background: #fff;
 	color: #4d4d4d;
 	padding: 15px 20px;
 	opacity: 0.8;
@@ -31,14 +35,41 @@
 .story-share {
 	display: flex;
     align-self: flex-end;
-    margin: 5px 0;
+    position: absolute;
+	right: -84px;
 }
 
 .story-share div {
-	margin-right: 5px;
+	margin-bottom: 16px;
 	cursor: pointer;
 }
 
 .story-share div:last-child {
-	margin-right: 0;
+	margin-bottom: 0;
+}
+
+.story-text {
+	margin: 28px 0;
+	position: relative;
+}
+
+.back-to-articles {
+	padding: 16px 36px 16px 16px;
+	position: relative;
+	height: min-content;
+	text-decoration: initial;
+	color: initial;
+	margin-right: 117px;
+}
+
+.back-to-articles:hover {
+	text-decoration: initial;
+	color: initial;
+}
+
+.back-to-articles:before {
+	content: '\3008';
+	position: relative;
+	margin-right: 16px;
+	font-weight: 600;
 }

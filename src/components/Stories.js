@@ -1,31 +1,59 @@
 import React, { Component } from 'react';
-import StoryPreview from './StoryPreview';
-import FullStory from './FullStory';
-import stories from './../data/stories/stories.csv';
+import { withRouter } from 'react-router';
 import { csv } from 'd3-request';
 import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
 import TextField from 'material-ui/TextField';
+import Search from 'material-ui-icons/Search';
+import FormControl from 'material-ui/Form/FormControl';
+import Divider from 'material-ui/Divider';
+import { CircularProgress } from 'material-ui/Progress';
 
+import StoryPreview from './StoryPreview';
 import SelectMenu from './forms/SelectMenu';
+import stories from './../data/stories.csv';
 import './../styles/components/Stories.css';
 
 class Stories extends Component {
   constructor(props) {
     super(props);
 
+    const search = this.props.location.search || '';
+    let hashes = search
+      .slice(search.indexOf('?') + 1)
+      .split('&')
+      .reduce((params, hash) => {
+        let [key, val] = hash.split('=');
+        return Object.assign(params, { [key]: decodeURIComponent(val) });
+      }, {});
+
     this.state = {
       stories: [],
       tags: [],
       filters: {
-        keyword: '',
-        year: null,
-        manufacturer: null,
-        country: null,
+        keyword: hashes.keyword || '',
+        year: hashes.year || null,
+        manufacturer: hashes.manufacturer || null,
+        country: hashes.country || null,
+        type: hashes.type || null,
       },
+      loading: true,
     };
 
     this.typing = false;
+    this.manufacturers = [];
+    this.countries = [];
+    this.years = [];
+    this.types = [
+      { text: intl.get('EVENTS'), value: 'events' },
+      { text: intl.get('BACKGROUND'), value: 'background' },
+    ];
+
+    const curYear = new Date().getFullYear();
+
+    for (let i = 2017; i <= curYear; i++) {
+      this.years.push({ text: i, value: i });
+    }
   }
 
   componentWillMount() {
@@ -43,72 +71,75 @@ class Stories extends Component {
       this.setState({
         stories: data,
         tags: [...new Set(tags)],
+        loading: false,
       });
     });
   }
 
-  renderFullStory(match, stories) {
-    const fullStory = stories[match.params.id] || null;
-
-    if (fullStory) {
-      return (
-        <div>
-          <FullStory
-            title={fullStory.title}
-            preview={fullStory.preview}
-            image={fullStory.image}
-            body={fullStory.body}
-            id={match.params.id}
-            date={fullStory.date}
-            tags={fullStory.tags}
-          />
-        </div>
-      );
-    } else {
-      return <div>Article not found.</div>;
-    }
-  }
-
   renderPreviews() {
     const filteredStories = this.state.stories.reduce((ary, cur) => {
+      const tags = cur.tags.split(',').map(tag => {
+        return tag.toLowerCase();
+      });
+
       const filterYear = this.state.filters.year
-        ? this.state.filters.year === new Date(cur.date).getFullYear()
-        : true;
-      const filterCountry = this.state.filters.country
-        ? this.state.filters.country === ''
-        : true;
-      const filterManufacturer = this.state.filters.manufacturer
-        ? this.state.filters.manufacturer === ''
-        : true;
-      const filterKeyword = this.state.filters.keyword.length
-        ? this.state.tags.filter(item => {
-            return item.indexOf(this.state.filters.keyword) !== -1;
-          })
+        ? tags.filter(item => {
+            return item === this.state.filters.year;
+          }).length
         : true;
 
-      if (filterYear && filterKeyword) {
+      const filterCountry = this.state.filters.country
+        ? tags.filter(item => {
+            return item === this.state.filters.country.toLowerCase();
+          }).length
+        : true;
+
+      const filterManufacturer = this.state.filters.manufacturer
+        ? tags.filter(item => {
+            return item === this.state.filters.manufacturer.toLowerCase();
+          }).length
+        : true;
+
+      const filterType = this.state.filters.type
+        ? tags.filter(item => {
+            return item === this.state.filters.type.toLowerCase();
+          }).length
+        : true;
+
+      const filterKeyword = this.state.filters.keyword.length
+        ? tags.filter(item => {
+            return (
+              item.indexOf(this.state.filters.keyword.toLowerCase()) !== -1
+            );
+          }).length
+        : true;
+
+      if (
+        filterYear &&
+        filterCountry &&
+        filterManufacturer &&
+        filterKeyword &&
+        filterType
+      ) {
         ary.push(cur);
       }
 
       return ary;
     }, []);
 
-    const articles = filteredStories
-      .map((x, i) => {
-        return (
-          <StoryPreview
-            key={i}
-            title={x.title}
-            preview={x.preview}
-            date={x.date}
-            image={x.image}
-            body={x.body}
-            id={i}
-            tags={x.tags}
-          />
-        );
-      })
-      .reverse();
+    const articles = filteredStories.map((x, i) => {
+      return (
+        <StoryPreview
+          key={i}
+          title={x.title}
+          body={x.body}
+          date={x.date}
+          image={x.image}
+          id={parseInt(x.id, 10)}
+          tags={x.tags}
+        />
+      );
+    });
 
     return (
       <section className="stories-container">
@@ -117,15 +148,25 @@ class Stories extends Component {
     );
   }
 
-  renderStories() {
-    return;
-    <section />;
-  }
-
   handleChange(id, value) {
     const filters = Object.assign(this.state.filters, { [id]: value });
 
     this.setState({ filters });
+    this.props.history.replace(
+      this.props.location.pathname + '?' + this.generateQueryString(),
+    );
+  }
+
+  generateQueryString() {
+    return Object.keys(this.state.filters)
+      .reduce((ary, i) => {
+        if (this.state.filters[i]) {
+          ary.push(i + '=' + this.state.filters[i]);
+        }
+
+        return ary;
+      }, [])
+      .join('&');
   }
 
   updateKeyword(event) {
@@ -140,47 +181,66 @@ class Stories extends Component {
 
   renderSearchMenu() {
     return (
-      <div className="stories-search">
+      <div className="stories-search box-shadow">
         <div className="search-title">
           {intl.get('SEARCH')}
         </div>
-        <TextField
-          id="keyword"
-          className="search-keyword"
-          value={this.state.filters.keyword}
-          onChange={this.updateKeyword.bind(this)}
+        <FormControl className="stories-search__text">
+          <TextField
+            id="keyword"
+            className="search-keyword"
+            value={this.state.filters.keyword}
+            onChange={this.updateKeyword.bind(this)}
+          />
+          <Search />
+        </FormControl>
+        <Divider className="divider" />
+        <div className="search-filter">
+          {intl.get('FILTER')}
+        </div>
+        <SelectMenu
+          onChange={this.handleChange.bind(this)}
+          options={this.types}
+          value={this.state.filters.type}
+          id="type"
+          label={intl.get('ARTICLE_TYPE')}
         />
         <SelectMenu
           onChange={this.handleChange.bind(this)}
-          options={this.state.tags.map(x => ({ value: x, text: x }))}
-          id="year"
-          label="{ intl.get('YEAR') }"
-        />
-        <SelectMenu
-          onChange={this.handleChange.bind(this)}
-          options={this.state.tags.map(x => ({ value: x, text: x }))}
+          options={this.countries}
+          value={this.state.filters.countries}
           id="country"
-          label="{ intl.get('COUNTRY') }"
+          label={intl.get('COUNTRY')}
         />
         <SelectMenu
           onChange={this.handleChange.bind(this)}
-          options={this.state.tags.map(x => ({ value: x, text: x }))}
+          options={this.years}
+          value={this.state.filters.year}
+          id="year"
+          label={intl.get('YEAR')}
+        />
+        <SelectMenu
+          onChange={this.handleChange.bind(this)}
+          options={this.manufacturers}
+          value={this.state.filters.manufacturer}
           id="manufacturer"
-          label="{ intl.get('MANUFACTURER') }"
+          label={intl.get('MANUFACTURER')}
         />
       </div>
     );
   }
 
   render() {
+    if (this.state.loading) {
+      return <CircularProgress className="loading" />;
+    }
+
     return (
       <div className="stories-wrapper">
         <section className="stories-search-wrapper">
           {this.renderSearchMenu()}
         </section>
-        {!this.props.match.params.id
-          ? this.renderPreviews()
-          : this.renderFullStory(this.props.match, this.state.stories)}
+        {this.renderPreviews()}
       </div>
     );
   }
@@ -190,27 +250,4 @@ Stories.propTypes = {
   match: PropTypes.object,
 };
 
-export default Stories;
-
-/*
-if () {
-      return (
-        <section>
-          <SelectMenu
-            onChange={this.handleChange.bind(this)}
-            options={this.state.tags.map(x => ({value: x, text: x}))}
-            id="tagFilter"
-            label="Select tag"
-          />
-          {this.renderPreviews()}
-        </section>
-      );
-    } else {
-      return (
-        <section>
-
-          {this.renderFullStory(this.props.match, this.state.stories)}
-        </section>
-      );
-    }
-*/
+export default withRouter(Stories);

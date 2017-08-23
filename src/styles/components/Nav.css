@@ -1,16 +1,27 @@
 .primary-nav {
   border-bottom: 1px solid #dcdcdc;
-  height: 70px;
+  height: 64px;
   padding: 19px 15px;
-  height: 94px;
   position: fixed;
   width: 100%;
   background: #fff;
   z-index: 999;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.primary-nav h1 a {
+  font-size: 1.5rem;
 }
 
 .primary-nav ul {
   align-items: flex-end;
+}
+
+.primary-nav ul li:not(:last-child) {
+  margin-right: 60px;
 }
 
 .primary-nav a, .primary-nav a:active, .primary-nav a:visited, .primary-nav a:hover {
@@ -20,8 +31,13 @@
   padding: 0 5px;
   text-decoration: none;
   transition: border .25s ease;
+  font-size: 1.15rem;
 }
 
 .primary-nav a.active {
   border-bottom: 3px solid #2D80B5;
+}
+
+.primary-nav .lang-selection .selected {
+  color: #2D80B5;
 }
