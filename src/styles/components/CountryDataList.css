@@ -5,3 +5,7 @@
 .country-data-list li {
   margin: 10px 0;
 }
+
+.country-data-list__title {
+	font-size: 1.25rem;
+}

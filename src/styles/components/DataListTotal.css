@@ -2,10 +2,12 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-bottom: 10px;
 }
 
 .data-list-total__value {
 	margin-right: 5px;
+	font-size: 1.85rem;
 }
 
 .data-list-total__sparkline {
