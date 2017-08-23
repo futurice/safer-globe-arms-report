@@ -7,6 +7,7 @@
 	max-width: 714px;
 	width: 100%;
 	margin-right: 68px;
+	margin-left: 380px;
 }
 
 .full-story-container .story-date {
@@ -36,10 +37,14 @@
 	display: flex;
     align-self: flex-end;
     position: absolute;
-	right: -84px;
+	right: -30px;
 }
 
-.story-share div {
+.story-share > div {
+	position: fixed;
+}
+
+.story-share > div div {
 	margin-bottom: 16px;
 	cursor: pointer;
 }
@@ -55,7 +60,7 @@
 
 .back-to-articles {
 	padding: 16px 36px 16px 16px;
-	position: relative;
+	position: fixed;
 	height: min-content;
 	text-decoration: initial;
 	color: initial;

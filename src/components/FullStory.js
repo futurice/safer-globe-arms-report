@@ -31,7 +31,8 @@ class FullStory extends Component {
 
   componentDidMount() {
     const storyId = this.props.match.params.id;
-    const url = `/stories/${storyId}.md`;
+    const url = require(`../data/stories/${storyId}.md`);
+
     let headers = new Headers();
     headers.append('Content-Type', 'text/plain');
 
@@ -110,20 +111,22 @@ class FullStory extends Component {
           </div>
           <div className="story-text">
             <div className="story-share flex-column-container">
-              <FacebookShareButton
-                url={articleLink}
-                title={this.state.title}
-                picture={this.state.image}
-              >
-                <FacebookIcon size={38} round={false} />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url={articleLink}
-                title={this.state.title}
-                hastag={this.state.tags.join(' ')}
-              >
-                <TwitterIcon size={38} round={false} />
-              </TwitterShareButton>
+              <div>
+                <FacebookShareButton
+                  url={articleLink}
+                  title={this.state.title}
+                  picture={this.state.image}
+                >
+                  <FacebookIcon size={38} round={false} />
+                </FacebookShareButton>
+                <TwitterShareButton
+                  url={articleLink}
+                  title={this.state.title}
+                  hastag={this.state.tags.join(' ')}
+                >
+                  <TwitterIcon size={38} round={false} />
+                </TwitterShareButton>
+              </div>
             </div>
             <ReactMarkdown source={this.state.body || ''} />
           </div>

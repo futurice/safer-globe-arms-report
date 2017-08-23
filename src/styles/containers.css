@@ -7,8 +7,12 @@
 
 .content-wrapper {
 	margin-top: 64px;
-	height: 100vh;
+	height: calc(100vh - 64px);
 	min-height: 200px;
+	overflow: scroll;
+}
+
+.content-wrapper > *:not(.data-section-container) {
 	padding: 43px 16px;
 }
 
