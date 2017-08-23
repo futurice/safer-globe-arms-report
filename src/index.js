@@ -19,6 +19,7 @@ import Nav from './components/Nav';
 // import Home from './components/Home';
 import Data from './components/Data';
 import Stories from './components/Stories';
+import FullStory from './components/FullStory';
 import About from './components/About';
 import Downloads from './components/Downloads';
 // import Footer from './components/Footer';
@@ -48,6 +49,20 @@ const locales = {
     TOP5COUNTRIES: 'Top 5 Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
+    SEARCH: 'Search articles',
+    YEAR: 'Year',
+    COUNTRY: 'Country',
+    MANUFACTURER: 'Manufacturer',
+    FILTER: 'Filter',
+    NOT_FOUND: 'The requested page could not be found.',
+    BACK_TO_ARTICLES: 'Back to articles',
+    TEXT_BY: 'Text by',
+    ARTICLE_TYPE: 'Article type',
+    EVENTS: 'Events',
+    BACKGROUND: 'Background',
+    PEACEFUL: 'Peaceful',
+    RESTLESS: 'Restless',
+    NOT_AVAILABLE: 'Not available',
   },
   fi: {
     DATA: 'Data',
@@ -62,6 +77,20 @@ const locales = {
     TOP5COUNTRIES: 'Suurimmat 5 maata',
     WORLD: 'Maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
+    SEARCH: 'Etsi artikkeleita',
+    YEAR: 'Vuosi',
+    COUNTRY: 'Maa',
+    MANUFACTURER: 'Valmistaja',
+    FILTER: 'Suodata',
+    NOT_FOUND: 'Heattua sivua ei löytynyt.',
+    BACK_TO_ARTICLES: 'Takaisin artikkeleihin',
+    TEXT_BY: 'Teksti',
+    ARTICLE_TYPE: 'Artikkelityyppi',
+    EVENTS: 'Tapahtumat',
+    BACKGROUND: 'Taustaa',
+    PEACEFUL: 'Rauhallinen',
+    RESTLESS: 'Rauhaton',
+    NOT_AVAILABLE: 'Ei saatavilla',
   },
 };
 
@@ -97,19 +126,21 @@ class AppRouter extends Component {
           <div className="container">
             <Route path="/" render={props => <Nav {...props} />} />
 
-            <Route exact path="/" component={Data} />
-            <Route
-              exact
-              path="/stories"
-              render={props => <Stories {...props} />}
-            />
-            <Route
-              exact
-              path="/stories/:id"
-              render={props => <Stories {...props} />}
-            />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/downloads" component={Downloads} />
+            <div className="content-wrapper">
+              <Route exact path="/" component={Data} />
+              <Route
+                exact
+                path="/stories"
+                render={props => <Stories {...props} />}
+              />
+              <Route
+                exact
+                path="/stories/:id"
+                render={props => <FullStory {...props} />}
+              />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/downloads" component={Downloads} />
+            </div>
           </div>
         </div>
       </Router>
