@@ -10,6 +10,7 @@ import formatEuros from '../utils/formatEuros';
 import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
+
 class TopFiveCountries extends Component {
   constructor(props) {
     super(props);
