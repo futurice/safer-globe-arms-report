@@ -63,6 +63,7 @@ const locales = {
     PEACEFUL: 'Peaceful',
     RESTLESS: 'Restless',
     NOT_AVAILABLE: 'Not available',
+    FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
   },
   fi: {
     DATA: 'Data',
@@ -75,7 +76,7 @@ const locales = {
     DEFENCE: 'Puolustus',
     CIVILIAN: 'Siviili',
     TOP5COUNTRIES: 'Suurimmat 5 maata',
-    WORLD: 'Maailma',
+    WORLD: 'Koko maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
     SEARCH: 'Etsi artikkeleita',
     YEAR: 'Vuosi',
@@ -91,6 +92,7 @@ const locales = {
     PEACEFUL: 'Rauhallinen',
     RESTLESS: 'Rauhaton',
     NOT_AVAILABLE: 'Ei saatavilla',
+    FINNISH_ARMS_EXPORT: 'Suomen asevienti',
   },
 };
 
