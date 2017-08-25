@@ -64,6 +64,8 @@
 	text-decoration: initial;
 	color: initial;
 	font-size: 1.25rem;
+	font-weight: 600;
+	color: #797979;
 }
 
 .back-to-articles:hover {

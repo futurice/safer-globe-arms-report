@@ -61,42 +61,50 @@ class About extends Component {
 
   loadDocument(name, hash = null) {
     const lang = intl.determineLocale().includes('en') ? 'en' : 'fi';
-    const url = require(`../data/about/${name}_${lang}.md`);
 
-    if (this.state.page === name) {
-      if (this.state.hash !== hash) {
-        this.setState({ hash });
+    try {
+      const url = require(`../data/about/${name}_${lang}.md`);
+
+      if (this.state.page === name) {
+        if (this.state.hash !== hash) {
+          this.setState({ hash });
+        }
+
+        return;
       }
 
-      return;
-    }
+      let headers = new Headers();
+      headers.append('Content-Type', 'text/plain');
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'text/plain');
-
-    this.setState({
-      loading: true,
-      hash: null,
-    });
-
-    return fetch(url, { headers })
-      .then(response => response.text())
-      .then(response => {
-        this.setState({
-          body: response,
-          hash,
-          page: name,
-          error: false,
-          loading: false,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          error: true,
-          loading: false,
-          page: null,
-        });
+      this.setState({
+        loading: true,
+        hash: null,
       });
+
+      return fetch(url, { headers })
+        .then(response => response.text())
+        .then(response => {
+          this.setState({
+            body: response,
+            hash,
+            page: name,
+            error: false,
+            loading: false,
+          });
+        })
+        .catch(() => {
+          this.setState({
+            error: true,
+            loading: false,
+            page: null,
+          });
+        });
+    } catch (e) {
+      this.setState({
+        error: true,
+        loading: false,
+      });
+    }
   }
 
   renderMenu() {
@@ -127,17 +135,7 @@ class About extends Component {
   }
 
   render() {
-    if (this.state.loading) {
-      return <CircularProgress className="loading" />;
-    } else if (this.state.error) {
-      return (
-        <div>
-          {intl.get('NOT_FOUND')}
-        </div>
-      );
-    }
-
-    if (this.state.hash) {
+    if (this.state.hash && this.state.body) {
       setTimeout(() => {
         const elem = document.querySelector(`a[name=${this.state.hash}]`);
 
@@ -152,9 +150,19 @@ class About extends Component {
         <section className="stories-search-wrapper">
           {this.renderMenu()}
         </section>
-        <section className="full-story-container flex-container box-shadow">
-          <ReactMarkdown className="md" source={this.state.body || ''} />
-        </section>
+
+        {this.state.loading ? <CircularProgress className="loading" /> : null}
+        {this.state.error
+          ? <div className="not-found">
+              {intl.get('NOT_FOUND')}
+            </div>
+          : null}
+
+        {this.state.body
+          ? <section className="full-story-container flex-container box-shadow">
+              <ReactMarkdown className="md" source={this.state.body || ''} />
+            </section>
+          : null}
       </div>
     );
   }

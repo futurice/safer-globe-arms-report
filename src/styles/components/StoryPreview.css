@@ -34,6 +34,7 @@
 .stories-container .story-text h3 {
   font-size: 1rem;
   margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .stories-container .story-text p {
@@ -49,6 +50,7 @@
   left: 0;
   top: 20px;
   opacity: 0.75;
+  font-weight: 600;
 }
 
 .story-image {
@@ -58,4 +60,5 @@
 .story-preview__tags {
   color: #797979;
   margin-top: 29px;
+  font-size: 0.7rem;
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import { csv } from 'd3-request';
+import { CircularProgress } from 'material-ui/Progress';
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
 import saferGlobe from './../data/safer-globe.csv';
@@ -772,7 +773,7 @@ class DataMap extends Component {
         </div>
       );
     } else {
-      return <div style={{ textAlign: 'center' }}>Loading Map...</div>;
+      return <CircularProgress className="loading" />;
     }
   }
 }
