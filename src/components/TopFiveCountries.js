@@ -10,13 +10,6 @@ import formatEuros from '../utils/formatEuros';
 import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
-const styles = {
-  divider: {
-    margin: '10px -1rem 16px -1rem',
-    clear: 'both',
-  },
-};
-
 class TopFiveCountries extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +34,7 @@ class TopFiveCountries extends Component {
           {intl.get('FINNISH_ARMS_EXPORT')}
         </div>
         <DataListTabs onClick={this.handleTabClick.bind(this)} />
-        <Divider style={styles.divider} />
+        <Divider className="divider" />
         <h3 className="CountryName">
           {totals.name}
         </h3>
@@ -50,11 +43,11 @@ class TopFiveCountries extends Component {
           civilian={totals.civilian.value}
           defence={totals.defence.value}
         />
-        <Divider style={styles.divider} />
+        <Divider className="divider" />
         <div className="top-countries">
-          <h3>
+          <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}
-          </h3>
+          </div>
           {countries.map((data, i) =>
             <div key={i} className="top-countries__country">
               <div className="top-countries__name">
@@ -62,7 +55,9 @@ class TopFiveCountries extends Component {
                   <span>
                     {i + 1}
                   </span>
-                  {data.Countries}
+                  <span>
+                    {data.Countries}
+                  </span>
                 </span>
                 <span className="top-countries__name--sum">
                   {formatEuros(data.Total)}

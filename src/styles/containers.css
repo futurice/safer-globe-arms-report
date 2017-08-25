@@ -21,4 +21,6 @@
 	position: relative;
 	top: 2rem;
 	color: #2D80B5 !important;
+	width: 100px !important;
+	height: 100px !important;
 }

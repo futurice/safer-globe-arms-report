@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
+  font-size: 1rem;
 }
 
 .stories-container article {
@@ -30,17 +31,17 @@
   padding: 20px 15px;
 }
 
-.stories-container .story-text p {
-  margin-top: 0;
-  margin-bottom: 40px;
-}
-
 .stories-container .story-text h3 {
-  font-size: 1.1rem;
-  margin-bottom: 7px;
+  font-size: 1rem;
+  margin-bottom: 6px;
 }
 
-.story-date {
+.stories-container .story-text p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.story-container .story-date {
   background: #fff;
   color: #4d4d4d;
   padding: 15px 20px;
@@ -52,4 +53,9 @@
 
 .story-image {
   width: 100%;
+}
+
+.story-preview__tags {
+  color: #797979;
+  margin-top: 29px;
 }

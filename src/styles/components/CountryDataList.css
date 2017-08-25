@@ -9,3 +9,8 @@
 .country-data-list__title {
 	font-size: 1.25rem;
 }
+
+.country-data-container .divider {
+	clear: both;
+	margin: 20px -1rem;
+}

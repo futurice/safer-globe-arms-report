@@ -192,7 +192,7 @@ class Stories extends Component {
             value={this.state.filters.keyword}
             onChange={this.updateKeyword.bind(this)}
           />
-          <Search />
+          <Search style={{ position: 'absolute', right: '6px' }} />
         </FormControl>
         <Divider className="divider" />
         <div className="search-filter">

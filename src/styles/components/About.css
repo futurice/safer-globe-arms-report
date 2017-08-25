@@ -1,0 +1,30 @@
+.about-content-wrapper {
+	position: fixed;
+	width: 264px;
+	padding: 16px;
+}
+
+.about-main-link, .about-main-link:visited {
+	font-size: 1rem;
+	color: #333333;
+}
+
+.about-sub-link, .about-sub-link:visited {
+	color: #797979;
+	margin-left: 1rem;
+}
+
+.about-main-link:hover, .about-sub-link:hover {
+	text-decoration: none;
+} 
+
+.about-menu .divider {
+	margin: 16px 0 16px 0 !important;
+	left: -16px;
+	position: relative;
+	width: calc(100% + 33px);
+}
+
+.about-menu a.active {
+	color: #2D80B5;
+}

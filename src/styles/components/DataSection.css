@@ -4,6 +4,7 @@
   /* Create space between the following Stats section to acommodate the active Timeline down arrow */
   position: relative;
   background: rgba(250, 250, 250, 1);
+  justify-content: end;
 }
 
 .country-data-container {
@@ -16,7 +17,7 @@
   z-index: 2;
   /*width: 20vw;
   max-width: 18.75rem;*/
-  max-height: 30.5rem;
+  max-height: 30rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }

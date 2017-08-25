@@ -31,11 +31,16 @@
 
 .search-keyword {
 	width: 100%;
-	margin-right: 10px !important;
 }
 
 .search-keyword div {
 	border: 1px solid #666666;
+	padding-bottom: 0;
+}
+
+.search-keyword + svg {
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .search-keyword div:before {
@@ -43,12 +48,18 @@
 }
 
 .search-keyword input {
-	padding: 18px 10px;
-    box-sizing: border-box;
+	padding: 14px 10px;
+    padding-right: 32px;
+    background: #F5F5F5;
+    width: calc(100% - 42px);
+}
+
+.search-keyword > div:after {
+	display: none;
 }
 
 .stories-search .select-menu {
-	width: calc(100% - 34px);
+	width: 100%;
 }
 
 .stories-search .divider {
@@ -56,9 +67,4 @@
 	left: -16px;
 	position: relative;
 	width: calc(100% + 33px);
-
-}
-
-.search-filter {
-	font-size: 1rem;
 }
