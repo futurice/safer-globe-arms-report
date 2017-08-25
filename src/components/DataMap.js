@@ -5,6 +5,7 @@ import * as topojson from 'topojson';
 import * as d3GeoProjection from 'd3-geo-projection';
 import { csv, json } from 'd3-request';
 import { CircularProgress } from 'material-ui/Progress';
+
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
 import saferGlobe from './../data/safer-globe.csv';
