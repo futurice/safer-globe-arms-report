@@ -24,3 +24,9 @@
 	width: 100px !important;
 	height: 100px !important;
 }
+
+.not-found {
+	text-align: center;
+    width: 100%;
+    font-size: 1.4rem;
+}

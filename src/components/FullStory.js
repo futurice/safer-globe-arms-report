@@ -31,60 +31,58 @@ class FullStory extends Component {
 
   componentDidMount() {
     const storyId = this.props.match.params.id;
-    const url = require(`../data/stories/${storyId}.md`);
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'text/plain');
+    try {
+      const url = require(`../data/stories/${storyId}.md`);
 
-    this.setState({ loading: true });
+      let headers = new Headers();
+      headers.append('Content-Type', 'text/plain');
 
-    return fetch(url, { headers })
-      .then(response => response.text())
-      .then(response => {
-        const lines = response.split('\n');
-        const tags = lines[0].split(',').reduce((ary, cur) => {
-          ary.push(`#${cur}`);
+      this.setState({ loading: true });
 
-          return ary;
-        }, []);
-        const date = lines[1];
-        const author = lines[2];
-        const image = lines[3];
-        const body = lines.slice(4).join('\n').trim();
-        const title = body.match(new RegExp('^#([^\n].*)\n', 'i'))[1];
+      return fetch(url, { headers })
+        .then(response => response.text())
+        .then(response => {
+          const lines = response.split('\n');
+          const tags = lines[0].split(',').reduce((ary, cur) => {
+            ary.push(`#${cur}`);
 
-        this.setState({
-          title,
-          tags,
-          date,
-          image,
-          body,
-          author,
-          id: this.props.match.params.id,
-          error: false,
-          loading: false,
+            return ary;
+          }, []);
+          const date = lines[1];
+          const author = lines[2];
+          const image = lines[3];
+          const body = lines.slice(4).join('\n').trim();
+          const title = body.match(new RegExp('^#([^\n].*)\n', 'i'))[1];
+
+          this.setState({
+            title,
+            tags,
+            date,
+            image,
+            body,
+            author,
+            id: this.props.match.params.id,
+            error: false,
+            loading: false,
+          });
+        })
+        .catch(() => {
+          this.setState({
+            error: true,
+            loading: false,
+          });
         });
-      })
-      .catch(() => {
-        this.setState({
-          error: true,
-          loading: false,
-        });
+    } catch (e) {
+      this.setState({
+        error: true,
+        loading: false,
       });
+    }
   }
 
   render() {
     const articleLink = window.location.href;
-
-    if (this.state.loading) {
-      return <CircularProgress className="loading" />;
-    } else if (this.state.error) {
-      return (
-        <div>
-          {intl.get('NOT_FOUND')}
-        </div>
-      );
-    }
 
     return (
       <div className="flex-container flex-column-row">
@@ -94,45 +92,55 @@ class FullStory extends Component {
         >
           {intl.get('BACK_TO_ARTICLES')}
         </a>
-        <section className="full-story-container flex-container box-shadow">
-          <div className="story-image">
-            <img src={this.state.image} alt={this.state.title} />
-          </div>
-          <div className="meta-data flex-column-row">
-            <span className="story-date">
-              <div>
-                {this.state.date}
-              </div>
-              <div>
-                {intl.get('TEXT_BY')}: {this.state.author}
-              </div>
-            </span>
-            <span className="story-tags">
-              {this.state.tags.join(' ')}
-            </span>
-          </div>
-          <div className="story-text">
-            <div className="story-share flex-column-container">
-              <div>
-                <FacebookShareButton
-                  url={articleLink}
-                  title={this.state.title}
-                  picture={this.state.image}
-                >
-                  <FacebookIcon size={38} round={false} />
-                </FacebookShareButton>
-                <TwitterShareButton
-                  url={articleLink}
-                  title={this.state.title}
-                  hastag={this.state.tags.join(' ')}
-                >
-                  <TwitterIcon size={38} round={false} />
-                </TwitterShareButton>
-              </div>
+
+        {this.state.loading ? <CircularProgress className="loading" /> : null}
+        {this.state.error
+          ? <div className="not-found">
+              {intl.get('NOT_FOUND')}
             </div>
-            <ReactMarkdown className="md" source={this.state.body || ''} />
-          </div>
-        </section>
+          : null}
+
+        {this.state.body
+          ? <section className="full-story-container flex-container box-shadow">
+              <div className="story-image">
+                <img src={this.state.image} alt={this.state.title} />
+              </div>
+              <div className="meta-data flex-column-row">
+                <span className="story-date">
+                  <div>
+                    {this.state.date}
+                  </div>
+                  <div>
+                    {intl.get('TEXT_BY')}: {this.state.author}
+                  </div>
+                </span>
+                <span className="story-tags">
+                  {this.state.tags.join(' ')}
+                </span>
+              </div>
+              <div className="story-text">
+                <div className="story-share flex-column-container">
+                  <div>
+                    <FacebookShareButton
+                      url={articleLink}
+                      title={this.state.title}
+                      picture={this.state.image}
+                    >
+                      <FacebookIcon size={38} round={false} />
+                    </FacebookShareButton>
+                    <TwitterShareButton
+                      url={articleLink}
+                      title={this.state.title}
+                      hastag={this.state.tags.join(' ')}
+                    >
+                      <TwitterIcon size={38} round={false} />
+                    </TwitterShareButton>
+                  </div>
+                </div>
+                <ReactMarkdown className="md" source={this.state.body || ''} />
+              </div>
+            </section>
+          : null}
       </div>
     );
   }
