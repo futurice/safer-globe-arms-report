@@ -148,6 +148,9 @@ class FullStory extends Component {
               </section>
             </div>
           : null}
+            <ReactMarkdown className="md" source={this.state.body || ''} />
+          </div>
+        </section>
       </div>
     );
   }

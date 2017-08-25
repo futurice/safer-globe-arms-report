@@ -32,6 +32,9 @@
   padding: 0 5px;
   text-decoration: none;
   transition: border .25s ease;
+}
+
+.primary-nav ul a {
   font-size: 1.15rem;
 }
 
