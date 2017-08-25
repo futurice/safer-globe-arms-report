@@ -13,7 +13,7 @@ export default class Maplegends extends Component {
   render() {
     return (
       <div className="map-legends box-shadow">
-        <strong>GPI</strong>
+        <div className="label">GPI</div>
         <div className="flex-column-row">
           <div className="flex-column-column">
             <ul>

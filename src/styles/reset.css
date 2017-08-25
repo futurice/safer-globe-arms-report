@@ -11,8 +11,8 @@ body {
   -webkit-backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
-  font: 1rem/1.25 'Source Sans Pro', sans-serif;
-  color: #646464;
+  font: 0.9rem/1.25 'Source Sans Pro', sans-serif;
+  color: #333333;
 }
 
 blockquote, q {

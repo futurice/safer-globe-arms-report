@@ -64,6 +64,8 @@ const locales = {
     RESTLESS: 'Restless',
     NOT_AVAILABLE: 'Not available',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
+    TERMS_EXPLAINED: 'Terms explained',
+    GPI: 'GPI',
   },
   fi: {
     DATA: 'Data',
@@ -93,6 +95,8 @@ const locales = {
     RESTLESS: 'Rauhaton',
     NOT_AVAILABLE: 'Ei saatavilla',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
+    TERMS_EXPLAINED: 'Termit selitettyinä',
+    GPI: 'GPI',
   },
 };
 
@@ -141,6 +145,7 @@ class AppRouter extends Component {
                 render={props => <FullStory {...props} />}
               />
               <Route exact path="/about" component={About} />
+              <Route path="/about/:page" component={About} />
               <Route exact path="/downloads" component={Downloads} />
             </div>
           </div>

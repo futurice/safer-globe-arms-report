@@ -14,7 +14,7 @@ class StoryPreview extends Component {
 
         return ary;
       }, [])
-      .join(', ');
+      .join(' ');
   }
 
   render() {
@@ -34,7 +34,9 @@ class StoryPreview extends Component {
               {this.props.title}
             </h3>
             <ReactMarkdown source={this.props.body} />
-            {this.renderTags()}
+            <div className="story-preview__tags">
+              {this.renderTags()}
+            </div>
           </div>
         </Link>
       </article>

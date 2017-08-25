@@ -8,9 +8,8 @@
 	font-size: 9px;
 }
 
-.map-legends strong {
-	font-weight: 600;
-	font-size: 0.8rem;
+.map-legends .label {
+	font-size: 0.7rem;
 	margin-bottom: 7px;
 	display: block;
 }

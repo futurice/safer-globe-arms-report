@@ -94,9 +94,11 @@ class FullStory extends Component {
         >
           {intl.get('BACK_TO_ARTICLES')}
         </a>
-        <section className="full-story-container flex-container">
+        <section className="full-story-container flex-container box-shadow">
           <div className="story-image">
             <img src={this.state.image} alt={this.state.title} />
+          </div>
+          <div className="meta-data flex-column-row">
             <span className="story-date">
               <div>
                 {this.state.date}
@@ -106,7 +108,7 @@ class FullStory extends Component {
               </div>
             </span>
             <span className="story-tags">
-              {this.state.tags.join(', ')}
+              {this.state.tags.join(' ')}
             </span>
           </div>
           <div className="story-text">
@@ -128,7 +130,7 @@ class FullStory extends Component {
                 </TwitterShareButton>
               </div>
             </div>
-            <ReactMarkdown source={this.state.body || ''} />
+            <ReactMarkdown className="md" source={this.state.body || ''} />
           </div>
         </section>
       </div>

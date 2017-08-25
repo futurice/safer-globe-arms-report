@@ -1,8 +1,4 @@
-.top-countries h3 {
-	margin-bottom: 1rem;
-}
-
-.top-countries__country {
+.top-countries__country, .top-countries__title {
 	margin-bottom: 1rem;
 }
 
@@ -27,6 +23,10 @@
 .top-countries__name--wrapper > span:first-child {
 	display: inline-block;
 	width: 20px;
+}
+
+.top-countries__name--wrapper > span:last-child {
+	font-weight: 600;
 }
 
 .top-countries__name--sum {
