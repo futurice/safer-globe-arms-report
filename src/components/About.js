@@ -141,7 +141,7 @@ class About extends Component {
                 <a href={`#${sub.id}`}>
                   {intl.get(sub.name)}
                 </a>
-              </div>,
+              </div>
             )}
 
             {i < itemCount ? <Divider className="divider" /> : null}
