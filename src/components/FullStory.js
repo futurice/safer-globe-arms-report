@@ -85,12 +85,11 @@ class FullStory extends Component {
     const articleLink = window.location.href;
 
     return (
-      <div className="flex-container flex-column-row">
-        <a
-          onClick={this.props.history.goBack}
-          className="back-to-articles box-shadow"
-        >
-          {intl.get('BACK_TO_ARTICLES')}
+      <div className="flex-container-row">
+        <a onClick={this.props.history.goBack} className="left-menu">
+          <div className="back-to-articles box-shadow">
+            {intl.get('BACK_TO_ARTICLES')}
+          </div>
         </a>
 
         {this.state.loading ? <CircularProgress className="loading" /> : null}
@@ -101,11 +100,11 @@ class FullStory extends Component {
           : null}
 
         {this.state.body
-          ? <section className="full-story-container flex-container box-shadow">
+          ? <section className="text-box full-story-container flex-container box-shadow">
               <div className="story-image">
                 <img src={this.state.image} alt={this.state.title} />
               </div>
-              <div className="meta-data flex-column-row">
+              <div className="meta-data flex-container-row">
                 <span className="story-date">
                   <div>
                     {this.state.date}
@@ -119,7 +118,7 @@ class FullStory extends Component {
                 </span>
               </div>
               <div className="story-text">
-                <div className="story-share flex-column-container">
+                <div className="story-share flex-container-column">
                   <div>
                     <FacebookShareButton
                       url={articleLink}

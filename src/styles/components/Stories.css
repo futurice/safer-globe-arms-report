@@ -1,16 +1,5 @@
-.stories-wrapper {
-	flex-direction: row;
-	display: flex;
-}
-
 .stories-search-wrapper {
 	flex: 0 0 264px;
-}
-
-.stories-search {
-	position: fixed;
-	width: 264px;
-	padding: 16px;
 }
 
 .stories-search > * {

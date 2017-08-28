@@ -236,8 +236,8 @@ class Stories extends Component {
     }
 
     return (
-      <div className="stories-wrapper">
-        <section className="stories-search-wrapper">
+      <div className="stories-wrapper flex-container-row">
+        <section className="left-menu">
           {this.renderSearchMenu()}
         </section>
         {this.renderPreviews()}

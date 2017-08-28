@@ -111,7 +111,7 @@ class About extends Component {
     const itemCount = this.state.navigation.length - 1;
 
     return (
-      <div className="about-content-wrapper about-menu box-shadow">
+      <div className="about-menu box-shadow">
         {this.state.navigation.map((item, i) =>
           <div key={i}>
             <div key={i}>
@@ -146,8 +146,8 @@ class About extends Component {
     }
 
     return (
-      <div className="stories-wrapper">
-        <section className="stories-search-wrapper">
+      <div className="stories-wrapper flex-container-row">
+        <section className="left-menu">
           {this.renderMenu()}
         </section>
 
@@ -159,7 +159,7 @@ class About extends Component {
           : null}
 
         {this.state.body
-          ? <section className="full-story-container flex-container box-shadow">
+          ? <section className="text-box flex-container box-shadow">
               <ReactMarkdown className="md" source={this.state.body || ''} />
             </section>
           : null}
