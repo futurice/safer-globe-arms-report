@@ -22,6 +22,7 @@
 .downloads .actions {
 	justify-content: flex-end;
 }
+
 .downloads .actions * {
 	color: #3182b5;
 }
