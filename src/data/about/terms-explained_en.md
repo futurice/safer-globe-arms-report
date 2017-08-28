@@ -6,6 +6,8 @@ Euroopan unioni asetti Kiinan asevientikieltoon kesäkuussa 1989, kun Kiina oli 
 
 Turvallisuuspolitiikan ja Kiinan asiantuntija Bates Gill <LINK https://www.sipri.org/about/bios/dr-bates-gill > oli tuolloin kuultavana Yhdysvaltain senaatin ulkoasiainvaliokunnassa. Nykyään hän johtaa Tukholman rauhantutkimusinstituuttia SIPRIä. Kysyimme häneltä, miten hän näkee EU:n asevientikiellon tulevaisuuden.
 
+---
+
 ## Sotatuotteet
 
 Turvallisuuspolitiikan ja Kiinan asiantuntija Bates Gill <LINK https://www.sipri.org/about/bios/dr-bates-gill > oli tuolloin kuultavana Yhdysvaltain senaatin ulkoasiainvaliokunnassa. Nykyään hän johtaa Tukholman rauhantutkimusinstituuttia SIPRIä. Kysyimme häneltä, miten hän näkee EU:n asevientikiellon tulevaisuuden.
