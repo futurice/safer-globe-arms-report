@@ -84,7 +84,6 @@ class About extends Component {
 
       let headers = new Headers();
       headers.append('Content-Type', 'text/plain');
-
       this.setState({
         loading: true,
         hash: null,
