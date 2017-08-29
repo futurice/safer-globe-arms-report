@@ -10,6 +10,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 2px 4px 0 rgba(121, 121, 121, 0.5);
+
 }
 
 .primary-nav h1 a {
@@ -41,6 +43,11 @@
   border-bottom: 3px solid #2D80B5;
 }
 
+.primary-nav .lang-selection {
+  font-size: 1.1rem;
+}
+
 .primary-nav .lang-selection .selected {
   color: #2D80B5;
+  font-weight: 600;
 }

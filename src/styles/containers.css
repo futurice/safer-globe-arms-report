@@ -30,3 +30,27 @@
     width: 100%;
     font-size: 1.4rem;
 }
+
+.text-box {
+	justify-content: space-between;
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	max-width: 792px;
+	width: 100%;
+	padding: 48px 96px 48px 48px;
+	margin-left: 16px;
+}
+
+.left-menu {
+	flex: 0 0 264px;
+}
+.left-menu > *:first-child {
+	height: min-content;
+	text-decoration: initial;
+	/*color: initial;*/
+	width: 264px;
+	padding: 16px;
+	position: fixed;
+	flex: 0 0 264px;
+}

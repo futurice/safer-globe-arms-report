@@ -14,7 +14,7 @@ export default class Maplegends extends Component {
     return (
       <div className="map-legends box-shadow">
         <div className="label">GPI</div>
-        <div className="flex-column-row">
+        <div className="flex-container-row">
           <div className="flex-column-column">
             <ul>
               {this.colorList.map((color, i) => {
@@ -22,7 +22,7 @@ export default class Maplegends extends Component {
               })}
             </ul>
             <div
-              className="flex-column-row"
+              className="flex-container-row"
               style={{ justifyContent: 'space-between' }}
             >
               <span>
