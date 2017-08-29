@@ -195,7 +195,7 @@ class Data extends Component {
         style={{ overflow: 'hidden' }}
       >
         <section className="data-map-container flex-container-column">
-          <div className="flex-container">
+          <div style={{ height: '100%' }} className="flex-container-column">
             <section className="flex-one country-data-container">
               {this.state.selectedCountry
                 ? <CountryDataList country={this.state.selectedCountry} />

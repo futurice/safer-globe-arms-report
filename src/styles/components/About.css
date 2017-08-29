@@ -1,19 +1,15 @@
-.about-main-link, .about-main-link:visited {
+.about-main-link a, .about-main-link a:visited {
 	font-size: 1rem;
 	color: #333333;
 }
 
-.about-sub-link, .about-sub-link:visited {
+.about-sub-link a, .about-sub-link a:visited {
 	color: #797979;
 }
 
-.about-main-link:hover, .about-sub-link:hover {
+.about-main-link a:hover, .about-sub-link a:hover {
 	text-decoration: none;
 } 
-
-.about-menu {
-	
-}
 
 .about-menu .divider {
 	margin: 16px 0 16px 0 !important;
@@ -25,8 +21,10 @@
 .about-menu a {
 	border-bottom: 2px solid transparent;
 	line-height: 22px;
+	font-weight: 600;
+	line-height: 1.83;
 }
 
 .about-menu a.active {
-	border-bottom: 2px solid #2D80B5;
+	border-bottom: 3px solid #2D80B5;
 }

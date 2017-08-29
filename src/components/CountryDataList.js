@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import intl from 'react-intl-universal';
 import Divider from 'material-ui/Divider';
-// import Button from './Button';
 
-import RadioButton from './forms/RadioButton';
 import DataListTabs from './DataListTabs';
 import DataListTotal from './DataListTotal';
 

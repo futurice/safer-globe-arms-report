@@ -1,0 +1,24 @@
+.article-notification {
+	display: flex;
+	margin: 0 0 16px 16px;
+	padding: 22px;
+	justify-content: space-between;
+	flex: 1 1 100%;
+	position: relative;
+}
+
+.article-notification span {
+	margin: 0 auto;
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.article-notification svg {
+	width: 32px;
+	height: 32px;
+	display: flex;
+    align-self: center;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}

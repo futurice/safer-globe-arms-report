@@ -10,6 +10,7 @@ import Divider from 'material-ui/Divider';
 import { CircularProgress } from 'material-ui/Progress';
 
 import StoryPreview from './StoryPreview';
+import ArticleNotification from './ArticleNotification';
 import SelectMenu from './forms/SelectMenu';
 import stories from './../data/stories.csv';
 import './../styles/components/Stories.css';
@@ -127,22 +128,21 @@ class Stories extends Component {
       return ary;
     }, []);
 
-    const articles = filteredStories.map((x, i) => {
-      return (
-        <StoryPreview
-          key={i}
-          title={x.title}
-          body={x.body}
-          date={x.date}
-          image={x.image}
-          id={parseInt(x.id, 10)}
-          tags={x.tags}
-        />
-      );
-    });
+    const articles = filteredStories.map((x, i) =>
+      <StoryPreview
+        key={i}
+        title={x.title}
+        body={x.body}
+        date={x.date}
+        image={x.image}
+        id={parseInt(x.id, 10)}
+        tags={x.tags}
+      />,
+    );
 
     return (
       <section className="stories-container">
+        <ArticleNotification />
         {articles}
       </section>
     );

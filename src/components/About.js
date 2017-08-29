@@ -10,6 +10,8 @@ import { CircularProgress } from 'material-ui/Progress';
 import './../styles/components/About.css';
 
 class About extends Component {
+  static xhr = null;
+
   constructor(props) {
     super(props);
 
@@ -47,8 +49,11 @@ class About extends Component {
 
     this.props.history.listen((location, action) => {
       const page = location.pathname.replace('/about/', '');
+      const hash = location.hash;
 
-      this.loadDocument(page);
+      if (!hash.length) {
+        this.loadDocument(page);
+      }
     });
   }
 
@@ -57,6 +62,10 @@ class About extends Component {
     const hash = this.props.location.hash.replace(/^#/, '') || null;
 
     this.loadDocument(page, hash);
+  }
+
+  compoenntWillUnmount() {
+    this.xhr.abort();
   }
 
   loadDocument(name, hash = null) {
@@ -75,13 +84,12 @@ class About extends Component {
 
       let headers = new Headers();
       headers.append('Content-Type', 'text/plain');
-
       this.setState({
         loading: true,
         hash: null,
       });
 
-      return fetch(url, { headers })
+      this.xhr = fetch(url, { headers })
         .then(response => response.text())
         .then(response => {
           this.setState({
@@ -99,6 +107,8 @@ class About extends Component {
             page: null,
           });
         });
+
+      return this.xhr;
     } catch (e) {
       this.setState({
         error: true,
@@ -109,19 +119,24 @@ class About extends Component {
 
   renderMenu() {
     const itemCount = this.state.navigation.length - 1;
+    const atRoot = this.props.location.pathname === '/about';
+    //const hashDefined = this.props.location.hash;
 
     return (
       <div className="about-menu box-shadow">
         {this.state.navigation.map((item, i) =>
           <div key={i}>
-            <div key={i}>
-              <NavLink to={`/about/${item.path}`} className="about-main-link">
+            <div key={i} className="about-main-link">
+              <NavLink
+                to={`/about/${item.path}`}
+                className={atRoot && i === 0 ? ' active' : null}
+              >
                 {intl.get(item.name)}
               </NavLink>
             </div>
             {item.anchors.map((sub, j) =>
-              <div key={j}>
-                <a href={`#${sub.id}`} className="about-sub-link">
+              <div key={j} className="about-sub-link">
+                <a href={`#${sub.id}`}>
                   {intl.get(sub.name)}
                 </a>
               </div>,

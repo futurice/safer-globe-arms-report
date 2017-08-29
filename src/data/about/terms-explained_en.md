@@ -44,7 +44,7 @@ kohtaan näkyy yhteistyössä sotaharjoituksissa ja sotilasasiamiesten lähettä
 
 Euroopan unioni asetti Kiinan asevientikieltoon kesäkuussa 1989, kun Kiina oli lopettanut Taivaallisen rauhan aukion mielenosoitukset väkivaltaisesti. Asevientikiellon asettamisesta on kulunut 20 vuotta ja osa EU-maista haluaisi kumota sen. Asevientikielto ei ole estänyt Suomea viemästä sotatuotteita ja siviiliaseiden patruunoita Kiinaan. Miksi asevientikielto ei koske niitä?
 
-## GPI
+## GPI<a name="gpi" />
 
 Turvallisuuspolitiikan ja Kiinan asiantuntija Bates Gill <LINK https://www.sipri.org/about/bios/dr-bates-gill > oli tuolloin kuultavana Yhdysvaltain senaatin ulkoasiainvaliokunnassa. Nykyään hän johtaa Tukholman rauhantutkimusinstituuttia SIPRIä. Kysyimme häneltä, miten hän näkee EU:n asevientikiellon tulevaisuuden.
 

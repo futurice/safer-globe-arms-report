@@ -67,6 +67,7 @@ const locales = {
     LOADING_ERROR: 'An error occurred while loading page.',
     TERMS_EXPLAINED: 'Terms explained',
     GPI: 'GPI',
+    ARTICLES_ONLY_IN_FINNISH: 'Articles are available only in Finnish.',
   },
   fi: {
     DATA: 'Data',
