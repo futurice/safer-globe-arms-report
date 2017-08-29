@@ -7,16 +7,26 @@ import './../styles/components/DataListTotal.css';
 
 class DataListTotal extends Component {
   render() {
-    const { total, defence, civilian } = this.props;
+    const { total, defence, civilian, year, name } = this.props;
 
     return (
       <div>
-        <div className="data-list-total">
-          <div className="data-list-total__value">
-            {formatEuros(total)}
+        <div className="flex-container-row">
+          <div className="data-list-total__year">
+            {year}
           </div>
           <div className="data-list-total__sparkline" />
         </div>
+
+        <div className="flex-container-row">
+          <div className="data-list-total__name">
+            {name}
+          </div>
+          <div className="data-list-total__value">
+            {formatEuros(total)}
+          </div>
+        </div>
+
         <div className="top-countries__graphs">
           <div
             className="top-countries__graphs--defence"
@@ -38,6 +48,10 @@ class DataListTotal extends Component {
 
 DataListTotal.propTypes = {
   total: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  defence: PropTypes.number.isRequired,
+  civilian: PropTypes.number.isRequired,
 };
 
 export default DataListTotal;

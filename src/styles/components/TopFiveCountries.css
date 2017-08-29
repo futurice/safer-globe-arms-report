@@ -17,7 +17,6 @@
 
 .top-countries__name--wrapper {
 	margin-right: 20px;
-	width: 185px;
 }
 
 .top-countries__name--wrapper > span:first-child {
@@ -30,7 +29,6 @@
 }
 
 .top-countries__name--sum {
-	width: 95px;
 	text-align: right;
 }
 
@@ -50,4 +48,8 @@
 .top-countries__graphs--civilian {
 	background: #f99041;
 	height: 2px;
+}
+
+.top-countries {
+	font-size: 1rem;
 }

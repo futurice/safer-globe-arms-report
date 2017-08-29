@@ -12,12 +12,9 @@
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
   margin: 30px 0 0 30px;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   position: fixed;
   z-index: 2;
-  /*width: 20vw;
-  max-width: 18.75rem;*/
-  max-height: 30rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }

@@ -24,7 +24,7 @@ class TopFiveCountries extends Component {
   }
 
   render() {
-    const { countries, totals } = this.props;
+    const { countries, totals, year, name } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
     const total = totals[this.state.selected].value;
 
@@ -35,10 +35,9 @@ class TopFiveCountries extends Component {
         </div>
         <DataListTabs onClick={this.handleTabClick.bind(this)} />
         <Divider className="divider" />
-        <h3 className="CountryName">
-          {totals.name}
-        </h3>
         <DataListTotal
+          year={year}
+          name={totals.name}
           total={total}
           civilian={totals.civilian.value}
           defence={totals.defence.value}
@@ -89,6 +88,7 @@ class TopFiveCountries extends Component {
 TopFiveCountries.propTypes = {
   countries: PropTypes.array.isRequired,
   totals: PropTypes.object.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default TopFiveCountries;

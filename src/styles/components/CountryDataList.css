@@ -8,9 +8,35 @@
 
 .country-data-list__title {
 	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.country-data-container {
+	width: 340px;
 }
 
 .country-data-container .divider {
 	clear: both;
 	margin: 20px -1rem;
+}
+
+.country-data-container .remarks {
+	font-size: 1.1rem;
+	margin-bottom: 6px;
+}
+
+.country-data-container ul li {
+	font-weight: 600;
+	font-size: 0.8rem;
+	margin-bottom: 11px;
+}
+
+.country-data-container ul {
+	margin-bottom: 86px;
+}
+
+.all-country-articles {
+	font-weight: 600;
+	display: flex;
+	justify-content: flex-end;
 }
