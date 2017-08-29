@@ -5,7 +5,6 @@ import { ShareButtons, generateShareIcon } from 'react-share';
 import ReactMarkdown from 'react-markdown';
 import intl from 'react-intl-universal';
 import { CircularProgress } from 'material-ui/Progress';
-import Snackbar from 'material-ui/Snackbar';
 
 import ArticleNotification from './ArticleNotification';
 import './../styles/components/FullStory.css';
