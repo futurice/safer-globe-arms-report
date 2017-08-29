@@ -56,14 +56,17 @@ class DataMap extends Component {
     csv(gpi, (error, data) => {
       if (error) {
         this.setState({ loadError: true });
+      } else {
+        this.setState({ gpiData: data });
       }
-      this.setState({ gpiData: data });
     });
+
     csv(saferGlobe, (error, data) => {
       if (error) {
         this.setState({ loadError: true });
+      } else {
+        this.setState({ saferGlobeData: data });
       }
-      this.setState({ saferGlobeData: data });
     });
 
     this.setState({ gpiYear: this.props.gpiYear });

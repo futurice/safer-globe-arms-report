@@ -68,6 +68,8 @@ const locales = {
     TERMS_EXPLAINED: 'Terms explained',
     GPI: 'GPI',
     ARTICLES_ONLY_IN_FINNISH: 'Articles are available only in Finnish.',
+    REMARKS: 'Remaks',
+    ALL_COUNTRY_ARTICLES: 'All articles of {countryName}',
   },
   fi: {
     DATA: 'Data',
@@ -100,6 +102,8 @@ const locales = {
     LOADING_ERROR: 'Sivua ladatessa tapahtui virhe.',
     TERMS_EXPLAINED: 'Termit selitettyinä',
     GPI: 'GPI',
+    REMARKS: 'Huomioita',
+    ALL_COUNTRY_ARTICLES: 'Kaikki {countryName} -artikkelit',
   },
 };
 

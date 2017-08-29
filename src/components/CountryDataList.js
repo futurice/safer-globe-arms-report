@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
+import intl from 'react-intl-universal';
+import { NavLink } from 'react-router-dom';
 
 import DataListTabs from './DataListTabs';
 import DataListTotal from './DataListTotal';
@@ -52,12 +54,6 @@ let country = {
   }
 }
 */
-const styles = {
-  divider: {
-    margin: '1rem -1rem',
-    clear: 'both',
-  },
-};
 
 class CountryDataList extends Component {
   render() {
@@ -69,12 +65,28 @@ class CountryDataList extends Component {
           <span className="is-strong">Finnish Arms Export</span>
         </h1>
         <DataListTabs onClick={() => {}} />
-        <Divider style={styles.divider} />
+        <Divider className="divider" />
         <h3 className="CountryName">
           {country.name}
         </h3>
-        <DataListTotal total={country.total.value} />
-        <Divider style={styles.divider} />
+        <DataListTotal
+          total={country.total.value}
+          civilian={country.civilian.value}
+          defence={country.defence.value}
+        />
+        <Divider className="divider" />
+        <div className="remarks">
+          {intl.get('REMARKS')}
+        </div>
+        <ul>
+          <li />
+        </ul>
+
+        <div className="all-country-articles">
+          <NavLink to={`stories/?country=${country.name}`}>
+            {intl.get('ALL_COUNTRY_ARTICLES', { countryName: country.name })}
+          </NavLink>
+        </div>
       </div>
     );
   }
@@ -86,49 +98,3 @@ CountryDataList.propTypes = {
 };
 
 export default CountryDataList;
-
-/*
-<ul className="country-data-list no-bullets">
-            <li className="has-spacer">
-              <div id="totalSparkLine">
-                <span className="is-block">
-                  <span className="is-strong">{intl.get('TOTALS')}</span>
-                  {' '}
-                  {country.total.value}
-                </span>
-              </div>
-            </li>
-            <li className="has-spacer">
-              <div id="defenceSparkLine">
-                <span className="is-block">
-                  <span className="is-strong">{intl.get('DEFENCE')}</span>
-                  {country.defence.value}
-                </span>
-              </div>
-            </li>
-            <li className="has-spacer">
-              <div id="civilianSparkLine">
-                <span className="is-block">
-                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
-                  {country.civilian.value}
-                </span>
-              </div>
-            </li>
-            <li className="has-spacer">
-              <div id="civilianSparkLine">
-                <span className="is-block">
-                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
-                  {country.civilian.value}
-                </span>
-              </div>
-            </li>
-            <li className="has-spacer">
-              <div id="civilianSparkLine">
-                <span className="is-block">
-                  <span className="is-strong">{intl.get('CIVILIAN')}</span>
-                  {country.civilian.value}
-                </span>
-              </div>
-            </li>
-          </ul>
-*/

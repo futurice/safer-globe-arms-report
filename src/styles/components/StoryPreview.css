@@ -5,6 +5,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   font-size: 1rem;
+  width: 100%;
 }
 
 .stories-container article {

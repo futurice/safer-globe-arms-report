@@ -1,15 +1,30 @@
 .data-list-total {
-	display: flex;
-	flex-direction: row;
 	align-items: center;
 	margin-bottom: 10px;
 }
 
 .data-list-total__value {
 	margin-right: 5px;
-	font-size: 1.85rem;
+	font-size: 1rem;
+}
+
+.data-list-total__name {
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.data-list-total__year {
+	font-size: 1.5rem;
 }
 
 .data-list-total__sparkline {
 	width: 90px;
+}
+
+.country-data-container .flex-container-row {
+	justify-content: space-between;
+}
+
+.country-data-container .flex-container-row:nth-child(2) {
+	margin-bottom: 12px;
 }

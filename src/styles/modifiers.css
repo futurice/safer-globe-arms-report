@@ -68,6 +68,10 @@
   line-height: 1.62;
 }
 
+.md a {
+  font-weight: 600;
+}
+
 .md hr {
   height: 1px;
   background-color: #e9e9e9;
