@@ -20,6 +20,7 @@
     "d3-geo-projection": "^2.2.0",
     "d3-request": "^1.0.5",
     "material-ui": "^1.0.0-beta.6",
+    "material-ui-icons": "^1.0.0-beta.5",
     "react": "^15.5.4",
     "react-csv": "^1.0.8",
     "react-dom": "^15.5.4",
