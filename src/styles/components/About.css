@@ -1,0 +1,30 @@
+.about-main-link a, .about-main-link a:visited {
+	font-size: 1rem;
+	color: #333333;
+}
+
+.about-sub-link a, .about-sub-link a:visited {
+	color: #797979;
+}
+
+.about-main-link a:hover, .about-sub-link a:hover {
+	text-decoration: none;
+} 
+
+.about-menu .divider {
+	margin: 16px 0 16px 0 !important;
+	left: -16px;
+	position: relative;
+	width: calc(100% + 33px);
+}
+
+.about-menu a {
+	border-bottom: 2px solid transparent;
+	line-height: 22px;
+	font-weight: 600;
+	line-height: 1.83;
+}
+
+.about-menu a.active {
+	border-bottom: 3px solid #2D80B5;
+}

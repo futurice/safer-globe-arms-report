@@ -20,7 +20,6 @@ input[name=countryList]:not(:first-of-type) + label {
 
 label {
 	color: #000;
-  font-weight: 700;
   margin: 15px 0px;
   width:33%;
 	transition: background .1s ease;

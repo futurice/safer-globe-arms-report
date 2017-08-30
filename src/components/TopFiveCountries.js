@@ -10,13 +10,6 @@ import formatEuros from '../utils/formatEuros';
 import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
-const styles = {
-  divider: {
-    margin: '1rem -1rem',
-    clear: 'both',
-  },
-};
-
 class TopFiveCountries extends Component {
   constructor(props) {
     super(props);
@@ -31,33 +24,41 @@ class TopFiveCountries extends Component {
   }
 
   render() {
-    const { countries, totals } = this.props;
+    const { countries, totals, year, name } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
     const total = totals[this.state.selected].value;
 
     return (
       <div>
-        <h1>
-          <span className="is-strong">Finnish Arms Export</span>
-        </h1>
+        <div className="country-data-list__title">
+          {intl.get('FINNISH_ARMS_EXPORT')}
+        </div>
         <DataListTabs onClick={this.handleTabClick.bind(this)} />
-        <Divider style={styles.divider} />
-        <h3 className="CountryName">
-          {totals.name}
-        </h3>
-        <DataListTotal total={total} />
-        <Divider style={styles.divider} />
+        <Divider className="divider" />
+        <DataListTotal
+          year={year}
+          name={totals.name}
+          total={total}
+          civilian={totals.civilian.value}
+          defence={totals.defence.value}
+        />
+        <Divider className="divider" />
         <div className="top-countries">
-          <h3>
+          <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}
-          </h3>
-          {countries.map((data, i) =>
+          </div>
+          {countries.map((data, i) => (
             <div key={i} className="top-countries__country">
               <div className="top-countries__name">
-                <span>
-                  {i + 1}. {data.Countries}
+                <span className="top-countries__name--wrapper">
+                  <span>
+                    {i + 1}
+                  </span>
+                  <span>
+                    {data.Countries}
+                  </span>
                 </span>
-                <span>
+                <span className="top-countries__name--sum">
                   {formatEuros(data.Total)}
                 </span>
               </div>
@@ -65,8 +66,8 @@ class TopFiveCountries extends Component {
                 <div
                   className="top-countries__graphs--defence"
                   style={{
-                    width:
-                      Math.round(data.Defence_Materiel / baseNum * 100) + '%',
+                    width: Math.round(data.Defence_Materiel / baseNum * 100) +
+                      '%',
                   }}
                 />
                 <div
@@ -76,8 +77,8 @@ class TopFiveCountries extends Component {
                   }}
                 />
               </div>
-            </div>,
-          )}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -87,6 +88,7 @@ class TopFiveCountries extends Component {
 TopFiveCountries.propTypes = {
   countries: PropTypes.array.isRequired,
   totals: PropTypes.object.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default TopFiveCountries;
