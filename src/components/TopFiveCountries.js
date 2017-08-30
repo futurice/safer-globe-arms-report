@@ -23,17 +23,18 @@ class TopFiveCountries extends Component {
     this.setState({ selected: value });
   }
 
+  class TopFiveCountries extends Component {
   render() {
-    const { countries, totals, year, name } = this.props;
+    const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
-    const total = totals[this.state.selected].value;
+    const total = totals[this.props.activeTab].value;
 
     return (
       <div>
         <div className="country-data-list__title">
           {intl.get('FINNISH_ARMS_EXPORT')}
         </div>
-        <DataListTabs onClick={this.handleTabClick.bind(this)} />
+        <DataListTabs onClick={this.props.selectTab} />
         <Divider className="divider" />
         <DataListTotal
           year={year}

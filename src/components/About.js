@@ -134,6 +134,7 @@ class About extends Component {
                 {intl.get(item.name)}
               </NavLink>
             </div>
+
             {item.anchors.map((sub, j) =>
               <div key={j} className="about-sub-link">
                 <a href={`#${sub.id}`}>

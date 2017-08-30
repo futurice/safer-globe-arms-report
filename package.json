@@ -16,10 +16,15 @@
   },
   "dependencies": {
     "babyparse": "^0.4.6",
-    "d3": "^4.9.1",
+    "d3": "^4.10.0",
+    "d3-geo-projection": "^2.2.0",
     "d3-request": "^1.0.5",
+<<<<<<< HEAD
     "material-ui": "^1.0.0-beta.5",
     "material-ui-icons": "^1.0.0-beta.5",
+=======
+    "material-ui": "^1.0.0-beta.6",
+>>>>>>> Update Data sheet  + map with bars
     "react": "^15.5.4",
     "react-csv": "^1.0.8",
     "react-dom": "^15.5.4",
