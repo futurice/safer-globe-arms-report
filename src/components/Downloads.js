@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { csv } from 'd3-request';
-import { NavLink } from 'react-router-dom';
 import intl from 'react-intl-universal';
 import { CircularProgress } from 'material-ui/Progress';
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';

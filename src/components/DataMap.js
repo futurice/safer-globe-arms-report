@@ -82,7 +82,9 @@ class DataMap extends Component {
       wid = Math.max(1024, window.innerWidth),
       hght = window.innerHeight - 65 - 30;
 
-    let selectedYear = '2016', armstype = 'total', scaleValue = 1;
+    let selectedYear = '2016',
+      armstype = 'total',
+      scaleValue = 1;
 
     let tooltipDiv = d3
       .select('body')
@@ -105,7 +107,8 @@ class DataMap extends Component {
     let zoom = d3.zoom().scaleExtent([1, 10]).on('zoom', () => {
       zoomGroup.attr(
         'transform',
-        `translate(${d3.event.transform.x},${d3.event.transform.y})scale(${d3.event.transform.k})`,
+        `translate(${d3.event.transform.x},${d3.event.transform.y})scale(${d3
+          .event.transform.k})`,
       );
       scaleValue = d3.event.transform.k;
       d3.selectAll('.land').attr('stroke-width', 0.5 / scaleValue);
@@ -131,11 +134,11 @@ class DataMap extends Component {
         .attr('width', 3)
         .attr('y', d => {
           let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-          if (d.years[selectedYear]['CivilianArmsTotal'] == 0) y1 = 0;
+          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
           return d.centroid[1] - y1;
         })
         .attr('height', d => {
-          if (d.years[selectedYear]['CivilianArmsTotal'] == 0) return 0;
+          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
           return hScale(d.years[selectedYear]['CivilianArmsTotal']);
         })
         .attr('fill', civilianColor)
@@ -168,7 +171,7 @@ class DataMap extends Component {
           return d.centroid[1] - y1 - y2;
         })
         .attr('height', d => {
-          if (d.years[selectedYear]['CountryMilatary'] == 0) return 0;
+          if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
           return hScale(d.years[selectedYear]['CountryMilatary']);
         })
         .attr('fill', defenceColor)
@@ -185,12 +188,12 @@ class DataMap extends Component {
           .transition()
           .duration(500)
           .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] == 0) return 0;
+            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
             return hScale(d.years[selectedYear]['CivilianArmsTotal']);
           })
           .attr('y', d => {
             let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] == 0) y1 = 0;
+            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
             return d.centroid[1] - y1;
           });
         d3
@@ -198,7 +201,7 @@ class DataMap extends Component {
           .transition()
           .duration(500)
           .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] == 0) return 0;
+            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
             return hScale(d.years[selectedYear]['CountryMilatary']);
           })
           .attr('y', d => {
@@ -215,12 +218,12 @@ class DataMap extends Component {
           .transition()
           .duration(500)
           .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] == 0) return 0;
+            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
             return hScale(d.years[selectedYear]['CivilianArmsTotal']);
           })
           .attr('y', d => {
             let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] == 0) y1 = 0;
+            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
             return d.centroid[1] - y1;
           });
         d3
@@ -242,7 +245,7 @@ class DataMap extends Component {
           .transition()
           .duration(500)
           .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] == 0) return 0;
+            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
             return hScale(d.years[selectedYear]['CountryMilatary']);
           })
           .attr('y', d => {
@@ -271,7 +274,11 @@ class DataMap extends Component {
       d3
         .selectAll('.tooltipDiv')
         .html(
-          `${values.name}<br>Military Weapons: ${values.years[selectedYear]['CountryMilatary']}<br>Civilian Arms: ${values.years[selectedYear]['CivilianArmsTotal']}<br>Total: ${values.years[selectedYear]['TotalCountry']}`,
+          `${values.name}<br>Military Weapons: ${values.years[selectedYear][
+            'CountryMilatary'
+          ]}<br>Civilian Arms: ${values.years[selectedYear][
+            'CivilianArmsTotal'
+          ]}<br>Total: ${values.years[selectedYear]['TotalCountry']}`,
         )
         .style('left', `${xPos + 5}px`)
         .style('top', `${yPos - 15}px`)
@@ -349,7 +356,8 @@ class DataMap extends Component {
       '#7D2F6A',
     ];
 
-    let civilianColor = '#ff8e39', defenceColor = '#d6004d';
+    let civilianColor = '#ff8e39',
+      defenceColor = '#d6004d';
 
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
 
