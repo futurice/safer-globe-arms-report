@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import * as d3GeoProjection from 'd3-geo-projection';
-import { csv, json } from 'd3-request';
+import { csv } from 'd3-request';
 import { CircularProgress } from 'material-ui/Progress';
 
 import output from './../data/output-v4.json';
