@@ -9,6 +9,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import ArticleNotification from './ArticleNotification';
 import './../styles/components/FullStory.css';
 
+
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');

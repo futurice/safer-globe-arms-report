@@ -41,7 +41,12 @@ class Downloads extends Component {
 
       return (
         <Card className="card box-shadow" key={i}>
-          <a href={filepath} target="_blank" download={data.filename}>
+          <a
+            href={filepath}
+            target="_blank"
+            rel="noopener noreferrer"
+            download={data.filename}
+          >
             <CardHeader className="header" title={data.title} />
             <CardContent className="content">
               {data.desc}

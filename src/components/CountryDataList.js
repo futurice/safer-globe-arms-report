@@ -56,31 +56,51 @@ let country = {
 */
 
 class CountryDataList extends Component {
-  render() {
-    const { country } = this.props;
+  renderRemakrs() {
+    if (!this.props.country.comments || !this.props.country.comments.length) {
+      return null;
+    }
 
     return (
-      <div>
+      <div className="remarks">
+        <div className="remarks-title">
+          {intl.get('REMARKS')}
+        </div>
+
+        <ul>
+          {this.props.country.comments.map((com, i) => {
+            return this.props.activeTab === 'total' ||
+            this.props.activeTab === com.type
+              ? <li key={i}>
+                  {com.text}
+                </li>
+              : null;
+          })}
+        </ul>
+      </div>
+    );
+  }
+
+  render() {
+    const { country, year } = this.props;
+
+    return (
+      <div className="flex-container-column">
         <h1>
           <span className="is-strong">Finnish Arms Export</span>
         </h1>
-        <DataListTabs onClick={() => {}} />
+        <DataListTabs onClick={this.props.selectTab} />
         <Divider className="divider" />
-        <h3 className="CountryName">
-          {country.name}
-        </h3>
         <DataListTotal
+          name={country.name}
+          year={year}
           total={country.total.value}
           civilian={country.civilian.value}
           defence={country.defence.value}
         />
         <Divider className="divider" />
-        <div className="remarks">
-          {intl.get('REMARKS')}
-        </div>
-        <ul>
-          <li />
-        </ul>
+
+        {this.renderRemakrs()}
 
         <div className="all-country-articles">
           <NavLink to={`stories/?country=${country.name}`}>
@@ -94,7 +114,9 @@ class CountryDataList extends Component {
 
 CountryDataList.propTypes = {
   country: PropTypes.object.isRequired,
-  topFive: PropTypes.array.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  selectTab: PropTypes.func.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default CountryDataList;

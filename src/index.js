@@ -11,6 +11,7 @@ import './styles/containers.css';
 import './styles/flex-styles.css';
 import './styles/headings.css';
 import './styles/text-types.css';
+import './styles/md.css';
 
 /*
 Primary Route Components
@@ -37,6 +38,7 @@ Docs can be found here: https://reacttraining.com/react-router/web/
 
 const locales = {
   'en-US': {
+    ARMS_REPORT: 'ARMS Report',
     DATA: 'Data',
     DOWNLOAD_DATA: 'Download Data',
     STORIES: 'Stories',
@@ -72,6 +74,7 @@ const locales = {
     ALL_COUNTRY_ARTICLES: 'All articles of {countryName}',
   },
   fi: {
+    ARMS_REPORT: 'Asevalvontaraportti',
     DATA: 'Data',
     DOWNLOAD_DATA: 'Lataa tiedot',
     STORIES: 'Artikkelit',

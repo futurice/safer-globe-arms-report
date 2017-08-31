@@ -13,6 +13,11 @@
 
 .country-data-container {
 	width: 340px;
+	height: 31rem;
+}
+
+.country-data-container > div {
+	height: 100%;
 }
 
 .country-data-container .divider {
@@ -20,7 +25,7 @@
 	margin: 20px -1rem;
 }
 
-.country-data-container .remarks {
+.country-data-container .remarks-title {
 	font-size: 1.1rem;
 	margin-bottom: 6px;
 }
@@ -31,12 +36,10 @@
 	margin-bottom: 11px;
 }
 
-.country-data-container ul {
-	margin-bottom: 86px;
-}
-
 .all-country-articles {
 	font-weight: 600;
 	display: flex;
 	justify-content: flex-end;
+	flex-grow: 1;
+	align-items: flex-end;
 }

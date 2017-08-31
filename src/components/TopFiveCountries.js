@@ -11,29 +11,17 @@ import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
 class TopFiveCountries extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selected: 'total',
-    };
-  }
-
-  handleTabClick(value) {
-    this.setState({ selected: value });
-  }
-
   render() {
-    const { countries, totals, year, name } = this.props;
+    const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
-    const total = totals[this.state.selected].value;
+    const total = totals[this.props.activeTab].value;
 
     return (
       <div>
         <div className="country-data-list__title">
           {intl.get('FINNISH_ARMS_EXPORT')}
         </div>
-        <DataListTabs onClick={this.handleTabClick.bind(this)} />
+        <DataListTabs onClick={this.props.selectTab} />
         <Divider className="divider" />
         <DataListTotal
           year={year}
@@ -89,6 +77,8 @@ TopFiveCountries.propTypes = {
   countries: PropTypes.array.isRequired,
   totals: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  selectTab: PropTypes.func.isRequired,
 };
 
 export default TopFiveCountries;

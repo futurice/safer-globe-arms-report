@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 4px 0 rgba(121, 121, 121, 0.5);
-
 }
 
 .primary-nav h1 a {
@@ -33,6 +32,10 @@
   padding: 0 5px;
   text-decoration: none;
   transition: border .25s ease;
+}
+
+.primary-nav ul a {
+  font-size: 1.15rem;
 }
 
 .primary-nav ul a {
