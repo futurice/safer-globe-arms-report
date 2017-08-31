@@ -11,19 +11,6 @@ import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
 class TopFiveCountries extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selected: 'total',
-    };
-  }
-
-  handleTabClick(value) {
-    this.setState({ selected: value });
-  }
-
-  class TopFiveCountries extends Component {
   render() {
     const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
@@ -90,6 +77,8 @@ TopFiveCountries.propTypes = {
   countries: PropTypes.array.isRequired,
   totals: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  selectTab: PropTypes.func.isRequired,
 };
 
 export default TopFiveCountries;

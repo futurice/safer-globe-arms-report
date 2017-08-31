@@ -399,7 +399,40 @@ class DataMap extends Component {
           cntryname = 'France';
         }
         hover(cntryname, d3.event.x, d3.event.y);
+      })
+      .on('click', d => {
+        let cntryname = d.properties.name;
+        if (d.properties.name === 'Alaska (United States of America)') {
+          cntryname = 'United States of America';
+        }
+        if (d.properties.name === 'France (Sub Region)') {
+          cntryname = 'France';
+        }
+        let values = d3
+          .select(
+            `#${cntryname
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')}milBar`,
+          )
+          .datum();
+
+        displayData({
+          name: values.name,
+          total: {
+            value: values.years[this.props.gpiYear].TotalCountry,
+          },
+          defence: {
+            value: values.years[this.props.gpiYear].MilataryMaterielTotal,
+          },
+          civilian: {
+            value: values.years[this.props.gpiYear].CivilianArmsTotal,
+          },
+          comments: values.years[this.props.gpiYear].comments,
+        });
       });
+
     for (let i = 0; i < this.state.gpiData.length; i++) {
       let id = `#${this.state.gpiData[i].country
         .replace(/ /g, '_')
