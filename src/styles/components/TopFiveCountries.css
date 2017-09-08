@@ -1,7 +1,9 @@
-.top-countries__country, .top-countries__title {
+.top-countries__country{
 	margin-bottom: 1rem;
 }
-
+.top-countries__title {
+	margin-bottom: 0.5rem;
+}
 .top-countries__name {
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -41,15 +43,19 @@
 }
 
 .top-countries__graphs--defence {
-	background: #d6214e;
+  	background: rgb(153, 112, 171);
 	height: 2px;
 }
 
 .top-countries__graphs--civilian {
-	background: #f99041;
+	background: rgb(90, 174, 97);
 	height: 2px;
 }
 
 .top-countries {
 	font-size: 1rem;
+}
+
+.country-rank {
+	font-size: 0.875rem;
 }

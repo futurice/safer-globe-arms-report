@@ -30,19 +30,19 @@ class DataListTabs extends Component {
           onClick={this.handleClick.bind(this)}
         />
         <RadioButton
-          checked={this.state.checked === 'defence'}
-          id="defence"
-          name="countryList"
-          value="defence"
-          label={intl.get('DEFENCE')}
-          onClick={this.handleClick.bind(this)}
-        />
-        <RadioButton
           checked={this.state.checked === 'civilian'}
           id="civilian"
           name="countryList"
           value="civilian"
           label={intl.get('CIVILIAN')}
+          onClick={this.handleClick.bind(this)}
+        />
+        <RadioButton
+          checked={this.state.checked === 'defence'}
+          id="defence"
+          name="countryList"
+          value="defence"
+          label={intl.get('DEFENCE')}
           onClick={this.handleClick.bind(this)}
         />
       </div>

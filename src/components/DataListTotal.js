@@ -29,15 +29,15 @@ class DataListTotal extends Component {
 
         <div className="top-countries__graphs">
           <div
-            className="top-countries__graphs--defence"
-            style={{
-              width: Math.round(defence / total * 100) + '%',
-            }}
-          />
-          <div
             className="top-countries__graphs--civilian"
             style={{
               width: Math.round(civilian / total * 100) + '%',
+            }}
+          />
+          <div
+            className="top-countries__graphs--defence"
+            style={{
+              width: Math.round(defence / total * 100) + '%',
             }}
           />
         </div>

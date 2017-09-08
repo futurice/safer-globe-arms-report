@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './../styles/components/DataTimeline.css';
+import saferGlobeJson from './../data/data.json';
+import * as d3 from 'd3';
 
 /*
   This component builds the timeline that sits at the bottom of the screen on the data page.
@@ -16,17 +18,19 @@ class DataTimeline extends Component {
   constructor(props) {
     super(props);
 
-    const startYear = 2005;
-    const endYear = 2016 + 1; // +1 fixes calculation to add defined year in the list too
+    const startYear = parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
+    const endYear =
+      parseInt(d3.keys(saferGlobeJson[0].years).slice(-1)[0], 10) + 1; // +1 fixes calculation to add defined year in the list too
 
     this.state = {
-      activeYear: 2016,
+      activeYear: endYear - 1,
       years: Array.from(
         {
           length: endYear - startYear,
         },
         (v, i) => startYear + i,
       ),
+      play: false,
     };
 
     this.processNewGPIYear = this.processNewGPIYear.bind(this);
@@ -34,16 +38,27 @@ class DataTimeline extends Component {
 
   processNewGPIYear(year) {
     this.setState({ activeYear: year });
+    this.setState({ play: false });
     this.props.updateGPIYear(year);
   }
 
+  processPlay(clck) {
+    this.setState({ play: clck });
+  }
   render() {
     return (
       <div className="flex-container flex-spread at-flex-end">
+        <div
+          className={`play-button ${this.state.play === true ? 'active-play' : ''}`}
+          onClick={() => {
+            this.processPlay(!this.state.play);
+          }}
+        />
         {this.state.years.map((year, i) => (
           <div
             key={i}
-            className={`timeline-item ${this.state.activeYear === year ? 'active' : ''}`}
+            className={`timeline-item ${year} ${this.state.activeYear === year ? 'active' : ''}`}
+            id={year}
             onClick={() => {
               this.processNewGPIYear(year);
             }}

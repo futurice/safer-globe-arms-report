@@ -11,6 +11,7 @@ import './styles/containers.css';
 import './styles/flex-styles.css';
 import './styles/headings.css';
 import './styles/text-types.css';
+import './styles/scroll.css';
 
 /*
 Primary Route Components
@@ -48,6 +49,10 @@ const locales = {
     TOP5COUNTRIES: 'Top 5 Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
+    FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
+    PEACEFUL: 'Peacful',
+    RESTLESS: 'Restless',
+    NOT_AVAILABLE: 'Not available',
   },
   fi: {
     DATA: 'Data',
@@ -60,8 +65,12 @@ const locales = {
     DEFENCE: 'Puolustus',
     CIVILIAN: 'Siviili',
     TOP5COUNTRIES: 'Suurimmat 5 maata',
-    WORLD: 'Maailma',
+    WORLD: 'World',
     RESET_ZOOM: 'Nollaa tarkennus',
+    FINNISH_ARMS_EXPORT: 'Suomen Asevienti',
+    PEACEFUL: 'Rauhallinen',
+    RESTLESS: 'Rauhaton',
+    NOT_AVAILABLE: 'Ei saatavilla',
   },
 };
 

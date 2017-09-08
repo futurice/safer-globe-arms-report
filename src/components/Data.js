@@ -211,9 +211,7 @@ class Data extends Component {
                 gpiYear={this.state.activeYear}
               />
             </section>
-            <Button raised className="map-container__reset">
-              {intl.get('RESET_ZOOM')}
-            </Button>
+            <div className="map-container__reset box-shadow" />
             <MapLegends />
           </div>
           <DataTimeline updateGPIYear={this.updateGPIYear} />

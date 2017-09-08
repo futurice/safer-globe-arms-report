@@ -24,7 +24,7 @@ class TopFiveCountries extends Component {
   }
 
   render() {
-    const { countries, totals, year, name } = this.props;
+    const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
     const total = totals[this.state.selected].value;
 
@@ -43,6 +43,7 @@ class TopFiveCountries extends Component {
           defence={totals.defence.value}
         />
         <Divider className="divider" />
+        <div className="time-series-graph" />
         <div className="top-countries">
           <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}
@@ -54,31 +55,46 @@ class TopFiveCountries extends Component {
                   <span>
                     {i + 1}
                   </span>
-                  <span>
+                  <span className={'top-countries__name' + (i + 1)}>
                     {data.Countries}
                   </span>
                 </span>
-                <span className="top-countries__name--sum">
+                <span className={'top-countries__name--sum' + (i + 1)}>
                   {formatEuros(data.Total)}
                 </span>
               </div>
               <div className="top-countries__graphs">
                 <div
+                  className="top-countries__graphs--civilian"
+                  id={'top-countries__graphs--civilian' + (i + 1)}
+                  style={{
+                    width: Math.round(data.Civilian_Arms / baseNum * 100) + '%',
+                  }}
+                />
+                <div
                   className="top-countries__graphs--defence"
+                  id={'top-countries__graphs--defence' + (i + 1)}
                   style={{
                     width: Math.round(data.Defence_Materiel / baseNum * 100) +
                       '%',
                   }}
                 />
-                <div
-                  className="top-countries__graphs--civilian"
-                  style={{
-                    width: Math.round(data.Civilian_Arms / baseNum * 100) + '%',
-                  }}
-                />
               </div>
             </div>
           ))}
+        </div>
+        <div
+          className="country-bullet-point"
+          style={{
+            display: 'none',
+          }}
+        >
+          <div className="country-rank">
+            {'Rank - 0'}
+          </div>
+          <div className="key-points">
+            {'Hello World'}
+          </div>
         </div>
       </div>
     );

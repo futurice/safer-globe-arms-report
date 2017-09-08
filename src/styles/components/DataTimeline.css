@@ -11,6 +11,12 @@
   position: relative;
   text-align: center;
   transition: background .25s ease;
+  height: 2.5rem;
+}
+
+.timeline-item:hover{
+  background: #dadada;
+  color: #000000;
 }
 
 .timeline-item svg {
@@ -25,7 +31,23 @@
 }
 .timeline-item span {
   display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 48px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.play-button {
+  cursor: pointer;
+  width: 4rem;
+  content: url(play-icon.png);
+  background-color:#c8c8c8;
+  margin-right: 1px; 
+}
+.play-button.active-play {
+  background: #ffffff;
+  content: url(pause-icon.png);
+}
+
+.play-button:hover{
+  background: #dadada;
 }
