@@ -2288,7 +2288,12 @@ class DataMap extends Component {
         } else return '#dddddd';
       })
       .attr('fill-opacity', 1)
-      .attr('stroke', '#fff')
+      .attr('stroke', d => {
+        if (d.properties.name === 'Somalia') {
+          return 'none';
+        }
+        return '#fff';
+      })
       .attr('stroke-width', 0.5)
       .on('mouseover', d => {
         let cntryname = d.properties.name;
