@@ -12,8 +12,8 @@ class Nav extends Component {
       <nav className="primary-nav">
         <h1>
           <Link to="/">
-            <span className="is-strong">SaferGlobe</span>
-            <span className="is-light">| ARMS Report</span>
+            <span className="is-strong logo-text">SaferGlobe</span>
+            <span className="is-light">| Arms Report</span>
           </Link>
         </h1>
         <ul className="flex-container no-bullets">
