@@ -39,13 +39,12 @@
 .play-button {
   cursor: pointer;
   width: 4rem;
-  content: url(play-icon.png);
   background-color:#c8c8c8;
   margin-right: 1px; 
 }
+
 .play-button.active-play {
   background: #ffffff;
-  content: url(pause-icon.png);
 }
 
 .play-button:hover{

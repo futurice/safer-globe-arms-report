@@ -42,7 +42,6 @@ class TopFiveCountries extends Component {
           civilian={totals.civilian.value}
           defence={totals.defence.value}
         />
-        <Divider className="divider" />
         <div className="time-series-graph" />
         <div className="top-countries">
           <div className="top-countries__title">

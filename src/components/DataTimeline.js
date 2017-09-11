@@ -4,6 +4,9 @@ import './../styles/components/DataTimeline.css';
 import saferGlobeJson from './../data/data.json';
 import * as d3 from 'd3';
 
+const playSvg = require('./../assets/play-icon.svg');
+const pauseSvg = require('./../assets/pause-icon.svg');
+
 /*
   This component builds the timeline that sits at the bottom of the screen on the data page.
 
@@ -53,7 +56,12 @@ class DataTimeline extends Component {
           onClick={() => {
             this.processPlay(!this.state.play);
           }}
-        />
+        >
+          <img
+            src={this.state.play === true ? pauseSvg : playSvg}
+            alt={this.state.play === true ? 'Pause Icon' : 'Play Icon'}
+          />
+        </div>
         {this.state.years.map((year, i) => (
           <div
             key={i}

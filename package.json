@@ -19,6 +19,7 @@
     "d3": "^4.10.0",
     "d3-geo-projection": "^2.2.0",
     "d3-request": "^1.0.5",
+    "fontawesome": "^4.7.2",
     "material-ui": "^1.0.0-beta.6",
     "material-ui-icons": "^1.0.0-beta.5",
     "react": "^15.5.4",

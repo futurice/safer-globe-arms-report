@@ -618,21 +618,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Total arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Total arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">' +
+                    "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }
@@ -709,21 +713,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Civilian arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    'is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Civilian arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    'is <span style="font-weight:700">' +
+                    "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }
@@ -801,21 +809,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Military arms exports to <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Military arms exports to <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">' +
+                    "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }
@@ -1073,21 +1085,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Total arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Total arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">' +
+                    "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }
@@ -1164,21 +1180,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Civilian arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    'is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Civilian arms exports to  <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    'is <span style="font-weight:700">' +
+                    "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }
@@ -1256,21 +1276,25 @@ class DataMap extends Component {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Military arms exports to <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">highest</span> for year ' +
-                    selectedYear,
+                    "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
+                    rank +
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             } else {
               d3
                 .selectAll('.country-rank')
                 .html(
-                  'Military arms exports to <span style="font-weight:700">' +
+                  '<span style="font-weight:700">' +
                     cntryNm +
-                    '</span> is <span style="font-weight:700">' +
+                    "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
-                    '</span> highest for year ' +
-                    selectedYear,
+                    '</span> in the year ' +
+                    selectedYear +
+                    '.',
                 );
             }
           }

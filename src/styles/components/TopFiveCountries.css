@@ -1,6 +1,11 @@
 .top-countries__country{
 	margin-bottom: 1rem;
 }
+
+.top-countries__country:last-of-type{
+	margin-bottom: 0rem;
+}
+
 .top-countries__title {
 	margin-bottom: 0.5rem;
 }
@@ -9,7 +14,7 @@
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	display: flex;
-	margin-bottom: .5rem;
+	margin-bottom: 0.25rem;
 }
 
 .top-countries__name--order-num {

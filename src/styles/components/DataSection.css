@@ -12,18 +12,18 @@
   background: rgba(255, 255, 255, .7);
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
-  margin: 2rem 0 0 2rem;
+  margin: 1.5rem 0 0 2rem;
   padding: 0.5rem 1rem;
   position: fixed;
   z-index: 2;
   min-height: 500px;
-  height:76%;
+  height:80%;
   max-height: 640px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 } 
 .time-series-graph{
-  margin:1rem 0 2rem 0;
+  margin:1.5rem 0 2rem 0;
 }
 .data-filter-container {
   background: rgba(255, 255, 255, .85);
@@ -31,9 +31,8 @@
 
 .map-container__reset {
   position: absolute;
-  content: url(reset-icon.svg);
   right: 2rem;
-  top: 2.5rem;
+  top: 1.5rem;
   width: 2.25rem;
   height: 2.25rem;
   padding: 0;
@@ -41,6 +40,10 @@
   background-color: rgba(255,255,255,0.8);
 }
 
-.map-container__reset:hover{
-  background-color: rgba(255,255,255,1);
+.reset-icon {
+  opacity: 0.5;
+}
+
+.reset-icon:hover {
+  opacity: 1;
 }
