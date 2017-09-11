@@ -242,6 +242,12 @@ class DataMap extends Component {
         .transition()
         .delay(2500)
         .attr('pointer-events', 'all');
+
+      d3
+        .select('.data-map-container')
+        .transition()
+        .delay(2500)
+        .style('pointer-events', 'auto');
     }
     function changeYear(yrs) {
       selectedYear = yrs;
@@ -1806,6 +1812,7 @@ class DataMap extends Component {
     mapSVG.call(Zoom);
 
     let zoomGroup = mapSVG.append('g');
+    d3.select('.data-map-container').style('pointer-events', 'none');
 
     zoomGroup
       .append('rect')
@@ -2023,7 +2030,7 @@ class DataMap extends Component {
       '#cd7d6b',
       '#a75a61',
     ];
-    let civilianColor = '#5AAE61', defenceColor = '#9970AB';
+    let civilianColor = '#2eae38', defenceColor = '#8f4eab';
 
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
 
