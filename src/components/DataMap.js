@@ -109,7 +109,7 @@ class DataMap extends Component {
       mapSVG.transition().duration(500).call(Zoom.transform, d3.zoomIdentity);
     });
 
-    function drawBars(selectedYear) {
+    function drawBars(yrs) {
       zoomGroup
         .selectAll('.civBars')
         .data(dataV2)
@@ -135,19 +135,20 @@ class DataMap extends Component {
           hover(d.name, d3.event.x, d3.event.y);
         })
         .transition()
+        .delay(2000)
         .duration(
           d =>
             500 *
-            d.years[selectedYear]['CivilianArmsTotal'] /
-            d.years[selectedYear]['TotalCountry'],
+            d.years[yrs]['CivilianArmsTotal'] /
+            d.years[yrs]['TotalCountry'],
         )
         .attr('height', d => {
-          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
-          return hScale(d.years[selectedYear]['CivilianArmsTotal']);
+          if (d.years[yrs]['CivilianArmsTotal'] === 0) return 0;
+          return hScale(d.years[yrs]['CivilianArmsTotal']);
         })
         .attr('y', d => {
-          let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
+          let y1 = hScale(d.years[yrs]['CivilianArmsTotal']);
+          if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
           return d.centroid[1] - y1;
         });
 
@@ -170,8 +171,8 @@ class DataMap extends Component {
         .attr('x', d => d.centroid[0] - 2)
         .attr('width', 4)
         .attr('y', d => {
-          let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
+          let y1 = hScale(d.years[yrs]['CivilianArmsTotal']);
+          if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
           return d.centroid[1] - y1;
         })
         .attr('height', 0)
@@ -182,25 +183,26 @@ class DataMap extends Component {
         .transition()
         .delay(
           d =>
+            2000 +
             500 *
-            d.years[selectedYear]['CivilianArmsTotal'] /
-            d.years[selectedYear]['TotalCountry'],
+              d.years[yrs]['CivilianArmsTotal'] /
+              d.years[yrs]['TotalCountry'],
         )
         .duration(
           d =>
             500 *
-            d.years[selectedYear]['CountryMilatary'] /
-            d.years[selectedYear]['TotalCountry'],
+            d.years[yrs]['CountryMilatary'] /
+            d.years[yrs]['TotalCountry'],
         )
         .attr('height', d => {
-          if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
-          return hScale(d.years[selectedYear]['CountryMilatary']);
+          if (d.years[yrs]['CountryMilatary'] === 0) return 0;
+          return hScale(d.years[yrs]['CountryMilatary']);
         })
         .attr('y', d => {
-          let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']),
-            y2 = hScale(d.years[selectedYear]['CountryMilatary']);
-          if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
-          if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
+          let y1 = hScale(d.years[yrs]['CivilianArmsTotal']),
+            y2 = hScale(d.years[yrs]['CountryMilatary']);
+          if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
+          if (d.years[yrs]['CountryMilatary'] === 0) y2 = 0;
           return d.centroid[1] - y1 - y2;
         });
 
@@ -219,31 +221,27 @@ class DataMap extends Component {
         .on('click', clicked)
         .transition()
         .duration(500)
+        .delay(2000)
         .attr('height', d => {
-          if (d[selectedYear]['Total'] === 0) return 0;
-          return hScale(d[selectedYear]['Total']);
+          if (d[yrs]['Total'] === 0) return 0;
+          return hScale(d[yrs]['Total']);
         })
         .attr('y', d => {
-          let y1 = hScale(d[selectedYear]['Total']);
-          if (d[selectedYear]['Total'] === 0) y1 = 0;
+          let y1 = hScale(d[yrs]['Total']);
+          if (d[yrs]['Total'] === 0) y1 = 0;
           return hght - 42 - y1;
         });
-      zoomGroup
-        .selectAll('.intlmissionsbartext')
-        .data(intlMissions)
-        .enter()
-        .append('text')
-        .attr('class', 'intlmissionsbartext')
-        .attr('x', wid / 2)
-        .attr('y', hght - 32)
-        .attr('font-size', 9)
-        .attr('font-weight', 700)
-        .attr('font-family', 'Source Sans Pro')
-        .text('Export to international peace mission')
-        .attr('text-anchor', 'middle')
-        .attr('fill', '#aaa')
-        .on('mouseover', hoverIntl)
-        .on('click', clicked);
+
+      d3
+        .selectAll('.land')
+        .transition()
+        .delay(2500)
+        .attr('pointer-events', 'auto');
+      d3
+        .selectAll('.bg')
+        .transition()
+        .delay(2500)
+        .attr('pointer-events', 'all');
     }
     function changeYear(yrs) {
       selectedYear = yrs;
@@ -260,19 +258,47 @@ class DataMap extends Component {
       if (!active.state && !mouseHover.state) {
         updateSideBarYear('World', selectedYear);
       }
-      d3.selectAll('.land').transition().duration(200).attr('fill', d => {
-        let cntryName = d.properties.name;
-        if (d.properties.name === 'Alaska (United States of America)') {
-          cntryName = 'United States of America';
-        }
-        if (d.properties.name === 'France (Sub Region)') {
-          cntryName = 'France';
-        }
-        if (d3.keys(gpiObject).indexOf(cntryName) !== -1) {
-          if (gpiObject[cntryName][yrs] === -1) return '#dddddd';
-          else return threshold(gpiObject[cntryName][yrs]);
-        } else return '#dddddd';
-      });
+      d3
+        .selectAll('.land')
+        .transition()
+        .duration(200)
+        .attr('fill', d => {
+          let cntryName = d.properties.name;
+          if (d.properties.name === 'Alaska (United States of America)') {
+            cntryName = 'United States of America';
+          }
+          if (d.properties.name === 'France (Sub Region)') {
+            cntryName = 'France';
+          }
+          if (d3.keys(gpiObject).indexOf(cntryName) !== -1) {
+            if (gpiObject[cntryName][yrs] === -1) return '#dddddd';
+            else return threshold(gpiObject[cntryName][yrs]);
+          } else return '#dddddd';
+        })
+        .attr('fill-opacity', d => {
+          let cntryname = d.properties.name;
+          if (d.properties.name === 'Alaska (United States of America)') {
+            cntryname = 'United States of America';
+          }
+          if (d.properties.name === 'France (Sub Region)') {
+            cntryname = 'France';
+          }
+          let indx = dataV2CountryList.indexOf(cntryname);
+          if (armstype === 'total') {
+            if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0) return 1;
+            else return 0.2;
+          }
+          if (armstype === 'defence') {
+            if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
+              return 1;
+            else return 0.2;
+          }
+          if (armstype === 'civilian') {
+            if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+              return 1;
+            else return 0.2;
+          }
+        });
       if (armstype === 'total') {
         d3
           .selectAll('.civBars')
@@ -488,6 +514,34 @@ class DataMap extends Component {
             return hScale(d[selectedYear]['Total']);
           });
       }
+      d3
+        .selectAll('.land')
+        .transition()
+        .duration(200)
+        .attr('fill-opacity', d => {
+          let cntryname = d.properties.name;
+          if (d.properties.name === 'Alaska (United States of America)') {
+            cntryname = 'United States of America';
+          }
+          if (d.properties.name === 'France (Sub Region)') {
+            cntryname = 'France';
+          }
+          let indx = dataV2CountryList.indexOf(cntryname);
+          if (armstype === 'total') {
+            if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0) return 1;
+            else return 0.2;
+          }
+          if (armstype === 'defence') {
+            if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
+              return 1;
+            else return 0.2;
+          }
+          if (armstype === 'civilian') {
+            if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+              return 1;
+            else return 0.2;
+          }
+        });
     }
     function updateSideBarYear(cntryNm, yrs) {
       let lineChartwidth = 308,
@@ -1676,7 +1730,31 @@ class DataMap extends Component {
           .selectAll('.land')
           .transition()
           .duration(500)
-          .attr('fill-opacity', 1);
+          .attr('fill-opacity', d => {
+            let cntryname = d.properties.name;
+            if (d.properties.name === 'Alaska (United States of America)') {
+              cntryname = 'United States of America';
+            }
+            if (d.properties.name === 'France (Sub Region)') {
+              cntryname = 'France';
+            }
+            let indx = dataV2CountryList.indexOf(cntryname);
+            if (armstype === 'total') {
+              if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
+                return 1;
+              else return 0.2;
+            }
+            if (armstype === 'defence') {
+              if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
+                return 1;
+              else return 0.2;
+            }
+            if (armstype === 'civilian') {
+              if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+                return 1;
+              else return 0.2;
+            }
+          });
         d3.selectAll('rect').attr('opacity', 1);
         d3
           .selectAll('.intlmissionsbartext')
@@ -1707,10 +1785,11 @@ class DataMap extends Component {
 
     zoomGroup
       .append('rect')
+      .attr('class', 'bg')
       .attr('width', wid)
       .attr('height', hght)
       .style('fill', 'none')
-      .style('pointer-events', 'all')
+      .attr('pointer-events', 'none')
       .on('mouseover', () => {
         mouseHover.state = false;
         if (!active.state) {
@@ -1718,7 +1797,31 @@ class DataMap extends Component {
             .selectAll('.land')
             .transition()
             .duration(200)
-            .attr('fill-opacity', 1);
+            .attr('fill-opacity', d => {
+              let cntryname = d.properties.name;
+              if (d.properties.name === 'Alaska (United States of America)') {
+                cntryname = 'United States of America';
+              }
+              if (d.properties.name === 'France (Sub Region)') {
+                cntryname = 'France';
+              }
+              let indx = dataV2CountryList.indexOf(cntryname);
+              if (armstype === 'total') {
+                if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
+                  return 1;
+                else return 0.2;
+              }
+              if (armstype === 'defence') {
+                if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
+                  return 1;
+                else return 0.2;
+              }
+              if (armstype === 'civilian') {
+                if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+                  return 1;
+                else return 0.2;
+              }
+            });
           d3.selectAll('rect').transition().duration(200).attr('opacity', 1);
           d3
             .selectAll('.intlmissionsbartext')
@@ -1913,7 +2016,7 @@ class DataMap extends Component {
           .gpiData[i][k.toString()];
       }
     }
-    // Drawing the countries as different svg paths
+
     for (let g = startYear; g <= endYear; g++) {
       let totalObject = {
         Year: g,
@@ -1952,6 +2055,7 @@ class DataMap extends Component {
     }
 
     drawLineChart(totalExport);
+
     //Drawing Line Chart
     function drawLineChartIntl(dataLine) {
       d3.selectAll('.time-series-svg').remove();
@@ -2252,6 +2356,41 @@ class DataMap extends Component {
         .attr('shape-rendering', 'crispEdges');
     }
 
+    let features = topojson.feature(
+      this.state.countryData,
+      this.state.countryData.objects.countries,
+    ).features;
+    let countryList = [], dataV2CountryList = [];
+    let origin;
+    features.forEach((d, i) => {
+      countryList.push(d.properties.name);
+    });
+
+    dataV2.forEach((d, i) => {
+      let indx = countryList.indexOf(d.name);
+      d.centroid = path.centroid(features[indx]);
+      if (d.name === 'Finland') origin = path.centroid(features[indx]);
+    });
+
+    dataV2.sort((a, b) => {
+      return d3.ascending(a.centroid[1], b.centroid[1]);
+    });
+
+    dataV2.forEach((d, i) => {
+      dataV2CountryList.push(d.name);
+    });
+
+    let arrSorted = [];
+    for (let i = 0; i < dataV2.length; i++) {
+      arrSorted.push(dataV2[i]);
+    }
+    arrSorted.sort(function(x, y) {
+      return (
+        y['years'][selectedYear]['TotalCountry'] -
+        x['years'][selectedYear]['TotalCountry']
+      );
+    });
+
     //Drawing Map
     zoomGroup
       .selectAll('.land')
@@ -2287,7 +2426,11 @@ class DataMap extends Component {
           else return threshold(gpiObject[cntryName][selectedYear]);
         } else return '#dddddd';
       })
-      .attr('fill-opacity', 1)
+      .attr('fill-opacity', d => {
+        if (d.properties.name === 'Finland') {
+          return 1;
+        } else return 0.2;
+      })
       .attr('stroke', d => {
         if (d.properties.name === 'Somalia') {
           return 'none';
@@ -2295,6 +2438,7 @@ class DataMap extends Component {
         return '#fff';
       })
       .attr('stroke-width', 0.5)
+      .attr('pointer-events', 'none')
       .on('mouseover', d => {
         let cntryname = d.properties.name;
         if (d.properties.name === 'Alaska (United States of America)') {
@@ -2305,8 +2449,134 @@ class DataMap extends Component {
         }
         hover(cntryname, d3.event.x, d3.event.y);
       })
+      .on('click', clicked)
+      .transition()
+      .duration(2000)
+      .attr('fill-opacity', d => {
+        let cntryname = d.properties.name;
+        if (d.properties.name === 'Alaska (United States of America)') {
+          cntryname = 'United States of America';
+        }
+        if (d.properties.name === 'France (Sub Region)') {
+          cntryname = 'France';
+        }
+        let indx = dataV2CountryList.indexOf(cntryname);
+        if (armstype === 'total') {
+          if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0) return 1;
+          else return 0.2;
+        }
+        if (armstype === 'defence') {
+          if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0) return 1;
+          else return 0.2;
+        }
+        if (armstype === 'civilian') {
+          if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+            return 1;
+          else return 0.2;
+        }
+      });
+    zoomGroup
+      .selectAll('.intlmissionsbartext')
+      .data(intlMissions)
+      .enter()
+      .append('text')
+      .attr('class', 'intlmissionsbartext')
+      .attr('x', wid / 2)
+      .attr('y', hght - 32)
+      .attr('font-size', 9)
+      .attr('font-weight', 700)
+      .attr('font-family', 'Source Sans Pro')
+      .text('Export to international peace mission')
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#aaa')
+      .on('mouseover', hoverIntl)
       .on('click', clicked);
+    zoomGroup
+      .selectAll('.initCivBar')
+      .data(dataV2)
+      .enter()
+      .filter(d => d.name == 'Finland')
+      .append('rect')
+      .attr('class', 'initCivBar')
+      .attr('x', d => d.centroid[0] - 2)
+      .attr('width', 4)
+      .attr('height', hScale(totalExport[0][selectedYear]['Civilian']))
+      .attr('y', d => {
+        let y1 = hScale(totalExport[0][selectedYear]['Civilian']);
+        return d.centroid[1] - y1;
+      })
+      .attr('fill', civilianColor)
+      .transition()
+      .duration(
+        d =>
+          2000 *
+          totalExport[0][selectedYear]['Civilian'] /
+          totalExport[0][selectedYear]['Total'],
+      )
+      .attr('y', d => d.centroid[1])
+      .attr('height', 0);
 
+    zoomGroup
+      .selectAll('.initMilBars')
+      .data(dataV2)
+      .enter()
+      .filter(d => d.name == 'Finland')
+      .append('rect')
+      .attr('class', 'initMilBars')
+      .attr('x', d => d.centroid[0] - 2)
+      .attr('width', 4)
+      .attr('height', hScale(totalExport[0][selectedYear]['Military']))
+      .attr('y', d => {
+        let y1 = hScale(totalExport[0][selectedYear]['Civilian']),
+          y2 = hScale(totalExport[0][selectedYear]['Military']);
+        return d.centroid[1] - y1 - y2;
+      })
+      .attr('fill', defenceColor)
+      .transition()
+      .delay(
+        d =>
+          2000 *
+          totalExport[0][selectedYear]['Civilian'] /
+          totalExport[0][selectedYear]['Total'],
+      )
+      .duration(
+        d =>
+          500 *
+          totalExport[0][selectedYear]['Military'] /
+          totalExport[0][selectedYear]['Total'],
+      )
+      .attr('y', d => {
+        let y1 = hScale(totalExport[0][selectedYear]['Civilian']);
+        return d.centroid[1] - y1;
+      })
+      .attr('height', 0);
+
+    console.log(origin);
+
+    zoomGroup
+      .selectAll('.animatedCircle')
+      .data(dataV2)
+      .enter()
+      .filter(d => d.years[selectedYear]['TotalCountry'] > 0)
+      .append('line')
+      .attr('class', 'animatedCircle')
+      .attr('r', 2)
+      .attr('stroke', '#212121')
+      .attr('opacity', 0.3)
+      .attr('stroke-dasharray', '5, 10')
+      .attr('x1', origin[0])
+      .attr('y1', origin[1])
+      .attr('x2', origin[0])
+      .attr('y2', origin[1])
+      .transition()
+      .duration(1000)
+      .attr('x2', d => d.centroid[0])
+      .attr('y2', d => d.centroid[1])
+      .transition()
+      .duration(1000)
+      .attr('x1', d => d.centroid[0])
+      .attr('y1', d => d.centroid[1])
+      .on('end', drawBars(endYear.toString()));
     function clicked(d) {
       if (d.properties !== null) {
         let countryClicked = d.properties.name;
@@ -2443,33 +2713,6 @@ class DataMap extends Component {
     }
     //End Drawing Map
 
-    let features = topojson.feature(
-      this.state.countryData,
-      this.state.countryData.objects.countries,
-    ).features;
-    let countryList = [];
-    features.forEach((d, i) => {
-      countryList.push(d.properties.name);
-    });
-    dataV2.forEach((d, i) => {
-      let indx = countryList.indexOf(d.name);
-      d.centroid = path.centroid(features[indx]);
-    });
-    dataV2.sort((a, b) => {
-      return d3.ascending(a.centroid[1], b.centroid[1]);
-    });
-
-    let arrSorted = [];
-    for (let i = 0; i < dataV2.length; i++) {
-      arrSorted.push(dataV2[i]);
-    }
-    arrSorted.sort(function(x, y) {
-      return (
-        y['years'][selectedYear]['TotalCountry'] -
-        x['years'][selectedYear]['TotalCountry']
-      );
-    });
-
     for (let k = 0; k < 5; k++) {
       d3.selectAll(`.Country${k + 1}`).html(`${k + 1}. ${dataV2[k].name}`);
     }
@@ -2479,7 +2722,6 @@ class DataMap extends Component {
         .html(`${formatEuros(dataV2[k].years[selectedYear]['TotalCountry'])}`);
     }
 
-    drawBars(endYear.toString());
     updateSidebar(
       'World',
       selectedYear,
@@ -2499,7 +2741,7 @@ class DataMap extends Component {
     }
 
     d3.selectAll('.play-button').on('click', () => {
-      let duration = 3000;
+      let duration = 1500;
       if (play) {
         play = false;
         clearInterval(timer);
