@@ -34,27 +34,47 @@ class Stories extends Component {
       filters: {
         keyword: hashes.keyword || '',
         year: hashes.year || null,
-        manufacturer: hashes.manufacturer || null,
-        country: hashes.country || null,
+        region: hashes.region || null,
+        direction: hashes.direction || null,
         type: hashes.type || null,
+        theme: hashes.theme || null,
+        product: hashes.product || null,
       },
       loading: true,
     };
 
     this.typing = false;
-    this.manufacturers = [];
-    this.countries = [];
+    this.regions = this.makeMenuObject(
+      intl.options.locales[intl.options.currentLocale].TAGS_REGION,
+    );
+    this.types = this.makeMenuObject(
+      intl.options.locales[intl.options.currentLocale].TAGS_ARTICLE_TYPE,
+    );
+    this.directions = this.makeMenuObject(
+      intl.options.locales[intl.options.currentLocale].TAGS_IMPORT_EXPORT,
+    );
+    this.themes = this.makeMenuObject(
+      intl.options.locales[intl.options.currentLocale].TAGS_THEME,
+    );
+    this.products = this.makeMenuObject(
+      intl.options.locales[intl.options.currentLocale].TAGS_PRODUCT,
+    );
     this.years = [];
-    this.types = [
-      { text: intl.get('EVENTS'), value: 'events' },
-      { text: intl.get('BACKGROUND'), value: 'background' },
-    ];
 
     const curYear = new Date().getFullYear();
 
-    for (let i = 2017; i <= curYear; i++) {
+    for (let i = 2008; i <= curYear; i++) {
       this.years.push({ text: i, value: i });
     }
+  }
+
+  makeMenuObject(ary) {
+    return ary.map(r => {
+      return {
+        text: r,
+        value: r,
+      };
+    });
   }
 
   componentWillMount() {
@@ -89,21 +109,33 @@ class Stories extends Component {
           }).length
         : true;
 
-      const filterCountry = this.state.filters.country
+      const filterDirection = this.state.filters.direction
         ? tags.filter(item => {
-            return item === this.state.filters.country.toLowerCase();
+            return item === this.state.filters.direction.toLowerCase();
           }).length
         : true;
 
-      const filterManufacturer = this.state.filters.manufacturer
+      const filterRegion = this.state.filters.region
         ? tags.filter(item => {
-            return item === this.state.filters.manufacturer.toLowerCase();
+            return item === this.state.filters.region.toLowerCase();
           }).length
         : true;
 
       const filterType = this.state.filters.type
         ? tags.filter(item => {
             return item === this.state.filters.type.toLowerCase();
+          }).length
+        : true;
+
+      const filterTheme = this.state.filters.theme
+        ? tags.filter(item => {
+            return item === this.state.filters.theme.toLowerCase();
+          }).length
+        : true;
+
+      const filterProduct = this.state.filters.product
+        ? tags.filter(item => {
+            return item === this.state.filters.product.toLowerCase();
           }).length
         : true;
 
@@ -117,9 +149,11 @@ class Stories extends Component {
 
       if (
         filterYear &&
-        filterCountry &&
-        filterManufacturer &&
+        filterDirection &&
+        filterRegion &&
         filterKeyword &&
+        filterTheme &&
+        filterProduct &&
         filterType
       ) {
         ary.push(cur);
@@ -207,10 +241,10 @@ class Stories extends Component {
         />
         <SelectMenu
           onChange={this.handleChange.bind(this)}
-          options={this.countries}
-          value={this.state.filters.countries}
-          id="country"
-          label={intl.get('COUNTRY')}
+          options={this.regions}
+          value={this.state.filters.region}
+          id="region"
+          label={intl.get('REGION')}
         />
         <SelectMenu
           onChange={this.handleChange.bind(this)}
@@ -221,10 +255,24 @@ class Stories extends Component {
         />
         <SelectMenu
           onChange={this.handleChange.bind(this)}
-          options={this.manufacturers}
-          value={this.state.filters.manufacturer}
-          id="manufacturer"
-          label={intl.get('MANUFACTURER')}
+          options={this.directions}
+          value={this.state.filters.direction}
+          id="direction"
+          label={intl.get('IMPORT_EXPORT')}
+        />
+        <SelectMenu
+          onChange={this.handleChange.bind(this)}
+          options={this.themes}
+          value={this.state.filters.themes}
+          id="theme"
+          label={intl.get('THEME')}
+        />
+        <SelectMenu
+          onChange={this.handleChange.bind(this)}
+          options={this.products}
+          value={this.state.filters.product}
+          id="product"
+          label={intl.get('PRODUCT')}
         />
       </div>
     );
