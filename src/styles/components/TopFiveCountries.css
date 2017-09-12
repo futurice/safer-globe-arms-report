@@ -1,8 +1,4 @@
-.top-countries h3 {
-	margin-bottom: 1rem;
-}
-
-.top-countries__country {
+.top-countries__country, .top-countries__title {
 	margin-bottom: 1rem;
 }
 
@@ -14,17 +10,25 @@
 	margin-bottom: .5rem;
 }
 
-.top-countries__name span {
-	display: block;
+.top-countries__name--order-num {
+	width: 10px;
+	display: inline-block;
 }
 
-.top-countries__name span:first-child {
+.top-countries__name--wrapper {
 	margin-right: 20px;
-	width: 170px;
 }
 
-.top-countries__name span:last-child {
-	width: 95px;
+.top-countries__name--wrapper > span:first-child {
+	display: inline-block;
+	width: 20px;
+}
+
+.top-countries__name--wrapper > span:last-child {
+	font-weight: 600;
+}
+
+.top-countries__name--sum {
 	text-align: right;
 }
 
@@ -44,4 +48,8 @@
 .top-countries__graphs--civilian {
 	background: #f99041;
 	height: 2px;
+}
+
+.top-countries {
+	font-size: 1rem;
 }

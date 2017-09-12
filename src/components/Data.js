@@ -69,6 +69,7 @@ class Data extends Component {
       gpiData: null,
       activeYear: activeYear,
       saferGlobeData: [],
+      activeTab: 'total',
       totals: {
         name: `${intl.get('TOTALS')} - ${activeYear}`,
         total: {
@@ -115,7 +116,7 @@ class Data extends Component {
         saferGlobeData: data,
         countries: countryList.sort(compare),
         totals: {
-          name: `${this.state.activeYear} | ${intl.get('WORLD')}`,
+          name: intl.get('WORLD'),
           total: {
             value: accumulateTotal(data, 'Total'),
           },
@@ -132,6 +133,12 @@ class Data extends Component {
 
   updateGPIYear(newGPIYear) {
     this.setState({ activeYear: newGPIYear });
+  }
+
+  selectTab(val) {
+    this.setState({
+      activeTab: val,
+    });
   }
 
   sortTopLists(type, count = 5) {
@@ -194,22 +201,23 @@ class Data extends Component {
         className="data-section-container"
         style={{ overflow: 'hidden' }}
       >
-        <section className="data-map-container flex-column-container">
-          <div className="flex-container">
+        <section className="data-map-container flex-container-column">
+          <div style={{ height: '100%' }} className="flex-container-column">
             <section className="flex-one country-data-container">
               {this.state.selectedCountry
-                ? <CountryDataList country={this.state.selectedCountry} />
+                ? <CountryDataList
+                    year={this.state.activeYear}
+                    activeTab={this.state.activeTab}
+                    country={this.state.selectedCountry}
+                    selectTab={this.selectTab.bind(this)}
+                  />
                 : <TopFiveCountries
                     year={this.state.activeYear}
                     countries={sortedListTotal}
+                    activeTab={this.state.activeTab}
                     totals={this.state.totals}
+                    selectTab={this.selectTab.bind(this)}
                   />}
-              <CSVLink
-                data={this.state.saferGlobeData}
-                filename={'data-dump.csv'}
-              >
-                {intl.get('DOWNLOAD_DATA')}
-              </CSVLink>
             </section>
             <section className="flex-five map-container">
               <DataMap

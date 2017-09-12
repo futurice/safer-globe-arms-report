@@ -11,7 +11,9 @@ body {
   -webkit-backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
-  font: 1rem/1.25 'Source Sans Pro', sans-serif;
+  font: 0.9rem/1.25 'Source Sans Pro', sans-serif;
+  color: #333333;
+  background: #FAFAFA;
 }
 
 blockquote, q {
@@ -54,4 +56,18 @@ ol, ul {
 
 svg {
   overflow: visible;
+}
+
+*:focus {
+  outline: 0;
+}
+
+.not-found {
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
 }

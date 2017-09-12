@@ -4,7 +4,8 @@
 }
 
 .timeline-item {
-  background: #f6f6f6;
+  background: #c8c8c8;
+  color: #ffffff;
   cursor: pointer;
   flex: 1;
   position: relative;
@@ -18,12 +19,13 @@
 }
 
 .timeline-item.active {
-  background: #2A79AA;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
   font-weight: 700;
 }
 .timeline-item span {
   display: inline-block;
-  font-size: .8rem;
-  line-height: 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 48px;
 }

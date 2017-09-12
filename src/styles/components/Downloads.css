@@ -1,0 +1,28 @@
+.downloads .card {
+	max-width: 340px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+}
+
+.downloads .card a, .downloads .card a:hover {
+	text-decoration: none;
+	color: #333333;
+}
+
+.downloads .header {
+	padding-bottom: 0;
+}
+
+.downloads .header span {
+	color: #3182b5;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.downloads .actions {
+	justify-content: flex-end;
+}
+
+.downloads .actions * {
+	color: #3182b5;
+}
