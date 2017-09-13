@@ -486,8 +486,8 @@ class DataMap extends Component {
             return hScale(d[selectedYear]['Total']);
           });
 
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -561,7 +561,7 @@ class DataMap extends Component {
             }
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           console.log(cname);
           if (cname != 'International Missions') {
@@ -665,8 +665,8 @@ class DataMap extends Component {
           .duration(500)
           .attr('y', hght - 42)
           .attr('height', 0);
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -704,7 +704,7 @@ class DataMap extends Component {
             d3.selectAll('.land').attr('fill-opacity', 0.1);
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           if (cname != 'International Missions') {
             let values = d3
@@ -777,8 +777,8 @@ class DataMap extends Component {
             if (d[selectedYear]['Total'] === 0) return 0;
             return hScale(d[selectedYear]['Total']);
           });
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -852,7 +852,7 @@ class DataMap extends Component {
             }
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           if (cname != 'International Missions') {
             let values = d3
@@ -973,8 +973,8 @@ class DataMap extends Component {
             if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
             return d.centroid[1] - y1 - y2;
           });
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -1048,7 +1048,7 @@ class DataMap extends Component {
             }
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           console.log(cname);
           if (cname != 'International Missions') {
@@ -1156,8 +1156,8 @@ class DataMap extends Component {
           .duration(500)
           .attr('y', hght - 42)
           .attr('height', 0);
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -1195,7 +1195,7 @@ class DataMap extends Component {
             d3.selectAll('.land').attr('fill-opacity', 0.1);
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           if (cname != 'International Missions') {
             let values = d3
@@ -1268,8 +1268,8 @@ class DataMap extends Component {
             if (d[selectedYear]['Total'] === 0) return 0;
             return hScale(d[selectedYear]['Total']);
           });
-        if (hover.state) {
-          let cname = hover.country;
+        if (mouseHover.state) {
+          let cname = mouseHover.country;
           if (cname != 'International Missions') {
             let values = d3
               .select(
@@ -1343,7 +1343,7 @@ class DataMap extends Component {
             }
           }
         }
-        if (active.state && !hover.state) {
+        if (active.state && !mouseHover.state) {
           let cname = active.country;
           if (cname != 'International Missions') {
             let values = d3
@@ -3100,6 +3100,7 @@ class DataMap extends Component {
       .on('click', () => {
         mapSVG.transition().duration(500).call(Zoom.transform, d3.zoomIdentity);
         active.state = false;
+        mouseHover.state = false;
         d3.selectAll('.connectorLine').style('display', 'none');
         d3.selectAll('.connectorLineIntl').style('display', 'none');
         d3.selectAll('#FinlandOverlay').style('display', 'none');
