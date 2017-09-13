@@ -37,11 +37,11 @@ Docs can be found here: https://reacttraining.com/react-router/web/
 
 const locales = {
   'en-US': {
-    DATA: 'Data',
+    DATA: 'Map',
     DOWNLOAD_DATA: 'Download Data',
-    STORIES: 'Stories',
-    ABOUT: 'About',
-    DOWNLOADS: 'Downloads',
+    STORIES: 'Articles',
+    ABOUT: 'Info',
+    DOWNLOADS: 'Open Data',
     TOTALS: 'Totals',
     TOTAL: 'Total',
     DEFENCE: 'Defence',
@@ -55,11 +55,11 @@ const locales = {
     NOT_AVAILABLE: 'Not available',
   },
   fi: {
-    DATA: 'Data',
+    DATA: 'Kartta',
     DOWNLOAD_DATA: 'Lataa tiedot',
     STORIES: 'Artikkelit',
-    ABOUT: 'Tietoja',
-    DOWNLOADS: 'Lataukset',
+    ABOUT: 'Info',
+    DOWNLOADS: 'Avoin Data',
     TOTALS: 'Kokonaissumma',
     TOTAL: 'Yhteensä',
     DEFENCE: 'Sota-aseet',

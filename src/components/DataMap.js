@@ -3615,20 +3615,11 @@ class DataMap extends Component {
       })
       .on('click', clicked)
       .transition()
-      .duration(2500)
-      .attr('fill', d => {
-        let cntryName = d.properties.name;
-        if (d.properties.name === 'Alaska (United States of America)') {
-          cntryName = 'United States of America';
-        }
-        if (d.properties.name === 'France (Sub Region)') {
-          cntryName = 'France';
-        }
-        if (d3.keys(gpiObject).indexOf(cntryName) !== -1) {
-          if (gpiObject[cntryName][selectedYear] === -1) return '#dddddd';
-          else return threshold(gpiObject[cntryName][selectedYear]);
-        } else return '#dddddd';
-      })
+      .duration(1250)
+      .attr('fill-opacity', 0.7)
+      .transition()
+      .delay(750)
+      .duration(500)
       .attr('fill-opacity', d => {
         let cntryname = d.properties.name;
         if (d.properties.name === 'Alaska (United States of America)') {
