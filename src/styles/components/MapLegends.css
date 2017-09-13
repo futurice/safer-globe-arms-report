@@ -1,8 +1,8 @@
 .map-legends {
-	padding: 10px;
+	padding: 0.5rem;
 	position: absolute;
-	right: 10px;
-	bottom: 58px;
+	right: 2rem;
+	bottom: 4rem;
 	z-index: 9999;
 	background: #ffffff;
 	font-size: 9px;

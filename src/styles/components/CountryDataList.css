@@ -26,6 +26,11 @@
 }
 
 .country-data-container .remarks-title {
+	margin: 1rem -1rem 1rem -1rem;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.country-data-container .remarks {
 	font-size: 1.1rem;
 	margin-bottom: 6px;
 }
@@ -34,6 +39,11 @@
 	font-weight: 600;
 	font-size: 0.8rem;
 	margin-bottom: 11px;
+}
+
+
+.country-data-container ul {
+	margin-bottom: 86px;
 }
 
 .all-country-articles {

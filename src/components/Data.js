@@ -8,9 +8,7 @@ import DataTimeline from './DataTimeline';
 import MapLegends from './MapLegends';
 // import StoryPreview from './StoryPreview';
 import { csv } from 'd3-request';
-import { CSVLink } from 'react-csv';
 import intl from 'react-intl-universal';
-import Button from 'material-ui/Button';
 
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
@@ -19,6 +17,8 @@ import saferGlobe from './../data/safer-globe.csv';
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
 import './../styles/icons.css';
+
+const svg = require('./../assets/reset-icon.svg');
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
@@ -225,9 +225,14 @@ class Data extends Component {
                 gpiYear={this.state.activeYear}
               />
             </section>
-            <Button raised className="map-container__reset">
-              {intl.get('RESET_ZOOM')}
-            </Button>
+            <div className="map-container__reset box-shadow">
+              <img
+                src={svg}
+                className="reset-icon"
+                alt="Reset Icon"
+                title="Fit to Screen"
+              />
+            </div>
             <MapLegends />
           </div>
           <DataTimeline updateGPIYear={this.updateGPIYear} />

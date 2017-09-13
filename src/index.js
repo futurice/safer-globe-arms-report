@@ -12,6 +12,7 @@ import './styles/flex-styles.css';
 import './styles/headings.css';
 import './styles/text-types.css';
 import './styles/md.css';
+import './styles/scroll.css';
 
 /*
 Primary Route Components

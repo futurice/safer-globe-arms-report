@@ -27,9 +27,9 @@
 
 .primary-nav a, .primary-nav a:active, .primary-nav a:visited, .primary-nav a:hover {
   border-bottom: 3px solid transparent;
-  color: black;
+  color: #aaa;
   display: inline-block;
-  padding: 0 5px;
+  padding: 0 1px;
   text-decoration: none;
   transition: border .25s ease;
 }
@@ -38,12 +38,8 @@
   font-size: 1.15rem;
 }
 
-.primary-nav ul a {
-  font-size: 1.15rem;
-}
-
 .primary-nav a.active {
-  border-bottom: 3px solid #2D80B5;
+  color: #2D80B5;
 }
 
 .primary-nav .lang-selection {
