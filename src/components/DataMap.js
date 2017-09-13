@@ -174,6 +174,53 @@ class DataMap extends Component {
         .attr('stroke', '#2D80B5')
         .style('display', 'none');
       zoomGroup
+        .selectAll('.connectorLineIntl')
+        .data(dataV2)
+        .enter()
+        .append('line')
+        .attr('class', 'connectorLineIntl')
+        .attr('x1', wid / 2 + 1.5)
+        .attr('y1', hght - 43)
+        .attr('x2', d => d.centroid[0])
+        .attr('y2', d => d.centroid[1])
+        .attr(
+          'id',
+          d =>
+            `${d.name
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')
+              .replace('.', '_')}connectorIntl`,
+        )
+        .attr('opacity', 0.5)
+        .attr('fill', 'none')
+        .attr('stroke-width', 0.5)
+        .attr('stroke', '#999999')
+        .style('display', 'none');
+      zoomGroup
+        .append('path')
+        .attr('class', 'connectorLine')
+        .attr('d', () => {
+          let coordinates = [wid / 2 + 1.5, hght - 43];
+          let path = drawArc(coordinates, origin);
+          return path;
+        })
+        .attr('id', () => {
+          let nm = 'International Missions';
+          return `${nm
+            .replace(/ /g, '_')
+            .replace('(', '_')
+            .replace(')', '_')
+            .replace("'", '_')
+            .replace('.', '_')}connector`;
+        })
+        .attr('opacity', 1)
+        .attr('fill', 'none')
+        .attr('stroke-width', 1)
+        .attr('stroke', '#2D80B5')
+        .style('display', 'none');
+      zoomGroup
         .selectAll('.civBars')
         .data(dataV2)
         .enter()
@@ -438,6 +485,159 @@ class DataMap extends Component {
             if (d[selectedYear]['Total'] === 0) return 0;
             return hScale(d[selectedYear]['Total']);
           });
+
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].TotalCountry === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          console.log(cname);
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            console.log(values.years[selectedYear].TotalCountry);
+            if (values.years[selectedYear].TotalCountry === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
       }
       if (armstype === 'civilian') {
         d3
@@ -465,6 +665,84 @@ class DataMap extends Component {
           .duration(500)
           .attr('y', hght - 42)
           .attr('height', 0);
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'none');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            d3.selectAll('.land').attr('fill-opacity', 0.1);
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'none');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            d3.selectAll('.land').attr('fill-opacity', 0.1);
+          }
+        }
       }
       if (armstype === 'defence') {
         d3
@@ -499,6 +777,156 @@ class DataMap extends Component {
             if (d[selectedYear]['Total'] === 0) return 0;
             return hScale(d[selectedYear]['Total']);
           });
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CountryMilatary === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CountryMilatary === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
       }
     }
 
@@ -545,6 +973,158 @@ class DataMap extends Component {
             if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
             return d.centroid[1] - y1 - y2;
           });
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].TotalCountry === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          console.log(cname);
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            console.log(values.years[selectedYear].TotalCountry);
+            if (values.years[selectedYear].TotalCountry === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
       }
       if (val === 'civilian') {
         d3
@@ -576,6 +1156,84 @@ class DataMap extends Component {
           .duration(500)
           .attr('y', hght - 42)
           .attr('height', 0);
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'none');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            d3.selectAll('.land').attr('fill-opacity', 0.1);
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'none');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            d3.selectAll('.land').attr('fill-opacity', 0.1);
+          }
+        }
       }
       if (val === 'defence') {
         d3
@@ -610,6 +1268,156 @@ class DataMap extends Component {
             if (d[selectedYear]['Total'] === 0) return 0;
             return hScale(d[selectedYear]['Total']);
           });
+        if (hover.state) {
+          let cname = hover.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CountryMilatary === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
+        if (active.state && !hover.state) {
+          let cname = active.country;
+          if (cname != 'International Missions') {
+            let values = d3
+              .select(
+                `#${cname
+                  .replace(/ /g, '_')
+                  .replace('(', '_')
+                  .replace(')', '_')
+                  .replace("'", '_')
+                  .replace('.', '_')}milBar`,
+              )
+              .datum();
+            if (values.years[selectedYear].CountryMilatary === 0) {
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('#FinlandOverlay').style('display', 'none');
+            } else {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+              d3.selectAll('.connectorLineIntl').style('display', 'none');
+              d3.selectAll('.connectorLine').style('display', 'none');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          } else {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            d3.selectAll('.connectorLineIntl').style('display', 'none');
+            d3.selectAll('.connectorLine').style('display', 'none');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${cname
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+        }
       }
     }
     function updateSideBarYear(cntryNm, yrs) {
@@ -1102,7 +1910,6 @@ class DataMap extends Component {
         }
 
         if (armstype === 'total' || armstype === 'defence') {
-          d3.selectAll('.intlMissionsConnector').remove();
           d3.selectAll('.land').attr('fill-opacity', 0.1);
           for (
             let i = 0;
@@ -1121,26 +1928,7 @@ class DataMap extends Component {
               )
               .attr('fill-opacity', 0.8);
           }
-          zoomGroup
-            .selectAll('.intlMissionsConnector')
-            .data(intlMissions[0][selectedYear]['Countries'])
-            .enter()
-            .append('line')
-            .attr('class', 'intlMissionsConnector')
-            .attr('x1', origin[0])
-            .attr('y1', origin[1])
-            .attr('x2', d => {
-              let cntryName = d[0];
-              return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[0];
-            })
-            .attr('y2', d => {
-              let cntryName = d[0];
-              return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[1];
-            })
-            .attr('stroke', '#2D80B5')
-            .attr('opacity', 0.5);
         } else {
-          d3.selectAll('.intlMissionsConnector').remove();
           d3.selectAll('.land').attr('fill-opacity', 0.15);
         }
         if (active.state || mouseHover.state) {
@@ -1613,7 +2401,6 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
         }
         if (armstype === 'total' || armstype === 'defence') {
-          d3.selectAll('.intlMissionsConnector').remove();
           for (
             let i = 0;
             i < intlMissions[0][selectedYear]['Countries'].length;
@@ -1633,26 +2420,7 @@ class DataMap extends Component {
               .duration(300)
               .attr('fill-opacity', 0.8);
           }
-          zoomGroup
-            .selectAll('.intlMissionsConnector')
-            .data(intlMissions[0][selectedYear]['Countries'])
-            .enter()
-            .append('line')
-            .attr('class', 'intlMissionsConnector')
-            .attr('x1', origin[0])
-            .attr('y1', origin[1])
-            .attr('x2', d => {
-              let cntryName = d[0];
-              return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[0];
-            })
-            .attr('y2', d => {
-              let cntryName = d[0];
-              return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[1];
-            })
-            .attr('stroke', '#2D80B5')
-            .attr('opacity', 0.5);
         } else {
-          d3.selectAll('.intlMissionsConnector').remove();
           d3.selectAll('.land').attr('fill-opacity', 0.15);
         }
         if (active.state || mouseHover.state) {
@@ -1671,12 +2439,14 @@ class DataMap extends Component {
       mouseHover.state = true;
       mouseHover.country = 'International Missions';
       d3.selectAll('.connectorLine').style('display', 'none');
+      d3.selectAll('.connectorLineIntl').style('display', 'none');
       d3
         .selectAll('.land')
         .transition()
         .duration(200)
         .attr('fill-opacity', 0.1);
       if (armstype === 'total' || armstype === 'defence') {
+        d3.selectAll('#FinlandOverlay').style('display', 'inline');
         for (
           let i = 0;
           i < intlMissions[0][selectedYear]['Countries'].length;
@@ -1695,29 +2465,27 @@ class DataMap extends Component {
             .transition()
             .duration(300)
             .attr('fill-opacity', 0.8);
+          d3
+            .selectAll(
+              `#${cntryName
+                .replace(/ /g, '_')
+                .replace('(', '_')
+                .replace(')', '_')
+                .replace("'", '_')
+                .replace('.', '_')}connectorIntl`,
+            )
+            .style('display', 'inline');
         }
-        zoomGroup
-          .selectAll('.intlMissionsConnector')
-          .data(intlMissions[0][selectedYear]['Countries'])
-          .enter()
-          .append('line')
-          .attr('class', 'intlMissionsConnector')
-          .attr('x1', origin[0])
-          .attr('y1', origin[1])
-          .attr('x2', origin[0])
-          .attr('y2', origin[1])
-          .transition()
-          .duration(300)
-          .attr('x2', d => {
-            let cntryName = d[0];
-            return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[0];
-          })
-          .attr('y2', d => {
-            let cntryName = d[0];
-            return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[1];
-          })
-          .attr('stroke', '#2D80B5')
-          .attr('opacity', 0.5);
+        d3
+          .selectAll(
+            `#${mouseHover.country
+              .replace(/ /g, '_')
+              .replace('(', '_')
+              .replace(')', '_')
+              .replace("'", '_')
+              .replace('.', '_')}connector`,
+          )
+          .style('display', 'inline');
       }
       d3.selectAll('rect').transition().duration(200).attr('opacity', 0.3);
       d3
@@ -1737,8 +2505,8 @@ class DataMap extends Component {
 
     function hover(cntryNm, xPos, yPos) {
       d3.selectAll('.connectorLine').style('display', 'none');
+      d3.selectAll('.connectorLineIntl').style('display', 'none');
       d3.selectAll('#FinlandOverlay').style('display', 'none');
-      d3.selectAll('.intlMissionsConnector').remove();
       mouseHover.state = true;
       mouseHover.country = cntryNm;
       console.log(mouseHover);
@@ -2083,8 +2851,8 @@ class DataMap extends Component {
       .on('mouseover', () => {
         mouseHover.state = false;
         d3.selectAll('.connectorLine').style('display', 'none');
+        d3.selectAll('.connectorLineIntl').style('display', 'none');
         d3.selectAll('#FinlandOverlay').style('display', 'none');
-        d3.selectAll('.intlMissionsConnector').remove();
         if (!active.state) {
           d3
             .selectAll('.land')
@@ -2207,7 +2975,6 @@ class DataMap extends Component {
               .transition()
               .duration(200)
               .attr('opacity', 0.2);
-            d3.selectAll('.intlMissionsConnector').remove();
             if (armstype === 'total') {
               if (values.years[selectedYear].TotalCountry > 0) {
                 d3
@@ -2279,6 +3046,7 @@ class DataMap extends Component {
               .attr('opacity', 1);
 
             if (armstype === 'total' || armstype === 'defence') {
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
               for (
                 let i = 0;
                 i < intlMissions[0][selectedYear]['Countries'].length;
@@ -2295,30 +3063,28 @@ class DataMap extends Component {
                       .replace("'", '_')
                       .replace('.', '_')}`,
                   )
-                  .transition()
-                  .duration(300)
                   .attr('fill-opacity', 0.8);
+                d3
+                  .selectAll(
+                    `#${cntryName
+                      .replace(/ /g, '_')
+                      .replace('(', '_')
+                      .replace(')', '_')
+                      .replace("'", '_')
+                      .replace('.', '_')}connectorIntl`,
+                  )
+                  .style('display', 'inline');
+                d3
+                  .selectAll(
+                    `#${active.country
+                      .replace(/ /g, '_')
+                      .replace('(', '_')
+                      .replace(')', '_')
+                      .replace("'", '_')
+                      .replace('.', '_')}connector`,
+                  )
+                  .style('display', 'inline');
               }
-              zoomGroup
-                .selectAll('.intlMissionsConnector')
-                .data(intlMissions[0][selectedYear]['Countries'])
-                .enter()
-                .append('line')
-                .attr('class', 'intlMissionsConnector')
-                .attr('x1', origin[0])
-                .attr('y1', origin[1])
-                .attr('x2', d => {
-                  let cntryName = d[0];
-                  return dataV2[dataV2CountryList.indexOf(cntryName)]
-                    .centroid[0];
-                })
-                .attr('y2', d => {
-                  let cntryName = d[0];
-                  return dataV2[dataV2CountryList.indexOf(cntryName)]
-                    .centroid[1];
-                })
-                .attr('stroke', '#2D80B5')
-                .attr('opacity', 0.5);
             }
             updateSidebar(
               'International Missions',
@@ -2335,8 +3101,8 @@ class DataMap extends Component {
         mapSVG.transition().duration(500).call(Zoom.transform, d3.zoomIdentity);
         active.state = false;
         d3.selectAll('.connectorLine').style('display', 'none');
+        d3.selectAll('.connectorLineIntl').style('display', 'none');
         d3.selectAll('#FinlandOverlay').style('display', 'none');
-        d3.selectAll('.intlMissionsConnector').remove();
         d3
           .selectAll('.land')
           .transition()
@@ -2904,6 +3670,7 @@ class DataMap extends Component {
       .style('display', 'none')
       .on('mouseover', () => {
         d3.selectAll('.connectorLine').style('display', 'none');
+        d3.selectAll('.connectorLineIntl').style('display', 'none');
         d3.selectAll('#FinlandOverlay').style('display', 'none');
       });
     zoomGroup
@@ -3010,7 +3777,7 @@ class DataMap extends Component {
 
     function clicked(d) {
       d3.selectAll('.connectorLine').style('display', 'none');
-      d3.selectAll('.intlMissionsConnector').remove();
+      d3.selectAll('.connectorLineIntl').style('display', 'none');
       d3.selectAll('#FinlandOverlay').style('display', 'none');
       if (d.properties !== null && d.properties !== undefined) {
         let countryClicked = d.properties.name;
@@ -3150,7 +3917,6 @@ class DataMap extends Component {
       } else {
         if (active.country === 'International Missions' && active.state) {
           active.state = false;
-          d3.selectAll('.intlMissionsConnector').remove();
           d3
             .selectAll('.intlmissionsbartext')
             .transition()
@@ -3170,7 +3936,6 @@ class DataMap extends Component {
             totalExport,
           );
         } else {
-          d3.selectAll('.intlMissionsConnector').remove();
           active.state = true;
           active.country = 'International Missions'; // updated for d3 v4
           d3
@@ -3185,6 +3950,7 @@ class DataMap extends Component {
             .attr('opacity', 1);
 
           if (armstype === 'total' || armstype === 'defence') {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
             for (
               let i = 0;
               i < intlMissions[0][selectedYear]['Countries'].length;
@@ -3201,25 +3967,27 @@ class DataMap extends Component {
                     .replace('.', '_')}`,
                 )
                 .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${active.country
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
             }
-            zoomGroup
-              .selectAll('.intlMissionsConnector')
-              .data(intlMissions[0][selectedYear]['Countries'])
-              .enter()
-              .append('line')
-              .attr('class', 'intlMissionsConnector')
-              .attr('x1', origin[0])
-              .attr('y1', origin[1])
-              .attr('x2', d => {
-                let cntryName = d[0];
-                return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[0];
-              })
-              .attr('y2', d => {
-                let cntryName = d[0];
-                return dataV2[dataV2CountryList.indexOf(cntryName)].centroid[1];
-              })
-              .attr('stroke', '#2D80B5')
-              .attr('opacity', 0.5);
           }
           updateSidebar(
             'International Missions',
