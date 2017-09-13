@@ -8,9 +8,7 @@ import DataTimeline from './DataTimeline';
 import MapLegends from './MapLegends';
 // import StoryPreview from './StoryPreview';
 import { csv } from 'd3-request';
-import { CSVLink } from 'react-csv';
 import intl from 'react-intl-universal';
-import Button from 'material-ui/Button';
 
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
