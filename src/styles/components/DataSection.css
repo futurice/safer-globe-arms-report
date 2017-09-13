@@ -23,7 +23,7 @@
   overflow-x: hidden;
 } 
 .time-series-graph{
-  margin:1.5rem 0 2rem 0;
+  margin:2rem 0 1.5rem 0;
 }
 .data-filter-container {
   background: rgba(255, 255, 255, .85);

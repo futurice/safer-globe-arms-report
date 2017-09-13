@@ -48,12 +48,12 @@
 }
 
 .top-countries__graphs--defence {
-  	background: rgb(153, 112, 171);
+  	background: #fe6100;
 	height: 2px;
 }
 
 .top-countries__graphs--civilian {
-	background: rgb(90, 174, 97);
+	background: #785ef0;
 	height: 2px;
 }
 

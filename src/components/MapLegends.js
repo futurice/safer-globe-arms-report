@@ -7,7 +7,7 @@ export default class Maplegends extends Component {
   constructor(props) {
     super(props);
 
-    this.colorList = ['#e7e7bf', '#fed199', '#e9a57a', '#cd7d6b', '#a75a61'];
+    this.colorList = ['#D5E1EC', '#B7BFD6', '#9F9CC1', '#89659F', '#82197C'];
   }
 
   render() {

@@ -43,6 +43,7 @@ class TopFiveCountries extends Component {
           defence={totals.defence.value}
         />
         <div className="time-series-graph" />
+        <Divider className="divider" />
         <div className="top-countries">
           <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}

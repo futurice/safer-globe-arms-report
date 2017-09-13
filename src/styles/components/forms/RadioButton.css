@@ -8,29 +8,19 @@ input[name=countryList] {
 	display: none;
 }
 
-input[name=countryList]:checked + label[for=defence] {
-  background: #e9e9e9;
-}
 input[name=countryList]:checked + label[for=defence]:before{
-    background-color: rgb(153, 112, 171);
-    box-shadow: inset 0 0 0 2px #e9e9e9;
-}
-input[name=countryList]:checked + label[for=total] {
-  background: #e9e9e9;
+    background-color: #fe6100;
+    box-shadow: inset 0 0 0 2px #fff;
 }
 
 input[name=countryList]:checked + label[for=total]:before{
     background-color: #999999;
-    box-shadow: inset 0 0 0 2px #e9e9e9;
-}
-
-input[name=countryList]:checked + label[for=civilian] {
-  background: #e9e9e9;
+    box-shadow: inset 0 0 0 2px #fff;
 }
 
 input[name=countryList]:checked + label[for=civilian]:before{
-    background-color: rgb(90, 174, 97);
-    box-shadow: inset 0 0 0 2px #e9e9e9;
+    background-color: #785ef0;
+    box-shadow: inset 0 0 0 2px #fff;
 }
 
 input[name=countryList]:not(:first-of-type) + label {
@@ -39,8 +29,7 @@ input[name=countryList]:not(:first-of-type) + label {
 
 label {
 	color: #999;
-  margin: 0.5rem 0 1rem 0;
-  width:33%;
+  margin: 0.25rem 1rem 0.5rem 0;
 	transition: background .1s ease;
 	font-size: 0.875rem;
 	padding: 0.5rem 0;
@@ -48,15 +37,13 @@ label {
   float: left;
 	display: block;
   font-weight: 700;
-  background: #fff;
-  text-align: center;
 	cursor: pointer;
 }
 
 label[for=defence]:before {
   content: '';
   border-radius: 100%;
-  border: 1px solid rgb(153, 112, 171);
+  border: 1px solid #fe6100;
   display: inline-block;
   width: 0.875rem;
   height: 0.875rem;
@@ -65,13 +52,10 @@ label[for=defence]:before {
   position: relative;
   vertical-align: top;
   cursor: pointer;
-  text-align: center;
   transition: all 250ms ease;
 }
-
 label[for=defence]{
-  color: rgb(153, 112, 171);
-  border: 1px solid #e9e9e9;
+  color: #fe6100;
 }
 
 label[for=total]:before {
@@ -86,20 +70,14 @@ label[for=total]:before {
   position: relative;
   vertical-align: top;
   cursor: pointer;
-  text-align: center;
   transition: all 250ms ease;
 }
 
-label[for=total]{
-  border: 1px solid #e9e9e9;
-  border-top-left-radius: 1px;
-  border-bottom-left-radius: 1px;
-}
 
 label[for=civilian]:before {
   content: '';
   border-radius: 100%;
-  border: 1px solid rgb(90, 174, 97);
+  border: 1px solid #785ef0;
   display: inline-block;
   width: 0.875rem;
   height: 0.875rem;
@@ -113,9 +91,5 @@ label[for=civilian]:before {
 }
 
 label[for=civilian]{
-  border-bottom: 1px solid #e9e9e9;
-  border-top: 1px solid #e9e9e9;
-  color: rgb(90, 174, 97);
-  border-top-right-radius: 1px;
-  border-bottom-right-radius: 1px;
+  color: #785ef0;
 }
