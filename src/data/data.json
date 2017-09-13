@@ -19863,24 +19863,7 @@
                 "CountryMilatary": 0,
                 "MilataryCommentTitle": "",
                 "MilataryComment": "",
-                "TotalCountry": 87227.0,
-                "comments": [
-                    {
-                        "type": "defence",
-                        "id": 1,
-                        "text": "Defence 1"
-                    },
-                    {
-                        "type": "civilian",
-                        "id": 1,
-                        "text": "Civilian 1"
-                    },
-                    {
-                        "type": "defence",
-                        "id": 1,
-                        "text": "Defence 2"
-                    }
-                ]
+                "TotalCountry": 87227.0
             }
         }
     },

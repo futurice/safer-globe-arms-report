@@ -30,6 +30,7 @@ class TopFiveCountries extends Component {
           civilian={totals.civilian.value}
           defence={totals.defence.value}
         />
+        <div className="time-series-graph" />
         <Divider className="divider" />
         <div className="top-countries">
           <div className="top-countries__title">
@@ -52,21 +53,36 @@ class TopFiveCountries extends Component {
               </div>
               <div className="top-countries__graphs">
                 <div
+                  className="top-countries__graphs--civilian"
+                  id={'top-countries__graphs--civilian' + (i + 1)}
+                  style={{
+                    width: Math.round(data.Civilian_Arms / baseNum * 100) + '%',
+                  }}
+                />
+                <div
                   className="top-countries__graphs--defence"
+                  id={'top-countries__graphs--defence' + (i + 1)}
                   style={{
                     width:
                       Math.round(data.Defence_Materiel / baseNum * 100) + '%',
                   }}
                 />
-                <div
-                  className="top-countries__graphs--civilian"
-                  style={{
-                    width: Math.round(data.Civilian_Arms / baseNum * 100) + '%',
-                  }}
-                />
               </div>
             </div>,
           )}
+        </div>
+        <div
+          className="country-bullet-point"
+          style={{
+            display: 'none',
+          }}
+        >
+          <div className="country-rank">
+            {'Rank - 0'}
+          </div>
+          <div className="key-points">
+            {'Hello World'}
+          </div>
         </div>
       </div>
     );

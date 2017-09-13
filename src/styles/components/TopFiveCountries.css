@@ -2,12 +2,15 @@
 	margin-bottom: 1rem;
 }
 
+.top-countries__title {
+	margin-bottom: 0.5rem;
+}
 .top-countries__name {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	display: flex;
-	margin-bottom: .5rem;
+	margin-bottom: 0.25rem;
 }
 
 .top-countries__name--order-num {
@@ -41,12 +44,12 @@
 }
 
 .top-countries__graphs--defence {
-	background: #d6214e;
+  	background: #fe6100;
 	height: 2px;
 }
 
 .top-countries__graphs--civilian {
-	background: #f99041;
+	background: #785ef0;
 	height: 2px;
 }
 
