@@ -43,7 +43,16 @@
 }
 
 .primary-nav .lang-selection {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  margin-top:6px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.25)
+}
+
+.lang-selection a{
+  color: #aaa;
+  letter-spacing: 1.5px;
 }
 
 .primary-nav .lang-selection .selected {
