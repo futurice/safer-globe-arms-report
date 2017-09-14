@@ -39,6 +39,7 @@
 .play-button {
   cursor: pointer;
   width: 4rem;
+  height: 2.5rem;
   background-color:#c8c8c8;
   margin-right: 1px; 
 }
