@@ -180,8 +180,8 @@ const locales = {
     // Map page
     TOTALS: 'Kokonaissumma',
     TOTAL: 'Yhteensä',
-    DEFENCE: 'Puolustus',
-    CIVILIAN: 'Siviili',
+    DEFENCE: 'Sota-aseet',
+    CIVILIAN: 'Siviiliaseet',
     TOP5COUNTRIES: 'Suurimmat 5 maata',
     WORLD: 'World',
     RESET_ZOOM: 'Nollaa tarkennus',

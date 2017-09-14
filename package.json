@@ -23,6 +23,7 @@
     "loaders.css": "^0.1.2",
     "material-ui": "^1.0.0-beta.6",
     "material-ui-icons": "^1.0.0-beta.5",
+    "npm-font-source-sans-pro": "^1.0.2",
     "react": "^15.5.4",
     "react-csv": "^1.0.8",
     "react-dom": "^15.5.4",
@@ -31,6 +32,7 @@
     "react-markdown": "^2.5.0",
     "react-router-dom": "^4.1.1",
     "react-share": "^1.16.0",
+    "source-sans-pro": "^2.0.10",
     "topojson": "^3.0.0"
   },
   "lint-staged": {

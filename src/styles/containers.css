@@ -7,11 +7,11 @@
 
 .content-wrapper {
 	min-height: 200px;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .content-wrapper > *:not(.data-section-container) {
-	padding: 43px 16px;
+	padding: 5rem 16px;
 }
 
 .loading {
