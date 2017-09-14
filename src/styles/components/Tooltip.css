@@ -6,7 +6,6 @@
   pointer-events: none;
   position: absolute;
   width: 200px;
-  display: none;
 }
 
 .tooltip h1{
