@@ -1,5 +1,9 @@
-.top-countries__country, .top-countries__title {
+.top-countries__country{
 	margin-bottom: 1rem;
+}
+
+.top-countries__country:last-of-type{
+	margin-bottom: 0rem;
 }
 
 .top-countries__title {
@@ -55,4 +59,8 @@
 
 .top-countries {
 	font-size: 1rem;
+}
+
+.country-rank {
+	font-size: 0.875rem;
 }
