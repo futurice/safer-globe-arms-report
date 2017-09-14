@@ -11,17 +11,29 @@ import './../styles/components/CountryDataList.css';
 import './../styles/components/TopFiveCountries.css';
 
 class TopFiveCountries extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selected: 'total',
+    };
+  }
+
+  handleTabClick(value) {
+    this.setState({ selected: value });
+  }
+
   render() {
     const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
-    const total = totals[this.props.activeTab].value;
+    const total = totals[this.state.selected].value;
 
     return (
       <div>
         <div className="country-data-list__title">
           {intl.get('FINNISH_ARMS_EXPORT')}
         </div>
-        <DataListTabs onClick={this.props.selectTab} />
+        <DataListTabs onClick={this.handleTabClick.bind(this)} />
         <Divider className="divider" />
         <DataListTotal
           year={year}
@@ -36,18 +48,18 @@ class TopFiveCountries extends Component {
           <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}
           </div>
-          {countries.map((data, i) =>
+          {countries.map((data, i) => (
             <div key={i} className="top-countries__country">
               <div className="top-countries__name">
                 <span className="top-countries__name--wrapper">
                   <span>
                     {i + 1}
                   </span>
-                  <span>
+                  <span className={'top-countries__name' + (i + 1)}>
                     {data.Countries}
                   </span>
                 </span>
-                <span className="top-countries__name--sum">
+                <span className={'top-countries__name--sum' + (i + 1)}>
                   {formatEuros(data.Total)}
                 </span>
               </div>
@@ -63,13 +75,13 @@ class TopFiveCountries extends Component {
                   className="top-countries__graphs--defence"
                   id={'top-countries__graphs--defence' + (i + 1)}
                   style={{
-                    width:
-                      Math.round(data.Defence_Materiel / baseNum * 100) + '%',
+                    width: Math.round(data.Defence_Materiel / baseNum * 100) +
+                      '%',
                   }}
                 />
               </div>
-            </div>,
-          )}
+            </div>
+          ))}
         </div>
         <div
           className="country-bullet-point"
@@ -93,8 +105,6 @@ TopFiveCountries.propTypes = {
   countries: PropTypes.array.isRequired,
   totals: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
-  activeTab: PropTypes.string.isRequired,
-  selectTab: PropTypes.func.isRequired,
 };
 
 export default TopFiveCountries;

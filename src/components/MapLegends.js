@@ -7,13 +7,12 @@ export default class Maplegends extends Component {
   constructor(props) {
     super(props);
 
-    this.colorList = ['#C6E9F0', '#A7D3E5', '#7FA2CE', '#7A6CA8', '#7D2F6A'];
+    this.colorList = ['#D5E1EC', '#B7BFD6', '#9F9CC1', '#89659F', '#82197C'];
   }
 
   render() {
     return (
       <div className="map-legends box-shadow">
-        <div className="label">GPI</div>
         <div className="flex-container-row">
           <div className="flex-column-column">
             <ul>

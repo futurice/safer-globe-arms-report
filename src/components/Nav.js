@@ -12,10 +12,8 @@ class Nav extends Component {
       <nav className="primary-nav">
         <h1>
           <Link to="/">
-            <span className="is-strong">
-              {intl.get('ARMS_REPORT')}
-            </span>
-            <span className="is-light"> | SaferGlobe</span>
+            <span className="is-strong logo-text">SaferGlobe</span>
+            <span className="is-light logo-sub-text">Arms Report</span>
           </Link>
         </h1>
         <ul className="flex-container no-bullets">
