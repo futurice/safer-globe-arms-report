@@ -23,7 +23,7 @@ class DataTimeline extends Component {
 
     const startYear = parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
     const endYear =
-      parseInt(d3.keys(saferGlobeJson[0].years).slice(-1)[0], 10) + 1; // +1 fixes calculation to add defined year in the list too
+      parseInt(d3.keys(saferGlobeJson[0].years).slice(-2)[0], 10) + 1; // +1 fixes calculation to add defined year in the list too
 
     this.state = {
       activeYear: endYear - 1,
@@ -52,7 +52,9 @@ class DataTimeline extends Component {
     return (
       <div className="flex-container flex-spread at-flex-end">
         <div
-          className={`play-button ${this.state.play === true ? 'active-play' : ''}`}
+          className={`play-button ${this.state.play === true
+            ? 'active-play'
+            : ''}`}
           onClick={() => {
             this.processPlay(!this.state.play);
           }}
@@ -62,10 +64,12 @@ class DataTimeline extends Component {
             alt={this.state.play === true ? 'Pause Icon' : 'Play Icon'}
           />
         </div>
-        {this.state.years.map((year, i) => (
+        {this.state.years.map((year, i) =>
           <div
             key={i}
-            className={`timeline-item ${year} ${this.state.activeYear === year ? 'active' : ''}`}
+            className={`timeline-item ${year} ${this.state.activeYear === year
+              ? 'active'
+              : ''}`}
             id={year}
             onClick={() => {
               this.processNewGPIYear(year);
@@ -74,8 +78,8 @@ class DataTimeline extends Component {
             <span className="timeline-item-year">
               {year}
             </span>
-          </div>
-        ))}
+          </div>,
+        )}
       </div>
     );
   }
