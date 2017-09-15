@@ -4,6 +4,8 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import * as d3GeoProjection from 'd3-geo-projection';
 import { csv } from 'd3-request';
+import { CircularProgress } from 'material-ui/Progress';
+
 import output from './../data/output-v4.json';
 import gpi from './../data/gpi_2008-2016_v1.csv';
 import saferGlobe from './../data/safer-globe.csv';
@@ -83,7 +85,8 @@ class DataMap extends Component {
     let active = { state: false, country: '' },
       mouseHover = { state: false, country: '' };
 
-    let play = false, timer;
+    let play = false,
+      timer;
     /*
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
@@ -1421,7 +1424,9 @@ class DataMap extends Component {
     function updateSideBarYear(cntryNm, yrs) {
       let lineChartwidth = 308,
         lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
-      let totalVal = 0, defenceVal = 0, civilianVal = 0;
+      let totalVal = 0,
+        defenceVal = 0,
+        civilianVal = 0;
       let lineChartX = d3
         .scaleLinear()
         .rangeRound([
@@ -1471,7 +1476,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['TotalCountry']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['TotalCountry'] === totalVal
@@ -1532,9 +1538,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 =
                 arrSorted[k - 1].years[selectedYear].CivilianArmsTotal *
                 100 /
@@ -1567,7 +1573,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CivilianArmsTotal']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CivilianArmsTotal'] ===
@@ -1664,7 +1671,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CountryMilatary']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CountryMilatary'] ===
@@ -1724,9 +1732,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 = 0;
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
@@ -1960,7 +1968,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['TotalCountry']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['TotalCountry'] === totalVal
@@ -2021,9 +2030,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 =
                 arrSorted[k - 1].years[selectedYear].CivilianArmsTotal *
                 100 /
@@ -2056,7 +2065,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CivilianArmsTotal']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CivilianArmsTotal'] ===
@@ -2153,7 +2163,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CountryMilatary']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CountryMilatary'] ===
@@ -2213,9 +2224,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 = 0;
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
@@ -3157,7 +3168,8 @@ class DataMap extends Component {
       '#82197C',
     ];
 
-    let civilianColor = '#785ef0', defenceColor = '#fe6100';
+    let civilianColor = '#785ef0',
+      defenceColor = '#fe6100';
 
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
 
@@ -3256,7 +3268,9 @@ class DataMap extends Component {
         .x((d, i) => lineChartX(i))
         .y(d => lineChartY(d));
 
-      let totalForLine = [], defenceForLine = [], civilianForLine = [];
+      let totalForLine = [],
+        defenceForLine = [],
+        civilianForLine = [];
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
@@ -3407,7 +3421,9 @@ class DataMap extends Component {
         .x((d, i) => lineChartX(i))
         .y(d => lineChartY(d));
 
-      let totalForLine = [], defenceForLine = [], civilianForLine = [];
+      let totalForLine = [],
+        defenceForLine = [],
+        civilianForLine = [];
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
@@ -3518,7 +3534,8 @@ class DataMap extends Component {
       this.state.countryData,
       this.state.countryData.objects.countries,
     ).features;
-    let countryList = [], dataV2CountryList = [];
+    let countryList = [],
+      dataV2CountryList = [];
     let origin;
     features.forEach((d, i) => {
       countryList.push(d.properties.name);
@@ -4399,7 +4416,7 @@ class DataMap extends Component {
         </div>
       );
     } else {
-      return <div style={{ textAlign: 'center' }}>Loading Map...</div>;
+      return <CircularProgress className="loading" />;
     }
   }
 }
