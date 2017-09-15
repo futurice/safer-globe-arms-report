@@ -69,8 +69,8 @@ class DataMap extends Component {
   }
 
   drawMap(displayData) {
-    let totalExport = [{}];
-    let intlMissions = [{}];
+    let totalExport = [{}],
+      intlMissions = [{}];
     d3.select('.map-container').html('');
 
     const wid = Math.max(1024, window.innerWidth),
@@ -83,7 +83,8 @@ class DataMap extends Component {
     let active = { state: false, country: '' },
       mouseHover = { state: false, country: '' };
 
-    let play = false, timer;
+    let play = false,
+      timer;
     /*
     let tooltipFigure = figure =>
       (parseFloat(figure) / 1000000).toFixed(2).toString().replace('.', ',');
@@ -242,6 +243,7 @@ class DataMap extends Component {
         .on('mouseover', d => {
           hover(d.name, d3.event.x, d3.event.y);
         })
+        .on('mouseout', mouseOut)
         .transition()
         .delay(2000)
         .duration(
@@ -288,6 +290,7 @@ class DataMap extends Component {
         .on('mouseover', d => {
           hover(d.name, d3.event.x, d3.event.y);
         })
+        .on('mouseout', mouseOut)
         .transition()
         .delay(
           d =>
@@ -327,6 +330,7 @@ class DataMap extends Component {
         .attr('fill', defenceColor)
         .on('mouseover', hoverIntl)
         .on('click', clicked)
+        .on('mouseout', mouseOut)
         .style('cursor', 'pointer')
         .transition()
         .duration(500)
@@ -359,13 +363,11 @@ class DataMap extends Component {
         .style('pointer-events', 'auto');
     }
     function changeYear(yrs) {
-      selectedYear = yrs;
       d3.selectAll('.data-list-total__year').html(yrs);
       document.getElementsByClassName('active')[0].classList.remove('active');
       document.getElementById(yrs).classList.add('active');
-      currentYear = parseInt(yrs, 10) + 1;
       if (mouseHover.state) {
-        updateSideBarYear(mouseHover.country, selectedYear);
+        updateSideBarYear(mouseHover.country, yrs);
         d3.selectAll('.land').transition().duration(200).attr('fill', d => {
           let cntryName = d.properties.name;
           if (d.properties.name === 'Alaska (United States of America)') {
@@ -381,7 +383,7 @@ class DataMap extends Component {
         });
       }
       if (active.state && !mouseHover.state) {
-        updateSideBarYear(active.country, selectedYear);
+        updateSideBarYear(active.country, yrs);
         d3.selectAll('.land').transition().duration(200).attr('fill', d => {
           let cntryName = d.properties.name;
           if (d.properties.name === 'Alaska (United States of America)') {
@@ -397,7 +399,7 @@ class DataMap extends Component {
         });
       }
       if (!active.state && !mouseHover.state) {
-        updateSideBarYear('World', selectedYear);
+        updateSideBarYear('World', yrs);
         d3
           .selectAll('.land')
           .transition()
@@ -425,550 +427,64 @@ class DataMap extends Component {
             }
             let indx = dataV2CountryList.indexOf(cntryname);
             if (armstype === 'total') {
-              if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
-                return 0.7;
+              if (dataV2[indx].years[yrs]['TotalCountry'] > 0) return 0.7;
               else return 0.15;
             }
             if (armstype === 'defence') {
-              if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
-                return 0.7;
+              if (dataV2[indx].years[yrs]['CountryMilatary'] > 0) return 0.7;
               else return 0.15;
             }
             if (armstype === 'civilian') {
-              if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
-                return 0.7;
+              if (dataV2[indx].years[yrs]['CivilianArmsTotal'] > 0) return 0.7;
               else return 0.15;
             }
           });
       }
-      if (armstype === 'total') {
-        d3
-          .selectAll('.civBars')
-          .transition()
-          .duration(500)
-          .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CivilianArmsTotal']);
-          })
-          .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
-            return d.centroid[1] - y1;
-          });
-        d3
-          .selectAll('.milBars')
-          .transition()
-          .duration(500)
-          .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CountryMilatary']);
-          })
-          .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']),
-              y2 = hScale(d.years[selectedYear]['CountryMilatary']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
-            if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
-            return d.centroid[1] - y1 - y2;
-          });
-        d3
-          .selectAll('.intlmissionsbar')
-          .transition()
-          .duration(500)
-          .attr('y', d => {
-            let y1 = hScale(d[selectedYear]['Total']);
-            if (d[selectedYear]['Total'] === 0) y1 = 0;
-            return hght - 42 - y1;
-          })
-          .attr('height', d => {
-            if (d[selectedYear]['Total'] === 0) return 0;
-            return hScale(d[selectedYear]['Total']);
-          });
-
-        if (mouseHover.state) {
-          let cname = mouseHover.country;
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            if (values.years[selectedYear].TotalCountry === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'inline');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}`,
-                )
-                .attr('fill-opacity', 0.8);
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connectorIntl`,
-                )
-                .style('display', 'inline');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          }
-        }
-        if (active.state && !mouseHover.state) {
-          let cname = active.country;
-          console.log(cname);
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            console.log(values.years[selectedYear].TotalCountry);
-            if (values.years[selectedYear].TotalCountry === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'inline');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}`,
-                )
-                .attr('fill-opacity', 0.8);
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connectorIntl`,
-                )
-                .style('display', 'inline');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          }
-        }
-      }
-      if (armstype === 'civilian') {
-        d3
-          .selectAll('.civBars')
-          .transition()
-          .duration(500)
-          .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CivilianArmsTotal']);
-          })
-          .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
-            return d.centroid[1] - y1;
-          });
-        d3
-          .selectAll('.milBars')
-          .transition()
-          .duration(500)
-          .attr('height', 0)
-          .attr('y', d => d.centroid[1]);
-        d3
-          .selectAll('.intlmissionsbar')
-          .transition()
-          .duration(500)
-          .attr('y', hght - 42)
-          .attr('height', 0);
-        if (mouseHover.state) {
-          let cname = mouseHover.country;
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            if (values.years[selectedYear].CivilianArmsTotal === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'none');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            d3.selectAll('.land').attr('fill-opacity', 0.1);
-          }
-        }
-        if (active.state && !mouseHover.state) {
-          let cname = active.country;
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            if (values.years[selectedYear].CivilianArmsTotal === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'none');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            d3.selectAll('.land').attr('fill-opacity', 0.1);
-          }
-        }
-      }
-      if (armstype === 'defence') {
-        d3
-          .selectAll('.civBars')
-          .transition()
-          .duration(500)
-          .attr('height', 0)
-          .attr('y', d => d.centroid[1]);
-        d3
-          .selectAll('.milBars')
-          .transition()
-          .duration(500)
-          .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CountryMilatary']);
-          })
-          .attr('y', d => {
-            let y2 = hScale(d.years[selectedYear]['CountryMilatary']);
-            if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
-            return d.centroid[1] - y2;
-          });
-        d3
-          .selectAll('.intlmissionsbar')
-          .transition()
-          .duration(500)
-          .attr('y', d => {
-            let y1 = hScale(d[selectedYear]['Total']);
-            if (d[selectedYear]['Total'] === 0) y1 = 0;
-            return hght - 42 - y1;
-          })
-          .attr('height', d => {
-            if (d[selectedYear]['Total'] === 0) return 0;
-            return hScale(d[selectedYear]['Total']);
-          });
-        if (mouseHover.state) {
-          let cname = mouseHover.country;
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            if (values.years[selectedYear].CountryMilatary === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'inline');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}`,
-                )
-                .attr('fill-opacity', 0.8);
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connectorIntl`,
-                )
-                .style('display', 'inline');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          }
-        }
-        if (active.state && !mouseHover.state) {
-          let cname = active.country;
-          if (cname !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${cname
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            if (values.years[selectedYear].CountryMilatary === 0) {
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('#FinlandOverlay').style('display', 'none');
-            } else {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              d3.selectAll('.connectorLineIntl').style('display', 'none');
-              d3.selectAll('.connectorLine').style('display', 'none');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          } else {
-            d3.selectAll('#FinlandOverlay').style('display', 'inline');
-            d3.selectAll('.connectorLineIntl').style('display', 'none');
-            d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}`,
-                )
-                .attr('fill-opacity', 0.8);
-              d3
-                .selectAll(
-                  `#${cntryName
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connectorIntl`,
-                )
-                .style('display', 'inline');
-              d3
-                .selectAll(
-                  `#${cname
-                    .replace(/ /g, '_')
-                    .replace('(', '_')
-                    .replace(')', '_')
-                    .replace("'", '_')
-                    .replace('.', '_')}connector`,
-                )
-                .style('display', 'inline');
-            }
-          }
-        }
-      }
+      redrawBars(armstype, yrs);
     }
 
-    function redrawBars(val) {
+    function redrawBars(val, yrs) {
+      console.log(yrs);
       if (val === 'total') {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CivilianArmsTotal']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) return 0;
+            return hScale(d.years[yrs]['CivilianArmsTotal']);
           })
           .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
+            let y1 = hScale(d.years[yrs]['CivilianArmsTotal']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
             return d.centroid[1] - y1;
           });
         d3
           .selectAll('.intlmissionsbar')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('y', d => {
-            let y1 = hScale(d[selectedYear]['Total']);
-            if (d[selectedYear]['Total'] === 0) y1 = 0;
+            let y1 = hScale(d[yrs]['Total']);
+            if (d[yrs]['Total'] === 0) y1 = 0;
             return hght - 42 - y1;
           })
           .attr('height', d => {
-            if (d[selectedYear]['Total'] === 0) return 0;
-            return hScale(d[selectedYear]['Total']);
+            if (d[yrs]['Total'] === 0) return 0;
+            return hScale(d[yrs]['Total']);
           });
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CountryMilatary']);
+            if (d.years[yrs]['CountryMilatary'] === 0) return 0;
+            return hScale(d.years[yrs]['CountryMilatary']);
           })
           .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']),
-              y2 = hScale(d.years[selectedYear]['CountryMilatary']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
-            if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
+            let y1 = hScale(d.years[yrs]['CivilianArmsTotal']),
+              y2 = hScale(d.years[yrs]['CountryMilatary']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
+            if (d.years[yrs]['CountryMilatary'] === 0) y2 = 0;
             return d.centroid[1] - y1 - y2;
           });
         if (mouseHover.state) {
@@ -984,7 +500,7 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            if (values.years[selectedYear].TotalCountry === 0) {
+            if (values.years[yrs].TotalCountry === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1007,12 +523,8 @@ class DataMap extends Component {
             d3.selectAll('#FinlandOverlay').style('display', 'inline');
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+            for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
+              let cntryName = intlMissions[0][yrs]['Countries'][i][0];
               d3
                 .selectAll(
                   `#${cntryName
@@ -1060,8 +572,8 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            console.log(values.years[selectedYear].TotalCountry);
-            if (values.years[selectedYear].TotalCountry === 0) {
+            console.log(values.years[yrs].TotalCountry);
+            if (values.years[yrs].TotalCountry === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1084,12 +596,8 @@ class DataMap extends Component {
             d3.selectAll('#FinlandOverlay').style('display', 'inline');
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+            for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
+              let cntryName = intlMissions[0][yrs]['Countries'][i][0];
               d3
                 .selectAll(
                   `#${cntryName
@@ -1128,30 +636,30 @@ class DataMap extends Component {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', d => {
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CivilianArmsTotal']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) return 0;
+            return hScale(d.years[yrs]['CivilianArmsTotal']);
           })
           .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
+            let y1 = hScale(d.years[yrs]['CivilianArmsTotal']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
             return d.centroid[1] - y1;
           });
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', 0)
           .attr('y', d => {
-            let y1 = hScale(d.years[selectedYear]['CivilianArmsTotal']);
-            if (d.years[selectedYear]['CivilianArmsTotal'] === 0) y1 = 0;
+            let y1 = hScale(d.years[yrs]['CivilianArmsTotal']);
+            if (d.years[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
             return d.centroid[1] - y1;
           });
         d3
           .selectAll('.intlmissionsbar')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('y', hght - 42)
           .attr('height', 0);
         if (mouseHover.state) {
@@ -1167,7 +675,7 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+            if (values.years[yrs].CivilianArmsTotal === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1206,7 +714,7 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            if (values.years[selectedYear].CivilianArmsTotal === 0) {
+            if (values.years[yrs].CivilianArmsTotal === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1237,34 +745,34 @@ class DataMap extends Component {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', 0)
           .attr('y', d => d.centroid[1]);
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('height', d => {
-            if (d.years[selectedYear]['CountryMilatary'] === 0) return 0;
-            return hScale(d.years[selectedYear]['CountryMilatary']);
+            if (d.years[yrs]['CountryMilatary'] === 0) return 0;
+            return hScale(d.years[yrs]['CountryMilatary']);
           })
           .attr('y', d => {
-            let y2 = hScale(d.years[selectedYear]['CountryMilatary']);
-            if (d.years[selectedYear]['CountryMilatary'] === 0) y2 = 0;
+            let y2 = hScale(d.years[yrs]['CountryMilatary']);
+            if (d.years[yrs]['CountryMilatary'] === 0) y2 = 0;
             return d.centroid[1] - y2;
           });
         d3
           .selectAll('.intlmissionsbar')
           .transition()
-          .duration(500)
+          .duration(200)
           .attr('y', d => {
-            let y1 = hScale(d[selectedYear]['Total']);
-            if (d[selectedYear]['Total'] === 0) y1 = 0;
+            let y1 = hScale(d[yrs]['Total']);
+            if (d[yrs]['Total'] === 0) y1 = 0;
             return hght - 42 - y1;
           })
           .attr('height', d => {
-            if (d[selectedYear]['Total'] === 0) return 0;
-            return hScale(d[selectedYear]['Total']);
+            if (d[yrs]['Total'] === 0) return 0;
+            return hScale(d[yrs]['Total']);
           });
         if (mouseHover.state) {
           let cname = mouseHover.country;
@@ -1279,7 +787,7 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            if (values.years[selectedYear].CountryMilatary === 0) {
+            if (values.years[yrs].CountryMilatary === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1302,12 +810,8 @@ class DataMap extends Component {
             d3.selectAll('#FinlandOverlay').style('display', 'inline');
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+            for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
+              let cntryName = intlMissions[0][yrs]['Countries'][i][0];
               d3
                 .selectAll(
                   `#${cntryName
@@ -1354,7 +858,7 @@ class DataMap extends Component {
                   .replace('.', '_')}milBar`,
               )
               .datum();
-            if (values.years[selectedYear].CountryMilatary === 0) {
+            if (values.years[yrs].CountryMilatary === 0) {
               d3.selectAll('.connectorLine').style('display', 'none');
               d3.selectAll('.connectorLineIntl').style('display', 'none');
               d3.selectAll('#FinlandOverlay').style('display', 'none');
@@ -1377,12 +881,8 @@ class DataMap extends Component {
             d3.selectAll('#FinlandOverlay').style('display', 'inline');
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            for (
-              let i = 0;
-              i < intlMissions[0][selectedYear]['Countries'].length;
-              i++
-            ) {
-              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+            for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
+              let cntryName = intlMissions[0][yrs]['Countries'][i][0];
               d3
                 .selectAll(
                   `#${cntryName
@@ -1419,9 +919,14 @@ class DataMap extends Component {
       }
     }
     function updateSideBarYear(cntryNm, yrs) {
+      if (cntryNm === 'World') {
+        d3.selectAll('rect').attr('opacity', 1);
+      }
       let lineChartwidth = 308,
         lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
-      let totalVal = 0, defenceVal = 0, civilianVal = 0;
+      let totalVal = 0,
+        defenceVal = 0,
+        civilianVal = 0;
       let lineChartX = d3
         .scaleLinear()
         .rangeRound([
@@ -1436,13 +941,13 @@ class DataMap extends Component {
         .attr('x1', lineChartX(parseInt(yrs, 10) - startYear))
         .attr('x2', lineChartX(parseInt(yrs, 10) - startYear));
       if (cntryNm === 'World') {
-        totalVal = totalExport[0][selectedYear]['Total'];
-        defenceVal = totalExport[0][selectedYear]['Military'];
-        civilianVal = totalExport[0][selectedYear]['Civilian'];
+        totalVal = totalExport[0][yrs]['Total'];
+        defenceVal = totalExport[0][yrs]['Military'];
+        civilianVal = totalExport[0][yrs]['Civilian'];
       }
       if (cntryNm === 'International Missions') {
-        totalVal = intlMissions[0][selectedYear].Total;
-        defenceVal = intlMissions[0][selectedYear].Total;
+        totalVal = intlMissions[0][yrs].Total;
+        defenceVal = intlMissions[0][yrs].Total;
         civilianVal = 0;
       }
       if (cntryNm !== 'World' && cntryNm !== 'International Missions') {
@@ -1456,9 +961,9 @@ class DataMap extends Component {
               .replace('.', '_')}milBar`,
           )
           .datum();
-        totalVal = values.years[selectedYear].TotalCountry;
-        defenceVal = values.years[selectedYear].CountryMilatary;
-        civilianVal = values.years[selectedYear].CivilianArmsTotal;
+        totalVal = values.years[yrs].TotalCountry;
+        defenceVal = values.years[yrs].CountryMilatary;
+        civilianVal = values.years[yrs].CivilianArmsTotal;
       }
       if (cntryNm !== 'International Missions') {
         if (armstype === 'total') {
@@ -1467,22 +972,20 @@ class DataMap extends Component {
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           arrSorted.sort(function(x, y) {
             return (
-              y['years'][selectedYear]['TotalCountry'] -
-              x['years'][selectedYear]['TotalCountry']
+              y['years'][yrs]['TotalCountry'] - x['years'][yrs]['TotalCountry']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
-            if (
-              arrSorted[i]['years'][selectedYear]['TotalCountry'] === totalVal
-            ) {
+            if (arrSorted[i]['years'][yrs]['TotalCountry'] === totalVal) {
               rank = i + 1;
             }
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
-                arrSorted[i]['years'][selectedYear]['MilataryComment'] +
+                arrSorted[i]['years'][yrs]['MilataryComment'] +
                 '<br>' +
-                arrSorted[i]['years'][selectedYear]['CivilianArmsComment'];
+                arrSorted[i]['years'][yrs]['CivilianArmsComment'];
               break;
             }
           }
@@ -1498,7 +1001,7 @@ class DataMap extends Component {
                     "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             } else {
@@ -1510,7 +1013,7 @@ class DataMap extends Component {
                     "'s</span> rank for total arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             }
@@ -1532,19 +1035,17 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[yrs].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 =
-                arrSorted[k - 1].years[selectedYear].CivilianArmsTotal *
+                arrSorted[k - 1].years[yrs].CivilianArmsTotal *
                 100 /
                 totalExport[0][yrs]['Total'];
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(
-                formatEuros(arrSorted[k - 1].years[selectedYear].TotalCountry),
-              );
+              .html(formatEuros(arrSorted[k - 1].years[yrs].TotalCountry));
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1563,21 +1064,20 @@ class DataMap extends Component {
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           arrSorted.sort(function(x, y) {
             return (
-              y['years'][selectedYear]['CivilianArmsTotal'] -
-              x['years'][selectedYear]['CivilianArmsTotal']
+              y['years'][yrs]['CivilianArmsTotal'] -
+              x['years'][yrs]['CivilianArmsTotal']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
-              arrSorted[i]['years'][selectedYear]['CivilianArmsTotal'] ===
-              civilianVal
+              arrSorted[i]['years'][yrs]['CivilianArmsTotal'] === civilianVal
             ) {
               rank = i + 1;
             }
             if (arrSorted[i]['name'] === cntryNm) {
-              bullets =
-                arrSorted[i]['years'][selectedYear]['CivilianArmsComment'];
+              bullets = arrSorted[i]['years'][yrs]['CivilianArmsComment'];
               break;
             }
           }
@@ -1593,7 +1093,7 @@ class DataMap extends Component {
                     "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             } else {
@@ -1605,7 +1105,7 @@ class DataMap extends Component {
                     "'s</span> rank for civilian arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             }
@@ -1631,17 +1131,13 @@ class DataMap extends Component {
           for (let k = 1; k < 6; k++) {
             let percentDef1 = 0,
               percentCiv1 =
-                arrSorted[k - 1].years[selectedYear].CivilianArmsTotal *
+                arrSorted[k - 1].years[yrs].CivilianArmsTotal *
                 100 /
                 totalExport[0][yrs]['Total'];
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(
-                formatEuros(
-                  arrSorted[k - 1].years[selectedYear].CivilianArmsTotal,
-                ),
-              );
+              .html(formatEuros(arrSorted[k - 1].years[yrs].CivilianArmsTotal));
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1660,20 +1156,18 @@ class DataMap extends Component {
           d3.selectAll('.civilianLine').attr('opacity', 0.1);
           arrSorted.sort(function(x, y) {
             return (
-              y['years'][selectedYear]['CountryMilatary'] -
-              x['years'][selectedYear]['CountryMilatary']
+              y['years'][yrs]['CountryMilatary'] -
+              x['years'][yrs]['CountryMilatary']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
-            if (
-              arrSorted[i]['years'][selectedYear]['CountryMilatary'] ===
-              defenceVal
-            ) {
+            if (arrSorted[i]['years'][yrs]['CountryMilatary'] === defenceVal) {
               rank = i + 1;
             }
             if (arrSorted[i]['name'] === cntryNm) {
-              bullets = arrSorted[i]['years'][selectedYear]['MilataryComment'];
+              bullets = arrSorted[i]['years'][yrs]['MilataryComment'];
               break;
             }
           }
@@ -1689,7 +1183,7 @@ class DataMap extends Component {
                     "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             } else {
@@ -1701,7 +1195,7 @@ class DataMap extends Component {
                     "'s</span> rank for military arms imports from Finland was <span style='font-weight:700'>" +
                     rank +
                     '</span> in the year ' +
-                    selectedYear +
+                    yrs +
                     '.',
                 );
             }
@@ -1724,18 +1218,14 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[yrs].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 = 0;
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(
-                formatEuros(
-                  arrSorted[k - 1].years[selectedYear].CountryMilatary,
-                ),
-              );
+              .html(formatEuros(arrSorted[k - 1].years[yrs].CountryMilatary));
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1760,7 +1250,7 @@ class DataMap extends Component {
         }
       } else {
         if (armstype === 'total') {
-          intlMissions[0][selectedYear].Countries.sort((a, b) => {
+          intlMissions[0][yrs].Countries.sort((a, b) => {
             return d3.descending(a[1], b[1]);
           });
           d3.selectAll('.key-points-head').remove();
@@ -1780,7 +1270,7 @@ class DataMap extends Component {
             .style('width', '293px');
           tbl
             .selectAll('.country-row')
-            .data(intlMissions[0][selectedYear].Countries)
+            .data(intlMissions[0][yrs].Countries)
             .enter()
             .append('tr')
             .attr('class', 'country-row');
@@ -1849,7 +1339,7 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
         }
         if (armstype === 'defence') {
-          intlMissions[0][selectedYear].Countries.sort((a, b) => {
+          intlMissions[0][yrs].Countries.sort((a, b) => {
             return d3.descending(a[1], b[1]);
           });
           d3.selectAll('.key-points-head').remove();
@@ -1869,7 +1359,7 @@ class DataMap extends Component {
             .style('width', '293px');
           tbl
             .selectAll('.country-row')
-            .data(intlMissions[0][selectedYear].Countries)
+            .data(intlMissions[0][yrs].Countries)
             .enter()
             .append('tr')
             .attr('class', 'country-row');
@@ -1909,12 +1399,8 @@ class DataMap extends Component {
 
         if (armstype === 'total' || armstype === 'defence') {
           d3.selectAll('.land').attr('fill-opacity', 0.1);
-          for (
-            let i = 0;
-            i < intlMissions[0][selectedYear]['Countries'].length;
-            i++
-          ) {
-            let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+          for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
+            let cntryName = intlMissions[0][yrs]['Countries'][i][0];
             d3
               .selectAll(
                 `#${cntryName
@@ -1940,6 +1426,7 @@ class DataMap extends Component {
         }
       }
     }
+
     function updateSidebar(
       cntryNm,
       yrs,
@@ -1960,7 +1447,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['TotalCountry']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['TotalCountry'] === totalVal
@@ -2021,9 +1509,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 =
                 arrSorted[k - 1].years[selectedYear].CivilianArmsTotal *
                 100 /
@@ -2056,7 +1544,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CivilianArmsTotal']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CivilianArmsTotal'] ===
@@ -2153,7 +1642,8 @@ class DataMap extends Component {
               x['years'][selectedYear]['CountryMilatary']
             );
           });
-          let rank = 'NA', bullets = '';
+          let rank = 'NA',
+            bullets = '';
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['years'][selectedYear]['CountryMilatary'] ===
@@ -2213,9 +1703,9 @@ class DataMap extends Component {
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
-              arrSorted[k - 1].years[selectedYear].CountryMilatary *
-              100 /
-              totalExport[0][yrs]['Total'],
+                arrSorted[k - 1].years[selectedYear].CountryMilatary *
+                100 /
+                totalExport[0][yrs]['Total'],
               percentCiv1 = 0;
             d3.select('.top-countries__name' + k).html(arrSorted[k - 1].name);
             d3
@@ -2652,6 +2142,246 @@ class DataMap extends Component {
       );
     }
 
+    function mouseOut(data) {
+      mouseHover.state = false;
+      if (!active.state) {
+        d3.selectAll('.connectorLine').style('display', 'none');
+        d3.selectAll('.connectorLineIntl').style('display', 'none');
+        d3.selectAll('#FinlandOverlay').style('display', 'none');
+        d3
+          .selectAll('.land')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', d => {
+            let cntryname = d.properties.name;
+            if (d.properties.name === 'Alaska (United States of America)') {
+              cntryname = 'United States of America';
+            }
+            if (d.properties.name === 'France (Sub Region)') {
+              cntryname = 'France';
+            }
+            let indx = dataV2CountryList.indexOf(cntryname);
+            if (armstype === 'total') {
+              if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
+                return 0.7;
+              else return 0.15;
+            }
+            if (armstype === 'defence') {
+              if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
+                return 0.7;
+              else return 0.15;
+            }
+            if (armstype === 'civilian') {
+              if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
+                return 0.7;
+              else return 0.15;
+            }
+          });
+        d3.selectAll('rect').transition().duration(200).attr('opacity', 1);
+        d3
+          .selectAll('.intlmissionsbartext')
+          .transition()
+          .duration(200)
+          .attr('opacity', 1);
+        updateSidebar(
+          'World',
+          selectedYear,
+          totalExport[0][selectedYear]['Total'],
+          totalExport[0][selectedYear]['Military'],
+          totalExport[0][selectedYear]['Civilian'],
+          totalExport,
+        );
+      } else {
+        d3
+          .selectAll('.land')
+          .transition()
+          .duration(200)
+          .attr('fill-opacity', 0.1);
+        d3.selectAll('.connectorLine').style('display', 'none');
+        if (active.country !== 'International Missions') {
+          let values = d3
+            .select(
+              `#${active.country
+                .replace(/ /g, '_')
+                .replace('(', '_')
+                .replace(')', '_')
+                .replace("'", '_')
+                .replace('.', '_')}milBar`,
+            )
+            .datum();
+          d3
+            .select(
+              `#${active.country
+                .replace(/ /g, '_')
+                .replace('(', '_')
+                .replace(')', '_')
+                .replace("'", '_')
+                .replace('.', '_')}`,
+            )
+            .transition()
+            .duration(200)
+            .attr('fill-opacity', 0.8);
+          d3.selectAll('rect').transition().duration(200).attr('opacity', 0.3);
+          d3
+            .select(
+              `#${active.country
+                .replace(/ /g, '_')
+                .replace('(', '_')
+                .replace(')', '_')
+                .replace("'", '_')
+                .replace('.', '_')}milBar`,
+            )
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+          d3
+            .select(
+              `#${active.country
+                .replace(/ /g, '_')
+                .replace('(', '_')
+                .replace(')', '_')
+                .replace("'", '_')
+                .replace('.', '_')}civBar`,
+            )
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+          let dataForLineGraph = [{}];
+          for (let g = startYear; g <= endYear; g++) {
+            let totalObject = {
+              Year: g,
+              Total: 0,
+              Military: 0,
+              Civilian: 0,
+            };
+            totalObject.Military = values.years[g.toString()].CountryMilatary;
+            totalObject.Civilian = values.years[g.toString()].CivilianArmsTotal;
+            totalObject.Total = totalObject.Military + totalObject.Civilian;
+            dataForLineGraph[0][g.toString()] = totalObject;
+          }
+          d3
+            .selectAll('.intlmissionsbartext')
+            .transition()
+            .duration(200)
+            .attr('opacity', 0.2);
+          if (armstype === 'total') {
+            if (values.years[selectedYear].TotalCountry > 0) {
+              d3
+                .selectAll(
+                  `#${values.name
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            }
+          }
+          if (armstype === 'defence') {
+            if (values.years[selectedYear].CountryMilatary > 0) {
+              d3
+                .selectAll(
+                  `#${values.name
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            }
+          }
+          if (armstype === 'civilian') {
+            if (values.years[selectedYear].CivilianArmsTotal > 0) {
+              d3
+                .selectAll(
+                  `#${values.name
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+              d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            }
+          }
+          updateSidebar(
+            active.country,
+            selectedYear,
+            values.years[selectedYear].TotalCountry,
+            values.years[selectedYear].CountryMilatary,
+            values.years[selectedYear].CivilianArmsTotal,
+            dataForLineGraph,
+          );
+        } else {
+          d3.selectAll('rect').transition().duration(200).attr('opacity', 0.3);
+          d3
+            .selectAll('.intlmissionsbar')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+          d3
+            .selectAll('.intlmissionsbartext')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+
+          if (armstype === 'total' || armstype === 'defence') {
+            d3.selectAll('#FinlandOverlay').style('display', 'inline');
+            for (
+              let i = 0;
+              i < intlMissions[0][selectedYear]['Countries'].length;
+              i++
+            ) {
+              let cntryName = intlMissions[0][selectedYear]['Countries'][i][0];
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}`,
+                )
+                .attr('fill-opacity', 0.8);
+              d3
+                .selectAll(
+                  `#${cntryName
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connectorIntl`,
+                )
+                .style('display', 'inline');
+              d3
+                .selectAll(
+                  `#${active.country
+                    .replace(/ /g, '_')
+                    .replace('(', '_')
+                    .replace(')', '_')
+                    .replace("'", '_')
+                    .replace('.', '_')}connector`,
+                )
+                .style('display', 'inline');
+            }
+          }
+          updateSidebar(
+            'International Missions',
+            selectedYear,
+            intlMissions[0][selectedYear].Total,
+            intlMissions[0][selectedYear].Total,
+            0,
+            intlMissions,
+          );
+        }
+      }
+    }
+
     d3.selectAll('.country-data-container').on('mouseover', () => {
       mouseHover.state = false;
       if (active.state) {
@@ -2846,255 +2576,6 @@ class DataMap extends Component {
       .attr('height', hght)
       .style('fill', 'none')
       .attr('pointer-events', 'none')
-      .on('mouseover', () => {
-        mouseHover.state = false;
-        d3.selectAll('.connectorLine').style('display', 'none');
-        d3.selectAll('.connectorLineIntl').style('display', 'none');
-        d3.selectAll('#FinlandOverlay').style('display', 'none');
-        if (!active.state) {
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', d => {
-              let cntryname = d.properties.name;
-              if (d.properties.name === 'Alaska (United States of America)') {
-                cntryname = 'United States of America';
-              }
-              if (d.properties.name === 'France (Sub Region)') {
-                cntryname = 'France';
-              }
-              let indx = dataV2CountryList.indexOf(cntryname);
-              if (armstype === 'total') {
-                if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-              if (armstype === 'defence') {
-                if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-              if (armstype === 'civilian') {
-                if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-            });
-          d3.selectAll('rect').transition().duration(200).attr('opacity', 1);
-          d3
-            .selectAll('.intlmissionsbartext')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1);
-          updateSidebar(
-            'World',
-            selectedYear,
-            totalExport[0][selectedYear]['Total'],
-            totalExport[0][selectedYear]['Military'],
-            totalExport[0][selectedYear]['Civilian'],
-            totalExport,
-          );
-        } else {
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', 0.1);
-
-          if (active.country !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}`,
-              )
-              .transition()
-              .duration(200)
-              .attr('fill-opacity', 0.8);
-            d3
-              .selectAll('rect')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.3);
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}civBar`,
-              )
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            let dataForLineGraph = [{}];
-            for (let g = startYear; g <= endYear; g++) {
-              let totalObject = {
-                Year: g,
-                Total: 0,
-                Military: 0,
-                Civilian: 0,
-              };
-              totalObject.Military = values.years[g.toString()].CountryMilatary;
-              totalObject.Civilian =
-                values.years[g.toString()].CivilianArmsTotal;
-              totalObject.Total = totalObject.Military + totalObject.Civilian;
-              dataForLineGraph[0][g.toString()] = totalObject;
-            }
-            d3
-              .selectAll('.intlmissionsbartext')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.2);
-            if (armstype === 'total') {
-              if (values.years[selectedYear].TotalCountry > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            if (armstype === 'defence') {
-              if (values.years[selectedYear].CountryMilatary > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            if (armstype === 'civilian') {
-              if (values.years[selectedYear].CivilianArmsTotal > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            updateSidebar(
-              active.country,
-              selectedYear,
-              values.years[selectedYear].TotalCountry,
-              values.years[selectedYear].CountryMilatary,
-              values.years[selectedYear].CivilianArmsTotal,
-              dataForLineGraph,
-            );
-          } else {
-            d3
-              .selectAll('rect')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.3);
-            d3
-              .selectAll('.intlmissionsbar')
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            d3
-              .selectAll('.intlmissionsbartext')
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-
-            if (armstype === 'total' || armstype === 'defence') {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              for (
-                let i = 0;
-                i < intlMissions[0][selectedYear]['Countries'].length;
-                i++
-              ) {
-                let cntryName =
-                  intlMissions[0][selectedYear]['Countries'][i][0];
-                d3
-                  .selectAll(
-                    `#${cntryName
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}`,
-                  )
-                  .attr('fill-opacity', 0.8);
-                d3
-                  .selectAll(
-                    `#${cntryName
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connectorIntl`,
-                  )
-                  .style('display', 'inline');
-                d3
-                  .selectAll(
-                    `#${active.country
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-              }
-            }
-            updateSidebar(
-              'International Missions',
-              selectedYear,
-              intlMissions[0][selectedYear].Total,
-              intlMissions[0][selectedYear].Total,
-              0,
-              intlMissions,
-            );
-          }
-        }
-      })
       .on('click', () => {
         mapSVG.transition().duration(500).call(Zoom.transform, d3.zoomIdentity);
         active.state = false;
@@ -3157,16 +2638,17 @@ class DataMap extends Component {
       '#82197C',
     ];
 
-    let civilianColor = '#785ef0', defenceColor = '#fe6100';
+    let civilianColor = '#785ef0',
+      defenceColor = '#fe6100';
 
     let threshold = d3.scaleThreshold().domain(domain).range(colorList);
 
     let dataV2 = this.state.saferGlobeDataV2;
     const startYear = parseInt(d3.keys(dataV2[0].years)[0], 10),
-      endYear = parseInt(d3.keys(dataV2[0].years).slice(-1)[0], 10);
+      endYear = parseInt(d3.keys(dataV2[0].years).slice(-2)[0], 10);
     let gpiObject = {};
-    let currentYear = parseInt(d3.keys(dataV2[0].years).slice(-1)[0], 10),
-      selectedYear = d3.keys(dataV2[0].years).slice(-1)[0];
+    let currentYear = parseInt(d3.keys(dataV2[0].years).slice(-2)[0], 10),
+      selectedYear = d3.keys(dataV2[0].years).slice(-2)[0];
     for (let i = 0; i < this.state.gpiData.length; i++) {
       gpiObject[this.state.gpiData[i].country] = {};
       for (let k = startYear; k <= endYear; k++) {
@@ -3256,7 +2738,9 @@ class DataMap extends Component {
         .x((d, i) => lineChartX(i))
         .y(d => lineChartY(d));
 
-      let totalForLine = [], defenceForLine = [], civilianForLine = [];
+      let totalForLine = [],
+        defenceForLine = [],
+        civilianForLine = [];
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
@@ -3407,7 +2891,9 @@ class DataMap extends Component {
         .x((d, i) => lineChartX(i))
         .y(d => lineChartY(d));
 
-      let totalForLine = [], defenceForLine = [], civilianForLine = [];
+      let totalForLine = [],
+        defenceForLine = [],
+        civilianForLine = [];
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
@@ -3518,7 +3004,8 @@ class DataMap extends Component {
       this.state.countryData,
       this.state.countryData.objects.countries,
     ).features;
-    let countryList = [], dataV2CountryList = [];
+    let countryList = [],
+      dataV2CountryList = [];
     let origin;
     features.forEach((d, i) => {
       countryList.push(d.properties.name);
@@ -3612,252 +3099,7 @@ class DataMap extends Component {
         hover(cntryname, d3.event.x, d3.event.y);
       })
       .on('click', clicked)
-      .on('mouseout', d => {
-        if (!active.state) {
-          d3.selectAll('.connectorLine').style('display', 'none');
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', d => {
-              let cntryname = d.properties.name;
-              if (d.properties.name === 'Alaska (United States of America)') {
-                cntryname = 'United States of America';
-              }
-              if (d.properties.name === 'France (Sub Region)') {
-                cntryname = 'France';
-              }
-              let indx = dataV2CountryList.indexOf(cntryname);
-              if (armstype === 'total') {
-                if (dataV2[indx].years[selectedYear]['TotalCountry'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-              if (armstype === 'defence') {
-                if (dataV2[indx].years[selectedYear]['CountryMilatary'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-              if (armstype === 'civilian') {
-                if (dataV2[indx].years[selectedYear]['CivilianArmsTotal'] > 0)
-                  return 0.7;
-                else return 0.15;
-              }
-            });
-          d3.selectAll('rect').transition().duration(200).attr('opacity', 1);
-          d3
-            .selectAll('.intlmissionsbartext')
-            .transition()
-            .duration(200)
-            .attr('opacity', 1);
-          updateSidebar(
-            'World',
-            selectedYear,
-            totalExport[0][selectedYear]['Total'],
-            totalExport[0][selectedYear]['Military'],
-            totalExport[0][selectedYear]['Civilian'],
-            totalExport,
-          );
-        } else {
-          d3
-            .selectAll('.land')
-            .transition()
-            .duration(200)
-            .attr('fill-opacity', 0.1);
-          d3.selectAll('.connectorLine').style('display', 'none');
-          if (active.country !== 'International Missions') {
-            let values = d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .datum();
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}`,
-              )
-              .transition()
-              .duration(200)
-              .attr('fill-opacity', 0.8);
-            d3
-              .selectAll('rect')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.3);
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}milBar`,
-              )
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            d3
-              .select(
-                `#${active.country
-                  .replace(/ /g, '_')
-                  .replace('(', '_')
-                  .replace(')', '_')
-                  .replace("'", '_')
-                  .replace('.', '_')}civBar`,
-              )
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            let dataForLineGraph = [{}];
-            for (let g = startYear; g <= endYear; g++) {
-              let totalObject = {
-                Year: g,
-                Total: 0,
-                Military: 0,
-                Civilian: 0,
-              };
-              totalObject.Military = values.years[g.toString()].CountryMilatary;
-              totalObject.Civilian =
-                values.years[g.toString()].CivilianArmsTotal;
-              totalObject.Total = totalObject.Military + totalObject.Civilian;
-              dataForLineGraph[0][g.toString()] = totalObject;
-            }
-            d3
-              .selectAll('.intlmissionsbartext')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.2);
-            if (armstype === 'total') {
-              if (values.years[selectedYear].TotalCountry > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            if (armstype === 'defence') {
-              if (values.years[selectedYear].CountryMilatary > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            if (armstype === 'civilian') {
-              if (values.years[selectedYear].CivilianArmsTotal > 0) {
-                d3
-                  .selectAll(
-                    `#${values.name
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-                d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              }
-            }
-            updateSidebar(
-              active.country,
-              selectedYear,
-              values.years[selectedYear].TotalCountry,
-              values.years[selectedYear].CountryMilatary,
-              values.years[selectedYear].CivilianArmsTotal,
-              dataForLineGraph,
-            );
-          } else {
-            d3
-              .selectAll('rect')
-              .transition()
-              .duration(200)
-              .attr('opacity', 0.3);
-            d3
-              .selectAll('.intlmissionsbar')
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-            d3
-              .selectAll('.intlmissionsbartext')
-              .transition()
-              .duration(200)
-              .attr('opacity', 1);
-
-            if (armstype === 'total' || armstype === 'defence') {
-              d3.selectAll('#FinlandOverlay').style('display', 'inline');
-              for (
-                let i = 0;
-                i < intlMissions[0][selectedYear]['Countries'].length;
-                i++
-              ) {
-                let cntryName =
-                  intlMissions[0][selectedYear]['Countries'][i][0];
-                d3
-                  .selectAll(
-                    `#${cntryName
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}`,
-                  )
-                  .attr('fill-opacity', 0.8);
-                d3
-                  .selectAll(
-                    `#${cntryName
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connectorIntl`,
-                  )
-                  .style('display', 'inline');
-                d3
-                  .selectAll(
-                    `#${active.country
-                      .replace(/ /g, '_')
-                      .replace('(', '_')
-                      .replace(')', '_')
-                      .replace("'", '_')
-                      .replace('.', '_')}connector`,
-                  )
-                  .style('display', 'inline');
-              }
-            }
-            updateSidebar(
-              'International Missions',
-              selectedYear,
-              intlMissions[0][selectedYear].Total,
-              intlMissions[0][selectedYear].Total,
-              0,
-              intlMissions,
-            );
-          }
-        }
-      })
+      .on('mouseout', mouseOut)
       .transition()
       .duration(1250)
       .attr('fill-opacity', 0.7)
@@ -3925,6 +3167,7 @@ class DataMap extends Component {
       .attr('fill', '#aaa')
       .style('cursor', 'pointer')
       .on('mouseover', hoverIntl)
+      .on('mouseout', mouseOut)
       .on('click', clicked);
     zoomGroup
       .selectAll('.initCivBar')
@@ -4259,9 +3502,16 @@ class DataMap extends Component {
     for (let i = startYear; i <= endYear; i++) {
       document.getElementById(i.toString()).onclick = function(event) {
         currentYear = i;
+        selectedYear = i.toString();
         play = false;
         clearInterval(timer);
         changeYear(i.toString());
+      };
+      document.getElementById(i.toString()).onmouseover = function(event) {
+        if (!play) changeYear(i.toString());
+      };
+      document.getElementById(i.toString()).onmouseleave = function(event) {
+        if (!play) changeYear(selectedYear);
       };
     }
 
@@ -4277,9 +3527,11 @@ class DataMap extends Component {
           currentYear = startYear;
         }
         timer = setInterval(() => {
+          currentYear++;
           if (currentYear > endYear) {
             currentYear = startYear;
           }
+          selectedYear = currentYear.toString();
           changeYear(currentYear.toString());
         }, duration);
       }
@@ -4290,6 +3542,7 @@ class DataMap extends Component {
         .property('value');
       redrawBars(
         d3.select('input[name="countryList"]:checked').property('value'),
+        selectedYear,
       );
 
       if (!active.state) {

@@ -16,6 +16,7 @@ class Nav extends Component {
             <span className="is-light logo-sub-text">Arms Report</span>
           </Link>
         </h1>
+        {/*
         <ul className="flex-container no-bullets">
           <li>
             <NavLink exact to="/">
@@ -38,6 +39,7 @@ class Nav extends Component {
             </NavLink>
           </li>
         </ul>
+        */}
         <span className="lang-selection">
           <a
             href="?lang=fi"
