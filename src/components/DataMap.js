@@ -219,10 +219,16 @@ class DataMap extends Component {
         .attr('stroke-width', 1)
         .attr('stroke', '#2D80B5')
         .style('display', 'none');
-      zoomGroup
-        .selectAll('.civBars')
+
+      let gBar = zoomGroup
+        .selectAll('.milBars')
         .data(dataV2)
         .enter()
+        .append('g')
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.25);
+
+      gBar
         .append('rect')
         .attr('class', 'civBars')
         .attr(
@@ -262,10 +268,7 @@ class DataMap extends Component {
           return d.centroid[1] - y1;
         });
 
-      zoomGroup
-        .selectAll('.milBars')
-        .data(dataV2)
-        .enter()
+      gBar
         .append('rect')
         .attr('class', 'milBars')
         .attr(
