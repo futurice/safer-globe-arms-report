@@ -33,7 +33,7 @@ class DataMap extends Component {
       gpiData: null,
       gpiYear: 2016,
       saferGlobeData: null,
-      saferGlobeDataV2: null,
+      saferGlobeDataV2: saferGlobeJson,
     };
   }
 
@@ -57,6 +57,7 @@ class DataMap extends Component {
         this.setState({ loadError: true });
       }
       this.setState({ gpiData: data });
+      this.render();
     });
     csv(saferGlobe, (error, data) => {
       if (error) {
@@ -64,7 +65,6 @@ class DataMap extends Component {
       }
       this.setState({ saferGlobeData: data });
     });
-    this.setState({ saferGlobeDataV2: saferGlobeJson });
     this.setState({ gpiYear: this.props.gpiYear });
   }
 
@@ -3472,7 +3472,7 @@ class DataMap extends Component {
     if (
       this.state.countryData &&
       this.state.gpiData &&
-      this.state.saferGlobeData
+      this.state.saferGlobeDataV2
     ) {
       return (
         <div>
