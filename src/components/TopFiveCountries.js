@@ -22,12 +22,11 @@ class TopFiveCountries extends Component {
   handleTabClick(value) {
     this.setState({ selected: value });
   }
-
   render() {
     const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
     //const total = totals[this.state.selected].value;
-
+    window.sidebar = true;
     return (
       <div>
         <div className="country-data-list__title">
@@ -38,7 +37,7 @@ class TopFiveCountries extends Component {
         <DataListTotal
           year={year}
           name={totals.name}
-          total={0}
+          total={totals.total.value}
           civilian={totals.civilian.value}
           defence={totals.defence.value}
         />

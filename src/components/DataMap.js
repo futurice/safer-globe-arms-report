@@ -4,11 +4,6 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import * as d3GeoProjection from 'd3-geo-projection';
 import { csv } from 'd3-request';
-import output from './../data/output-v4.json';
-import gpi from './../data/gpi_2008-2016_v1.csv';
-import saferGlobe from './../data/safer-globe.csv';
-import saferGlobeJson from './../data/data.json';
-import saferGlobeMapJson from './../data/data2.json';
 import formatEuros from '../utils/formatEuros';
 import drawArc from '../utils/drawArcs';
 
@@ -31,17 +26,9 @@ class DataMap extends Component {
     this.drawMap = this.drawMap.bind(this);
 
     this.state = {
-      countryData: output,
-      gpiData: null,
-      gpiYear: 2016,
-      saferGlobeData: saferGlobeMapJson,
+      gpiYear: 2015,
+      saferGlobeData: {},
     };
-  }
-
-  componentWillReceiveProps(newGPIYear) {
-    if (this.state.gpiYear !== newGPIYear.gpiYear) {
-      this.setState({ gpiYear: newGPIYear.gpiYear });
-    }
   }
 
   shouldComponentUpdate() {
@@ -51,24 +38,12 @@ class DataMap extends Component {
       return true;
     }
   }
-
   componentWillMount() {
-    csv(gpi, (error, data) => {
-      if (error) {
-        this.setState({ loadError: true });
-      }
-      this.setState({ gpiData: data });
-      this.render();
-    });
-    csv(saferGlobe, (error, data) => {
-      if (error) {
-        this.setState({ loadError: true });
-      }
-      this.setState({ saferGlobeData: data });
-    });
-    this.setState({ gpiYear: this.props.gpiYear });
+    this.setState({ saferGlobeData: this.props.mapData });
   }
-
+  componentDidMount() {
+    if (window.timeline && window.nav && window.sidebar) this.render();
+  }
   drawMap(displayData) {
     let totalExport = [{}],
       intlMissions = [{}];
@@ -282,6 +257,15 @@ class DataMap extends Component {
         .transition()
         .delay(2500)
         .style('pointer-events', 'auto');
+
+      updateSidebar(
+        'World',
+        selectedYear,
+        totalExport[0][selectedYear]['Total'],
+        totalExport[0][selectedYear]['Military'],
+        totalExport[0][selectedYear]['Civilian'],
+        totalExport,
+      );
     }
     function changeYear(yrs) {
       d3.selectAll('.data-list-total__year').html(yrs);
@@ -1977,7 +1961,6 @@ class DataMap extends Component {
           )
             values = d;
         });
-      console.log(values);
       d3
         .selectAll(
           `.${cntryNm
@@ -2707,7 +2690,6 @@ class DataMap extends Component {
       FI:
         'Vienti YK:n ja muiden kansainvälisten järjestöjen rauhanturva- ja humanitaarisen avustustoiminnan käyttöön',
     };
-    console.log(countryNameLang);
     arrSorted.sort(function(x, y) {
       return (
         y['data'][selectedYear]['TotalCountry'] -
@@ -2716,6 +2698,7 @@ class DataMap extends Component {
     });
 
     //Drawing Map
+    console.log(this.props.mapData);
     zoomGroup
       .selectAll('.countryGroup')
       .data(topojson.feature(data, data.objects.countries).features)
@@ -3204,8 +3187,10 @@ class DataMap extends Component {
               Military: 0,
               Civilian: 0,
             };
-            totalObject.Military = values.data[g.toString()].CountryMilatary;
-            totalObject.Civilian = values.data[g.toString()].CivilianArmsTotal;
+            totalObject.Military =
+              values.properties.data[g.toString()].CountryMilatary;
+            totalObject.Civilian =
+              values.properties.data[g.toString()].CivilianArmsTotal;
             totalObject.Total = totalObject.Military + totalObject.Civilian;
             dataForLineGraph[0][g.toString()] = totalObject;
           }
@@ -3217,9 +3202,9 @@ class DataMap extends Component {
           updateSidebar(
             active.country,
             selectedYear,
-            values.data[selectedYear].TotalCountry,
-            values.data[selectedYear].CountryMilatary,
-            values.data[selectedYear].CivilianArmsTotal,
+            values.properties.data[selectedYear].TotalCountry,
+            values.properties.data[selectedYear].CountryMilatary,
+            values.properties.data[selectedYear].CivilianArmsTotal,
             dataForLineGraph,
           );
         } else {
@@ -3238,8 +3223,9 @@ class DataMap extends Component {
 
   render() {
     if (
-      this.state.countryData &&
-      this.state.gpiData &&
+      window.timeline &&
+      window.nav &&
+      window.sidebar &&
       this.state.saferGlobeData
     ) {
       return <div>{this.drawMap(this.props.saferGlobeData)}</div>;

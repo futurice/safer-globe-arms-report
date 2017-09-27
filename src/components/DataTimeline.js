@@ -20,10 +20,9 @@ const pauseSvg = require('./../assets/pause-icon.svg');
 class DataTimeline extends Component {
   constructor(props) {
     super(props);
-
-    const startYear = 2003; //parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
-    const endYear =
-      parseInt(d3.keys(saferGlobeJson[0].years).slice(-2)[0], 10) + 1; // +1 fixes calculation to add defined year in the list too
+    console.log(this.props);
+    const startYear = parseInt(this.props.startYear, 10); //parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
+    const endYear = parseInt(this.props.endYear, 10) + 1; // +1 fixes calculation to add defined year in the list too
 
     this.state = {
       activeYear: endYear - 1,
@@ -49,6 +48,8 @@ class DataTimeline extends Component {
     this.setState({ play: clck });
   }
   render() {
+    window.timeline = true;
+    console.log(this.props);
     return (
       <div className="flex-container flex-spread at-flex-end">
         <div

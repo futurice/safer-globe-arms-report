@@ -9,11 +9,7 @@ import MapLegends from './MapLegends';
 // import StoryPreview from './StoryPreview';
 import { csv } from 'd3-request';
 import intl from 'react-intl-universal';
-
-import output from './../data/output-v4.json';
-import gpi from './../data/gpi_2008-2016_v1.csv';
-import saferGlobe from './../data/safer-globe.csv';
-
+import dataSheet from './../data/data2.json';
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
 import './../styles/icons.css';
@@ -49,11 +45,20 @@ function compare(a, b) {
   return 0;
 }
 
-function accumulateTotal(data, type) {
-  let total = data.reduce((sum, value) => {
-    return Number(value[type]) + sum;
-  }, 0);
-
+function accumulateTotal(data, type, yrs) {
+  let total = 0;
+  if (type === 'Total') {
+    data.forEach(d => {
+      total =
+        total +
+        d.properties.data[yrs].CivilianArmsTotal +
+        d.properties.data[yrs].MilataryMaterielTotal;
+    });
+  } else {
+    data.forEach(d => {
+      total = total + d.properties.data[yrs][type];
+    });
+  }
   return total;
 }
 
@@ -61,24 +66,46 @@ class Data extends Component {
   constructor() {
     super();
 
-    const activeYear = 2016;
+    const activeYear = 2015;
 
     this.state = {
-      countries: [],
-      countryData: output,
       gpiData: null,
-      activeYear: activeYear,
-      saferGlobeData: [],
+      activeYear: parseInt(
+        Object.keys(
+          dataSheet.objects.countries.geometries[0].properties.data,
+        ).slice(-2)[0],
+        10,
+      ),
+      countryData: dataSheet.objects.countries.geometries,
+      countryShapeAndData: dataSheet,
       totals: {
-        name: `${intl.get('TOTALS')} - ${activeYear}`,
+        name: `${intl.get('WORLD')}`,
         total: {
-          value: 0,
+          value: accumulateTotal(
+            dataSheet.objects.countries.geometries,
+            'Total',
+            Object.keys(
+              dataSheet.objects.countries.geometries[0].properties.data,
+            ).slice(-2)[0],
+          ),
         },
         defence: {
-          value: 0,
+          value: accumulateTotal(
+            dataSheet.objects.countries.geometries,
+            'MilataryMaterielTotal',
+            Object.keys(
+              dataSheet.objects.countries.geometries[0].properties.data,
+            ).slice(-2)[0],
+          ),
         },
         civilian: {
-          value: 0,
+          value: accumulateTotal(
+            dataSheet.objects.countries.geometries,
+            'CivilianArmsTotal',
+            Object.keys(
+              dataSheet.objects.countries.geometries[0].properties.data,
+            ).slice(-2)[0],
+          ),
         },
       },
     };
@@ -89,63 +116,32 @@ class Data extends Component {
     this.accumulateTotal = this.accumulateTotal.bind(this);
   }
 
-  componentWillMount() {
-    csv(gpi, (error, data) => {
-      if (error) {
-        this.setState({ loadError: true });
-      }
-      this.setState({ gpiData: data });
-    });
-
-    csv(saferGlobe, (error, data) => {
-      if (error) {
-        this.setState({ loadError: true });
-      }
-
-      const countryList = data
-        .filter(x => parseInt(x.Total, 10) !== 0)
-        .map(y => {
-          return {
-            value: y.Countries,
-            text: y.Countries,
-          };
-        });
-
-      this.setState({
-        saferGlobeData: data,
-        countries: countryList.sort(compare),
-        totals: {
-          name: intl.get('WORLD'),
-          total: {
-            value: accumulateTotal(data, 'Total'),
-          },
-          defence: {
-            value: accumulateTotal(data, 'Defence_Materiel'),
-          },
-          civilian: {
-            value: accumulateTotal(data, 'Civilian_Arms'),
-          },
-        },
-      });
-    });
-  }
-
   updateGPIYear(newGPIYear) {
     this.setState({ activeYear: newGPIYear });
   }
 
-  sortTopLists(type, count = 5) {
+  sortTopLists(type, count = 5, yrs = '2015') {
     // Once we have yearly data, we will need to filter this further by the activeYear
-    let data = this.state.saferGlobeData;
+    let data = this.state.countryData;
     let sorted = data.sort((a, b) => {
-      return Number(a[type]) < Number(b[type]) ? 1 : -1;
+      return Number(
+        a.properties.data[yrs].CivilianArmsTotal +
+          a.properties.data[yrs].MilataryMaterielTotal,
+      ) <
+        Number(
+          b.properties.data[yrs].CivilianArmsTotal +
+            b.properties.data[yrs].MilataryMaterielTotal,
+        )
+        ? 1
+        : -1;
     });
     return this.buildTopLists(sorted, type, count);
   }
 
   buildTopLists(data, type, count = 5) {
     const listItems = Object.keys(data.slice(0, count)).map(country => {
-      return data[country];
+      console.log(data);
+      return 'data[country]';
     });
 
     /*.map(country => (
@@ -158,13 +154,20 @@ class Data extends Component {
     return listItems;
   }
 
-  accumulateTotal(type) {
+  accumulateTotal(type, yrs = toString(this.state.activeYear)) {
     let total = 0;
-
-    this.state.saferGlobeData.forEach(country => {
-      total += Number(country[type]);
-    });
-
+    if (type === 'Total') {
+      this.state.countryData.forEach(d => {
+        total =
+          total +
+          d.properties.data[yrs].CivilianArmsTotal +
+          d.properties.data[yrs].MilataryMaterielTotal;
+      });
+    } else {
+      this.state.countryData.forEach(d => {
+        total = total + d.properties.data[yrs][type];
+      });
+    }
     return total;
   }
 
@@ -174,21 +177,7 @@ class Data extends Component {
 
   render() {
     let sortedListTotal = null;
-    //let sortedListDefence = null;
-    //let sortedListCivilian = null;
-    //let accumulatedTotal = 0;
-    //let accumulatedDefence = 0;
-    //let accumulatedCivilian = 0;
-
-    if (this.state.saferGlobeData) {
-      sortedListTotal = this.sortTopLists('Total');
-      //sortedListDefence = this.sortTopLists('Defence_Materiel');
-      //sortedListCivilian = this.sortTopLists('Civilian_Arms');
-      //accumulatedTotal = this.accumulateTotal('Total');
-      //accumulatedDefence = this.accumulateTotal('Defence_Materiel');
-      //accumulatedCivilian = this.accumulateTotal('Civilian_Arms');
-    }
-
+    sortedListTotal = this.sortTopLists('Total');
     return (
       <section
         className="data-section-container"
@@ -197,18 +186,21 @@ class Data extends Component {
         <section className="data-map-container flex-container-column">
           <div style={{ height: '100%' }} className="flex-container-column">
             <section className="flex-one country-data-container">
-              {this.state.selectedCountry
-                ? <CountryDataList country={this.state.selectedCountry} />
-                : <TopFiveCountries
-                    year={this.state.activeYear}
-                    countries={sortedListTotal}
-                    totals={this.state.totals}
-                  />}
+              {this.state.selectedCountry ? (
+                <CountryDataList country={this.state.selectedCountry} />
+              ) : (
+                <TopFiveCountries
+                  year={this.state.activeYear}
+                  countries={sortedListTotal}
+                  totals={this.state.totals}
+                />
+              )}
             </section>
             <section className="flex-five map-container">
               <DataMap
                 displayData={this.displayActiveCountry.bind(this)}
                 gpiYear={this.state.activeYear}
+                mapData={this.state.countryShapeAndData}
               />
             </section>
             <div className="map-container__reset box-shadow">
@@ -221,7 +213,17 @@ class Data extends Component {
             </div>
             <MapLegends />
           </div>
-          <DataTimeline updateGPIYear={this.updateGPIYear} />
+          <DataTimeline
+            updateGPIYear={this.updateGPIYear}
+            startYear={
+              Object.keys(this.state.countryData[0].properties.data)[0]
+            }
+            endYear={
+              Object.keys(this.state.countryData[0].properties.data).slice(
+                -2,
+              )[0]
+            }
+          />
         </section>
       </section>
     );

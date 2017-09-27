@@ -7,7 +7,7 @@ import './../styles/components/Nav.css';
 class Nav extends Component {
   render() {
     const selectedLocale = intl.options.currentLocale;
-
+    window.nav = true;
     return (
       <nav className="primary-nav">
         <h1>
