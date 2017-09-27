@@ -40,7 +40,7 @@ Docs can be found here: https://reacttraining.com/react-router/web/
 const locales = {
   'en-US': {
     // Page names & general
-    ARMS_REPORT: 'ARMS Report',
+    ARMS_REPORT: 'Finnish Arms Control Report',
     ABOUT: 'Info',
     STORIES: 'Articles',
     DATA: 'Map',
@@ -100,17 +100,17 @@ const locales = {
     DOWNLOAD_DATA: 'Download Data',
     TOTALS: 'Totals',
     TOTAL: 'Total',
-    DEFENCE: 'Defence Arms',
+    DEFENCE: 'Military Material',
     CIVILIAN: 'Civilian Arms',
     TOP5COUNTRIES: 'Top 5 Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
-    PEACEFUL: 'Peaceful',
-    RESTLESS: 'Restless',
+    PEACEFUL: 'More Peaceful',
+    RESTLESS: 'Less Peaceful',
     NOT_AVAILABLE: 'Not available',
     REMARKS: 'Remaks',
     ALL_COUNTRY_ARTICLES: 'All articles of {countryName}',
-    GPI: 'GPI',
+    GPI: 'Global Peace Index',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
 
     // About page
@@ -122,7 +122,7 @@ const locales = {
   },
   fi: {
     // Page names & general
-    ARMS_REPORT: 'Asevalvontaraportti',
+    ARMS_REPORT: 'Suomen Asevalvontaraportti',
     ABOUT: 'Info',
     STORIES: 'Artikkelit',
     DATA: 'Kartta',
@@ -180,17 +180,17 @@ const locales = {
     // Map page
     TOTALS: 'Kokonaissumma',
     TOTAL: 'Yhteensä',
-    DEFENCE: 'Sota-aseet',
+    DEFENCE: 'Sotatuotteet',
     CIVILIAN: 'Siviiliaseet',
-    TOP5COUNTRIES: 'Suurimmat 5 maata',
-    WORLD: 'World',
+    TOP5COUNTRIES: '5 suurinta vientimaata',
+    WORLD: 'Maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
     PEACEFUL: 'Rauhallinen',
     RESTLESS: 'Rauhaton',
     NOT_AVAILABLE: 'Ei saatavilla',
     REMARKS: 'Huomioita',
     ALL_COUNTRY_ARTICLES: 'Kaikki {countryName} -artikkelit',
-    GPI: 'GPI',
+    GPI: 'Maailman rauhanindeksi',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
 
     // About page
@@ -228,31 +228,32 @@ class AppRouter extends Component {
 
   render() {
     return (
-      this.state.initDone &&
-      <Router>
-        <div>
-          <div className="container">
-            <Route path="/" render={props => <Nav {...props} />} />
+      this.state.initDone && (
+        <Router>
+          <div>
+            <div className="container">
+              <Route path="/" render={props => <Nav {...props} />} />
 
-            <div className="content-wrapper">
-              <Route exact path="/" component={Data} />
-              <Route
-                exact
-                path="/stories"
-                render={props => <Stories {...props} />}
-              />
-              <Route
-                exact
-                path="/stories/:id"
-                render={props => <FullStory {...props} />}
-              />
-              <Route exact path="/about" component={About} />
-              <Route path="/about/:page" component={About} />
-              <Route exact path="/downloads" component={Downloads} />
+              <div className="content-wrapper">
+                <Route exact path="/" component={Data} />
+                <Route
+                  exact
+                  path="/stories"
+                  render={props => <Stories {...props} />}
+                />
+                <Route
+                  exact
+                  path="/stories/:id"
+                  render={props => <FullStory {...props} />}
+                />
+                <Route exact path="/about" component={About} />
+                <Route path="/about/:page" component={About} />
+                <Route exact path="/downloads" component={Downloads} />
+              </div>
             </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      )
     );
   }
 }

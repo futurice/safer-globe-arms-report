@@ -26,7 +26,7 @@ class TopFiveCountries extends Component {
   render() {
     const { countries, totals, year } = this.props;
     const baseNum = countries.length ? countries[0].Total : 0;
-    const total = totals[this.state.selected].value;
+    //const total = totals[this.state.selected].value;
 
     return (
       <div>
@@ -38,7 +38,7 @@ class TopFiveCountries extends Component {
         <DataListTotal
           year={year}
           name={totals.name}
-          total={total}
+          total={0}
           civilian={totals.civilian.value}
           defence={totals.defence.value}
         />
@@ -52,9 +52,7 @@ class TopFiveCountries extends Component {
             <div key={i} className="top-countries__country">
               <div className="top-countries__name">
                 <span className="top-countries__name--wrapper">
-                  <span>
-                    {i + 1}
-                  </span>
+                  <span>{i + 1}</span>
                   <span className={'top-countries__name' + (i + 1)}>
                     {data.Countries}
                   </span>
@@ -75,8 +73,8 @@ class TopFiveCountries extends Component {
                   className="top-countries__graphs--defence"
                   id={'top-countries__graphs--defence' + (i + 1)}
                   style={{
-                    width: Math.round(data.Defence_Materiel / baseNum * 100) +
-                      '%',
+                    width:
+                      Math.round(data.Defence_Materiel / baseNum * 100) + '%',
                   }}
                 />
               </div>
@@ -89,12 +87,8 @@ class TopFiveCountries extends Component {
             display: 'none',
           }}
         >
-          <div className="country-rank">
-            {'Rank - 0'}
-          </div>
-          <div className="key-points">
-            {'Hello World'}
-          </div>
+          <div className="country-rank">{'Rank - 0'}</div>
+          <div className="key-points">{'Hello World'}</div>
         </div>
       </div>
     );

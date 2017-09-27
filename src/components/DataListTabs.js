@@ -33,7 +33,7 @@ class DataListTabs extends Component {
           checked={this.state.checked === 'civilian'}
           id="civilian"
           name="countryList"
-          value="civilian"
+          value="CivilianArmsTotal"
           label={intl.get('CIVILIAN')}
           onClick={this.handleClick.bind(this)}
         />
@@ -41,7 +41,7 @@ class DataListTabs extends Component {
           checked={this.state.checked === 'defence'}
           id="defence"
           name="countryList"
-          value="defence"
+          value="CountryMilatary"
           label={intl.get('DEFENCE')}
           onClick={this.handleClick.bind(this)}
         />

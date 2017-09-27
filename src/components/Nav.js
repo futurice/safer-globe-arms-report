@@ -13,7 +13,9 @@ class Nav extends Component {
         <h1>
           <Link to="/">
             <span className="is-strong logo-text">SaferGlobe</span>
-            <span className="is-light logo-sub-text">Arms Report</span>
+            <span className="is-light logo-sub-text">
+              {intl.get('ARMS_REPORT')}
+            </span>
           </Link>
         </h1>
         {/*
@@ -43,6 +45,7 @@ class Nav extends Component {
         <span className="lang-selection">
           <a
             href="?lang=fi"
+            id="FI"
             className={selectedLocale.includes('fi') ? 'selected' : null}
           >
             FI
@@ -50,6 +53,7 @@ class Nav extends Component {
           |
           <a
             href="?lang=en-US"
+            id="EN"
             className={selectedLocale.includes('en') ? 'selected' : null}
           >
             EN

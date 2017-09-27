@@ -21,7 +21,7 @@ class DataTimeline extends Component {
   constructor(props) {
     super(props);
 
-    const startYear = parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
+    const startYear = 2003; //parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
     const endYear =
       parseInt(d3.keys(saferGlobeJson[0].years).slice(-2)[0], 10) + 1; // +1 fixes calculation to add defined year in the list too
 
@@ -64,7 +64,7 @@ class DataTimeline extends Component {
             alt={this.state.play === true ? 'Pause Icon' : 'Play Icon'}
           />
         </div>
-        {this.state.years.map((year, i) =>
+        {this.state.years.map((year, i) => (
           <div
             key={i}
             className={`timeline-item ${year} ${this.state.activeYear === year
@@ -75,11 +75,9 @@ class DataTimeline extends Component {
               this.processNewGPIYear(year);
             }}
           >
-            <span className="timeline-item-year">
-              {year}
-            </span>
-          </div>,
-        )}
+            <span className="timeline-item-year">{year}</span>
+          </div>
+        ))}
       </div>
     );
   }
