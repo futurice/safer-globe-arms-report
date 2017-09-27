@@ -302,8 +302,7 @@ class DataMap extends Component {
           .attr(
             'fill',
             d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
-          )
-          .attr('opacity', 1);
+          );
       }
       redrawBars(armstype, yrs);
     }
@@ -2044,6 +2043,11 @@ class DataMap extends Component {
           .duration(200)
           .attr('opacity', 1);
         d3
+          .selectAll('.land')
+          .transition()
+          .duration(200)
+          .attr('opacity', 0.7);
+        d3
           .selectAll('.intlMissionsGroup')
           .transition()
           .duration(200)
@@ -2082,17 +2086,10 @@ class DataMap extends Component {
                 values = d;
             });
           d3
-            .selectAll(
-              `.${active.country
-                .replace(/ /g, '_')
-                .replace('(', '_')
-                .replace(')', '_')
-                .replace("'", '_')
-                .replace('.', '_')}`,
-            )
+            .selectAll('.land')
             .transition()
-            .duration(200)
-            .attr('opacity', 1);
+            .duration(190)
+            .attr('opacity', 0.7);
           d3
             .selectAll(
               `.${active.country
@@ -2715,6 +2712,7 @@ class DataMap extends Component {
             .replace("'", '_')
             .replace('.', '_')}`,
       )
+      .style('cursor', 'pointer')
       .on('mouseover', d => {
         let cntryname = d.properties.CountryName.EN;
         hover(cntryname, d3.event.x, d3.event.y);
@@ -2757,7 +2755,7 @@ class DataMap extends Component {
       .attr('pointer-events', 'none')
       .transition()
       .duration(1250)
-      .attr('opacity', 1);
+      .attr('opacity', 0.7);
     zoomGroup
       .selectAll('.overlay')
       .data(topojson.feature(data, data.objects.countries).features)
