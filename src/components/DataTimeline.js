@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './../styles/components/DataTimeline.css';
-import saferGlobeJson from './../data/data.json';
 import * as d3 from 'd3';
 
 const playSvg = require('./../assets/play-icon.svg');

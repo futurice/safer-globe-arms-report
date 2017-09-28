@@ -78,6 +78,7 @@ class Data extends Component {
       ),
       countryData: dataSheet.objects.countries.geometries,
       countryShapeAndData: dataSheet,
+      language: intl.options.currentLocale.includes('fi') ? 'FI' : 'EN',
       totals: {
         name: `${intl.get('WORLD')}`,
         total: {
@@ -201,6 +202,7 @@ class Data extends Component {
                 displayData={this.displayActiveCountry.bind(this)}
                 gpiYear={this.state.activeYear}
                 mapData={this.state.countryShapeAndData}
+                language={this.state.language}
               />
             </section>
             <div className="map-container__reset box-shadow">

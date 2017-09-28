@@ -13,7 +13,14 @@ export default class Maplegends extends Component {
   render() {
     return (
       <div className="map-legends box-shadow">
-        <div className="GPI-head">{intl.get('GPI')}</div>
+        <div className="GPI-head">
+          <a
+            href="http://visionofhumanity.org/indexes/global-peace-index/"
+            target="_blank"
+          >
+            {intl.get('GPI')}
+          </a>
+        </div>
         <div className="flex-container-row">
           <div className="flex-column-column">
             <ul>
