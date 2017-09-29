@@ -2954,6 +2954,12 @@ class DataMap extends Component {
             .transition()
             .duration(200)
             .attr('opacity', 1);
+          d3
+            .selectAll('.countryGroup')
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+
           updateSidebar(
             'World',
             selectedYear,
