@@ -51,7 +51,14 @@ a:hover {
 }
 
 ol, ul {
+
+}
+
+ol li {
   list-style-position: inside;
+  text-indent: -1em;
+  padding-left: 1em;
+  margin-bottom: 0.25rem;
 }
 
 svg {
@@ -70,4 +77,12 @@ svg {
 
 a {
   cursor: pointer;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 600;
 }

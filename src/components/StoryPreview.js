@@ -10,7 +10,7 @@ class StoryPreview extends Component {
     return this.props.tags
       .split(',')
       .reduce((ary, cur) => {
-        ary.push(`#${cur}`);
+        ary.push(`#${cur.trim()}`);
 
         return ary;
       }, [])
@@ -20,11 +20,12 @@ class StoryPreview extends Component {
   render() {
     return (
       <article className="story-container flex-container box-shadow">
-        <Link to={'/stories/' + this.props.id}>
+        <Link to={'/articles/' + this.props.id}>
           <img
             className="story-image"
             src={this.props.image}
-            alt={this.props.title}
+            alt=""
+            aria-hidden="true"
           />
           <span className="story-date">
             {this.props.date}

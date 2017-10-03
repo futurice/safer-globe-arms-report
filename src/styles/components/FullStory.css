@@ -13,6 +13,7 @@
 
 .meta-data .story-tags {
 	align-self: flex-end;
+	max-width: 50%;
 }
 
 .meta-data .story-date {

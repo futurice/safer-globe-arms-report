@@ -12,6 +12,7 @@ import './styles/flex-styles.css';
 import './styles/headings.css';
 import './styles/text-types.css';
 import './styles/md.css';
+import './styles/table.css';
 import './styles/scroll.css';
 
 /*
@@ -238,12 +239,12 @@ class AppRouter extends Component {
               <Route exact path="/" component={Data} />
               <Route
                 exact
-                path="/stories"
+                path="/articles"
                 render={props => <Stories {...props} />}
               />
               <Route
                 exact
-                path="/stories/:id"
+                path="/articles/:id"
                 render={props => <FullStory {...props} />}
               />
               <Route exact path="/about" component={About} />
