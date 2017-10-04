@@ -13,6 +13,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after -e 'ssh -p 10059' --quiet $TRAVIS_BUILD_DIR/build $SAFER_GLOBE_SSH_USER@$SAFER_GLOBE_DEPLOY_HOST:/tmp/armsreport
+  script: ./deploy.sh
+    -
   on:
     branch: master
