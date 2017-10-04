@@ -16,6 +16,7 @@ import './../styles/icons.css';
 import './../styles/components/Note.css';
 
 const svg = require('./../assets/reset-icon.svg');
+const svgFinland = require('./../assets/finland-icon.svg');
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
@@ -212,6 +213,14 @@ class Data extends Component {
                 className="reset-icon"
                 alt="Reset Icon"
                 title="Fit to Screen"
+              />
+            </div>
+            <div className="map-container__finland box-shadow">
+              <img
+                src={svgFinland}
+                className="finland-icon"
+                alt="Select Finland"
+                title="Select Finland"
               />
             </div>
             <MapLegends />

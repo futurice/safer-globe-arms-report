@@ -39,11 +39,27 @@
   cursor: pointer;
   background-color: rgba(255,255,255,0.8);
 }
-
+.map-container__finland {
+  position: absolute;
+  right: 1rem;
+  top: 3.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.8);
+}
 .reset-icon {
   opacity: 0.5;
 }
 
 .reset-icon:hover {
+  opacity: 1;
+}
+.finland-icon {
+  opacity: 0.5;
+}
+
+.finland-icon:hover {
   opacity: 1;
 }

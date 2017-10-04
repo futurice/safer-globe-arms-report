@@ -89,6 +89,8 @@ class DataMap extends Component {
         .call(Zoom.transform, d3.zoomIdentity);
     });
 
+    d3.select('.map-container__finland').on('click', clickedFinland);
+
     function drawBars(yrs) {
       let connectorG = zoomGroup
         .selectAll('.connectorLineG')
