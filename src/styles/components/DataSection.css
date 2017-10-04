@@ -12,7 +12,7 @@
   background: rgba(255, 255, 255, .7);
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
-  margin: 1.5rem 0 0 2rem;
+  margin: 1.5rem 0 0 1rem;
   padding: 0.5rem 1rem;
   position: fixed;
   z-index: 2;
@@ -31,7 +31,7 @@
 
 .map-container__reset {
   position: absolute;
-  right: 2rem;
+  right: 1rem;
   top: 1.5rem;
   width: 2.25rem;
   height: 2.25rem;
@@ -39,11 +39,27 @@
   cursor: pointer;
   background-color: rgba(255,255,255,0.8);
 }
-
+.map-container__finland {
+  position: absolute;
+  right: 1rem;
+  top: 3.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.8);
+}
 .reset-icon {
   opacity: 0.5;
 }
 
 .reset-icon:hover {
+  opacity: 1;
+}
+.finland-icon {
+  opacity: 0.5;
+}
+
+.finland-icon:hover {
   opacity: 1;
 }
