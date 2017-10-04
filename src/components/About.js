@@ -23,24 +23,29 @@ class About extends Component {
       body: null,
       navigation: [
         {
-          path: 'terms-explained',
-          file: 'terms-explained',
-          name: 'TERMS_EXPLAINED',
+          path: 'info',
+          file: 'info',
+          name: 'INFO',
           anchors: [
             {
-              id: 'gpi',
-              name: 'GPI',
+              id: 'terms',
+              name: 'TERMS',
             },
-          ],
-        },
-        {
-          path: 'page2',
-          file: 'terms-explained',
-          name: 'TERMS_EXPLAINED',
-          anchors: [
             {
-              id: 'gpi',
-              name: 'GPI',
+              id: 'how-to-read',
+              name: 'HOW_TO_READ',
+            },
+            {
+              id: 'how-data-is-shown',
+              name: 'HOW_GATHERED',
+            },
+            {
+              id: 'read-more',
+              name: 'READ_MORE',
+            },
+            {
+              id: 'safer-globe',
+              name: 'SAFER_GLOBE',
             },
           ],
         },
@@ -58,18 +63,17 @@ class About extends Component {
   }
 
   componentDidMount() {
-    const page = this.props.match.params.page || this.state.navigation[0].path;
+    const page = 'info'; //this.props.match.params.page || this.state.navigation[0].path;
     const hash = this.props.location.hash.replace(/^#/, '') || null;
-
     this.loadDocument(page, hash);
   }
 
-  compoenntWillUnmount() {
+  componentWillUnmount() {
     this.xhr.abort();
   }
 
   loadDocument(name, hash = null) {
-    const lang = intl.determineLocale().includes('en') ? 'en' : 'fi';
+    const lang = intl.options.currentLocale.includes('en') ? 'en' : 'fi';
 
     try {
       const url = require(`../data/about/${name}_${lang}.md`);
@@ -126,15 +130,6 @@ class About extends Component {
       <div className="about-menu box-shadow">
         {this.state.navigation.map((item, i) =>
           <div key={i}>
-            <div key={i} className="about-main-link">
-              <NavLink
-                to={`/about/${item.path}`}
-                className={atRoot && i === 0 ? ' active' : null}
-              >
-                {intl.get(item.name)}
-              </NavLink>
-            </div>
-
             {item.anchors.map((sub, j) =>
               <div key={j} className="about-sub-link">
                 <a href={`#${sub.id}`}>
@@ -153,12 +148,14 @@ class About extends Component {
   render() {
     if (this.state.hash && this.state.body) {
       setTimeout(() => {
-        const elem = document.querySelector(`a[name=${this.state.hash}]`);
+        const headerHeight = document.querySelector('nav').offsetHeight;
+        const hash = this.props.location.hash.replace(/^#/, '') || null;
+        const elem = document.querySelector(`a[name=${hash}]`);
 
         if (elem) {
-          elem.scrollIntoView();
+          document.querySelector('html').scrollTop = elem.offsetTop;
         }
-      }, 100);
+      }, 200);
     }
 
     return (
