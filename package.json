@@ -43,7 +43,7 @@
     ]
   },
   "scripts": {
-    "prpare": "patch-package",
+    "prepare": "patch-package",
     "start": "react-scripts start && postcss -u autoprefixer --no-map -r ./src/styles/*.css",
     "build": "react-scripts build",
     "lint": "eslint src",
