@@ -18,6 +18,7 @@ import './styles/scroll.css';
 Primary Route Components
 */
 import Nav from './components/Nav';
+
 // import Home from './components/Home';
 import Data from './components/Data';
 import Stories from './components/Stories';
@@ -47,6 +48,10 @@ const locales = {
     DOWNLOADS: 'Open Data',
     NOT_FOUND: 'The requested page could not be found.',
     LOADING_ERROR: 'An error occurred while loading page.',
+
+    // Notetext
+    NOTE:
+      'The project by <a href="http://futurice.com/" target="_blank">Futurice’s</a> <a href="https://spiceprogram.org/chilicorn-fund/" target="_blank">Chilicorn Fund</a> and <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a>',
 
     // Tags
     TAGS_REGION: [
@@ -129,6 +134,10 @@ const locales = {
     DOWNLOADS: 'Avoin Data',
     NOT_FOUND: 'Heattua sivua ei löytynyt.',
     LOADING_ERROR: 'Sivua ladatessa tapahtui virhe.',
+
+    // Notetext
+    NOTE:
+      '<a href="http://futurice.com/" target="_blank">Futuricen</a> <a href="https://spiceprogram.org/chilicorn-fund/" target="_blank">Chilicorn Fundin</a> ja <a href="https://saferglobe.fi" target="_blank">SaferGloben</a> projekti',
 
     // Tags
     TAGS_REGION: [

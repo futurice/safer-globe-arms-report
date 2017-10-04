@@ -9,12 +9,14 @@ import MapLegends from './MapLegends';
 // import StoryPreview from './StoryPreview';
 import { csv } from 'd3-request';
 import intl from 'react-intl-universal';
-import dataSheet from './../data/data2.json';
+import dataSheet from './../data/data3.json';
 import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
 import './../styles/icons.css';
+import './../styles/components/Note.css';
 
 const svg = require('./../assets/reset-icon.svg');
+const svgFinland = require('./../assets/finland-icon.svg');
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
@@ -213,7 +215,19 @@ class Data extends Component {
                 title="Fit to Screen"
               />
             </div>
+            <div className="map-container__finland box-shadow">
+              <img
+                src={svgFinland}
+                className="finland-icon"
+                alt="Select Finland"
+                title="Select Finland"
+              />
+            </div>
             <MapLegends />
+            <div
+              className="footnote"
+              dangerouslySetInnerHTML={{ __html: intl.get('NOTE') }}
+            />
           </div>
           <DataTimeline
             updateGPIYear={this.updateGPIYear}

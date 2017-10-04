@@ -1,4 +1,8 @@
 export default function(countryName, rank, language, armsType, yrs, bullets) {
+  console.log(bullets);
+  if (rank == 0) {
+    return bullets;
+  }
   if (language === 'FI') {
     let arms;
     switch (armsType) {
