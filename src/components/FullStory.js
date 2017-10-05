@@ -96,60 +96,65 @@ class FullStory extends Component {
           </a>
         )}
 
-        {this.state.loading ? <CircularProgress className="loading" /> : null}
         {this.state.error
           ? <div className="not-found">
               {intl.get('NOT_FOUND')}
             </div>
           : null}
 
-        {this.state.body
-          ? <div>
-              <ArticleNotification />
-              <section className="text-box full-story-container flex-container box-shadow">
-                <div className="story-image">
-                  <img src={this.state.image} alt={this.state.title} />
-                </div>
-                <div className="meta-data flex-container-row">
-                  <span className="story-date">
-                    <div>
-                      {this.state.date}
-                    </div>
-                    <div>
-                      {intl.get('TEXT_BY')}: {this.state.author}
-                    </div>
-                  </span>
-                  <span className="story-tags">
-                    {this.state.tags.join(' ')}
-                  </span>
-                </div>
-                <div className="story-text">
-                  <div className="story-share flex-container-column">
-                    <div>
-                      <FacebookShareButton
-                        url={articleLink}
-                        title={this.state.title}
-                        picture={this.state.image}
-                      >
-                        <FacebookIcon size={38} round={false} />
-                      </FacebookShareButton>
-                      <TwitterShareButton
-                        url={articleLink}
-                        title={this.state.title}
-                        hastag={this.state.tags.join(' ')}
-                      >
-                        <TwitterIcon size={38} round={false} />
-                      </TwitterShareButton>
-                    </div>
-                  </div>
-                  <ReactMarkdown
-                    className="md"
-                    source={this.state.body || ''}
-                  />
-                </div>
-              </section>
-            </div>
-          : null}
+        <div className="story-wrap">
+          {!isModal && (
+            <ArticleNotification />
+          )}
+          <section className="text-box full-story-container flex-container box-shadow">
+            {this.state.loading ? <CircularProgress className="loading" /> : null}
+            {this.state.body ?
+             <div>
+               <div className="story-image">
+                 <img src={this.state.image} alt={this.state.title} />
+               </div>
+               <div className="meta-data flex-container-row">
+                 <span className="story-date">
+                   <div>
+                     {this.state.date}
+                   </div>
+                   <div>
+                     {intl.get('TEXT_BY')}: {this.state.author}
+                   </div>
+                 </span>
+                 <span className="story-tags">
+                   {this.state.tags.join(' ')}
+                 </span>
+               </div>
+               <div className="story-text">
+                 <div className="story-share flex-container-column">
+                   <div>
+                     <FacebookShareButton
+                       url={articleLink}
+                       title={this.state.title}
+                       picture={this.state.image}
+                     >
+                       <FacebookIcon size={38} round={false} />
+                     </FacebookShareButton>
+                     <TwitterShareButton
+                       url={articleLink}
+                       title={this.state.title}
+                       hastag={this.state.tags.join(' ')}
+                     >
+                       <TwitterIcon size={38} round={false} />
+                     </TwitterShareButton>
+                   </div>
+                 </div>
+                 <ReactMarkdown
+                   className="md"
+                   source={this.state.body || ''}
+                 />
+               </div>
+             </div>
+
+             : null}
+          </section>
+        </div>
       </div>
     );
   }

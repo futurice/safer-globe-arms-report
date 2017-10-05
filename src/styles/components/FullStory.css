@@ -1,3 +1,8 @@
+.story-wrap {
+  width: 100%;
+  maxWidth: 792px;
+}
+
 .story-image {
 	position: relative;
 	margin-bottom: 16px;
@@ -41,6 +46,10 @@
 	margin-bottom: 0;
 }
 
+.full-story-container {
+  min-height: 100vh;
+}
+
 .full-story-container .story-text {
 	margin: 28px 0;
 	position: relative;
@@ -67,4 +76,11 @@
 	position: relative;
 	margin-right: 16px;
 	font-weight: 600;
+}
+
+.story-wrap .loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
