@@ -1,7 +1,7 @@
 export default function(countryName, rank, language, armsType, yrs, bullets) {
   console.log(bullets);
   if (rank == 0) {
-    return bullets;
+    return `<span style='font-style: italic'>${bullets}</span>`;
   }
   if (language === 'FI') {
     let arms;
@@ -17,9 +17,9 @@ export default function(countryName, rank, language, armsType, yrs, bullets) {
         break;
     }
     if (parseInt(rank, 10) === 1) {
-      return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+      return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
     } else {
-      return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+      return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
     }
   } else {
     let arms, text;
@@ -36,16 +36,16 @@ export default function(countryName, rank, language, armsType, yrs, bullets) {
     }
     switch (parseInt(rank, 10)) {
       case 1:
-        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
         break;
       case 2:
-        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
         break;
       case 3:
-        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
         break;
       default:
-        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br>${bullets}`;
+        text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span>.<br><br><span style='font-style: italic'>${bullets}</span>`;
         break;
     }
     return text;
