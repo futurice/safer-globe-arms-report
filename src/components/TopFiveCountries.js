@@ -88,6 +88,7 @@ class TopFiveCountries extends Component {
         >
           <div className="country-rank">{'Rank - 0'}</div>
           <div className="key-points">{'Hello World'}</div>
+          <div className="bullet-point" />
         </div>
       </div>
     );

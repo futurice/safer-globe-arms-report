@@ -65,3 +65,8 @@
 	font-size: 1rem;
 	line-height: 20px;
 }
+.bullet-point {
+	font-size: 1rem;
+  font-style: italic;
+	line-height: 20px;
+}
