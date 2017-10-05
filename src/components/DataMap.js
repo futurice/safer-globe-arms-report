@@ -1426,7 +1426,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1518,7 +1521,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1609,7 +1615,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1908,7 +1917,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -2007,7 +2019,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -2108,7 +2123,10 @@ class DataMap extends Component {
               );
           }
           d3.selectAll('.key-points').html('');
-          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
+          d3
+            .selectAll('.bullet-point')
+            .html(makeBulletHtml(bullets, 1))
+            .on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
