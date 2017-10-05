@@ -83,15 +83,18 @@ class FullStory extends Component {
   }
 
   render() {
+    const { isModal } = this.props;
     const articleLink = window.location.href;
 
     return (
       <div className="flex-container-row">
-        <a onClick={this.props.history.goBack} className="left-menu">
-          <div className="back-to-articles box-shadow">
-            {intl.get('BACK_TO_ARTICLES')}
-          </div>
-        </a>
+        {!isModal && (
+          <a onClick={this.props.history.goBack} className="left-menu">
+            <div className="back-to-articles box-shadow">
+              {intl.get('BACK_TO_ARTICLES')}
+            </div>
+          </a>
+        )}
 
         {this.state.loading ? <CircularProgress className="loading" /> : null}
         {this.state.error
