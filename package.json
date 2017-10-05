@@ -26,6 +26,7 @@
     "npm-font-source-sans-pro": "^1.0.2",
     "patch-package": "^3.5.0",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-csv": "^1.0.8",
     "react-dom": "^15.5.4",
     "react-intl-universal": "^1.2.1",
