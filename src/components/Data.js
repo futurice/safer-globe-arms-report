@@ -205,6 +205,7 @@ class Data extends Component {
                 gpiYear={this.state.activeYear}
                 mapData={this.state.countryShapeAndData}
                 language={this.state.language}
+                history={this.props.history}
               />
             </section>
             <div className="map-container__reset box-shadow">

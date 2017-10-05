@@ -7,6 +7,7 @@ import { csv } from 'd3-request';
 import formatEuros from '../utils/formatEuros';
 import drawArc from '../utils/drawArcs';
 import commentLine from '../utils/commentLine';
+import makeBulletHtml from '../utils/makeBulletHtml';
 
 /*
   This component builds the primary data map.
@@ -25,6 +26,7 @@ class DataMap extends Component {
   constructor() {
     super();
     this.drawMap = this.drawMap.bind(this);
+    this.handleBulletPointClick = this.handleBulletPointClick.bind(this);
 
     this.state = {
       gpiYear: 2015,
@@ -45,7 +47,23 @@ class DataMap extends Component {
   componentDidMount() {
     if (window.timeline && window.nav && window.sidebar) this.render();
   }
+
+  handleBulletPointClick(storyId) {
+    return () => {
+      const ev = d3.event;
+
+      if (ev.metaKey) return true;
+
+      const { history } = this.props;
+      history.push(`/stories/${storyId}`, { modal: true })
+
+      ev.preventDefault();
+    }
+  }
+
   drawMap(displayData) {
+    const self = this;
+
     let totalExport = [{}],
       intlMissions = [{}];
     d3.select('.map-container').html('');
@@ -1392,7 +1410,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -1405,11 +1422,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1485,7 +1502,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -1498,11 +1514,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1577,7 +1593,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -1590,11 +1605,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1877,7 +1892,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -1890,11 +1904,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1977,7 +1991,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -1990,11 +2003,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -2079,7 +2092,6 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           } else {
@@ -2092,11 +2104,11 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
-                  bullets,
                 ),
               );
           }
           d3.selectAll('.key-points').html('');
+          d3.selectAll('.bullet-point').html(makeBulletHtml(bullets, 1)).on('click', self.handleBulletPointClick(1));
 
           d3
             .selectAll('.data-list-total__name')
@@ -3993,6 +4005,7 @@ class DataMap extends Component {
 DataMap.propTypes = {
   gpiYear: PropTypes.number.isRequired,
   displayData: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default DataMap;
