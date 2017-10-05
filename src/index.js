@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import intl from 'react-intl-universal';
+import classNames from 'classnames';
 
 /*
 Non-Component-Specific Stylesheets
@@ -26,6 +27,11 @@ import FullStory from './components/FullStory';
 import About from './components/About';
 import Downloads from './components/Downloads';
 // import Footer from './components/Footer';
+
+/*
+Wrapper Components
+*/
+import Modal from './components/Modal';
 
 /*
 Modifier stylesheet to override any preceeding styles when used
@@ -235,15 +241,41 @@ class AppRouter extends Component {
     this.loadLocales();
   }
 
+  componentWillUpdate(nextProps) {
+    const { location } = this.props;
+
+    // set previousLocation if props.location is not modal
+    if (
+      nextProps.history.action !== 'POP' &&
+      (!location.state || !location.state.modal)
+    ) {
+      this.previousLocation = location;
+    }
+  }
+
   render() {
+    const { location } = this.props;
+
+    const isModal = !!(
+      location.state &&
+      location.state.modal &&
+      this.previousLocation !== location && // not initial render
+      this.previousLocation &&
+      this.previousLocation.key !== location.key
+    ); // avoid modal on direct routes
+
     return (
       this.state.initDone && (
-        <Router>
-          <div>
-            <div className="container">
-              <Route path="/" render={props => <Nav {...props} />} />
+        <div>
+          <div
+            className={classNames('container', {
+              'container--behind-a-modal': isModal,
+            })}
+          >
+            <Route path="/" render={props => <Nav {...props} />} />
 
-              <div className="content-wrapper">
+            <div className="content-wrapper">
+              <Switch location={isModal ? this.previousLocation : location}>
                 <Route exact path="/" component={Data} />
                 <Route
                   exact
@@ -258,13 +290,25 @@ class AppRouter extends Component {
                 <Route exact path="/about" component={About} />
                 <Route path="/about/:page" component={About} />
                 <Route exact path="/downloads" component={Downloads} />
-              </div>
+              </Switch>
             </div>
           </div>
-        </Router>
+
+          {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
+        </div>
       )
     );
   }
 }
 
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
+/*
+We have to wrap our main app component in a generic <Route /> like this
+so we get the `location` in props
+*/
+const AppRouterWrap = () => (
+  <Router>
+    <Route component={AppRouter} />
+  </Router>
+);
+
+ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));

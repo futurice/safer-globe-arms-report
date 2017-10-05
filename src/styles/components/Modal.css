@@ -1,0 +1,40 @@
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 10000; /* 1 higher than the highest on .map-legends */
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-inner {
+  position: relative;
+
+	max-width: 792px; /* similar to .text-box from containers.css */
+  margin: 2em auto;
+}
+
+.cross-icon {
+  position: absolute;
+
+  right: 5px;
+  top: 18px;
+
+  width: 15px;
+  height: 15px;
+
+  cursor: pointer;
+
+  z-index: 1;
+}
