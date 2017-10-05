@@ -48,7 +48,9 @@ class DataMap extends Component {
     if (window.timeline && window.nav && window.sidebar) this.render();
   }
 
-  handleBulletPointClick(storyId) {
+  handleBulletPointClick(hasLink, storyId) {
+    if (!hasLink || storyId === -1) return null;
+
     return () => {
       const ev = d3.event;
 
@@ -1389,7 +1391,9 @@ class DataMap extends Component {
             return y.data[yrs]['TotalCountry'] - x.data[yrs]['TotalCountry'];
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (arrSorted[i].data[yrs]['TotalCountry'] === totalVal) {
               rank = i + 1;
@@ -1397,6 +1401,10 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Total'][langSelected];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1428,8 +1436,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1484,7 +1492,9 @@ class DataMap extends Component {
             );
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (arrSorted[i].data[yrs]['CivilianArmsTotal'] === civilianVal) {
               rank = i + 1;
@@ -1492,6 +1502,10 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Civilian'][langSelected];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1523,8 +1537,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1578,7 +1592,9 @@ class DataMap extends Component {
             );
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (arrSorted[i].data[yrs]['CountryMilatary'] === defenceVal) {
               rank = i + 1;
@@ -1586,6 +1602,10 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Military'][langSelected];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1617,8 +1637,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1876,7 +1896,9 @@ class DataMap extends Component {
             );
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['data'][selectedYear]['TotalCountry'] === totalVal
@@ -1888,6 +1910,10 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Total'][
                   langSelected
                 ];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1919,8 +1945,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1977,7 +2003,9 @@ class DataMap extends Component {
             );
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['data'][selectedYear]['CivilianArmsTotal'] ===
@@ -1990,6 +2018,10 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Civilian'][
                   langSelected
                 ];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -2021,8 +2053,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -2081,7 +2113,9 @@ class DataMap extends Component {
             );
           });
           let rank = 'NA',
-            bullets = '';
+            bullets = '',
+            hasLink = false,
+            storyId = -1;
           for (let i = 0; i < arrSorted.length; i++) {
             if (
               arrSorted[i]['data'][selectedYear]['CountryMilatary'] ===
@@ -2094,6 +2128,10 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Military'][
                   langSelected
                 ];
+              hasLink =
+                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId =
+                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -2125,8 +2163,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, 1))
-            .on('click', self.handleBulletPointClick(1));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
