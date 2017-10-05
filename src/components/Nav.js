@@ -4,6 +4,8 @@ import intl from 'react-intl-universal';
 
 import './../styles/components/Nav.css';
 
+const logo = require('./../assets/saferglobe_logo.png');
+
 class Nav extends Component {
   render() {
     const selectedLocale = intl.options.currentLocale;
@@ -12,7 +14,13 @@ class Nav extends Component {
       <nav className="primary-nav">
         <h1>
           <Link to="/">
-            <span className="is-strong logo-text">SaferGlobe</span>
+            <img
+              src={logo}
+              className="logo"
+              alt="Logo"
+              title="Logo"
+              width="160"
+            />
             <span className="is-light logo-sub-text">
               {intl.get('ARMS_REPORT')}
             </span>
