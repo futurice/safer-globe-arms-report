@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
@@ -14,6 +15,7 @@ import './styles/headings.css';
 import './styles/text-types.css';
 import './styles/md.css';
 import './styles/scroll.css';
+import './styles/transitions.css';
 
 /*
 Primary Route Components
@@ -294,7 +296,17 @@ class AppRouter extends Component {
             </div>
           </div>
 
-          {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionEnterTimeout={250}
+            transitionLeaveTimeout={250}>
+              {isModal ? (
+                <Route
+                  location={location}
+                  path="/stories/:id"
+                  component={Modal} />
+              ) : null}
+          </ReactCSSTransitionGroup>
         </div>
       )
     );
