@@ -68,5 +68,10 @@
 .bullet-point {
 	font-size: 1rem;
   font-style: italic;
-	line-height: 20px;
+	line-height: 24px;
+  opacity: 0.9;
+}
+.bullet-point a:hover {
+  text-decoration: none;
+  opacity: 1;
 }
