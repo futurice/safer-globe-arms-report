@@ -63,15 +63,15 @@
 
 .country-rank {
 	font-size: 1rem;
-	line-height: 20px;
+	line-height: 24px;
 }
 .bullet-point {
-	font-size: 1rem;
+  font-size: 1rem;
   font-style: italic;
-	line-height: 24px;
-  opacity: 0.9;
+  line-height: 24px;
+  cursor: pointer;
 }
 .bullet-point a:hover {
   text-decoration: none;
-  opacity: 1;
+  font-weight: 600;
 }

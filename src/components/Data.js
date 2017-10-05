@@ -17,6 +17,7 @@ import './../styles/components/Note.css';
 
 const svg = require('./../assets/reset-icon.svg');
 const svgFinland = require('./../assets/finland-icon.svg');
+const svgDownload = require('./../assets/download-icon.svg');
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
@@ -222,6 +223,14 @@ class Data extends Component {
                 className="finland-icon"
                 alt="Select Finland"
                 title="Select Finland"
+              />
+            </div>
+            <div className="map-container__download box-shadow">
+              <img
+                src={svgDownload}
+                className="download"
+                alt="Download"
+                title="Download"
               />
             </div>
             <MapLegends />

@@ -38,11 +38,23 @@
   padding: 0;
   cursor: pointer;
   background-color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid #eee;
 }
 .map-container__finland {
   position: absolute;
   right: 1rem;
   top: 3.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid #eee;
+}
+.map-container__download {
+  position: absolute;
+  right: 1rem;
+  top: 6rem;
   width: 2.25rem;
   height: 2.25rem;
   padding: 0;
@@ -61,5 +73,12 @@
 }
 
 .finland-icon:hover {
+  opacity: 1;
+}
+.download {
+  opacity: 0.5;
+}
+
+.download:hover {
   opacity: 1;
 }
