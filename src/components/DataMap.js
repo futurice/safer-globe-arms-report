@@ -375,7 +375,7 @@ class DataMap extends Component {
               if (d.properties.data[yrs][keyIndx] > 0) {
                 return 1;
               } else {
-                return 0.1;
+                return 0.15;
               }
             });
         } else {
@@ -466,7 +466,7 @@ class DataMap extends Component {
                 if (d.properties.data[yrs][keyIndx] > 0) {
                   return 1;
                 } else {
-                  return 0.1;
+                  return 0.15;
                 }
               });
           }
@@ -475,6 +475,14 @@ class DataMap extends Component {
           updateSideBarYear('World', yrs);
           d3
             .selectAll('.land')
+            .transition()
+            .duration(200)
+            .attr(
+              'fill',
+              d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
+            );
+          d3
+            .selectAll('.Finland')
             .transition()
             .duration(200)
             .attr(
@@ -779,7 +787,7 @@ class DataMap extends Component {
               if (d.properties.data[yrs][keyIndx] > 0) {
                 return 1;
               } else {
-                return 0.1;
+                return 0.15;
               }
             });
         }
@@ -876,7 +884,7 @@ class DataMap extends Component {
               );
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            d3.selectAll('.countryGroup').attr('opacity', 0.1);
+            d3.selectAll('.countryGroup').attr('opacity', 0.15);
           }
         }
         if (active.state && !mouseHover.state) {
@@ -941,7 +949,7 @@ class DataMap extends Component {
               );
             d3.selectAll('.connectorLineIntl').style('display', 'none');
             d3.selectAll('.connectorLine').style('display', 'none');
-            d3.selectAll('.countryGroup').attr('opacity', 0.1);
+            d3.selectAll('.countryGroup').attr('opacity', 0.15);
           }
         }
         if (finlandIsClicked && !mouseHover.state) {
@@ -1007,7 +1015,7 @@ class DataMap extends Component {
               if (d.properties.data[yrs][keyIndx] > 0) {
                 return 1;
               } else {
-                return 0.1;
+                return 0.15;
               }
             });
         }
@@ -1294,7 +1302,7 @@ class DataMap extends Component {
               if (d.properties.data[yrs][keyIndx] > 0) {
                 return 1;
               } else {
-                return 0.1;
+                return 0.15;
               }
             });
         }
@@ -1446,8 +1454,8 @@ class DataMap extends Component {
           }
         }
         if (armstype === 'CivilianArmsTotal') {
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
-          d3.selectAll('.defenceLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
+          d3.selectAll('.defenceLine').attr('opacity', 0.15);
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           arrSorted.sort(function(x, y) {
             return (
@@ -1539,9 +1547,9 @@ class DataMap extends Component {
           }
         }
         if (armstype === 'CountryMilatary') {
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
           d3.selectAll('.defenceLine').attr('opacity', 0.8);
-          d3.selectAll('.civilianLine').attr('opacity', 0.1);
+          d3.selectAll('.civilianLine').attr('opacity', 0.15);
           arrSorted.sort(function(x, y) {
             return (
               y.data[yrs]['CountryMilatary'] - x.data[yrs]['CountryMilatary']
@@ -1710,8 +1718,8 @@ class DataMap extends Component {
             .style('font-family', 'Source Sans Pro')
             .style('margin', '0 0 0.5rem 0');
           d3.selectAll('.country-table').remove();
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
-          d3.selectAll('.defenceLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
+          d3.selectAll('.defenceLine').attr('opacity', 0.15);
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           d3
             .selectAll('.data-list-total__name')
@@ -1772,9 +1780,9 @@ class DataMap extends Component {
             .style('text-align', 'right')
             .style('font-size', '1rem')
             .style('padding', '0.5rem 0');
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
           d3.selectAll('.defenceLine').attr('opacity', 0.8);
-          d3.selectAll('.civilianLine').attr('opacity', 0.1);
+          d3.selectAll('.civilianLine').attr('opacity', 0.15);
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1794,7 +1802,7 @@ class DataMap extends Component {
         }
 
         if (armstype === 'total' || armstype === 'CountryMilatary') {
-          d3.selectAll('.countryGroup').attr('opacity', 0.1);
+          d3.selectAll('.countryGroup').attr('opacity', 0.15);
           for (let i = 0; i < intlMissions[0][yrs]['Countries'].length; i++) {
             let cntryName = intlMissions[0][yrs]['Countries'][i][0];
             d3
@@ -1933,8 +1941,8 @@ class DataMap extends Component {
           }
         }
         if (armstype === 'CivilianArmsTotal') {
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
-          d3.selectAll('.defenceLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
+          d3.selectAll('.defenceLine').attr('opacity', 0.15);
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           arrSorted.sort(function(x, y) {
             return (
@@ -2035,9 +2043,9 @@ class DataMap extends Component {
           }
         }
         if (armstype === 'CountryMilatary') {
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
           d3.selectAll('.defenceLine').attr('opacity', 0.8);
-          d3.selectAll('.civilianLine').attr('opacity', 0.1);
+          d3.selectAll('.civilianLine').attr('opacity', 0.15);
           arrSorted.sort(function(x, y) {
             return (
               y['data'][selectedYear]['CountryMilatary'] -
@@ -2219,8 +2227,8 @@ class DataMap extends Component {
             .style('font-family', 'Source Sans Pro')
             .style('margin', '0 0 0.5rem 0');
           d3.selectAll('.country-table').remove();
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
-          d3.selectAll('.defenceLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
+          d3.selectAll('.defenceLine').attr('opacity', 0.15);
           d3.selectAll('.civilianLine').attr('opacity', 0.8);
           d3
             .selectAll('.data-list-total__name')
@@ -2281,9 +2289,9 @@ class DataMap extends Component {
             .style('text-align', 'right')
             .style('font-size', '1rem')
             .style('padding', '0.5rem 0');
-          d3.selectAll('.totalLine').attr('opacity', 0.1);
+          d3.selectAll('.totalLine').attr('opacity', 0.15);
           d3.selectAll('.defenceLine').attr('opacity', 0.8);
-          d3.selectAll('.civilianLine').attr('opacity', 0.1);
+          d3.selectAll('.civilianLine').attr('opacity', 0.15);
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -2345,7 +2353,7 @@ class DataMap extends Component {
         .selectAll('.countryGroup')
         .transition()
         .duration(200)
-        .attr('opacity', 0.1);
+        .attr('opacity', 0.15);
       if (armstype === 'total' || armstype === 'CountryMilatary') {
         d3
           .selectAll('.Finland')
@@ -2358,7 +2366,7 @@ class DataMap extends Component {
           .attr('opacity', d => {
             if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
               return 1;
-            else return 0.1;
+            else return 0.15;
           });
         d3.selectAll('.connectorLineIntl').style('display', d => {
           if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
@@ -2397,7 +2405,7 @@ class DataMap extends Component {
       d3.selectAll('.connectorLineIntl').style('display', 'none');
       d3
         .selectAll('.Finland')
-        .attr('opacity', 0.1)
+        .attr('opacity', 0.15)
         .attr(
           'fill',
           d => colorList[d.properties.data[selectedYear]['GPI']['GPIBand']],
@@ -2408,7 +2416,7 @@ class DataMap extends Component {
         .selectAll('.countryGroup')
         .transition()
         .duration(200)
-        .attr('opacity', 0.1);
+        .attr('opacity', 0.15);
       let values;
       d3
         .selectAll(
@@ -2541,7 +2549,7 @@ class DataMap extends Component {
           .selectAll('.countryGroup')
           .transition()
           .duration(200)
-          .attr('opacity', 0.1);
+          .attr('opacity', 0.15);
         d3.selectAll('.connectorLine').style('display', 'none');
         d3
           .selectAll('.Finland')
@@ -2579,7 +2587,7 @@ class DataMap extends Component {
               .attr('opacity', d => {
                 if (d.properties.data[selectedYear][keyIndx] > 0) {
                   return 1;
-                } else return 0.1;
+                } else return 0.15;
               });
             d3
               .selectAll('.land')
@@ -2723,7 +2731,7 @@ class DataMap extends Component {
               .attr('opacity', d => {
                 if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
                   return 1;
-                else return 0.1;
+                else return 0.15;
               });
             d3.selectAll('.connectorLineIntl').style('display', d => {
               if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
@@ -3301,7 +3309,7 @@ class DataMap extends Component {
         'fill',
         d => colorList[d.properties.data[selectedYear]['GPI']['GPIBand']],
       )
-      .attr('opacity', 0.1)
+      .attr('opacity', 0.15)
       .attr('stroke', d => {
         if (d.properties.name === 'Somalia') {
           return 'none';
@@ -3592,7 +3600,7 @@ class DataMap extends Component {
               .attr('opacity', d => {
                 if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
                   return 1;
-                else return 0.1;
+                else return 0.15;
               });
             d3.selectAll('.connectorLineIntl').style('display', d => {
               if (d.properties.data[selectedYear]['IntlMissionMilatary'] > 0)
@@ -3658,7 +3666,7 @@ class DataMap extends Component {
         .attr('opacity', d => {
           if (d.properties.data[selectedYear][keyIndx] > 0) {
             return 1;
-          } else return 0.1;
+          } else return 0.15;
         });
       d3
         .selectAll('.land')
@@ -3778,7 +3786,7 @@ class DataMap extends Component {
           console.log(d, selectedYear);
           if (d.properties.data[selectedYear][keyIndx] > 0) {
             return 1;
-          } else return 0.1;
+          } else return 0.15;
         });
         d3.selectAll('.land').attr('opacity', d => {
           if (d.properties.data[selectedYear][keyIndx] > 0) {
