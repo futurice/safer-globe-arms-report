@@ -13,19 +13,28 @@
 
 .meta-data .story-tags {
 	align-self: flex-end;
+	line-height: 24px;
 }
 
-.meta-data .story-date {
+.meta-data{
 	position: relative;
-	font-weight: bold;
 	color: #797979;
+}
+
+.story-date {
+	position: relative;
+    font-weight: 700 !important;
+	line-height: 24px;
+    color: #333333;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
 .story-share {
 	display: flex;
     align-self: flex-end;
     position: absolute;
-	right: -42px;
+	right: 64px;
 }
 
 .story-share > div {
@@ -42,29 +51,33 @@
 }
 
 .full-story-container .story-text {
-	margin: 28px 0;
+	margin: 16px 0;
 	position: relative;
 }
 
 .back-to-articles {
-	padding: 16px 36px 16px 16px;
+	padding: 8px 36px 4px 16px !important;
 	position: fixed;
 	height: min-content;
 	text-decoration: initial;
 	color: initial;
-	font-size: 1.25rem;
-	font-weight: 600;
-	color: #797979;
+	font-size: 1rem;
+	font-weight: 400;
+	color: #333333;
+	cursor: pointer !important;
 }
 
 .back-to-articles:hover {
 	text-decoration: initial;
 	color: initial;
+	font-weight: 600;
 }
 
 .back-to-articles:before {
-	content: '\3008';
+	content: '\2190';
 	position: relative;
-	margin-right: 16px;
-	font-weight: 600;
+	margin-right: 8px;
+	font-size: 24px;
+	font-weight: 900;
+    vertical-align:middle;
 }

@@ -14,27 +14,25 @@
   left: 0;
   right: 0;
   bottom: 0;
-
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .modal-inner {
   position: relative;
-
 	max-width: 792px; /* similar to .text-box from containers.css */
-  margin: 2em auto;
+  margin: 4rem auto;
 }
 
-.cross-icon {
+.cross-icon {    
   position: absolute;
-
-  right: 5px;
-  top: 18px;
-
-  width: 15px;
-  height: 15px;
-
+  right: 0px;
+  top: -16px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
-
+  padding: 6px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid #333;
   z-index: 1;
 }

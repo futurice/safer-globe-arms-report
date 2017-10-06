@@ -1,17 +1,21 @@
 .md h1 {
+  margin-bottom: 8px;
   color: #333333;
-  font-weight: bold;
-  margin-bottom: 26px;
+  font-weight: 300;
+  font-size: 56px;
 }
 
 .md h2 {
   margin-bottom: 21px;
   font-size: 1rem;
-  font-weight: 600;
+  font-style: italic;
+  font-weight: 300;
 }
 
 .md p {
   margin-bottom: 32px;
+  font-size: 1.25rem;
+  line-height: 2rem;
 }
 
 .md {
@@ -23,6 +27,45 @@
 }
 
 .md hr {
+  height: 1px;
+  background-color: #e9e9e9;
+  border: 0;
+  margin-bottom: 32px;
+}
+
+.about-md{
+  padding: 1rem 2rem 0 2rem;
+}
+
+.about-md h1 {
+  margin-bottom: 1rem;
+  color: #333333;
+  font-weight: 300;
+  font-size: 2.25rem;
+}
+
+.about-md h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.about-md p {
+  margin: 0 0 2rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.about-md {
+  line-height: 1.62;
+}
+
+.about-md a {
+  font-weight: 600;
+}
+
+.about-md hr {
   height: 1px;
   background-color: #e9e9e9;
   border: 0;

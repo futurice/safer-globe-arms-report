@@ -19,24 +19,18 @@ class StoryPreview extends Component {
 
   render() {
     return (
-      <article className="story-container flex-container box-shadow">
+      <article className="story-container flex-container box-shadow-content">
         <Link to={'/stories/' + this.props.id}>
           <img
             className="story-image"
             src={this.props.image}
             alt={this.props.title}
           />
-          <span className="story-date">
-            {this.props.date}
-          </span>
+          <span className="story-date">{this.props.date}</span>
           <div className="story-text">
-            <h3>
-              {this.props.title}
-            </h3>
+            <h3>{this.props.title}</h3>
             <ReactMarkdown source={this.props.body} />
-            <div className="story-preview__tags">
-              {this.renderTags()}
-            </div>
+            <div className="story-preview__tags">{this.renderTags()}</div>
           </div>
         </Link>
       </article>

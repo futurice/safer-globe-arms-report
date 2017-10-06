@@ -9,9 +9,9 @@
 }
 
 .stories-container article {
-  max-width: 365px;
-  margin-left: 16px;
-  margin-bottom: 16px;
+  max-width: 320px;
+  margin-left: 24px;
+  margin-bottom: 24px;
   box-sizing: content-box;
 }
 
@@ -29,31 +29,36 @@
 
 .stories-container .story-text {
   position: relative;
-  padding: 20px 15px;
+  padding: 0px 16px 16px 16px;
 }
 
 .stories-container .story-text h3 {
-  font-size: 1rem;
-  margin-bottom: 6px;
-  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
 .stories-container .story-text p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .story-container .story-date {
   background: #fff;
-  color: #4d4d4d;
-  padding: 15px 20px;
+  color: #333333;
+  padding: 4px 8px;
   position: absolute;
   left: 0;
   top: 20px;
   opacity: 0.75;
   font-weight: 600;
 }
-
+.story-container .story-image {
+  margin-bottom: 8px;
+}
 .story-image {
   width: 100%;
   min-height: 100px;
@@ -61,6 +66,6 @@
 
 .story-preview__tags {
   color: #797979;
-  margin-top: 29px;
+  margin-top: 16px;
   font-size: 0.7rem;
 }

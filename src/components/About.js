@@ -124,7 +124,7 @@ class About extends Component {
 
     return (
       <div className="about-menu box-shadow">
-        {this.state.navigation.map((item, i) =>
+        {this.state.navigation.map((item, i) => (
           <div key={i}>
             <div key={i} className="about-main-link">
               <NavLink
@@ -135,17 +135,15 @@ class About extends Component {
               </NavLink>
             </div>
 
-            {item.anchors.map((sub, j) =>
+            {item.anchors.map((sub, j) => (
               <div key={j} className="about-sub-link">
-                <a href={`#${sub.id}`}>
-                  {intl.get(sub.name)}
-                </a>
-              </div>,
-            )}
+                <a href={`#${sub.id}`}>{intl.get(sub.name)}</a>
+              </div>
+            ))}
 
             {i < itemCount ? <Divider className="divider" /> : null}
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     );
   }
@@ -162,23 +160,22 @@ class About extends Component {
     }
 
     return (
-      <div className="stories-wrapper flex-container-row">
-        <section className="left-menu">
-          {this.renderMenu()}
-        </section>
+      <div className="about-stories-wrapper flex-container-row">
+        <section className="left-menu">{this.renderMenu()}</section>
 
         {this.state.loading ? <CircularProgress className="loading" /> : null}
-        {this.state.error
-          ? <div className="not-found">
-              {intl.get('NOT_FOUND')}
-            </div>
-          : null}
+        {this.state.error ? (
+          <div className="not-found">{intl.get('NOT_FOUND')}</div>
+        ) : null}
 
-        {this.state.body
-          ? <section className="text-box flex-container box-shadow">
-              <ReactMarkdown className="md" source={this.state.body || ''} />
-            </section>
-          : null}
+        {this.state.body ? (
+          <section className="text-box flex-container box-shadow">
+            <ReactMarkdown
+              className="about-md"
+              source={this.state.body || ''}
+            />
+          </section>
+        ) : null}
       </div>
     );
   }

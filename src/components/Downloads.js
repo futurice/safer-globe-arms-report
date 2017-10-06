@@ -40,7 +40,7 @@ class Downloads extends Component {
       const filepath = require(`../data/downloads/${data.filename}`);
 
       return (
-        <Card className="card box-shadow" key={i}>
+        <Card className="card" key={i}>
           <a
             href={filepath}
             target="_blank"
@@ -48,12 +48,7 @@ class Downloads extends Component {
             download={data.filename}
           >
             <CardHeader className="header" title={data.title} />
-            <CardContent className="content">
-              {data.desc}
-            </CardContent>
-            <CardActions className="actions">
-              <FileDownload />
-            </CardActions>
+            <CardContent className="content">{data.desc}</CardContent>
           </a>
         </Card>
       );
@@ -64,11 +59,9 @@ class Downloads extends Component {
     return (
       <section className="downloads flex-container">
         {this.state.loading ? <CircularProgress className="loading" /> : null}
-        {this.state.error
-          ? <div className="not-found">
-              {intl.get('LOADING_ERROR')}
-            </div>
-          : null}
+        {this.state.error ? (
+          <div className="not-found">{intl.get('LOADING_ERROR')}</div>
+        ) : null}
         {this.state.files ? this.renderCards() : null}
       </section>
     );

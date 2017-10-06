@@ -57,10 +57,10 @@ class DataMap extends Component {
       if (ev.metaKey) return true;
 
       const { history } = this.props;
-      history.push(`/stories/${storyId}`, { modal: true })
+      history.push(`/stories/${storyId}`, { modal: true });
 
       ev.preventDefault();
-    }
+    };
   }
 
   drawMap(displayData) {
@@ -216,8 +216,8 @@ class DataMap extends Component {
       gBar
         .append('rect')
         .attr('class', 'civBars')
-        .attr('x', d => d.properties.centroid[0] - 1.5)
-        .attr('width', 3)
+        .attr('x', d => d.properties.centroid[0] - 2.5)
+        .attr('width', 5)
         .attr('y', d => d.properties.centroid[1])
         .attr('height', 0)
         .attr('fill', civilianColor)
@@ -242,8 +242,8 @@ class DataMap extends Component {
       gBar
         .append('rect')
         .attr('class', 'milBars')
-        .attr('x', d => d.properties.centroid[0] - 1.5)
-        .attr('width', 3)
+        .attr('x', d => d.properties.centroid[0] - 2.5)
+        .attr('width', 5)
         .attr('y', d => {
           let y1 = hScale(d.properties.data[yrs]['CivilianArmsTotal']);
           if (d.properties.data[yrs]['CivilianArmsTotal'] === 0) y1 = 0;
@@ -282,7 +282,7 @@ class DataMap extends Component {
         .append('rect')
         .attr('class', 'intlMissionsBars')
         .attr('x', wid / 2)
-        .attr('width', 4)
+        .attr('width', 5)
         .attr('y', hght - 42)
         .attr('height', 0)
         .attr('fill', defenceColor)
@@ -1401,10 +1401,8 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Total'][langSelected];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1436,8 +1434,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1502,10 +1500,8 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Civilian'][langSelected];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1537,8 +1533,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1602,10 +1598,8 @@ class DataMap extends Component {
             if (arrSorted[i]['name'] === cntryNm) {
               bullets =
                 arrSorted[i].data[yrs]['Comment']['Military'][langSelected];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1637,8 +1631,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1910,10 +1904,8 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Total'][
                   langSelected
                 ];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -1945,8 +1937,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -2018,10 +2010,8 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Civilian'][
                   langSelected
                 ];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -2053,8 +2043,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -2128,10 +2118,8 @@ class DataMap extends Component {
                 arrSorted[i]['data'][selectedYear]['Comment']['Military'][
                   langSelected
                 ];
-              hasLink =
-                arrSorted[i].data[yrs]['Comment']['Total']['Link'];
-              storyId =
-                arrSorted[i].data[yrs]['Comment']['Total']['ID'];
+              hasLink = arrSorted[i].data[yrs]['Comment']['Total']['Link'];
+              storyId = arrSorted[i].data[yrs]['Comment']['Total']['ID'];
               break;
             }
           }
@@ -2163,8 +2151,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId))
-            .on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId));
+          //.on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -3424,8 +3412,8 @@ class DataMap extends Component {
     zoomGroup
       .append('rect')
       .attr('class', 'initCivBar')
-      .attr('x', origin[0] - 1.5)
-      .attr('width', 3)
+      .attr('x', origin[0] - 2.5)
+      .attr('width', 5)
       .attr('height', hScale(totalExport[0][selectedYear]['Civilian']))
       .attr('y', () => {
         let y1 = hScale(totalExport[0][selectedYear]['Civilian']);
@@ -3444,8 +3432,8 @@ class DataMap extends Component {
     zoomGroup
       .append('rect')
       .attr('class', 'initMilBars')
-      .attr('x', origin[0] - 1.5)
-      .attr('width', 3)
+      .attr('x', origin[0] - 2.5)
+      .attr('width', 5)
       .attr('height', hScale(totalExport[0][selectedYear]['Military']))
       .attr('y', () => {
         let y1 = hScale(totalExport[0][selectedYear]['Civilian']),

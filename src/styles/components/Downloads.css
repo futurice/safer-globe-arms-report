@@ -1,7 +1,14 @@
+.downloads{
+	padding-left: 2rem !important;
+	padding-right: 0.5rem !important;
+}
+
 .downloads .card {
-	max-width: 340px;
-	margin-right: 16px;
-	margin-bottom: 16px;
+	width: 400px !important;
+	margin-right: 24px;
+	margin-bottom: 24px;
+	border-radius:2px;
+
 }
 
 .downloads .card a, .downloads .card a:hover {
@@ -14,14 +21,25 @@
 }
 
 .downloads .header span {
-	color: #3182b5;
-	font-size: 1rem;
-	font-weight: 600;
+	color: #333;
+	font-size: 1.25rem;
+	font-weight: 700;
 }
 
+.downloads .content {
+	color: #333;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	font-weight: 400;
+	padding-top: 0.5rem;
+	padding-bottom: 0;
+
+}
 .downloads .actions {
 	justify-content: flex-end;
+	padding: 0;
+	height: 2rem;
 }
 .downloads .actions * {
-	color: #3182b5;
+	color: #aaa;
 }

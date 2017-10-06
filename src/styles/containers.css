@@ -40,10 +40,16 @@
 	display: flex;
 	position: relative;
 	flex-direction: column;
-	max-width: 792px;
-	width: 100%;
-	padding: 48px 96px 48px 48px;
-	margin-left: 16px;
+	width: 95%;
+	margin: 0px 24px;
+}
+
+.meta-data{
+	padding: 0px 96px 0px 48px;
+}
+
+.story-text{
+	padding: 0px 96px 0px 48px;
 }
 
 .left-menu {

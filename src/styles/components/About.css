@@ -1,14 +1,20 @@
 .about-main-link a, .about-main-link a:visited {
 	font-size: 1rem;
+	text-transform: uppercase;
+	font-weight: 700;
 	color: #333333;
+	opacity: 0.7;
 }
 
 .about-sub-link a, .about-sub-link a:visited {
-	color: #797979;
+	color: #333333;
+	margin-left: 0.5rem;
+	opacity: 0.7;
 }
 
 .about-main-link a:hover, .about-sub-link a:hover {
 	text-decoration: none;
+	opacity: 1;
 } 
 
 .about-menu .divider {
@@ -21,10 +27,13 @@
 .about-menu a {
 	border-bottom: 2px solid transparent;
 	line-height: 22px;
-	font-weight: 600;
 	line-height: 1.83;
 }
 
 .about-menu a.active {
-	border-bottom: 3px solid #2D80B5;
+	opacity: 1;
+}
+
+.about-stories-wrapper{
+	padding-bottom: 1.5rem !important;
 }
