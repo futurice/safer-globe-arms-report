@@ -14,6 +14,7 @@ import './../styles/components/DataSection.css';
 import './../styles/components/DataStats.css';
 import './../styles/icons.css';
 import './../styles/components/Note.css';
+import { saveSvgAsPng } from 'save-svg-as-png';
 
 const svg = require('./../assets/reset-icon.svg');
 const svgFinland = require('./../assets/finland-icon.svg');
@@ -69,6 +70,8 @@ class Data extends Component {
   constructor() {
     super();
 
+    this.handleDownloadClick = this.handleDownloadClick.bind(this);
+
     const activeYear = 2015;
 
     this.state = {
@@ -118,6 +121,10 @@ class Data extends Component {
     this.sortTopLists = this.sortTopLists.bind(this);
     this.buildTopLists = this.buildTopLists.bind(this);
     this.accumulateTotal = this.accumulateTotal.bind(this);
+  }
+
+  handleDownloadClick() {
+    saveSvgAsPng(document.getElementsByClassName('svg-map')[0], `Suomen-asevienti-kartta-${this.state.activeYear}.png`)
   }
 
   updateGPIYear(newGPIYear) {
@@ -231,6 +238,7 @@ class Data extends Component {
                 className="download"
                 alt="Download"
                 title="Download"
+                onClick={this.handleDownloadClick}
               />
             </div>
             <MapLegends />
