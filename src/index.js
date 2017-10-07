@@ -122,6 +122,9 @@ const locales = {
     REMARKS: 'Remaks',
     ALL_COUNTRY_ARTICLES: 'All articles of {countryName}',
     GPI: 'Global Peace Index',
+    HOWTOREAD: 'Note: ',
+    HOWTOREADTEXT:
+      'If the export is > 0 then the graph shows a bar of min. height 1px',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
 
     // About page
@@ -206,6 +209,9 @@ const locales = {
     REMARKS: 'Huomioita',
     ALL_COUNTRY_ARTICLES: 'Kaikki {countryName} -artikkelit',
     GPI: 'Maailman rauhanindeksi',
+    HOWTOREAD: 'Huomautus: ',
+    HOWTOREADTEXT:
+      'Jos vienti on > 0, kaaviossa näkyy palkki, jonka vähimmäiskorkeus on 1px',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
 
     // About page

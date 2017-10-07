@@ -4,7 +4,7 @@
 	right: 1rem;
 	bottom: 4.5rem;
 	z-index: 9999;
-	background: #ffffff;
+	background: rgba(255,255,255,0.3) !important;
 	font-size: 9px;
 }
 
@@ -30,4 +30,13 @@
 	font-size: 10px;
 	font-weight: 700;
 	margin-bottom: 0.2rem;
+}
+
+.divider{
+	opacity:0.5;
+}
+
+.sub-text{
+	font-weight: 400;
+	font-style: italic;
 }

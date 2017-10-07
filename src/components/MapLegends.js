@@ -43,6 +43,11 @@ export default class Maplegends extends Component {
             <span>{intl.get('NOT_AVAILABLE')}</span>
           </div>
         </div>
+        <hr className="divider" />
+        <div className="GPI-head">
+          {intl.get('HOWTOREAD')}
+          <span className="sub-text">{intl.get('HOWTOREADTEXT')}</span>
+        </div>
       </div>
     );
   }

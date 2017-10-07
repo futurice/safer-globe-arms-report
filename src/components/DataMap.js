@@ -83,7 +83,7 @@ class DataMap extends Component {
     let hScale = d3
       .scaleLinear()
       .domain([0, 60000000])
-      .range([2, 175]);
+      .range([1, 175]);
 
     let projection = d3GeoProjection
       .geoRobinson()
@@ -1443,7 +1443,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(totalVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(totalVal))
+            .style('color', '#212121');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -1470,7 +1473,9 @@ class DataMap extends Component {
               .html(countryNameLang[arrSorted[k - 1].name][langSelected]);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(formatEuros(arrSorted[k - 1].data[yrs].TotalCountry));
+              .html(formatEuros(arrSorted[k - 1].data[yrs].TotalCountry))
+              .style('color', '#212121')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1549,7 +1554,8 @@ class DataMap extends Component {
             .html(countryNameLang[cntryNm][langSelected]);
           d3
             .selectAll('.data-list-total__value')
-            .html(formatEuros(civilianVal));
+            .html(formatEuros(civilianVal))
+            .style('color', '#785ef0');
           let percentDef = 0,
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -1573,7 +1579,9 @@ class DataMap extends Component {
               .html(countryNameLang[arrSorted[k - 1].name][langSelected]);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(formatEuros(arrSorted[k - 1].data[yrs].CivilianArmsTotal));
+              .html(formatEuros(arrSorted[k - 1].data[yrs].CivilianArmsTotal))
+              .style('color', '#785ef0')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1649,7 +1657,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(defenceVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(defenceVal))
+            .style('color', '#fe6100');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = 0;
           d3
@@ -1673,7 +1684,9 @@ class DataMap extends Component {
               .html(countryNameLang[arrSorted[k - 1].name][langSelected]);
             d3
               .select('.top-countries__name--sum' + k)
-              .html(formatEuros(arrSorted[k - 1].data[yrs].CountryMilatary));
+              .html(formatEuros(arrSorted[k - 1].data[yrs].CountryMilatary))
+              .style('color', '#fe6100')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -1743,7 +1756,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(totalVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(totalVal))
+            .style('color', '#212121');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -1776,7 +1792,8 @@ class DataMap extends Component {
             .html(countryNameLang[cntryNm][langSelected]);
           d3
             .selectAll('.data-list-total__value')
-            .html(formatEuros(civilianVal));
+            .html(formatEuros(civilianVal))
+            .style('color', '#785ef0');
           let percentDef = 0,
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -1836,7 +1853,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(defenceVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(defenceVal))
+            .style('color', '#fe6100');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = 0;
           d3
@@ -1958,7 +1978,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(totalVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(totalVal))
+            .style('color', '#212121');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -1987,7 +2010,9 @@ class DataMap extends Component {
               .select('.top-countries__name--sum' + k)
               .html(
                 formatEuros(arrSorted[k - 1].data[selectedYear].TotalCountry),
-              );
+              )
+              .style('color', '#212121')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -2071,7 +2096,8 @@ class DataMap extends Component {
             .html(countryNameLang[cntryNm][langSelected]);
           d3
             .selectAll('.data-list-total__value')
-            .html(formatEuros(civilianVal));
+            .html(formatEuros(civilianVal))
+            .style('color', '#785ef0');
           let percentDef = 0,
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -2099,7 +2125,9 @@ class DataMap extends Component {
                 formatEuros(
                   arrSorted[k - 1].data[selectedYear].CivilianArmsTotal,
                 ),
-              );
+              )
+              .style('color', '#785ef0')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -2181,7 +2209,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(defenceVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(defenceVal))
+            .style('color', '#fe6100');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = 0;
           d3
@@ -2209,7 +2240,9 @@ class DataMap extends Component {
                 formatEuros(
                   arrSorted[k - 1].data[selectedYear].CountryMilatary,
                 ),
-              );
+              )
+              .style('color', '#fe6100')
+              .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
@@ -2282,7 +2315,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(totalVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(totalVal))
+            .style('color', '#212121');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -2315,7 +2351,8 @@ class DataMap extends Component {
             .html(countryNameLang[cntryNm][langSelected]);
           d3
             .selectAll('.data-list-total__value')
-            .html(formatEuros(civilianVal));
+            .html(formatEuros(civilianVal))
+            .style('color', '#785ef0');
           let percentDef = 0,
             percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
           d3
@@ -2375,7 +2412,10 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
-          d3.selectAll('.data-list-total__value').html(formatEuros(defenceVal));
+          d3
+            .selectAll('.data-list-total__value')
+            .html(formatEuros(defenceVal))
+            .style('color', '#fe6100');
           let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
             percentCiv = 0;
           d3

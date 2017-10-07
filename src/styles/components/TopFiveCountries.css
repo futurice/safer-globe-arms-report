@@ -70,12 +70,14 @@
 .civComment{
 	color: #785ef0;
 	margin-top:0.75rem;
+	font-weight: 700;
 	margin-bottom:0.75rem;
 }
 
 .defComment{
 	color: #fe6100;
 	margin-top:0.75rem;
+	font-weight: 700;
 	margin-bottom:0.75rem;
 }
 

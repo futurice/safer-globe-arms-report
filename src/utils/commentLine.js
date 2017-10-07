@@ -24,9 +24,9 @@ export default function(countryName, rank, language, armsType, yrs, def, civ) {
       }
     } else {
       if (parseInt(rank, 10) === 1) {
-        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span><p class = "civComment">Siviiliaseet tuonti Suomesta <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Sotatuotteet tuonti Suomesta <span style='font-weight:700'>${def}</span></p>`;
+        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span><p>Siviiliaseet tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteet tuonti Suomesta <span class = "defComment">${def}</span></p>`;
       } else {
-        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<p class = "civComment">Siviiliaseet tuonti Suomesta <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Sotatuotteet tuonti Suomesta <span style='font-weight:700'>${def}</span></p>`;
+        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<p>Siviiliaseet tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteet tuonti Suomesta <span class = "defComment">${def}</span></p>`;
       }
     }
   } else {
@@ -60,16 +60,16 @@ export default function(countryName, rank, language, armsType, yrs, def, civ) {
     } else {
       switch (parseInt(rank, 10)) {
         case 1:
-          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p class = "civComment">Civilian Arm import from Finland is <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Military Arm import from Finland is <span style='font-weight:700'>${def}</span></p>`;
+          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p>Civilian Arm import from Finland is <span class = "civComment">${civ}</span></p><p>Military Arm import from Finland is <span class = "defComment">${def}</span></p>`;
           break;
         case 2:
-          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p class = "civComment">Civilian Arm import from Finland is <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Military Arm import from Finland is <span style='font-weight:700'>${def}</span></p>`;
+          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p>Civilian Arm import from Finland is <span class = "civComment">${civ}</span></p><p>Military Arm import from Finland is <span class = "defComment">${def}</span></p>`;
           break;
         case 3:
-          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p class = "civComment">Civilian Arm import from Finland is <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Military Arm import from Finland is <span style='font-weight:700'>${def}</span></p>`;
+          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p>Civilian Arm import from Finland is <span class = "civComment">${civ}</span></p><p>Military Arm import from Finland is <span class = "defComment">${def}</span></p>`;
           break;
         default:
-          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p class = "civComment">Civilian Arm import from Finland is <span style='font-weight:700'>${civ}</span></p><p class = "defComment">Military Arm import from Finland is <span style='font-weight:700'>${def}</span></p>`;
+          text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span><p>Civilian Arm import from Finland is <span class = "civComment">${civ}</span></p><p>Military Arm import from Finland is <span class = "defComment">${def}</span></p>`;
           break;
       }
     }
