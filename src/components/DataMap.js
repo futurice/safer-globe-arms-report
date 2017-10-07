@@ -1416,6 +1416,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -1428,6 +1430,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
@@ -1515,6 +1519,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -1527,6 +1533,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
@@ -1613,6 +1621,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -1625,6 +1635,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
@@ -1919,6 +1931,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -1931,6 +1945,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
@@ -2025,6 +2041,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -2037,6 +2055,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
@@ -2133,6 +2153,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  0,
+                  0,
                 ),
               );
           } else {
@@ -2145,6 +2167,8 @@ class DataMap extends Component {
                   langSelected,
                   armstype,
                   selectedYear,
+                  formatEuros(defenceVal),
+                  formatEuros(civilianVal),
                 ),
               );
           }
