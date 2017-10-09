@@ -25,13 +25,11 @@ export default class ArticleNotification extends Component {
   }
 
   render() {
-    return this.state.open && intl.options.currentLocale.includes('en')
-      ? <div className="article-notification box-shadow">
-          <span>
-            {intl.get('ARTICLES_ONLY_IN_FINNISH')}
-          </span>
-          <Clear onClick={this.closeNotification.bind(this)} />
-        </div>
-      : null;
+    return this.state.open && intl.options.currentLocale.includes('en') ? (
+      <div className="article-notification">
+        <span>{intl.get('ARTICLES_ONLY_IN_FINNISH')}</span>
+        <Clear onClick={this.closeNotification.bind(this)} />
+      </div>
+    ) : null;
   }
 }

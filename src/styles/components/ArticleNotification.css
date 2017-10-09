@@ -1,10 +1,16 @@
 .article-notification {
-	display: flex;
+	width: calc(100% + 8px);
 	margin: 0 0 16px 16px;
-	padding: 22px;
-	justify-content: space-between;
-	flex: 1 1 100%;
-	position: relative;
+	padding: 1rem;
+	position: fixed;
+	bottom:0;
+	z-index:1000;
+	left:0;
+	background-color: rgba(255,255,255,0.9);
+	text-align: center;
+	margin-bottom:  0rem;
+	margin-left: 0;
+  	box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
 .article-notification span {
@@ -14,10 +20,6 @@
 }
 
 .article-notification svg {
-	width: 32px;
-	height: 32px;
-	display: flex;
-    align-self: center;
     position: absolute;
     right: 10px;
     cursor: pointer;
