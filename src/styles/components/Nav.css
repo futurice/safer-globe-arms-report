@@ -31,10 +31,7 @@
 
 .primary-nav ul a {
   font-size: 1rem;
-  margin-top:6px;
   color: #999;
-  text-transform: uppercase;
-  font-weight: 600;
 }
 
 .primary-nav a:hover{
