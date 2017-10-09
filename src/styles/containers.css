@@ -40,7 +40,6 @@
 	display: flex;
 	position: relative;
 	flex-direction: column;
-	width: 98%;
 	max-width: 840px;
 	margin: 0px 24px;
 }
