@@ -23,24 +23,29 @@ class About extends Component {
       body: null,
       navigation: [
         {
-          path: 'terms-explained',
-          file: 'terms-explained',
+          path: 'top',
+          file: 'top',
           name: 'TERMS_EXPLAINED',
           anchors: [
             {
-              id: 'gpi',
-              name: 'GPI',
+              id: 'Kartassa_Käytetyt_Termit',
+              name: 'Kartassa_Käytetyt_Termit',
             },
-          ],
-        },
-        {
-          path: 'page2',
-          file: 'terms-explained',
-          name: 'TERMS_EXPLAINED',
-          anchors: [
             {
-              id: 'gpi',
-              name: 'GPI',
+              id: 'Kuinka_Lukea_Raporttia',
+              name: 'Kuinka_Lukea_Raporttia',
+            },
+            {
+              id: 'Miten_Tiedot_on_Esitetty',
+              name: 'Miten_Tiedot_on_Esitetty',
+            },
+            {
+              id: 'Lue_Lisää',
+              name: 'Lue_Lisää',
+            },
+            {
+              id: 'SaferGlobe',
+              name: 'SaferGlobe',
             },
           ],
         },
@@ -69,10 +74,15 @@ class About extends Component {
   }
 
   loadDocument(name, hash = null) {
-    const lang = intl.determineLocale().includes('en') ? 'en' : 'fi';
+    let lang = 'fi';
+
+    if (intl.get('STORIES') != 'Artikkelit') {
+      lang = 'en';
+    }
 
     try {
-      const url = require(`../data/about/${name}_${lang}.md`);
+      console.log(intl.determineLocale().includes('en'));
+      const url = require(`../data/about/about_${lang}.md`);
 
       if (this.state.page === name) {
         if (this.state.hash !== hash) {
@@ -126,15 +136,6 @@ class About extends Component {
       <div className="about-menu box-shadow">
         {this.state.navigation.map((item, i) => (
           <div key={i}>
-            <div key={i} className="about-main-link">
-              <NavLink
-                to={`/about/${item.path}`}
-                className={atRoot && i === 0 ? ' active' : null}
-              >
-                {intl.get(item.name)}
-              </NavLink>
-            </div>
-
             {item.anchors.map((sub, j) => (
               <div key={j} className="about-sub-link">
                 <a href={`#${sub.id}`}>{intl.get(sub.name)}</a>

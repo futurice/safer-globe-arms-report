@@ -6,10 +6,12 @@
 	opacity: 0.7;
 }
 
-.about-sub-link a, .about-sub-link a:visited {
-	color: #333333;
-	margin-left: 0.5rem;
-	opacity: 0.7;
+.about-sub-link{
+	color: #212121 !important;
+	margin: 1rem 0;
+	opacity: 1;
+	font-weight:600;
+	font-size: 1rem;
 }
 
 .about-main-link a:hover, .about-sub-link a:hover {

@@ -129,7 +129,12 @@ const locales = {
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
 
     // About page
-    TERMS_EXPLAINED: 'Terms explained',
+    TERMS_EXPLAINED: 'About Us',
+    Kartassa_Käytetyt_Termit: 'Terms Used in the Map',
+    Kuinka_Lukea_Raporttia: 'Reading the Report',
+    Miten_Tiedot_on_Esitetty: 'Presentation of Information',
+    Lue_Lisää: 'Read More',
+    SaferGlobe: 'SaferGlobe',
 
     //DOWNLOAD_DATA: 'Download Data',
     //EVENTS: 'Events',
@@ -216,7 +221,12 @@ const locales = {
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
 
     // About page
-    TERMS_EXPLAINED: 'Termit selitettyinä',
+    TERMS_EXPLAINED: 'Meistä',
+    Kartassa_Käytetyt_Termit: 'Kartassa Käytetyt Termit',
+    Kuinka_Lukea_Raporttia: 'Kuinka Lukea Raporttia',
+    Miten_Tiedot_on_Esitetty: 'Miten Tiedot on Esitetty',
+    Lue_Lisää: 'Lue Lisää',
+    SaferGlobe: 'SaferGlobe',
 
     //DOWNLOAD_DATA: 'Lataa tiedot',
     //EVENTS: 'Tapahtumat',
