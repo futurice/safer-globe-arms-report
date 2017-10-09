@@ -63,14 +63,14 @@
 	color: initial;
 	font-size: 1rem;
 	font-weight: 400;
-	color: #333333;
+	color: rgba(51,51,51,0.5);
 	cursor: pointer !important;
 }
 
 .back-to-articles:hover {
 	text-decoration: initial;
 	color: initial;
-	font-weight: 600;
+	color: rgba(51,51,51,1);
 }
 
 .back-to-articles:before {
