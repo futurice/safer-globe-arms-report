@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { ShareButtons, generateShareIcon } from 'react-share';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown-it';
 import intl from 'react-intl-universal';
 import { CircularProgress } from 'material-ui/Progress';
 
@@ -46,7 +46,7 @@ class FullStory extends Component {
         .then(response => {
           const lines = response.split('\n');
           const tags = lines[0].split(',').reduce((ary, cur) => {
-            ary.push(`#${cur}`);
+            ary.push(`#${cur.trim()}`);
 
             return ary;
           }, []);
@@ -88,13 +88,12 @@ class FullStory extends Component {
 
     return (
       <div className="flex-container-row">
-        {!isModal && (
+        {!isModal &&
           <a onClick={this.props.history.goBack} className="left-menu">
             <div className="back-to-articles box-shadow">
               {intl.get('BACK_TO_ARTICLES')}
             </div>
-          </a>
-        )}
+          </a>}
 
         {this.state.loading ? <CircularProgress className="loading" /> : null}
         {this.state.error
@@ -115,9 +114,11 @@ class FullStory extends Component {
                     <div>
                       {this.state.date}
                     </div>
-                    <div>
-                      {intl.get('TEXT_BY')}: {this.state.author}
-                    </div>
+                    {this.state.author
+                      ? <div>
+                          {intl.get('TEXT_BY')}: {this.state.author}
+                        </div>
+                      : null}
                   </span>
                   <span className="story-tags">
                     {this.state.tags.join(' ')}

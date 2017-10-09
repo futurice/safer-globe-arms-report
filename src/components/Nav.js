@@ -26,7 +26,6 @@ class Nav extends Component {
             </span>
           </Link>
         </h1>
-        {/*
         <ul className="flex-container no-bullets">
           <li>
             <NavLink exact to="/">
@@ -34,7 +33,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/stories">
+            <NavLink to="/articles">
               {intl.get('STORIES')}
             </NavLink>
           </li>
@@ -49,7 +48,6 @@ class Nav extends Component {
             </NavLink>
           </li>
         </ul>
-        */}
         <span className="lang-selection">
           <a
             href="?lang=fi"
