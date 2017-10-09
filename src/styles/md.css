@@ -10,8 +10,8 @@
   font-size: 1rem;
   margin-top: 0.75rem;
   line-height: 2rem;
-  font-weight: 600;
-  opacity:0.5;
+  font-weight: 700;
+  color:#212121;
 }
 
 .md p {    
@@ -53,6 +53,11 @@
   margin-bottom: 1rem;
   font-style: italic;
   font-size: 0.875rem;
+}
+
+.md ul{
+  margin: -1.5rem 1rem 1rem 1rem;
+  line-height: 2rem;
 }
 
 .about-md{

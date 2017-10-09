@@ -25,7 +25,7 @@
 
 .cross-icon {    
   position: absolute;
-  right: 0px;
+  right: 6px;
   top: -16px;
   width: 32px;
   height: 32px;
@@ -33,6 +33,7 @@
   padding: 6px;
   background-color: #fff;
   border-radius: 20px;
-  border: 1px solid #333;
+  border: 1px solid #ccc;
   z-index: 1;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }

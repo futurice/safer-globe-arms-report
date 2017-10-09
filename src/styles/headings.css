@@ -16,12 +16,14 @@ h4 {
   line-height: 4rem;
 }
 
-table + p {
+table + p {    
     font-size: 0.75rem !important;
-    font-style: italic  !important;
-    margin-top: 0.125rem  !important;
-    margin-bottom: 0.125rem  !important;
+    font-style: italic !important;
+    margin-top: 0.125rem !important;
+    margin-bottom: 1.5rem !important;
     padding-left: 0.5rem !important;
-    border-top: 1px solid #ccc  !important;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ccc !important;
     color: rgba(33,33,33,0.6);
+    line-height: 1rem !important;
 }

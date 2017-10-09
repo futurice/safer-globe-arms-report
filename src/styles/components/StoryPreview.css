@@ -15,7 +15,9 @@
   margin-bottom: 24px;
   box-sizing: content-box;
 }
-
+.stories-container .story-date{
+  margin-left: 0px !important;
+}
 .stories-container .story-container {
   align-items: flex-start;
   background: #fff;

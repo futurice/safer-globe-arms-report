@@ -1439,8 +1439,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -1547,8 +1547,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1652,8 +1652,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -1974,8 +1974,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
           d3
             .selectAll('.data-list-total__name')
             .html(countryNameLang[cntryNm][langSelected]);
@@ -2089,8 +2089,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')
@@ -2204,8 +2204,8 @@ class DataMap extends Component {
           d3.selectAll('.key-points').html('');
           d3
             .selectAll('.bullet-point')
-            .html(makeBulletHtml(bullets, hasLink, storyId));
-          //.on('click', self.handleBulletPointClick(hasLink, storyId));
+            .html(makeBulletHtml(bullets, hasLink, storyId))
+            .on('click', self.handleBulletPointClick(hasLink, storyId));
 
           d3
             .selectAll('.data-list-total__name')

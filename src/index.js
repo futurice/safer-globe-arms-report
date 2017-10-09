@@ -144,7 +144,7 @@ const locales = {
     DOWNLOADS: 'Avoin Data',
     NOT_FOUND: 'Heattua sivua ei löytynyt.',
     LOADING_ERROR: 'Sivua ladatessa tapahtui virhe.',
-    CLICK: 'Click to download',
+    CLICK: 'Lataa tästä',
 
     // Notetext
     NOTE:

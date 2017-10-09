@@ -5,7 +5,6 @@ import ReactMarkdown from 'react-markdown';
 
 import './../styles/components/StoryPreview.css';
 
-const img = require('./../assets/articleImages/asevarustelun_lapinakyvyys_lisaa_luottamusta_big.jpg');
 class StoryPreview extends Component {
   renderTags() {
     return this.props.tags
@@ -22,7 +21,12 @@ class StoryPreview extends Component {
     return (
       <article className="story-container flex-container box-shadow-content">
         <Link className="article-link" to={'/articles/' + this.props.id}>
-          <img className="story-image" src={img} alt="" aria-hidden="true" />
+          <img
+            className="story-image"
+            src={this.props.image}
+            alt=""
+            aria-hidden="true"
+          />
           <span className="story-date">{this.props.date}</span>
           <div className="story-text">
             <h3>{this.props.title}</h3>
