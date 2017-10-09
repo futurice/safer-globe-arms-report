@@ -49,6 +49,7 @@ class Downloads extends Component {
           >
             <CardHeader className="header" title={data.title} />
             <CardContent className="content">{data.desc}</CardContent>
+            <CardContent className="ClickHere">{intl.get('CLICK')}</CardContent>
           </a>
         </Card>
       );

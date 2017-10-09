@@ -13,6 +13,7 @@ import './styles/flex-styles.css';
 import './styles/headings.css';
 import './styles/text-types.css';
 import './styles/md.css';
+import './styles/table.css';
 import './styles/scroll.css';
 
 /*
@@ -54,6 +55,7 @@ const locales = {
     DOWNLOADS: 'Open Data',
     NOT_FOUND: 'The requested page could not be found.',
     LOADING_ERROR: 'An error occurred while loading page.',
+    CLICK: 'Click to download',
 
     // Notetext
     NOTE:
@@ -142,6 +144,7 @@ const locales = {
     DOWNLOADS: 'Avoin Data',
     NOT_FOUND: 'Heattua sivua ei löytynyt.',
     LOADING_ERROR: 'Sivua ladatessa tapahtui virhe.',
+    CLICK: 'Click to download',
 
     // Notetext
     NOTE:
@@ -283,12 +286,12 @@ class AppRouter extends Component {
                 <Route exact path="/" component={Data} />
                 <Route
                   exact
-                  path="/stories"
+                  path="/articles"
                   render={props => <Stories {...props} />}
                 />
                 <Route
                   exact
-                  path="/stories/:id"
+                  path="/articles/:id"
                   render={props => <FullStory {...props} />}
                 />
                 <Route exact path="/about" component={About} />

@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import * as d3GeoProjection from 'd3-geo-projection';
 import { csv } from 'd3-request';
+import { CircularProgress } from 'material-ui/Progress';
 import formatEuros from '../utils/formatEuros';
 import drawArc from '../utils/drawArcs';
 import commentLine from '../utils/commentLine';
@@ -4103,9 +4104,12 @@ class DataMap extends Component {
       window.sidebar &&
       this.state.saferGlobeData
     ) {
+      window.timeline = false;
+      window.nav = false;
+      window.sidebar = false;
       return <div>{this.drawMap(this.props.saferGlobeData)}</div>;
     } else {
-      return <div style={{ textAlign: 'center' }}>Loading Map...</div>;
+      return <CircularProgress className="loading" />;
     }
   }
 }

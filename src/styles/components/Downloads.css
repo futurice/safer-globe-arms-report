@@ -8,7 +8,7 @@
 	margin-right: 24px;
 	margin-bottom: 24px;
 	border-radius:2px;
-
+	height: 150px !important;
 }
 
 .downloads .card a, .downloads .card a:hover {
@@ -21,20 +21,21 @@
 }
 
 .downloads .header span {
-	color: #333;
-	font-size: 1.25rem;
-	font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+    font-weight: 700;
 }
 
 .downloads .content {
-	color: #333;
-	font-size: 0.875rem;
-	line-height: 1.5rem;
-	font-weight: 400;
-	padding-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.375rem;
+    font-style: italic;
+    font-weight: 400;
+    padding-top: 0rem;
+	color:rgba(33,33,33,0.6);
 	padding-bottom: 0;
-
 }
+
 .downloads .actions {
 	justify-content: flex-end;
 	padding: 0;
@@ -42,4 +43,15 @@
 }
 .downloads .actions * {
 	color: #aaa;
+}
+
+.downloads .ClickHere{
+	padding-bottom: 0.5rem;
+	position: absolute;
+	bottom: 28px;
+	text-transform: uppercase;
+	font-weight: 700;
+	opacity: 0.8;
+	color: #2D80B5;
+	font-size: 0.75rem;
 }

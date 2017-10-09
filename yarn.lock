@@ -165,7 +165,7 @@ are-we-there-yet@~1.1.2:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
 
-argparse@^1.0.7:
+argparse@^1.0.7, argparse@~1.0.2:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
   dependencies:
@@ -4475,6 +4475,12 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+linkify-it@~1.2.0:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/linkify-it/-/linkify-it-1.2.4.tgz#0773526c317c8fd13bd534ee1d180ff88abf881a"
+  dependencies:
+    uc.micro "^1.0.1"
+
 lint-staged@^3.5.1:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-3.6.1.tgz#24423c8b7bd99d96e15acd1ac8cb392a78e58582"
@@ -4722,6 +4728,16 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+markdown-it@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-4.4.0.tgz#3df373dbea587a9a7fef3e56311b68908f75c414"
+  dependencies:
+    argparse "~1.0.2"
+    entities "~1.1.1"
+    linkify-it "~1.2.0"
+    mdurl "~1.0.0"
+    uc.micro "^1.0.0"
+
 material-ui-icons@^1.0.0-beta.5:
   version "1.0.0-beta.15"
   resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.15.tgz#fa6c2481517d380a0c2d0daebb7aacf39c2c68a0"
@@ -4766,7 +4782,7 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-"mdurl@~ 1.0.1":
+"mdurl@~ 1.0.1", mdurl@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
@@ -6052,6 +6068,13 @@ react-loaders@^2.5.0:
     classnames "^2.2.3"
     prop-types "^15.6.0"
 
+react-markdown-it@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-markdown-it/-/react-markdown-it-1.0.2.tgz#9c28ba119f814ae6557020df9d07b6da8e75109a"
+  dependencies:
+    markdown-it "^4.4.0"
+    strip-indent "^1.0.1"
+
 react-markdown@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-2.5.0.tgz#b1c61904fee5895886803bd9df7db23c3dc3a89e"
@@ -7277,6 +7300,10 @@ typedarray@^0.0.6:
 ua-parser-js@^0.7.9:
   version "0.7.14"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.14.tgz#110d53fa4c3f326c121292bbeac904d2e03387ca"
+
+uc.micro@^1.0.0, uc.micro@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
 uglify-js@3.1.x:
   version "3.1.3"

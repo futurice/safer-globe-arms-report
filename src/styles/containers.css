@@ -17,7 +17,7 @@
 }
 
 .content-wrapper > *:not(.data-section-container) {
-	padding: 5rem 16px;
+	padding: 5rem 1rem 1rem 1rem;
 }
 
 .loading {
@@ -40,7 +40,8 @@
 	display: flex;
 	position: relative;
 	flex-direction: column;
-	width: 95%;
+	width: 98%;
+	max-width: 840px;
 	margin: 0px 24px;
 }
 
