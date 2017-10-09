@@ -1728,8 +1728,7 @@ class DataMap extends Component {
           let tbl = d3
             .selectAll('.key-points')
             .append('table')
-            .attr('class', 'country-table')
-            .style('width', '293px');
+            .attr('class', 'country-table');
           tbl
             .selectAll('.country-row')
             .data(intlMissions[0][yrs].Countries)
@@ -1825,8 +1824,7 @@ class DataMap extends Component {
           let tbl = d3
             .selectAll('.key-points')
             .append('table')
-            .attr('class', 'country-table')
-            .style('width', '293px');
+            .attr('class', 'country-table');
           tbl
             .selectAll('.country-row')
             .data(intlMissions[0][yrs].Countries)
@@ -2287,8 +2285,7 @@ class DataMap extends Component {
           let tbl = d3
             .selectAll('.key-points')
             .append('table')
-            .attr('class', 'country-table')
-            .style('width', '293px');
+            .attr('class', 'country-table');
           tbl
             .selectAll('.country-row')
             .data(dataForLine[0][selectedYear].Countries)
@@ -2384,8 +2381,7 @@ class DataMap extends Component {
           let tbl = d3
             .selectAll('.key-points')
             .append('table')
-            .attr('class', 'country-table')
-            .style('width', '293px');
+            .attr('class', 'country-table');
           tbl
             .selectAll('.country-row')
             .data(dataForLine[0][selectedYear].Countries)

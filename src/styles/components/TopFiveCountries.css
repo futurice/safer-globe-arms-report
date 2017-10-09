@@ -91,3 +91,9 @@
   text-decoration: none;
   font-weight: 600;
 }
+
+.country-row th{
+	text-transform: none !important;
+	border-top:0px;
+	border-bottom:0px;
+}
