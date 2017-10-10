@@ -9,8 +9,25 @@
 	width: calc(25% - 24px) !important;
 	margin-right: 24px;
 	margin-bottom: 24px;
-	border-radius:2px;
-	height: 125px !important;
+  padding-right: 8px;
+	border-radius: 2px;
+}
+
+@media (min-width: 1440px) {
+  .downloads .card {
+	  width: calc(20% - 24px) !important;
+  }
+}
+
+.downloads .card .download-icon {
+  width: 32px;
+  height: auto;
+}
+
+.downloads .card a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .downloads .card a, .downloads .card a:hover {
@@ -19,13 +36,12 @@
 }
 
 .downloads .header {
-	padding-bottom: 0;
+  padding-top: 12px;
+  padding-bottom: 10px !important;
 }
 
 .downloads .header span {
-    font-size: 1.125rem;
-    margin-bottom: 8px;
-    font-weight: 700;
+  font-size: 1rem;
 }
 
 .downloads .content {
