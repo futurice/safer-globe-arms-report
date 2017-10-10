@@ -68,28 +68,28 @@
 }
 
 .civComment{
-	color: #785ef0;
-	margin-top:0.75rem;
-	font-weight: 700;
-	margin-bottom:0.75rem;
+	color: #785ef0 !important;
+	margin-top:0.75rem !important;
+	font-weight: 700 !important;
+	margin-bottom:0.75rem !important;
 }
 
 .defComment{
-	color: #fe6100;
-	margin-top:0.75rem;
-	font-weight: 700;
-	margin-bottom:0.75rem;
+	color: #fe6100 !important;
+	margin-top:0.75rem !important;
+	font-weight: 700 !important;
+	margin-bottom:0.75rem !important;
 }
 
 .bullet-point {
-  font-size: 1rem;
-  line-height: 23px;
-  font-weight: 600;
+  font-size: 1rem !important;
+  line-height: 23px !important;
+  font-weight: 600 !important;
   cursor: pointer !important;
 }
 .bullet-point a:hover {
-  text-decoration: none;
-  font-weight: 600;
+  text-decoration: none !important;
+  font-weight: 600 !important;
 }
 
 .country-row th{
