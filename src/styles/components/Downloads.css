@@ -1,10 +1,12 @@
 .downloads{
 	padding-left: 2rem !important;
 	padding-right: 0.5rem !important;
+
+  flex-wrap: wrap;
 }
 
 .downloads .card {
-	width: 400px !important;
+	width: calc(25% - 24px) !important;
 	margin-right: 24px;
 	margin-bottom: 24px;
 	border-radius:2px;
