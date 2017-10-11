@@ -28,23 +28,23 @@ class About extends Component {
           name: 'TERMS_EXPLAINED',
           anchors: [
             {
-              id: 'Kartassa_Käytetyt_Termit',
+              id: '1',
               name: 'Kartassa_Käytetyt_Termit',
             },
             {
-              id: 'Kuinka_Lukea_Raporttia',
+              id: '2',
               name: 'Kuinka_Lukea_Raporttia',
             },
             {
-              id: 'Miten_Tiedot_on_Esitetty',
+              id: '3',
               name: 'Miten_Tiedot_on_Esitetty',
             },
             {
-              id: 'Lue_Lisää',
+              id: '4',
               name: 'Lue_Lisää',
             },
             {
-              id: 'SaferGlobe',
+              id: '5',
               name: 'SaferGlobe',
             },
           ],

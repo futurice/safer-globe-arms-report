@@ -1,4 +1,12 @@
-# Terms Used in the Map<a name="Kartassa_Käytetyt_Termit" />
+## About this project
+
+### SaferGlobe’s report on arms control and arms trade (published since 2008) examines current political developments regarding Finnish export control mechanisms and policy.
+
+#### <a name="1" class="internalLink" />
+
+---
+
+# Terms Used in the Map
 
 ## Military Material
 A product or service which has been planned, manufactured or sold specifically for military use. In the Finnish legislation, the term ”puolustustarvike” or defence material is used. Military material does not include consumer goods used by the military, e.g. biscuits, boots and computers. 
@@ -15,9 +23,11 @@ Military material and civilian arms.
 ## Global Peace Index
 Measures peacefulness using different indicators. The state of peace is divided into five categories from very low to very high.
 
+#### <a name="2" class="internalLink" />
+
 ---
 
-# Reading the Report<a name="Kuinka_Lukea_Raporttia" />
+# Reading the Report
 
 The Finnish Arms Control Report is produced by SaferGlobe, Finland’s leading independent think tank on peace and security. The report shows trends in international arms sales and arms control as well as how these trends are reflected in the policies promoted by Finland. It also shows where Finland exports arms, and where it imports arms from. 
 
@@ -29,9 +39,11 @@ The information in the report is shown in euros, but the euro sums do not direct
 
 If using the Finnish Arms Control Report or the information on this www-page, make sure to mention it as your source. If you would like to reprint any of the articles, please contact [SaferGlobe](https://saferglobe.fi/).
 
+#### <a name="3" class="internalLink" />
+
 ---
 
-# Presentation of Information<a name="Miten_Tiedot_on_Esitetty" />
+# Presentation of Information
 
 The report shows the number of actual arms exports from Finland. Exports require an export licence issued by the Finnish authorities. These licences are typically valid for one or three years. A granted export licence does not necessarily mean that the export licence would be used. However, the export licences show the kind of export policies Finland has and what kind of arms trade is considered to be in line with Finnish foreign and security politics. In considerations of political responsibility, it is insufficient to focus on the actual exports, but rather evaluation should also include circumstances around the granting of the export licence including potential encouragement to begin negotiations. More detailed information on the Finnish Export Licensing system can be found here <Suomen asevientilupajärjestelmä>.
 
@@ -43,17 +55,21 @@ The exports of civilian arms are from the [Uljas System for Distribution of Fore
  
 The export data is compared to the [Global Peace Index](http://visionofhumanity.org/indexes/global-peace-index/) which is published by the Institute for Economics and Peace. Currently, the index is the most useful tool to estimate in very general terms the probability of a state increasing both violence itself as well as support for the structures enabling violence.  The index uses 23 quantitative and qualitative indicators to measure internal and external conflict, societal security and militarization. 
 
+#### <a name="4" class="internalLink" />
+
 ---
 
-# Read More<a name="Lue_Lisää" />
+# Read More
 
 [In the background section](/articles) we have collected analyses of arms control, different treaties, arms licensing systems and general development of arms trade. On the page “cases”, we have collected articles on individual arms exports.
 
 [In the metadata](/downloads), you will find the differences between export licences, transfer licences, transhipments, information on the origin of the data used here, as well as the different customs classifications that include civilian arms.
 
+#### <a name="5" class="internalLink" />
+
 ---
 
-# SaferGlobe<a name="SaferGlobe" />
+# SaferGlobe
 
 The Finnish Arms Control (ISSN 2342-3447) is published by [SaferGlobe](https://saferglobe.fi/). SaferGlobe is an independent peace and security think tank, which studies and develops tools for the promotion of lasting peace and security. 
 

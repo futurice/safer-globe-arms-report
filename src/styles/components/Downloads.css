@@ -6,7 +6,7 @@
 }
 
 .downloads .card {
-	width: calc(25% - 24px) !important;
+	width: calc(33.33% - 24px) !important;
 	margin-right: 24px;
 	margin-bottom: 24px;
   padding-right: 8px;
@@ -15,12 +15,12 @@
 
 @media (min-width: 1440px) {
   .downloads .card {
-	  width: calc(20% - 24px) !important;
+	  width: calc(25% - 24px) !important;
   }
 }
 
 .downloads .card .download-icon {
-  width: 32px;
+  width: 24px;
   height: auto;
 }
 
@@ -32,7 +32,7 @@
 
 .downloads .card a, .downloads .card a:hover {
 	text-decoration: none;
-	color: #333333;
+	color: #2D80B5;
 }
 
 .downloads .header {
@@ -41,7 +41,9 @@
 }
 
 .downloads .header span {
-  font-size: 1rem;
+  font-size: 0.875rem;
+	color: #2D80B5 !important;
+	font-weight: 600;
 }
 
 .downloads .content {
