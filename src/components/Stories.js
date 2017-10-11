@@ -100,12 +100,12 @@ class Stories extends Component {
   renderPreviews() {
     const filteredStories = this.state.stories.reduce((ary, cur) => {
       const tags = cur.tags.split(',').map(tag => {
-        return tag.toLowerCase();
+        return tag.toLowerCase().trim();
       });
 
       const filterYear = this.state.filters.year
         ? tags.filter(item => {
-            return item === this.state.filters.year;
+            return item === this.state.filters.year.toString();
           }).length
         : true;
 
