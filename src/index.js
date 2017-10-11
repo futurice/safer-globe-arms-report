@@ -234,7 +234,10 @@ const locales = {
 class AppRouter extends Component {
   constructor() {
     super();
-    this.state = { initDone: false };
+    this.state = {
+      initDone: false,
+      isLoggedIn: false,
+    };
   }
 
   loadLocales() {
@@ -279,24 +282,30 @@ class AppRouter extends Component {
       this.previousLocation.key !== location.key
     ); // avoid modal on direct routes
 
+    if (
+      process.env.REACT_APP_PASSWORD_PROTECTED === 'true' &&
+      !this.state.isLoggedIn
+    ) {
     return (
-      this.state.initDone &&
+        <Login
+          onLogin={() => {
+            this.setState({ isLoggedIn: true });
+          }}
+        />
+      );
+    } else if (this.state.initDone) {
+      return (
       <div>
         <div
           className={classNames('container', {
             'container--behind-a-modal': isModal,
           })}
         >
-          <Route
-            path="/"
-            render={props =>
-              <Nav {...props} showPages={location.pathname !== '/login'} />}
-          />
+            <Route path="/" render={props => <Nav {...props} />} />
 
           <div className="content-wrapper">
             <Switch location={isModal ? this.previousLocation : location}>
               <Route exact path="/" component={Data} />
-              <Route exact path="/login" component={Login} />
               <Route
                 exact
                 path="/articles"
@@ -317,6 +326,9 @@ class AppRouter extends Component {
         {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
       </div>
     );
+    } else {
+      return null;
+    }
   }
 }
 

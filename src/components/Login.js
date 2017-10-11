@@ -3,6 +3,7 @@ import intl from 'react-intl-universal';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Card from 'material-ui/Card';
+import PropTypes from 'prop-types';
 
 import './../styles/components/Login.css';
 
@@ -36,11 +37,13 @@ class Login extends Component {
 
         <div>
           <p>
-            This webpage and its content are not public before Mon 23rd October
-            2017 at 4 p.m. (Finnish Time). Before this moment you can access the
-            web page with password. Articles based on information of this web
-            page are not allowed to be published before Mon 23rd October 2017 at
-            4 p.m. (Finnish Time).
+            This webpage and its content are not public before{' '}
+            <span className="no-break">Mon 23rd October 2017 at 4 PM</span>{' '}
+            (Finnish Time). Before this moment you can access the web page with
+            password. Articles based on information of this web page are not
+            allowed to be published before{' '}
+            <span className="no-break">Mon 23rd October 2017 at 4 PM</span>{' '}
+            (Finnish Time).
           </p>
 
           <p>Thank you for your cooperation!</p>
@@ -55,14 +58,39 @@ class Login extends Component {
 
         <hr className="sep" />
 
-        <form className="login-form">
+        <form
+          className="login-form"
+          onSubmit={ev => {
+            ev.preventDefault();
+            const passwordInput = ev.target.password;
+            const password = passwordInput.value;
+            if (password === 'Transparency_Increases_Security') {
+              this.props.onLogin();
+            } else {
+              // do wobble animation
+              const classes = passwordInput.className.split(' ');
+              const idx = classes.indexOf('invalid');
+              if (idx > -1) {
+                classes.splice(idx, 1);
+                passwordInput.className = classes.join(' ');
+              }
+              passwordInput.offsetWidth;
+              setTimeout(() => {
+                passwordInput.className += ' invalid';
+              });
+            }
+          }}
+        >
           <TextField
+            id="login-password"
             className="password-field"
             placeholder={intl.get('PASSWORD')}
+            name="password"
             type="password"
           />
 
           <Button
+            type="submit"
             className={`login-btn ${currentLocale === 'en-US'
               ? 'login-btn--eng'
               : 'login-btn--fi'}`}
@@ -75,5 +103,9 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default Login;

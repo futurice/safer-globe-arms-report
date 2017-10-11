@@ -26,29 +26,22 @@ class Nav extends Component {
             </span>
           </Link>
         </h1>
-        {this.props.showPages &&
-          <ul className="flex-container no-bullets">
-            <li>
-              <NavLink exact to="/">
-                {intl.get('DATA')}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/articles">
-                {intl.get('STORIES')}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">
-                {intl.get('ABOUT')}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/downloads">
-                {intl.get('DOWNLOADS')}
-              </NavLink>
-            </li>
-          </ul>}
+        <ul className="flex-container no-bullets">
+          <li>
+            <NavLink exact to="/">
+              {intl.get('DATA')}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/articles">{intl.get('STORIES')}</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">{intl.get('ABOUT')}</NavLink>
+          </li>
+          <li>
+            <NavLink to="/downloads">{intl.get('DOWNLOADS')}</NavLink>
+          </li>
+        </ul>
         <span className="lang-selection">
           <a
             href="?lang=fi"
