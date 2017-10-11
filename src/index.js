@@ -27,6 +27,7 @@ import Stories from './components/Stories';
 import FullStory from './components/FullStory';
 import About from './components/About';
 import Downloads from './components/Downloads';
+import Login from './components/Login';
 // import Footer from './components/Footer';
 
 /*
@@ -47,6 +48,9 @@ Docs can be found here: https://reacttraining.com/react-router/web/
 
 const locales = {
   'en-US': {
+    PASSWORD: 'Password',
+    LOGIN: 'Login',
+
     // Page names & general
     ARMS_REPORT: 'Finnish Arms Control Report',
     ABOUT: 'Info',
@@ -136,6 +140,9 @@ const locales = {
     //BACKGROUND: 'Background'
   },
   fi: {
+    PASSWORD: 'Salasana',
+    LOGIN: 'Kirjaudu sisään',
+
     // Page names & general
     ARMS_REPORT: 'Suomen Asevalvontaraportti',
     ABOUT: 'Info',
@@ -272,38 +279,42 @@ class AppRouter extends Component {
     ); // avoid modal on direct routes
 
     return (
-      this.state.initDone && (
-        <div>
-          <div
-            className={classNames('container', {
-              'container--behind-a-modal': isModal,
-            })}
-          >
-            <Route path="/" render={props => <Nav {...props} />} />
+      this.state.initDone &&
+      <div>
+        <div
+          className={classNames('container', {
+            'container--behind-a-modal': isModal,
+          })}
+        >
+          <Route
+            path="/"
+            render={props =>
+              <Nav {...props} showPages={location.pathname !== '/login'} />}
+          />
 
-            <div className="content-wrapper">
-              <Switch location={isModal ? this.previousLocation : location}>
-                <Route exact path="/" component={Data} />
-                <Route
-                  exact
-                  path="/articles"
-                  render={props => <Stories {...props} />}
-                />
-                <Route
-                  exact
-                  path="/articles/:id"
-                  render={props => <FullStory {...props} />}
-                />
-                <Route exact path="/about" component={About} />
-                <Route path="/about/:page" component={About} />
-                <Route exact path="/downloads" component={Downloads} />
-              </Switch>
-            </div>
+          <div className="content-wrapper">
+            <Switch location={isModal ? this.previousLocation : location}>
+              <Route exact path="/" component={Data} />
+              <Route exact path="/login" component={Login} />
+              <Route
+                exact
+                path="/articles"
+                render={props => <Stories {...props} />}
+              />
+              <Route
+                exact
+                path="/articles/:id"
+                render={props => <FullStory {...props} />}
+              />
+              <Route exact path="/about" component={About} />
+              <Route path="/about/:page" component={About} />
+              <Route exact path="/downloads" component={Downloads} />
+            </Switch>
           </div>
-
-          {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
         </div>
-      )
+
+        {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
+      </div>
     );
   }
 }
@@ -312,10 +323,9 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () => (
+const AppRouterWrap = () =>
   <Router>
     <Route component={AppRouter} />
-  </Router>
-);
+  </Router>;
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));

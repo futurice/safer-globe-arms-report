@@ -1,0 +1,61 @@
+.login-box {
+  max-width: 640px;
+  padding: 2em !important;
+
+  background: white;
+
+  margin: 8em auto;
+}
+
+.login-box p {
+  line-height: 1.4;
+}
+
+.sep {
+  margin: 2em 0;
+  border: none;
+  border-top: 1px solid #E1E3E5;
+}
+
+.login-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-field {
+  width: 100%;
+}
+
+.password-field div:before {
+	display: none;
+}
+
+.password-field > div:after {
+	display: none;
+}
+
+.password-field input {
+  box-sizing: border-box;
+	padding: 19px 10px;
+  width: 100%;
+  background: #F5F5F5;
+  color: #797979;
+	font-weight: 600;
+}
+
+.password-field div {
+	border: 1px solid #e9e9e9;
+	padding-bottom: 0;
+}
+
+.login-btn {
+  margin-left: 2%;
+}
+
+.login-btn--eng {
+  min-width: 100px !important;
+}
+
+.login-btn--fi {
+  min-width: 180px !important;
+}
