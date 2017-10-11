@@ -240,10 +240,11 @@ class AppRouter extends Component {
   loadLocales() {
     // init method will load CLDR locale data according to currentLocale
     // react-intl-universal is singleton, so you should init it only once in your app
+    const userLocale = intl.determineLocale({ urllocalekey: 'lang' });
 
     intl
       .init({
-        currentLocale: intl.determineLocale({ urlLocaleKey: 'lang' }),
+        currentLocale: userLocale in locales ? userLocale : 'en-US',
         locales,
       })
       .then(() => {
