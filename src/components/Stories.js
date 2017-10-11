@@ -63,15 +63,16 @@ class Stories extends Component {
 
     const curYear = new Date().getFullYear();
 
-    for (let i = 2008; i <= curYear; i++) {
+    for (let i = curYear; i >= 2008; i--) {
       this.years.push({ text: i, value: i });
     }
   }
 
   makeMenuObject(ary) {
     return ary.map(r => {
+      console.log(intl.get(r));
       return {
-        text: r,
+        text: intl.get(r),
         value: r,
       };
     });
@@ -162,7 +163,7 @@ class Stories extends Component {
       return ary;
     }, []);
 
-    const articles = filteredStories.map((x, i) =>
+    const articles = filteredStories.map((x, i) => (
       <StoryPreview
         key={i}
         title={x.title}
@@ -171,8 +172,8 @@ class Stories extends Component {
         image={x.image}
         id={parseInt(x.id, 10)}
         tags={x.tags}
-      />,
-    );
+      />
+    ));
 
     return (
       <section className="stories-container">
@@ -185,6 +186,7 @@ class Stories extends Component {
   handleChange(id, value) {
     const filters = Object.assign(this.state.filters, { [id]: value });
 
+    console.log(filters);
     this.setState({ filters });
     this.props.history.replace(
       this.props.location.pathname + '?' + this.generateQueryString(),
@@ -216,9 +218,7 @@ class Stories extends Component {
   renderSearchMenu() {
     return (
       <div className="stories-search box-shadow">
-        <div className="search-title">
-          {intl.get('SEARCH')}
-        </div>
+        <div className="search-title">{intl.get('SEARCH')}</div>
         <FormControl className="stories-search__text">
           <TextField
             id="keyword"
@@ -229,9 +229,7 @@ class Stories extends Component {
           <Search style={{ position: 'absolute', right: '6px' }} />
         </FormControl>
         <Divider className="divider" />
-        <div className="search-filter">
-          {intl.get('FILTER')}
-        </div>
+        <div className="search-filter">{intl.get('FILTER')}</div>
         <SelectMenu
           onChange={this.handleChange.bind(this)}
           options={this.types}
@@ -285,9 +283,7 @@ class Stories extends Component {
 
     return (
       <div className="stories-wrapper flex-container-row">
-        <section className="left-menu">
-          {this.renderSearchMenu()}
-        </section>
+        <section className="left-menu">{this.renderSearchMenu()}</section>
         {this.renderPreviews()}
       </div>
     );

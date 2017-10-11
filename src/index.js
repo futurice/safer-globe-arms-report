@@ -61,7 +61,45 @@ const locales = {
     NOTE:
       'Project by <a href="http://futurice.com/" target="_blank">Futurice’s</a> <a href="https://spiceprogram.org/chilicorn-fund/" target="_blank">Chilicorn Fund</a> and <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a>',
 
+    //Regions
+    Pohjois_Afrikka: 'North Africa',
+    Saharan_eteläpuolinen_Afrikka: 'Sub-Saharan Africa',
+    Pohjois_Amerikka: 'North America',
+    Väli_Amerikka_ja_Karibia: 'Central America and the Caribbean',
+    Etelä_Amerikka: 'South America',
+    Keski_Aasia: 'Central Asia',
+    Itä_Aasia: 'East Asia',
+    Kaakkois_Aasia: 'Southeast Asia',
+    Etelä_Aasia: 'South Asia',
+    Euroopan_unioni: 'European Union',
+    Muut_Euroopan_maat: 'Other European countries',
+    Lähi_itä: 'Middle East',
+    Oseania: 'Oceania',
+
+    //Themes
+    Sopimus: 'Treaty',
+    Ihmisoikeudet: 'Human rights',
+    Laiton_asekauppa: 'Illegal arms trade',
+    Aseellinen_konflikti: 'Armed conflict',
+    Rahoitus: 'Funding',
+
+    //ImpExp
+    Tuonti: 'Export',
+    Vienti: 'Import',
+
+    //Products
+    Sotatuote: 'Military material',
+    Siviiliase: 'Civilian arms',
+    Kaksikäyttötuote: 'Dual-use goods',
+    Kidutusväline: 'Instruments of torture',
+    Joukkotuhoaseet: 'Weapons of mass destruction',
+
+    //Article Type
+    Tapaukset: 'Cases',
+    Taustat: 'Background',
+
     // Tags
+    /*
     TAGS_REGION: [
       'North Africa',
       'Sub-Saharan Africa',
@@ -93,7 +131,40 @@ const locales = {
       'Weapons of mass destruction',
     ],
     TAGS_ARTICLE_TYPE: ['Cases', 'Background'],
+    */
 
+    // Tags
+    TAGS_REGION: [
+      'Pohjois_Afrikka',
+      'Saharan_eteläpuolinen_Afrikka',
+      'Pohjois_Amerikka',
+      'Väli_Amerikka_ja_Karibia',
+      'Etelä_Amerikka',
+      'Keski_Aasia',
+      'Itä_Aasia',
+      'Kaakkois_Aasia',
+      'Etelä_Aasia',
+      'Euroopan_unioni',
+      'Muut_Euroopan_maat',
+      'Lähi_itä',
+      'Oseania',
+    ],
+    TAGS_IMPORT_EXPORT: ['Tuonti', 'Vienti'],
+    TAGS_THEME: [
+      'Sopimus',
+      'Ihmisoikeudet',
+      'Laiton_asekauppa',
+      'Aseellinen_konflikti',
+      'Rahoitus',
+    ],
+    TAGS_PRODUCT: [
+      'Sotatuote',
+      'Siviiliase',
+      'Kaksikäyttötuote',
+      'Kidutusväline',
+      'Joukkotuhoaseet',
+    ],
+    TAGS_ARTICLE_TYPE: ['Tapaukset', 'Taustat'],
     // Articles page
     SEARCH: 'Search articles',
     FILTER: 'Filter',
@@ -157,28 +228,65 @@ const locales = {
     NOTE:
       '<a href="http://futurice.com/" target="_blank">Futuricen</a> <a href="https://spiceprogram.org/chilicorn-fund/" target="_blank">Chilicorn Fundin</a> ja <a href="https://saferglobe.fi" target="_blank">SaferGloben</a> projekti',
 
+    //Regions
+    Pohjois_Afrikka: 'Pohjois-Afrikka',
+    Saharan_eteläpuolinen_Afrikka: 'Saharan eteläpuolinen Afrikka',
+    Pohjois_Amerikka: 'Pohjois-Amerikka',
+    Väli_Amerikka_ja_Karibia: 'Väli-Amerikka ja Karibia',
+    Etelä_Amerikka: 'Etelä-Amerikka',
+    Keski_Aasia: 'Keski-Aasia',
+    Itä_Aasia: 'Itä-Aasia',
+    Kaakkois_Aasia: 'Kaakkois-Aasia',
+    Etelä_Aasia: 'Etelä-Aasia',
+    Euroopan_unioni: 'Euroopan unioni',
+    Muut_Euroopan_maat: 'Muut Euroopan maat',
+    Lähi_itä: 'Lähi-itä',
+    Oseania: 'Oseania',
+
+    //Themes
+    Sopimus: 'Sopimus',
+    Ihmisoikeudet: 'Ihmisoikeudet',
+    Laiton_asekauppa: 'Laiton asekauppa',
+    Aseellinen_konflikti: 'Aseellinen konflikti',
+    Rahoitus: 'Rahoitus',
+
+    //ImpExp
+    Tuonti: 'Tuonti',
+    Vienti: 'Vienti',
+
+    //Products
+    Sotatuote: 'Sotatuote',
+    Siviiliase: 'Siviiliase',
+    Kaksikäyttötuote: 'Kaksikäyttötuote',
+    Kidutusväline: 'Kidutusväline',
+    Joukkotuhoaseet: 'Joukkotuhoaseet',
+
+    //Article Type
+    Tapaukset: 'Tapaukset',
+    Taustat: 'Taustat',
+
     // Tags
     TAGS_REGION: [
-      'Pohjois-Afrikka',
-      'Saharan eteläpuolinen Afrikka',
-      'Pohjois-Amerikka',
-      'Väli-Amerikka ja Karibia',
-      'Etelä-Amerikka',
-      'Keski-Aasia',
-      'Itä-Aasia',
-      'Kaakkois-Aasia',
-      'Etelä-Aasia',
-      'Euroopan unioni',
-      'Muut Euroopan maat',
-      'Lähi-itä',
+      'Pohjois_Afrikka',
+      'Saharan_eteläpuolinen_Afrikka',
+      'Pohjois_Amerikka',
+      'Väli_Amerikka_ja_Karibia',
+      'Etelä_Amerikka',
+      'Keski_Aasia',
+      'Itä_Aasia',
+      'Kaakkois_Aasia',
+      'Etelä_Aasia',
+      'Euroopan_unioni',
+      'Muut_Euroopan_maat',
+      'Lähi_itä',
       'Oseania',
     ],
-    TAGS_IMPORT_EXPORT: ['Tuonti', 'Viesti'],
+    TAGS_IMPORT_EXPORT: ['Tuonti', 'Vienti'],
     TAGS_THEME: [
       'Sopimus',
       'Ihmisoikeudet',
-      'Laiton asekauppa',
-      'Aseellinen konflikti',
+      'Laiton_asekauppa',
+      'Aseellinen_konflikti',
       'Rahoitus',
     ],
     TAGS_PRODUCT: [

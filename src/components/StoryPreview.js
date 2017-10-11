@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import intl from 'react-intl-universal';
 import ReactMarkdown from 'react-markdown';
 
 import './../styles/components/StoryPreview.css';
@@ -10,8 +11,11 @@ class StoryPreview extends Component {
     return this.props.tags
       .split(',')
       .reduce((ary, cur) => {
-        ary.push(`#${cur.trim()}`);
-
+        if (isNaN(cur)) {
+          ary.push(`#${intl.get(cur.trim())}`);
+        } else {
+          ary.push(`#${cur.trim()}`);
+        }
         return ary;
       }, [])
       .join(' ');
