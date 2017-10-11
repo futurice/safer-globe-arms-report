@@ -49,7 +49,10 @@ class Downloads extends Component {
             rel="noopener noreferrer"
             download={data.filename}
           >
-            <CardHeader className="header" title={data.title} />
+            <CardHeader
+              className="header"
+              title={intl.get(data.title) + data.year}
+            />
             <img className="download-icon" src={svgDownload} />
           </a>
         </Card>
@@ -61,11 +64,9 @@ class Downloads extends Component {
     return (
       <section className="downloads flex-container">
         {this.state.loading ? <CircularProgress className="loading" /> : null}
-        {this.state.error
-          ? <div className="not-found">
-              {intl.get('LOADING_ERROR')}
-            </div>
-          : null}
+        {this.state.error ? (
+          <div className="not-found">{intl.get('LOADING_ERROR')}</div>
+        ) : null}
         {this.state.files ? this.renderCards() : null}
       </section>
     );

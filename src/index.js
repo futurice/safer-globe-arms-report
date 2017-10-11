@@ -137,16 +137,18 @@ const locales = {
     SaferGlobe: 'SaferGlobe',
 
     //DOWNLOAD_DATA: 'Download Data',
+    REPORT: 'Finnish Arms Exports Report ',
+    DATAXLS: 'Finnish Arms Exports Data ',
     //EVENTS: 'Events',
     //BACKGROUND: 'Background'
   },
   fi: {
     // Page names & general
-    ARMS_REPORT: 'Suomen Asevalvontaraportti',
+    ARMS_REPORT: 'Suomen asevalvontaraportti',
     ABOUT: 'Info',
     STORIES: 'Artikkelit',
     DATA: 'Kartta',
-    DOWNLOADS: 'Avoin Data',
+    DOWNLOADS: 'Avoin data',
     NOT_FOUND: 'Heattua sivua ei löytynyt.',
     LOADING_ERROR: 'Sivua ladatessa tapahtui virhe.',
     CLICK: 'Lataa tästä',
@@ -192,7 +194,7 @@ const locales = {
     SEARCH: 'Etsi artikkeleita',
     FILTER: 'Suodata',
     YEAR: 'Vuosi',
-    IMPORT_EXPORT: 'Tuomi / vienti',
+    IMPORT_EXPORT: 'Tuonti / vienti',
     REGION: 'Alue',
     THEME: 'Teema',
     PRODUCT: 'Tuote',
@@ -222,13 +224,15 @@ const locales = {
 
     // About page
     TERMS_EXPLAINED: 'Meistä',
-    Kartassa_Käytetyt_Termit: 'Kartassa Käytetyt Termit',
-    Kuinka_Lukea_Raporttia: 'Kuinka Lukea Raporttia',
-    Miten_Tiedot_on_Esitetty: 'Miten Tiedot on Esitetty',
-    Lue_Lisää: 'Lue Lisää',
+    Kartassa_Käytetyt_Termit: 'Kartassa käytetyt termit',
+    Kuinka_Lukea_Raporttia: 'Kuinka lukea raporttia',
+    Miten_Tiedot_on_Esitetty: 'Miten tiedot on esitetty',
+    Lue_Lisää: 'Lue lisää',
     SaferGlobe: 'SaferGlobe',
 
     //DOWNLOAD_DATA: 'Lataa tiedot',
+    REPORT: 'Suomen asevalvontaraportti ',
+    DATAXLS: 'Suomen asevientidata ',
     //EVENTS: 'Tapahtumat',
     //BACKGROUND: 'Taustaa',
   },

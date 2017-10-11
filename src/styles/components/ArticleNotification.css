@@ -1,16 +1,18 @@
 .article-notification {
 	width: calc(100% + 8px);
 	margin: 0 0 16px 16px;
-	padding: 1rem;
+	padding: 0.75rem 1rem;
 	position: fixed;
-	bottom:0;
+	top:0;
 	z-index:1000;
 	left:0;
-	background-color: rgba(255,255,255,0.9);
+	color:#fff !important;
+	background-color: rgba(45,128,181,0.5);
 	text-align: center;
 	margin-bottom:  0rem;
 	margin-left: 0;
   	box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
+	cursor: pointer !important;
 }
 
 .article-notification span {
@@ -21,7 +23,9 @@
 
 .article-notification svg {
     position: absolute;
+	width:24px;
+	height:auto;
     right: 10px;
     cursor: pointer;
-    color: #979797;
+    color: #fff;
 }

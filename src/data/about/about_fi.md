@@ -1,4 +1,12 @@
-# Kartassa Käytetyt Termit<a name="Kartassa_Käytetyt_Termit" />
+## Tietoja tästä hankkeesta
+
+### Lue Suomen asevalvontaraporttia kun haluat tietää maailman sotilasmenojen kehityksestä sekä siitä miten valtiot ennaltaehkäisivät konflikteja valvomalla ja rajoittamalla asekauppaa sekä sotilaallista toimintaa. Kerromme myös, minne Suomi vei väkivaltatuotteita ja mistä se osti aseita sekä ketkä sijoittivat sotateollisuuteen. 
+
+#### <a name="1" class="internalLink" />
+
+---
+
+# Kartassa käytetyt termit
 
 ## Sotatuote
 Tuote tai palvelu, joka on suunniteltu, valmistettu tai myyty nimenomaan sotilaallisiin käyttötarkoituksiin. Suomen lainsäädännössä sotatuotteista käytetään termiä puolustustarvike. Sotatuotteita eivät ole asevoimien käyttämät kulutustuotteet kuten näkkileipä, kumisaappaat tai tietokoneet.
@@ -15,9 +23,11 @@ Sotatuotteet ja siviiliaseet.
 ## Rauhanindeksi
 Mittaa eri muuttujilla valtioiden sisäisiä ja ulkoisia konflikteja. Jakaantuu viiteen luokkaan välillä rauhanomainen – rauhaton.
 
+#### <a name="2" class="internalLink" />
+
 ---
 
-# Kuinka Lukea Raporttia<a name="Kuinka_Lukea_Raporttia" />
+# Kuinka lukea raporttia
 
 Suomen asevalvontaraporttia julkaisee suomalainen SaferGlobe -ajatushautomo. Raportissa kerrotaan kansainvälisen asekaupan ja asevalvonnan kehityskulut, miten ne näkyvät Suomen harjoittamassa politiikassa, mistä Suomeen on tuotu aseita sekä minne Suomesta on viety aseita.
 
@@ -29,9 +39,11 @@ Raportin tiedot on esitetty euroina, mutta ne eivät kerro suoraan kyseisen vien
 
 Suomen asevalvontaraportin ja tämän verkkosivuston tietoja käytettäessä tai siteerattaessa on lähteeksi mainittava Suomen asevalvontaraportti. Raportin artikkelien uudelleenjulkaisulupia voi tiedustella [SaferGlobesta](https://saferglobe.fi/).
 
+# <a name="3" class="internalLink" />
+
 ---
 
-# Miten Tiedot on Esitetty<a name="Miten_Tiedot_on_Esitetty" />
+#### Miten tiedot on esitetty
 
 Raportissa esitetään Suomen toteutunut asevienti. Viennille tarvitaan lupa Suomen viranomaisilta. Vientilupa on pääsääntöisesti voimassa vuoden tai kolme vuotta. Myönnetty vientilupa ei välttämättä tarkoita, että luvan saanut vienti toteutuisi. Vientiluvat kertovat kuitenkin Suomen valtion harjoittamasta asevientipolitiikasta: millaisen asekaupan katsotaan olevan ulko- ja turvallisuuspolitiikan linjausten mukaista. Poliittista vastuuta arvioitaessa on viennin toteutumishetken lisäksi arvioitava vientiluvan myöntämishetkellä vallinneita olosuhteita ja mahdollisesti jo ennen sitä annettua puoltoa kauppaneuvotteluiden aloittamiseksi. Vientilupajärjestelmästä kerrotaan enemmän artikkelissa(Suomen asevientilupajärjestelmä).
 
@@ -43,17 +55,21 @@ Siviiliaseiden toteutunut vienti on saatu Tullin Ulkomaankauppatietojen [jakeluj
 
 Vientitietoja verrataan [Globaaliin Rauhanindeksiin](http://visionofhumanity.org/indexes/global-peace-index/), jota julkaisee australialainen Institute for Economics and Peace. Indeksi on tällä hetkellä käyttökelpoisin työkalu arvioimaan yleisellä tasolla yksittäisen valtion todennäköisyyttä lisätä väkivaltaa ja sitä ylläpitäviä rakenteita maailmassa. Indeksi mittaa 23 kvalitatiivisella ja kvantitatiivisella muuttujalla valtioiden sisäisiä ja ulkoisia konflikteja, yhteiskunnallista turvallisuutta ja militarisaatiota. Valtioiden sisäiselle tilanteelle annetaan 60 prosentin ja ulkoisille konflikteille 40 prosentin painoarvo.
 
+#### <a name="4" class="internalLink" />
+
 ---
 
-# Lue Lisää<a name="Lue_Lisää" />
+# Lue lisää
 
 Olemme koonneet [tausta-artikkeleihin](/articles) analyysejä asevalvonnasta ja eri sopimuksista, vientilupajärjestelmistä ja asekaupan yleisistä kehityskuluista. Sivulle[Sivulle](/articles) olemme koonneet artikkeleita yksittäisistä asekaupoista.
 
 Mitä eroa on vientiluvalla ja siirtoluvalla tai mitä tarkoittaa kauttakuljetus? Entä mistä data on peräisin ja mitä tulliluokkia siviiliaseiden vientitiedot sisältävät? [Nämä asiat selviävät laatuselosteesta](/downloads).
 
+#### <a name="5" class="internalLink" />
+
 ---
 
-# SaferGlobe<a name="SaferGlobe" />
+# SaferGlobe
 
 Suomen asevalvontaraporttia (ISSN 2342-3447) julkaisee ajatushautomo [SaferGlobe](https://saferglobe.fi/). SaferGlobe on riippumaton rauhan ja turvallisuuden ajatushautomo, jonka tarkoituksena on edistää rauhaa ja turvallisuutta tuottamalla tutkimusta ja asiantuntijapalveluita.
 
