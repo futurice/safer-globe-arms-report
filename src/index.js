@@ -210,6 +210,8 @@ const locales = {
     //DOWNLOAD_DATA: 'Download Data',
     REPORT: 'Finnish Arms Exports Report ',
     DATAXLS: 'Finnish Arms Exports Data ',
+    REPORTMETADATA: 'Arms Exports Report Metadata ',
+    DATAMETADATA: 'Arms Exports Data Metadata ',
     //EVENTS: 'Events',
     //BACKGROUND: 'Background'
   },
@@ -341,6 +343,8 @@ const locales = {
     //DOWNLOAD_DATA: 'Lataa tiedot',
     REPORT: 'Suomen asevalvontaraportti ',
     DATAXLS: 'Suomen asevientidata ',
+    REPORTMETADATA: 'Asevalvontaraportin laatuseloste',
+    DATAMETADATA: 'Asevientitietokannan metadata',
     //EVENTS: 'Tapahtumat',
     //BACKGROUND: 'Taustaa',
   },

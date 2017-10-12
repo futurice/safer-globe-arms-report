@@ -11,7 +11,9 @@
 	align-items: center;
 	width: 100%;
 }
-
+.stories-search{
+	padding-bottom: 4px !important;
+}
 .search-title {
 	font-weight: 600;
 	font-size: 1.25rem;

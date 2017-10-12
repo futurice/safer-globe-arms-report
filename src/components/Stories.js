@@ -218,18 +218,7 @@ class Stories extends Component {
   renderSearchMenu() {
     return (
       <div className="stories-search box-shadow">
-        <div className="search-title">{intl.get('SEARCH')}</div>
-        <FormControl className="stories-search__text">
-          <TextField
-            id="keyword"
-            className="search-keyword"
-            value={this.state.filters.keyword}
-            onChange={this.updateKeyword.bind(this)}
-          />
-          <Search style={{ position: 'absolute', right: '6px' }} />
-        </FormControl>
-        <Divider className="divider" />
-        <div className="search-filter">{intl.get('FILTER')}</div>
+        <div className="search-title">{intl.get('FILTER')}</div>
         <SelectMenu
           onChange={this.handleChange.bind(this)}
           options={this.types}

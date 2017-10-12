@@ -6,6 +6,11 @@
 	opacity: 0.7;
 }
 
+.about-menu{
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}
+
 .about-sub-link{
 	color: #212121 !important;
 	margin: 1rem 0;

@@ -67,8 +67,11 @@ class DataMap extends Component {
   drawMap(displayData) {
     const self = this;
 
+    const dur = 300;
+
     let totalExport = [{}],
       intlMissions = [{}];
+
     d3.select('.map-container').html('');
     const wid = Math.max(1024, window.innerWidth),
       hght = window.innerHeight - 65 - 30;
@@ -106,7 +109,7 @@ class DataMap extends Component {
     d3.select('.map-container__reset').on('click', () => {
       mapSVG
         .transition()
-        .duration(500)
+        .duration(dur)
         .call(Zoom.transform, d3.zoomIdentity);
     });
 
@@ -288,7 +291,7 @@ class DataMap extends Component {
         .attr('height', 0)
         .attr('fill', defenceColor)
         .transition()
-        .duration(500)
+        .duration(dur)
         .delay(2000)
         .attr('height', d => {
           if (d[yrs]['Total'] === 0) return 0;
@@ -365,7 +368,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -374,12 +377,12 @@ class DataMap extends Component {
           d3
             .selectAll('.Finland')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('fill', '#2D80B5');
           d3
             .selectAll('.countryGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', d => {
               let keyIndx;
               switch (armstype) {
@@ -404,7 +407,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -417,7 +420,7 @@ class DataMap extends Component {
             d3
               .selectAll('.land')
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr(
                 'fill',
                 d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -425,7 +428,7 @@ class DataMap extends Component {
             d3
               .selectAll('.Finland')
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr('fill', '#2D80B5');
           } else {
             let keyIndx, displayStyle;
@@ -461,7 +464,7 @@ class DataMap extends Component {
             d3
               .selectAll('.land')
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr(
                 'fill',
                 d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -470,7 +473,7 @@ class DataMap extends Component {
             d3
               .selectAll('.countryGroup')
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr('opacity', d => {
                 let keyIndx;
                 switch (armstype) {
@@ -497,7 +500,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -505,7 +508,7 @@ class DataMap extends Component {
           d3
             .selectAll('.Finland')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -520,7 +523,7 @@ class DataMap extends Component {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', d => {
             if (d.properties.data[yrs]['CivilianArmsTotal'] === 0) return 0;
             return hScale(d.properties.data[yrs]['CivilianArmsTotal']);
@@ -533,7 +536,7 @@ class DataMap extends Component {
         d3
           .selectAll('.intlMissionsBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('y', d => {
             let y1 = hScale(d[yrs]['Total']);
             if (d[yrs]['Total'] === 0) y1 = 0;
@@ -546,7 +549,7 @@ class DataMap extends Component {
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', d => {
             if (d.properties.data[yrs]['CountryMilatary'] === 0) return 0;
             return hScale(d.properties.data[yrs]['CountryMilatary']);
@@ -778,7 +781,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -787,7 +790,7 @@ class DataMap extends Component {
           d3
             .selectAll('.Finland')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('fill', '#2D80B5');
           d3
             .selectAll('.countryGroup')
@@ -817,7 +820,7 @@ class DataMap extends Component {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', d => {
             if (d.properties.data[yrs][val] === 0) return 0;
             return hScale(d.properties.data[yrs][val]);
@@ -830,7 +833,7 @@ class DataMap extends Component {
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', 0)
           .attr('y', d => {
             let y1 = hScale(d.properties.data[yrs][val]);
@@ -840,7 +843,7 @@ class DataMap extends Component {
         d3
           .selectAll('.intlMissionsBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('y', hght - 42)
           .attr('height', 0);
         if (mouseHover.state) {
@@ -1006,7 +1009,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -1015,7 +1018,7 @@ class DataMap extends Component {
           d3
             .selectAll('.Finland')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('fill', '#2D80B5');
           d3
             .selectAll('.countryGroup')
@@ -1045,13 +1048,13 @@ class DataMap extends Component {
         d3
           .selectAll('.civBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', 0)
           .attr('y', d => d.properties.centroid[1]);
         d3
           .selectAll('.milBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('height', d => {
             if (d.properties.data[yrs][val] === 0) return 0;
             return hScale(d.properties.data[yrs][val]);
@@ -1064,7 +1067,7 @@ class DataMap extends Component {
         d3
           .selectAll('.intlMissionsBars')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('y', d => {
             let y1 = hScale(d[yrs]['Total']);
             if (d[yrs]['Total'] === 0) y1 = 0;
@@ -1293,7 +1296,7 @@ class DataMap extends Component {
           d3
             .selectAll('.land')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr(
               'fill',
               d => colorList[d.properties.data[yrs]['GPI']['GPIBand']],
@@ -1302,7 +1305,7 @@ class DataMap extends Component {
           d3
             .selectAll('.Finland')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('fill', '#2D80B5');
           d3
             .selectAll('.countryGroup')
@@ -1348,7 +1351,7 @@ class DataMap extends Component {
       d3
         .selectAll('.yearMarker')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('x1', lineChartX(parseInt(yrs, 10) - startYear))
         .attr('x2', lineChartX(parseInt(yrs, 10) - startYear));
       if (cntryNm === 'World') {
@@ -1453,12 +1456,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
@@ -1480,12 +1483,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -1562,12 +1565,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 = 0,
@@ -1586,12 +1589,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -1667,12 +1670,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
@@ -1691,12 +1694,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -1765,12 +1768,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
         if (armstype === 'CivilianArmsTotal') {
@@ -1799,12 +1802,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
         if (armstype === 'CountryMilatary') {
@@ -1861,12 +1864,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
 
@@ -1986,12 +1989,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
@@ -2015,12 +2018,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -2102,12 +2105,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 = 0,
@@ -2130,12 +2133,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -2217,12 +2220,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
           for (let k = 1; k < 6; k++) {
             let percentDef1 =
@@ -2245,12 +2248,12 @@ class DataMap extends Component {
             d3
               .select('#top-countries__graphs--defence' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentDef1 + '%');
             d3
               .select('#top-countries__graphs--civilian' + k)
               .transition()
-              .duration(250)
+              .duration(dur)
               .style('width', percentCiv1 + '%');
           }
         }
@@ -2322,12 +2325,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
         if (armstype === 'CivilianArmsTotal') {
@@ -2356,12 +2359,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
         if (armstype === 'CountryMilatary') {
@@ -2418,12 +2421,12 @@ class DataMap extends Component {
           d3
             .select('.top-countries__graphs--defence')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentDef + '%');
           d3
             .select('.top-countries__graphs--civilian')
             .transition()
-            .duration(250)
+            .duration(dur)
             .style('width', percentCiv + '%');
         }
         if (armstype === 'total' || armstype === 'CountryMilatary') {
@@ -2469,7 +2472,7 @@ class DataMap extends Component {
       d3
         .selectAll('.countryGroup')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', 0.15);
       if (armstype === 'total' || armstype === 'CountryMilatary') {
         d3
@@ -2504,7 +2507,7 @@ class DataMap extends Component {
       d3
         .selectAll('.intlMissionsGroup')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', 1);
       updateSidebar(
         'International Missions',
@@ -2532,7 +2535,7 @@ class DataMap extends Component {
       d3
         .selectAll('.countryGroup')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', 0.15);
       let values;
       d3
@@ -2561,7 +2564,7 @@ class DataMap extends Component {
             .replace('.', '_')}`,
         )
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', 1);
 
       mouseHover.state = true;
@@ -2585,7 +2588,7 @@ class DataMap extends Component {
       d3
         .selectAll('.intlMissionsGroup')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', 0.2);
       let keyIndx;
       switch (armstype) {
@@ -2641,17 +2644,17 @@ class DataMap extends Component {
         d3
           .selectAll('.countryGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         d3
           .selectAll('.land')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         d3
           .selectAll('.intlMissionsGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         updateSidebar(
           'World',
@@ -2665,7 +2668,7 @@ class DataMap extends Component {
         d3
           .selectAll('.countryGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 0.15);
         d3.selectAll('.connectorLine').style('display', 'none');
         d3
@@ -2700,7 +2703,7 @@ class DataMap extends Component {
             d3
               .selectAll('.countryGroup')
               .transition()
-              .duration(210)
+              .duration(dur + 10)
               .attr('opacity', d => {
                 if (d.properties.data[selectedYear][keyIndx] > 0) {
                   return 1;
@@ -2709,7 +2712,7 @@ class DataMap extends Component {
             d3
               .selectAll('.land')
               .transition()
-              .duration(210)
+              .duration(dur + 10)
               .attr('opacity', d => {
                 if (d.properties.data[selectedYear][keyIndx] > 0) {
                   return 1;
@@ -2758,7 +2761,7 @@ class DataMap extends Component {
             d3
               .selectAll('.land')
               .transition()
-              .duration(190)
+              .duration(dur - 10)
               .attr('opacity', 1);
             d3
               .selectAll(
@@ -2770,7 +2773,7 @@ class DataMap extends Component {
                   .replace('.', '_')}`,
               )
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr('opacity', 1);
             let dataForLineGraph = [{}];
             for (let g = startYear; g <= endYear; g++) {
@@ -2790,7 +2793,7 @@ class DataMap extends Component {
             d3
               .selectAll('.intlMissionsGroup')
               .transition()
-              .duration(200)
+              .duration(dur)
               .attr('opacity', 0.2);
             let keyIndx;
             switch (armstype) {
@@ -2833,7 +2836,7 @@ class DataMap extends Component {
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
 
           if (armstype === 'total' || armstype === 'CountryMilatary') {
@@ -2904,7 +2907,7 @@ class DataMap extends Component {
       .on('click', () => {
         mapSVG
           .transition()
-          .duration(500)
+          .duration(dur)
           .call(Zoom.transform, d3.zoomIdentity);
         active.state = false;
         mouseHover.state = false;
@@ -2922,12 +2925,12 @@ class DataMap extends Component {
         d3
           .selectAll('.countryGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         d3
           .selectAll('.intlMissionsGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         updateSidebar(
           'World',
@@ -3561,17 +3564,17 @@ class DataMap extends Component {
           active.state = false;
           mapSVG
             .transition()
-            .duration(500)
+            .duration(dur)
             .call(Zoom.transform, d3.zoomIdentity);
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
           d3
             .selectAll('.countryGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
 
           updateSidebar(
@@ -3599,7 +3602,7 @@ class DataMap extends Component {
 
           mapSVG
             .transition()
-            .duration(500)
+            .duration(dur)
             .call(
               Zoom.transform,
               d3.zoomIdentity
@@ -3643,7 +3646,7 @@ class DataMap extends Component {
         d3
           .selectAll('.intlMissionsGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 0.2);
         let keyIndx;
         switch (armstype) {
@@ -3687,7 +3690,7 @@ class DataMap extends Component {
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
           updateSidebar(
             'World',
@@ -3703,7 +3706,7 @@ class DataMap extends Component {
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
           if (armstype === 'total' || armstype === 'CountryMilatary') {
             d3
@@ -3779,7 +3782,7 @@ class DataMap extends Component {
       d3
         .selectAll('.countryGroup')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', d => {
           if (d.properties.data[selectedYear][keyIndx] > 0) {
             return 1;
@@ -3788,7 +3791,7 @@ class DataMap extends Component {
       d3
         .selectAll('.land')
         .transition()
-        .duration(200)
+        .duration(dur)
         .attr('opacity', d => {
           if (d.properties.data[selectedYear][keyIndx] > 0) {
             return 1;
@@ -3797,7 +3800,7 @@ class DataMap extends Component {
       d3
         .selectAll('.connectorLine')
         .transition()
-        .duration(200)
+        .duration(dur)
         .style('display', d => {
           if (d.properties !== null && d.properties !== undefined) {
             if (d.properties.data[selectedYear][keyIndx] > 0) {
@@ -3857,7 +3860,7 @@ class DataMap extends Component {
       );
       mapSVG
         .transition()
-        .duration(500)
+        .duration(dur)
         .call(Zoom.transform, d3.zoomIdentity);
       let countryClicked = 'Finland';
       if (finlandIsClicked) {
@@ -3866,17 +3869,17 @@ class DataMap extends Component {
         d3
           .selectAll('.intlMissionsGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         d3
           .selectAll('.countryGroup')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
         d3
           .selectAll('.land')
           .transition()
-          .duration(200)
+          .duration(dur)
           .attr('opacity', 1);
       } else {
         finlandIsClicked = true;
@@ -4016,12 +4019,12 @@ class DataMap extends Component {
           d3
             .selectAll('.countryGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 1);
           updateSidebar(
             'World',
@@ -4069,7 +4072,7 @@ class DataMap extends Component {
           d3
             .selectAll('.intlMissionsGroup')
             .transition()
-            .duration(200)
+            .duration(dur)
             .attr('opacity', 0.2);
           updateSidebar(
             active.country,
