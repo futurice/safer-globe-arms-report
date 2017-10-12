@@ -8,6 +8,27 @@ import PropTypes from 'prop-types';
 import './../styles/components/Login.css';
 
 class Login extends Component {
+  onSumbit = ev => {
+    ev.preventDefault();
+    const passwordInput = ev.target.password;
+    const password = passwordInput.value;
+    if (password === 'Transparency_Increases_Security') {
+      this.props.onLogin();
+    } else {
+      // do wobble animation
+      const classes = passwordInput.className.split(' ');
+      const idx = classes.indexOf('invalid');
+      if (idx > -1) {
+        classes.splice(idx, 1);
+        passwordInput.className = classes.join(' ');
+      }
+      passwordInput.offsetWidth;
+      setTimeout(() => {
+        passwordInput.className += ' invalid';
+      });
+    }
+  };
+
   render() {
     const currentLocale = intl.determineLocale({ urlLocaleKey: 'lang' });
 
@@ -58,29 +79,7 @@ class Login extends Component {
 
         <hr className="sep" />
 
-        <form
-          className="login-form"
-          onSubmit={ev => {
-            ev.preventDefault();
-            const passwordInput = ev.target.password;
-            const password = passwordInput.value;
-            if (password === 'Transparency_Increases_Security') {
-              this.props.onLogin();
-            } else {
-              // do wobble animation
-              const classes = passwordInput.className.split(' ');
-              const idx = classes.indexOf('invalid');
-              if (idx > -1) {
-                classes.splice(idx, 1);
-                passwordInput.className = classes.join(' ');
-              }
-              passwordInput.offsetWidth;
-              setTimeout(() => {
-                passwordInput.className += ' invalid';
-              });
-            }
-          }}
-        >
+        <form className="login-form" onSubmit={this.onSumbit}>
           <TextField
             id="login-password"
             className="password-field"
