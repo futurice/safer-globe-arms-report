@@ -1,6 +1,6 @@
 ## About this project
 
-### SaferGlobe’s report on arms control and arms trade (published since 2008) examines current political developments regarding Finnish export control mechanisms and policy.
+### Where does Finland export arms? In what direction does global arms trade develop? How do countries prevent conflicts by monitoring and restricting arms trade and military actions? The Finnish Arms Control Report provides information about trends in arms trade and developments in arms control in Finland and in the world at large.
 
 #### <a name="1" class="internalLink" />
 
