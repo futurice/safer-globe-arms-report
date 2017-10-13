@@ -82,3 +82,15 @@ The printing and development of the report has been supported in 2010–2016 by 
 Reports on arms trade from 2008–2015 are available [here](/downloads). Some of the articles from these reports are also featured on the [articles page](/articles). 
 
 This database and the website has been made possible by [Futurice's](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
+
+#### <a name="6" class="internalLink" />
+
+---
+
+# Futurice
+
+We at [Futurice](http://futurice.com/) design and create innovative digital services for companies in wide variety of industries. Digitising this arms control report as a pro bono project let us apply our professional skills for a good cause. We invest a lot in social responsibility activities and our company culture is based on trust and transparency. These values we also want to promote in the society. The valuable work done by SaferGlobe reflects them well. We are proud to have helped.
+
+---
+
+A project by <img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> and <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;">

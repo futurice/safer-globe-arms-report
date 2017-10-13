@@ -47,6 +47,10 @@ class About extends Component {
               id: '5',
               name: 'SaferGlobe',
             },
+            {
+              id: '6',
+              name: 'Futurice',
+            },
           ],
         },
       ],

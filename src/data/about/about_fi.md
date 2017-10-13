@@ -39,11 +39,11 @@ Raportin tiedot on esitetty euroina, mutta ne eivät kerro suoraan kyseisen vien
 
 Suomen asevalvontaraportin ja tämän verkkosivuston tietoja käytettäessä tai siteerattaessa on lähteeksi mainittava Suomen asevalvontaraportti. Raportin artikkelien uudelleenjulkaisulupia voi tiedustella [SaferGlobesta](https://saferglobe.fi/).
 
-# <a name="3" class="internalLink" />
+#### <a name="3" class="internalLink" />
 
 ---
 
-#### Miten tiedot on esitetty
+# Miten tiedot on esitetty
 
 Raportissa esitetään Suomen toteutunut asevienti. Viennille tarvitaan lupa Suomen viranomaisilta. Vientilupa on pääsääntöisesti voimassa vuoden tai kolme vuotta. Myönnetty vientilupa ei välttämättä tarkoita, että luvan saanut vienti toteutuisi. Vientiluvat kertovat kuitenkin Suomen valtion harjoittamasta asevientipolitiikasta: millaisen asekaupan katsotaan olevan ulko- ja turvallisuuspolitiikan linjausten mukaista. Poliittista vastuuta arvioitaessa on viennin toteutumishetken lisäksi arvioitava vientiluvan myöntämishetkellä vallinneita olosuhteita ja mahdollisesti jo ennen sitä annettua puoltoa kauppaneuvotteluiden aloittamiseksi. Vientilupajärjestelmästä kerrotaan enemmän artikkelissa(Suomen asevientilupajärjestelmä).
 
@@ -82,3 +82,15 @@ Raporttien painattamista ja kehitystyötä ovat tukeneet vuosina 2010–2016 [Am
 Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](/downloads). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](/articles). 
 
 Tämän tietokannan ja verkkosivuston on mahdollistanut [Futuricen](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
+
+#### <a name="6" class="internalLink" />
+
+---
+
+# Futurice
+
+Me [Futuricella](http://futurice.com/) suunnittelemme ja toteutamme innovatiivisia digitaalisia palveluita asiakkaillemme. Asevalvontaraportin digitointi pro bono -hankkeena antoi meille mahdollisuuden käyttää ammattitaitoamme hyvän asian puolesta. Investoimme runsaasti yritysvastuuseen ja yrityskulttuurimme pohjaa luottamukseen ja läpinäkyvyyteen. Nämä ovat arvoja, joita haluamme myös edistää yhteiskunnassa, tässä tapauksessa tukemalla SaferGloben tekemää arvokasta työtä.
+
+---
+
+<img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projektti

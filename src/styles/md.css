@@ -105,3 +105,6 @@
   background-color: #e9e9e9;
   border: 0;
 }
+.about-md hr:last-of-type {
+  margin-bottom: 32px;
+}
