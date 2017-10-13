@@ -1,6 +1,6 @@
 ## Tietoja tästä hankkeesta
 
-### Lue Suomen asevalvontaraporttia kun haluat tietää maailman sotilasmenojen kehityksestä sekä siitä miten valtiot ennaltaehkäisivät konflikteja valvomalla ja rajoittamalla asekauppaa sekä sotilaallista toimintaa. Kerromme myös, minne Suomi vei väkivaltatuotteita ja mistä se osti aseita sekä ketkä sijoittivat sotateollisuuteen. 
+### Minne Suomesta viedään aseita? Mihin suuntaan maailman asekauppa muuttuu? Miten valtiot ennaltaehkäisivät konflikteja valvomalla ja rajoittamalla asekauppaa sekä sotilaallista toimintaa? Suomen asevalvontaraportti kertoo tiedot asekaupan trendeistä ja asevalvonnan kehityksestä Suomesta ja maailmalta.
 
 #### <a name="1" class="internalLink" />
 
