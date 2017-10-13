@@ -364,7 +364,7 @@ class AppRouter extends Component {
     super();
     this.state = {
       initDone: false,
-      isLoggedIn: false,
+      isLoggedIn: Boolean(sessionStorage.getItem("isLoggedIn")) | false,
     };
   }
 
@@ -417,6 +417,7 @@ class AppRouter extends Component {
       return (
         <Login
           onLogin={() => {
+            sessionStorage.setItem("isLoggedIn", "true")
             this.setState({ isLoggedIn: true });
           }}
         />
