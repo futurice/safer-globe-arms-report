@@ -2,6 +2,7 @@
   "name": "safer-globe-arms-report",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/armsreport",
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "eslint": "^3.19.0",

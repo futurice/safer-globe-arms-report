@@ -465,7 +465,7 @@ We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
 const AppRouterWrap = () => (
-  <Router>
+  <Router basename="/armsreport">
     <Route component={AppRouter} />
   </Router>
 );
