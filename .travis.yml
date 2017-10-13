@@ -3,7 +3,10 @@ node_js:
 - '8.4'
 before_script:
   - echo -e "Host saferglobe.seravo.fi\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-script: yarn build
+script:
+  - git apply base-path.patch
+  - yarn build
+  - node duplicate-index-html.js
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_a5a4b6243b23_key -iv $encrypted_a5a4b6243b23_iv
   -in deploy_rsa.enc -out /tmp/deploy_rsa -d

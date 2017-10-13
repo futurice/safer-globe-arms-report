@@ -1,0 +1,25 @@
+diff --git a/package.json b/package.json
+index d59e9d5..3b6dd22 100644
+--- a/package.json
++++ b/package.json
+@@ -2,6 +2,7 @@
+   "name": "safer-globe-arms-report",
+   "version": "0.1.0",
+   "private": true,
++  "homepage": "/armsreport",
+   "devDependencies": {
+     "autoprefixer": "^7.1.1",
+     "eslint": "^3.19.0",
+diff --git a/src/index.js b/src/index.js
+index 012aa5f..a76345b 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -465,7 +465,7 @@ We have to wrap our main app component in a generic <Route /> like this
+ so we get the `location` in props
+ */
+ const AppRouterWrap = () => (
+-  <Router>
++  <Router basename="/armsreport">
+     <Route component={AppRouter} />
+   </Router>
+ );
