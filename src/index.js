@@ -369,7 +369,7 @@ class AppRouter extends Component {
   loadLocales() {
     // init method will load CLDR locale data according to currentLocale
     // react-intl-universal is singleton, so you should init it only once in your app
-    const userLocale = intl.determineLocale({ urllocalekey: 'lang' });
+    const userLocale = intl.determineLocale({ urlLocaleKey: 'lang' });
 
     intl
       .init({
@@ -412,7 +412,7 @@ class AppRouter extends Component {
       process.env.REACT_APP_PASSWORD_PROTECTED === 'true' &&
       !this.state.isLoggedIn
     ) {
-    return (
+      return (
         <Login
           onLogin={() => {
             this.setState({ isLoggedIn: true });
@@ -421,37 +421,37 @@ class AppRouter extends Component {
       );
     } else if (this.state.initDone) {
       return (
-      <div>
-        <div
-          className={classNames('container', {
-            'container--behind-a-modal': isModal,
-          })}
-        >
+        <div>
+          <div
+            className={classNames('container', {
+              'container--behind-a-modal': isModal,
+            })}
+          >
             <Route path="/" render={props => <Nav {...props} />} />
 
-          <div className="content-wrapper">
-            <Switch location={isModal ? this.previousLocation : location}>
-              <Route exact path="/" component={Data} />
-              <Route
-                exact
-                path="/articles"
-                render={props => <Stories {...props} />}
-              />
-              <Route
-                exact
-                path="/articles/:id"
-                render={props => <FullStory {...props} />}
-              />
-              <Route exact path="/about" component={About} />
-              <Route path="/about/:page" component={About} />
-              <Route exact path="/downloads" component={Downloads} />
-            </Switch>
+            <div className="content-wrapper">
+              <Switch location={isModal ? this.previousLocation : location}>
+                <Route exact path="/" component={Data} />
+                <Route
+                  exact
+                  path="/articles"
+                  render={props => <Stories {...props} />}
+                />
+                <Route
+                  exact
+                  path="/articles/:id"
+                  render={props => <FullStory {...props} />}
+                />
+                <Route exact path="/about" component={About} />
+                <Route path="/about/:page" component={About} />
+                <Route exact path="/downloads" component={Downloads} />
+              </Switch>
+            </div>
           </div>
-        </div>
 
-        {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
-      </div>
-    );
+          {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
+        </div>
+      );
     } else {
       return null;
     }
