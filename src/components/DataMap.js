@@ -516,6 +516,9 @@ class DataMap extends Component {
         }
       }
       redrawBars(armstype, yrs);
+
+      d3.selectAll('.hoverArea').attr('opacity', 0.65);
+      d3.selectAll(`.hoverArea${yrs}`).attr('opacity', 0);
     }
 
     function redrawBars(val, yrs) {
@@ -1336,24 +1339,9 @@ class DataMap extends Component {
       if (cntryNm === 'World') {
         d3.selectAll('rect').attr('opacity', 1);
       }
-      let lineChartwidth = 308,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
       let totalVal = 0,
         defenceVal = 0,
         civilianVal = 0;
-      let lineChartX = d3
-        .scaleLinear()
-        .rangeRound([
-          0,
-          lineChartwidth - lineChartMargin.left - lineChartMargin.right,
-        ])
-        .domain([0, endYear - startYear]);
-      d3
-        .selectAll('.yearMarker')
-        .transition()
-        .duration(dur)
-        .attr('x1', lineChartX(parseInt(yrs, 10) - startYear))
-        .attr('x2', lineChartX(parseInt(yrs, 10) - startYear));
       if (cntryNm === 'World') {
         totalVal = totalExport[0][yrs]['Total'];
         defenceVal = totalExport[0][yrs]['Military'];
@@ -1451,8 +1439,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
             .style('color', '#212121');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+          let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
+            percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1561,7 +1553,11 @@ class DataMap extends Component {
             .html(formatEuros(civilianVal))
             .style('color', '#785ef0');
           let percentDef = 0,
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+            percentCiv = 100;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1577,7 +1573,7 @@ class DataMap extends Component {
               percentCiv1 =
                 arrSorted[k - 1].data[yrs].CivilianArmsTotal *
                 100 /
-                totalExport[0][yrs]['Total'];
+                totalExport[0][yrs]['Civilian'];
             d3
               .select('.top-countries__name' + k)
               .html(countryNameLang[arrSorted[k - 1].name][langSelected]);
@@ -1665,8 +1661,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(defenceVal))
             .style('color', '#fe6100');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
+          let percentDef = 100,
             percentCiv = 0;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1681,7 +1681,7 @@ class DataMap extends Component {
             let percentDef1 =
                 arrSorted[k - 1].data[yrs].CountryMilatary *
                 100 /
-                totalExport[0][yrs]['Total'],
+                totalExport[0][yrs]['Military'],
               percentCiv1 = 0;
             d3
               .select('.top-countries__name' + k)
@@ -1763,8 +1763,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
             .style('color', '#212121');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+          let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
+            percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1798,7 +1802,11 @@ class DataMap extends Component {
             .html(formatEuros(civilianVal))
             .style('color', '#785ef0');
           let percentDef = 0,
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+            percentCiv = 100;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1859,8 +1867,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(defenceVal))
             .style('color', '#fe6100');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
+          let percentDef = 100,
             percentCiv = 0;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -1984,8 +1996,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
             .style('color', '#212121');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+          let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
+            percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -2101,7 +2117,11 @@ class DataMap extends Component {
             .html(formatEuros(civilianVal))
             .style('color', '#785ef0');
           let percentDef = 0,
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+            percentCiv = 100;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -2117,7 +2137,7 @@ class DataMap extends Component {
               percentCiv1 =
                 arrSorted[k - 1].data[selectedYear].CivilianArmsTotal *
                 100 /
-                totalExport[0][yrs]['Total'];
+                totalExport[0][yrs]['Civilian'];
             d3
               .select('.top-countries__name' + k)
               .html(countryNameLang[arrSorted[k - 1].name][langSelected]);
@@ -2215,8 +2235,12 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(defenceVal))
             .style('color', '#fe6100');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
+          let percentDef = 100,
             percentCiv = 0;
+          if (defenceVal + civilianVal == 0) {
+            percentCiv = 0;
+            percentDef = 0;
+          }
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -2231,7 +2255,7 @@ class DataMap extends Component {
             let percentDef1 =
                 arrSorted[k - 1].data[selectedYear].CountryMilatary *
                 100 /
-                totalExport[0][yrs]['Total'],
+                totalExport[0][yrs]['Military'],
               percentCiv1 = 0;
             d3
               .select('.top-countries__name' + k)
@@ -2320,8 +2344,8 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
             .style('color', '#212121');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+          let percentDef = 100,
+            percentCiv = 0;
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -2355,7 +2379,7 @@ class DataMap extends Component {
             .html(formatEuros(civilianVal))
             .style('color', '#785ef0');
           let percentDef = 0,
-            percentCiv = civilianVal * 100 / totalExport[0][yrs]['Total'];
+            percentCiv = 0;
           d3
             .select('.top-countries__graphs--defence')
             .transition()
@@ -2416,7 +2440,7 @@ class DataMap extends Component {
             .selectAll('.data-list-total__value')
             .html(formatEuros(defenceVal))
             .style('color', '#fe6100');
-          let percentDef = defenceVal * 100 / totalExport[0][yrs]['Total'],
+          let percentDef = 100,
             percentCiv = 0;
           d3
             .select('.top-countries__graphs--defence')
@@ -2961,7 +2985,7 @@ class DataMap extends Component {
       endYear = parseInt(
         d3
           .keys(data.objects.countries.geometries[0].properties.data)
-          .slice(-2)[0],
+          .slice(-1)[0],
         10,
       );
 
@@ -2969,12 +2993,12 @@ class DataMap extends Component {
     let currentYear = parseInt(
         d3
           .keys(data.objects.countries.geometries[0].properties.data)
-          .slice(-2)[0],
+          .slice(-1)[0],
         10,
       ),
       selectedYear = d3
         .keys(data.objects.countries.geometries[0].properties.data)
-        .slice(-2)[0];
+        .slice(-1)[0];
 
     for (let g = startYear; g <= endYear; g++) {
       let totalObject = {
@@ -3031,7 +3055,7 @@ class DataMap extends Component {
 
       let lineChartwidth = 308,
         lineChartheight = 125,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
+        lineChartMargin = { top: 0, right: 0, bottom: 0, left: 40 };
 
       let lineChartSVG = d3
         .selectAll('.time-series-graph')
@@ -3057,8 +3081,15 @@ class DataMap extends Component {
       let lineChartY = d3
         .scaleLinear()
         .rangeRound([
-          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
           0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
+        ]);
+
+      let lineChartYAxes = d3
+        .scaleLinear()
+        .rangeRound([
+          0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         ]);
 
       let lineChartLine = d3
@@ -3068,26 +3099,38 @@ class DataMap extends Component {
         .y(d => lineChartY(d));
 
       let totalForLine = [],
-        defenceForLine = [],
-        civilianForLine = [];
-
+        forMax = [];
+      let barWidth =
+        (lineChartwidth - lineChartMargin.left - lineChartMargin.right) /
+        (d3.keys(dataLine[0]).length - 1);
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
-        totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        defenceForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        civilianForLine.push(0);
+        totalForLine.push([]);
+        totalForLine[totalForLine.length - 1].push(startYear + i);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        totalForLine[totalForLine.length - 1].push(0);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        forMax.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
       }
-      lineChartY.domain([0, d3.max(totalForLine)]);
+      lineChartY.domain([0, d3.max(forMax)]);
+      lineChartYAxes.domain([0, d3.max(forMax)]);
       lineChartX.domain([0, totalForLine.length - 1]);
       lineChartg
         .append('g')
         .call(
           d3
-            .axisLeft(lineChartY)
+            .axisLeft(lineChartYAxes)
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
-                let s = (d / 1e3).toFixed(0);
-                return s + ' K€';
+                if (d == 0) return '0 €';
+                else {
+                  let s = (d / 1e3).toFixed(0);
+                  return s + ' K€';
+                }
               } else {
                 let s = (d / 1e6).toFixed(0);
                 return s + ' M€';
@@ -3101,10 +3144,10 @@ class DataMap extends Component {
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         lineChartg
           .append('line')
-          .attr('x1', lineChartX(i))
-          .attr('x2', lineChartX(i))
+          .attr('x1', lineChartX(i) + barWidth / 2)
+          .attr('x2', lineChartX(i) + barWidth / 2)
           .attr('y1', lineChartheight)
-          .attr('y2', lineChartheight + 5)
+          .attr('y2', lineChartheight + 4)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
         let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
@@ -3113,11 +3156,12 @@ class DataMap extends Component {
         }
         lineChartg
           .append('text')
-          .attr('x', lineChartX(i) + 1)
-          .attr('y', lineChartheight + 10)
+          .attr('x', lineChartX(i) + barWidth / 2)
+          .attr('y', lineChartheight + 15)
           .attr('fill', '#aaa')
           .attr('font-size', 11)
           .attr('font-family', 'Source Sans Pro')
+          .attr('text-anchor', 'middle')
           .text(txt);
       }
 
@@ -3128,55 +3172,79 @@ class DataMap extends Component {
         .attr('font-size', 10);
       lineChartg.selectAll('.tick line').attr('stroke', '#aaa');
       lineChartg
-        .append('path')
-        .datum(totalForLine)
-        .attr('class', 'totalLine')
-        .attr('fill', 'none')
-        .attr('stroke', '#999')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-      lineChartg
-        .append('path')
-        .datum(defenceForLine)
-        .attr('class', 'defenceLine')
-        .attr('fill', 'none')
-        .attr('stroke', defenceColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-      lineChartg
-        .append('path')
-        .datum(civilianForLine)
-        .attr('class', 'civilianLine')
-        .attr('fill', 'none')
-        .attr('stroke', civilianColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-
-      lineChartg
-        .append('line')
-        .attr('class', 'yearMarker')
-        .attr('x1', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('x2', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('y1', 0)
+        .selectAll('.civArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `civArea Area${d[0]}`)
+        .attr('fill', civilianColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
         .attr(
-          'y2',
+          'y',
+          d =>
+            lineChartheight -
+            lineChartMargin.top -
+            lineChartMargin.bottom -
+            lineChartY(d[2]),
+        )
+        .attr('height', d => lineChartY(d[2]))
+        .attr('shape-rendering', 'crispEdges');
+      lineChartg
+        .selectAll('.defArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `defArea Area${d[0]}`)
+        .attr('fill', defenceColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr(
+          'y',
+          d =>
+            lineChartheight -
+            lineChartMargin.top -
+            lineChartMargin.bottom -
+            (lineChartY(d[2]) + lineChartY(d[3])),
+        )
+        .attr('height', d => lineChartY(d[3]))
+        .attr('shape-rendering', 'crispEdges');
+      lineChartg
+        .selectAll('.hoverArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `hoverArea hoverArea${d[0]}`)
+        .attr('fill', '#fff')
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', 0)
+        .attr(
+          'height',
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         )
-        .attr('stroke', '#333')
-        .attr('stroke-dasharray', '4,4')
-        .attr('shape-rendering', 'crispEdges');
+        .attr('opacity', d => {
+          if (d[0] === parseInt(selectedYear)) return 0;
+          else return 0.65;
+        })
+        .style('cursor', 'pointer')
+        .attr('shape-rendering', 'crispEdges')
+        .on('mouseover', d => {
+          changeYear(d[0].toString());
+        })
+        .on('mouseout', d => {
+          changeYear(selectedYear);
+        })
+        .on('click', d => {
+          selectedYear = d[0].toString();
+          changeYear(selectedYear);
+        });
     }
 
     function drawLineChart(dataLine) {
@@ -3184,7 +3252,7 @@ class DataMap extends Component {
 
       let lineChartwidth = 308,
         lineChartheight = 125,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
+        lineChartMargin = { top: 0, right: 0, bottom: 0, left: 40 };
 
       let lineChartSVG = d3
         .selectAll('.time-series-graph')
@@ -3210,6 +3278,13 @@ class DataMap extends Component {
       let lineChartY = d3
         .scaleLinear()
         .rangeRound([
+          0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
+        ]);
+
+      let lineChartYAxes = d3
+        .scaleLinear()
+        .rangeRound([
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
           0,
         ]);
@@ -3221,26 +3296,41 @@ class DataMap extends Component {
         .y(d => lineChartY(d));
 
       let totalForLine = [],
-        defenceForLine = [],
-        civilianForLine = [];
+        forMax = [];
+      let barWidth =
+        (lineChartwidth - lineChartMargin.left - lineChartMargin.right) /
+        (d3.keys(dataLine[0]).length - 1);
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
-        totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        defenceForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Military']);
-        civilianForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Civilian']);
+        totalForLine.push([]);
+        totalForLine[totalForLine.length - 1].push(startYear + i);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        forMax.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Civilian'],
+        );
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Military'],
+        );
       }
-      lineChartY.domain([0, d3.max(totalForLine)]);
+      lineChartY.domain([0, d3.max(forMax)]);
+      lineChartYAxes.domain([0, d3.max(forMax)]);
       lineChartX.domain([0, totalForLine.length - 1]);
       lineChartg
         .append('g')
         .call(
           d3
-            .axisLeft(lineChartY)
+            .axisLeft(lineChartYAxes)
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
-                let s = (d / 1e3).toFixed(0);
-                return s + ' K€';
+                if (d == 0) return '0 €';
+                else {
+                  let s = (d / 1e3).toFixed(0);
+                  return s + ' K€';
+                }
               } else {
                 let s = (d / 1e6).toFixed(0);
                 return s + ' M€';
@@ -3254,10 +3344,10 @@ class DataMap extends Component {
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         lineChartg
           .append('line')
-          .attr('x1', lineChartX(i))
-          .attr('x2', lineChartX(i))
+          .attr('x1', lineChartX(i) + barWidth / 2)
+          .attr('x2', lineChartX(i) + barWidth / 2)
           .attr('y1', lineChartheight)
-          .attr('y2', lineChartheight + 5)
+          .attr('y2', lineChartheight + 4)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
         let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
@@ -3266,11 +3356,12 @@ class DataMap extends Component {
         }
         lineChartg
           .append('text')
-          .attr('x', lineChartX(i) + 1)
-          .attr('y', lineChartheight + 10)
+          .attr('x', lineChartX(i) + barWidth / 2)
+          .attr('y', lineChartheight + 15)
           .attr('fill', '#aaa')
           .attr('font-size', 11)
           .attr('font-family', 'Source Sans Pro')
+          .attr('text-anchor', 'middle')
           .text(txt);
       }
 
@@ -3281,52 +3372,113 @@ class DataMap extends Component {
         .attr('font-size', 10);
       lineChartg.selectAll('.tick line').attr('stroke', '#aaa');
       lineChartg
-        .append('path')
-        .datum(totalForLine)
-        .attr('class', 'totalLine')
-        .attr('fill', 'none')
-        .attr('stroke', '#999')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
+        .selectAll('.civArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `civArea Area${d[0]}`)
+        .attr('fill', civilianColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', d => {
+          if (armstype != 'CountryMilatary') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[2])
+            );
+          } else
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(0)
+            );
+        })
+        .attr('height', d => {
+          if (armstype != 'CountryMilatary') {
+            return lineChartY(d[2]);
+          } else return 0;
+        })
         .attr('shape-rendering', 'crispEdges');
       lineChartg
-        .append('path')
-        .datum(defenceForLine)
-        .attr('class', 'defenceLine')
-        .attr('fill', 'none')
-        .attr('stroke', defenceColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
+        .selectAll('.defArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `defArea Area${d[0]}`)
+        .attr('fill', defenceColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', d => {
+          if (armstype === 'total') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              (lineChartY(d[2]) + lineChartY(d[3]))
+            );
+          }
+          if (armstype === 'CivilianArmsTotal') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[2])
+            );
+          }
+          if (armstype === 'CountryMilatary') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[3])
+            );
+          }
+        })
+        .attr('height', d => {
+          if (armstype != 'CivilianArmsTotal') {
+            return lineChartY(d[3]);
+          } else return 0;
+        })
         .attr('shape-rendering', 'crispEdges');
       lineChartg
-        .append('path')
-        .datum(civilianForLine)
-        .attr('class', 'civilianLine')
-        .attr('fill', 'none')
-        .attr('stroke', civilianColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges');
-
-      lineChartg
-        .append('line')
-        .attr('class', 'yearMarker')
-        .attr('x1', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('x2', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('y1', 0)
+        .selectAll('.hoverArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `hoverArea hoverArea${d[0]}`)
+        .attr('fill', '#fff')
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', 0)
         .attr(
-          'y2',
+          'height',
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         )
-        .attr('stroke', '#333')
-        .attr('stroke-dasharray', '4,4')
-        .attr('shape-rendering', 'crispEdges');
+        .attr('opacity', d => {
+          if (d[0] === parseInt(selectedYear)) return 0;
+          else return 0.65;
+        })
+        .attr('shape-rendering', 'crispEdges')
+        .style('cursor', 'pointer')
+        .on('mouseover', d => {
+          changeYear(d[0].toString());
+        })
+        .on('mouseout', d => {
+          changeYear(selectedYear);
+        })
+        .on('click', d => {
+          selectedYear = d[0].toString();
+          changeYear(selectedYear);
+        });
     }
 
     let features = topojson.feature(data, data.objects.countries).features;

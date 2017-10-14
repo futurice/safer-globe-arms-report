@@ -79,7 +79,7 @@ class Data extends Component {
       activeYear: parseInt(
         Object.keys(
           dataSheet.objects.countries.geometries[0].properties.data,
-        ).slice(-2)[0],
+        ).slice(-1)[0],
         10,
       ),
       countryData: dataSheet.objects.countries.geometries,
@@ -93,7 +93,7 @@ class Data extends Component {
             'Total',
             Object.keys(
               dataSheet.objects.countries.geometries[0].properties.data,
-            ).slice(-2)[0],
+            ).slice(-1)[0],
           ),
         },
         defence: {
@@ -102,7 +102,7 @@ class Data extends Component {
             'MilataryMaterielTotal',
             Object.keys(
               dataSheet.objects.countries.geometries[0].properties.data,
-            ).slice(-2)[0],
+            ).slice(-1)[0],
           ),
         },
         civilian: {
@@ -111,7 +111,7 @@ class Data extends Component {
             'CivilianArmsTotal',
             Object.keys(
               dataSheet.objects.countries.geometries[0].properties.data,
-            ).slice(-2)[0],
+            ).slice(-1)[0],
           ),
         },
       },
@@ -124,7 +124,10 @@ class Data extends Component {
   }
 
   handleDownloadClick() {
-    saveSvgAsPng(document.getElementsByClassName('svg-map')[0], `Suomen-asevienti-kartta-${this.state.activeYear}.png`)
+    saveSvgAsPng(
+      document.getElementsByClassName('svg-map')[0],
+      `Suomen-asevienti-kartta-${this.state.activeYear}.png`,
+    );
   }
 
   updateGPIYear(newGPIYear) {
@@ -254,7 +257,7 @@ class Data extends Component {
             }
             endYear={
               Object.keys(this.state.countryData[0].properties.data).slice(
-                -2,
+                -1,
               )[0]
             }
           />

@@ -24,9 +24,9 @@ export default function(countryName, rank, language, armsType, yrs, def, civ) {
       }
     } else {
       if (parseInt(rank, 10) === 1) {
-        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span><p>Siviiliaseet tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteet tuonti Suomesta <span class = "defComment">${def}</span></p>`;
+        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span><p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${def}</span></p>`;
       } else {
-        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<p>Siviiliaseet tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteet tuonti Suomesta <span class = "defComment">${def}</span></p>`;
+        return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span>.<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${civ}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${def}</span></p>`;
       }
     }
   } else {
