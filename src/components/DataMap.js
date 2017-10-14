@@ -517,7 +517,7 @@ class DataMap extends Component {
       }
       redrawBars(armstype, yrs);
 
-      d3.selectAll('.hoverArea').attr('opacity', 0.75);
+      d3.selectAll('.hoverArea').attr('opacity', 0.65);
       d3.selectAll(`.hoverArea${yrs}`).attr('opacity', 0);
     }
 
@@ -1339,24 +1339,9 @@ class DataMap extends Component {
       if (cntryNm === 'World') {
         d3.selectAll('rect').attr('opacity', 1);
       }
-      let lineChartwidth = 308,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
       let totalVal = 0,
         defenceVal = 0,
         civilianVal = 0;
-      let lineChartX = d3
-        .scaleLinear()
-        .rangeRound([
-          0,
-          lineChartwidth - lineChartMargin.left - lineChartMargin.right,
-        ])
-        .domain([0, endYear - startYear]);
-      d3
-        .selectAll('.yearMarker')
-        .transition()
-        .duration(dur)
-        .attr('x1', lineChartX(parseInt(yrs, 10) - startYear))
-        .attr('x2', lineChartX(parseInt(yrs, 10) - startYear));
       if (cntryNm === 'World') {
         totalVal = totalExport[0][yrs]['Total'];
         defenceVal = totalExport[0][yrs]['Military'];
@@ -3070,7 +3055,7 @@ class DataMap extends Component {
 
       let lineChartwidth = 308,
         lineChartheight = 125,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
+        lineChartMargin = { top: 0, right: 0, bottom: 0, left: 40 };
 
       let lineChartSVG = d3
         .selectAll('.time-series-graph')
@@ -3159,26 +3144,25 @@ class DataMap extends Component {
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         lineChartg
           .append('line')
-          .attr('x1', lineChartX(i))
-          .attr('x2', lineChartX(i))
+          .attr('x1', lineChartX(i) + barWidth / 2)
+          .attr('x2', lineChartX(i) + barWidth / 2)
           .attr('y1', lineChartheight)
-          .attr('y2', lineChartheight + 5)
+          .attr('y2', lineChartheight + 4)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
-        if (i % 4 == 0) {
-          let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-          if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
-            txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-          }
-          lineChartg
-            .append('text')
-            .attr('x', lineChartX(i) + 1)
-            .attr('y', lineChartheight + 10)
-            .attr('fill', '#aaa')
-            .attr('font-size', 11)
-            .attr('font-family', 'Source Sans Pro')
-            .text(txt);
+        let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+        if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
+          txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
         }
+        lineChartg
+          .append('text')
+          .attr('x', lineChartX(i) + barWidth / 2)
+          .attr('y', lineChartheight + 15)
+          .attr('fill', '#aaa')
+          .attr('font-size', 11)
+          .attr('font-family', 'Source Sans Pro')
+          .attr('text-anchor', 'middle')
+          .text(txt);
       }
 
       lineChartg.selectAll('.domain').remove();
@@ -3247,7 +3231,7 @@ class DataMap extends Component {
         )
         .attr('opacity', d => {
           if (d[0] === parseInt(selectedYear)) return 0;
-          else return 0.75;
+          else return 0.65;
         })
         .style('cursor', 'pointer')
         .attr('shape-rendering', 'crispEdges')
@@ -3268,7 +3252,7 @@ class DataMap extends Component {
 
       let lineChartwidth = 308,
         lineChartheight = 125,
-        lineChartMargin = { top: 0, right: 25, bottom: 0, left: 40 };
+        lineChartMargin = { top: 0, right: 0, bottom: 0, left: 40 };
 
       let lineChartSVG = d3
         .selectAll('.time-series-graph')
@@ -3360,26 +3344,25 @@ class DataMap extends Component {
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         lineChartg
           .append('line')
-          .attr('x1', lineChartX(i))
-          .attr('x2', lineChartX(i))
+          .attr('x1', lineChartX(i) + barWidth / 2)
+          .attr('x2', lineChartX(i) + barWidth / 2)
           .attr('y1', lineChartheight)
-          .attr('y2', lineChartheight + 5)
+          .attr('y2', lineChartheight + 4)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
-        if (i % 4 == 0) {
-          let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-          if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
-            txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-          }
-          lineChartg
-            .append('text')
-            .attr('x', lineChartX(i) + 1)
-            .attr('y', lineChartheight + 10)
-            .attr('fill', '#aaa')
-            .attr('font-size', 11)
-            .attr('font-family', 'Source Sans Pro')
-            .text(txt);
+        let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+        if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
+          txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
         }
+        lineChartg
+          .append('text')
+          .attr('x', lineChartX(i) + barWidth / 2)
+          .attr('y', lineChartheight + 15)
+          .attr('fill', '#aaa')
+          .attr('font-size', 11)
+          .attr('font-family', 'Source Sans Pro')
+          .attr('text-anchor', 'middle')
+          .text(txt);
       }
 
       lineChartg.selectAll('.domain').remove();
@@ -3482,7 +3465,7 @@ class DataMap extends Component {
         )
         .attr('opacity', d => {
           if (d[0] === parseInt(selectedYear)) return 0;
-          else return 0.75;
+          else return 0.65;
         })
         .attr('shape-rendering', 'crispEdges')
         .style('cursor', 'pointer')
