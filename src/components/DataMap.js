@@ -3109,7 +3109,6 @@ class DataMap extends Component {
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
         totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
         defenceForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
         civilianForLine.push(0);
       }
@@ -3123,8 +3122,11 @@ class DataMap extends Component {
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
-                let s = (d / 1e3).toFixed(0);
-                return s + ' K€';
+                if (d == 0) return '0 €';
+                else {
+                  let s = (d / 1e3).toFixed(0);
+                  return s + ' K€';
+                }
               } else {
                 let s = (d / 1e6).toFixed(0);
                 return s + ' M€';
@@ -3144,18 +3146,20 @@ class DataMap extends Component {
           .attr('y2', lineChartheight + 5)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
-        let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-        if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
-          txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+        if (i % 4 == 0) {
+          let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+          if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
+            txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+          }
+          lineChartg
+            .append('text')
+            .attr('x', lineChartX(i) + 1)
+            .attr('y', lineChartheight + 10)
+            .attr('fill', '#aaa')
+            .attr('font-size', 11)
+            .attr('font-family', 'Source Sans Pro')
+            .text(txt);
         }
-        lineChartg
-          .append('text')
-          .attr('x', lineChartX(i) + 1)
-          .attr('y', lineChartheight + 10)
-          .attr('fill', '#aaa')
-          .attr('font-size', 11)
-          .attr('font-family', 'Source Sans Pro')
-          .text(txt);
       }
 
       lineChartg.selectAll('.domain').remove();
@@ -3268,6 +3272,7 @@ class DataMap extends Component {
       }
       lineChartY.domain([0, d3.max(totalForLine)]);
       lineChartX.domain([0, totalForLine.length - 1]);
+      let barWidth = lineChartwidth / (totalForLine.length - 1);
       lineChartg
         .append('g')
         .call(
@@ -3276,8 +3281,11 @@ class DataMap extends Component {
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
-                let s = (d / 1e3).toFixed(0);
-                return s + ' K€';
+                if (d == 0) return '0 €';
+                else {
+                  let s = (d / 1e3).toFixed(0);
+                  return s + ' K€';
+                }
               } else {
                 let s = (d / 1e6).toFixed(0);
                 return s + ' M€';
@@ -3297,18 +3305,20 @@ class DataMap extends Component {
           .attr('y2', lineChartheight + 5)
           .attr('stroke', '#aaa')
           .attr('shape-rendering', 'crispEdges');
-        let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
-        if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
-          txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+        if (i % 4 == 0) {
+          let txt = "'" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+          if (parseInt(d3.keys(dataLine[0])[i], 10) % 1000 < 10) {
+            txt = "'0" + parseInt(d3.keys(dataLine[0])[i], 10) % 1000;
+          }
+          lineChartg
+            .append('text')
+            .attr('x', lineChartX(i) + 1)
+            .attr('y', lineChartheight + 10)
+            .attr('fill', '#aaa')
+            .attr('font-size', 11)
+            .attr('font-family', 'Source Sans Pro')
+            .text(txt);
         }
-        lineChartg
-          .append('text')
-          .attr('x', lineChartX(i) + 1)
-          .attr('y', lineChartheight + 10)
-          .attr('fill', '#aaa')
-          .attr('font-size', 11)
-          .attr('font-family', 'Source Sans Pro')
-          .text(txt);
       }
 
       lineChartg.selectAll('.domain').remove();
