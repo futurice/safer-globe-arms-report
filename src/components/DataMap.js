@@ -516,6 +516,9 @@ class DataMap extends Component {
         }
       }
       redrawBars(armstype, yrs);
+
+      d3.selectAll('.hoverArea').attr('opacity', 0.75);
+      d3.selectAll(`.hoverArea${yrs}`).attr('opacity', 0);
     }
 
     function redrawBars(val, yrs) {
@@ -3093,8 +3096,15 @@ class DataMap extends Component {
       let lineChartY = d3
         .scaleLinear()
         .rangeRound([
-          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
           0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
+        ]);
+
+      let lineChartYAxes = d3
+        .scaleLinear()
+        .rangeRound([
+          0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         ]);
 
       let lineChartLine = d3
@@ -3104,21 +3114,30 @@ class DataMap extends Component {
         .y(d => lineChartY(d));
 
       let totalForLine = [],
-        defenceForLine = [],
-        civilianForLine = [];
-
+        forMax = [];
+      let barWidth =
+        (lineChartwidth - lineChartMargin.left - lineChartMargin.right) /
+        (d3.keys(dataLine[0]).length - 1);
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
-        totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        defenceForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        civilianForLine.push(0);
+        totalForLine.push([]);
+        totalForLine[totalForLine.length - 1].push(startYear + i);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        totalForLine[totalForLine.length - 1].push(0);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        forMax.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
       }
-      lineChartY.domain([0, d3.max(totalForLine)]);
+      lineChartY.domain([0, d3.max(forMax)]);
+      lineChartYAxes.domain([0, d3.max(forMax)]);
       lineChartX.domain([0, totalForLine.length - 1]);
       lineChartg
         .append('g')
         .call(
           d3
-            .axisLeft(lineChartY)
+            .axisLeft(lineChartYAxes)
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
@@ -3169,55 +3188,79 @@ class DataMap extends Component {
         .attr('font-size', 10);
       lineChartg.selectAll('.tick line').attr('stroke', '#aaa');
       lineChartg
-        .append('path')
-        .datum(totalForLine)
-        .attr('class', 'totalLine')
-        .attr('fill', 'none')
-        .attr('stroke', '#999')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-      lineChartg
-        .append('path')
-        .datum(defenceForLine)
-        .attr('class', 'defenceLine')
-        .attr('fill', 'none')
-        .attr('stroke', defenceColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-      lineChartg
-        .append('path')
-        .datum(civilianForLine)
-        .attr('class', 'civilianLine')
-        .attr('fill', 'none')
-        .attr('stroke', civilianColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges')
-        .attr('opacity', 0.8);
-
-      lineChartg
-        .append('line')
-        .attr('class', 'yearMarker')
-        .attr('x1', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('x2', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('y1', 0)
+        .selectAll('.civArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `civArea Area${d[0]}`)
+        .attr('fill', civilianColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
         .attr(
-          'y2',
+          'y',
+          d =>
+            lineChartheight -
+            lineChartMargin.top -
+            lineChartMargin.bottom -
+            lineChartY(d[2]),
+        )
+        .attr('height', d => lineChartY(d[2]))
+        .attr('shape-rendering', 'crispEdges');
+      lineChartg
+        .selectAll('.defArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `defArea Area${d[0]}`)
+        .attr('fill', defenceColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr(
+          'y',
+          d =>
+            lineChartheight -
+            lineChartMargin.top -
+            lineChartMargin.bottom -
+            (lineChartY(d[2]) + lineChartY(d[3])),
+        )
+        .attr('height', d => lineChartY(d[3]))
+        .attr('shape-rendering', 'crispEdges');
+      lineChartg
+        .selectAll('.hoverArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `hoverArea hoverArea${d[0]}`)
+        .attr('fill', '#fff')
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', 0)
+        .attr(
+          'height',
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         )
-        .attr('stroke', '#333')
-        .attr('stroke-dasharray', '4,4')
-        .attr('shape-rendering', 'crispEdges');
+        .attr('opacity', d => {
+          if (d[0] === parseInt(selectedYear)) return 0;
+          else return 0.75;
+        })
+        .style('cursor', 'pointer')
+        .attr('shape-rendering', 'crispEdges')
+        .on('mouseover', d => {
+          changeYear(d[0].toString());
+        })
+        .on('mouseout', d => {
+          changeYear(selectedYear);
+        })
+        .on('click', d => {
+          selectedYear = d[0].toString();
+          changeYear(selectedYear);
+        });
     }
 
     function drawLineChart(dataLine) {
@@ -3251,6 +3294,13 @@ class DataMap extends Component {
       let lineChartY = d3
         .scaleLinear()
         .rangeRound([
+          0,
+          lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
+        ]);
+
+      let lineChartYAxes = d3
+        .scaleLinear()
+        .rangeRound([
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
           0,
         ]);
@@ -3262,22 +3312,33 @@ class DataMap extends Component {
         .y(d => lineChartY(d));
 
       let totalForLine = [],
-        defenceForLine = [],
-        civilianForLine = [];
+        forMax = [];
+      let barWidth =
+        (lineChartwidth - lineChartMargin.left - lineChartMargin.right) /
+        (d3.keys(dataLine[0]).length - 1);
 
       for (let i = 0; i < d3.keys(dataLine[0]).length; i++) {
-        totalForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
-        defenceForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Military']);
-        civilianForLine.push(dataLine[0][d3.keys(dataLine[0])[i]]['Civilian']);
+        totalForLine.push([]);
+        totalForLine[totalForLine.length - 1].push(startYear + i);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Total'],
+        );
+        forMax.push(dataLine[0][d3.keys(dataLine[0])[i]]['Total']);
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Civilian'],
+        );
+        totalForLine[totalForLine.length - 1].push(
+          dataLine[0][d3.keys(dataLine[0])[i]]['Military'],
+        );
       }
-      lineChartY.domain([0, d3.max(totalForLine)]);
+      lineChartY.domain([0, d3.max(forMax)]);
+      lineChartYAxes.domain([0, d3.max(forMax)]);
       lineChartX.domain([0, totalForLine.length - 1]);
-      let barWidth = lineChartwidth / (totalForLine.length - 1);
       lineChartg
         .append('g')
         .call(
           d3
-            .axisLeft(lineChartY)
+            .axisLeft(lineChartYAxes)
             .ticks(5)
             .tickFormat(d => {
               if (d < 1e6) {
@@ -3328,52 +3389,113 @@ class DataMap extends Component {
         .attr('font-size', 10);
       lineChartg.selectAll('.tick line').attr('stroke', '#aaa');
       lineChartg
-        .append('path')
-        .datum(totalForLine)
-        .attr('class', 'totalLine')
-        .attr('fill', 'none')
-        .attr('stroke', '#999')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
+        .selectAll('.civArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `civArea Area${d[0]}`)
+        .attr('fill', civilianColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', d => {
+          if (armstype != 'CountryMilatary') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[2])
+            );
+          } else
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(0)
+            );
+        })
+        .attr('height', d => {
+          if (armstype != 'CountryMilatary') {
+            return lineChartY(d[2]);
+          } else return 0;
+        })
         .attr('shape-rendering', 'crispEdges');
       lineChartg
-        .append('path')
-        .datum(defenceForLine)
-        .attr('class', 'defenceLine')
-        .attr('fill', 'none')
-        .attr('stroke', defenceColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
+        .selectAll('.defArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `defArea Area${d[0]}`)
+        .attr('fill', defenceColor)
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', d => {
+          if (armstype === 'total') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              (lineChartY(d[2]) + lineChartY(d[3]))
+            );
+          }
+          if (armstype === 'CivilianArmsTotal') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[2])
+            );
+          }
+          if (armstype === 'CountryMilatary') {
+            return (
+              lineChartheight -
+              lineChartMargin.top -
+              lineChartMargin.bottom -
+              lineChartY(d[3])
+            );
+          }
+        })
+        .attr('height', d => {
+          if (armstype != 'CivilianArmsTotal') {
+            return lineChartY(d[3]);
+          } else return 0;
+        })
         .attr('shape-rendering', 'crispEdges');
       lineChartg
-        .append('path')
-        .datum(civilianForLine)
-        .attr('class', 'civilianLine')
-        .attr('fill', 'none')
-        .attr('stroke', civilianColor)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1)
-        .attr('d', lineChartLine)
-        .attr('shape-rendering', 'crispEdges');
-
-      lineChartg
-        .append('line')
-        .attr('class', 'yearMarker')
-        .attr('x1', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('x2', lineChartX(d3.keys(dataLine[0]).indexOf(selectedYear)))
-        .attr('y1', 0)
+        .selectAll('.hoverArea')
+        .data(totalForLine)
+        .enter()
+        .append('rect')
+        .attr('class', d => `hoverArea hoverArea${d[0]}`)
+        .attr('fill', '#fff')
+        .attr('width', barWidth)
+        .attr('x', (d, i) => {
+          return barWidth * i;
+        })
+        .attr('y', 0)
         .attr(
-          'y2',
+          'height',
           lineChartheight - lineChartMargin.top - lineChartMargin.bottom,
         )
-        .attr('stroke', '#333')
-        .attr('stroke-dasharray', '4,4')
-        .attr('shape-rendering', 'crispEdges');
+        .attr('opacity', d => {
+          if (d[0] === parseInt(selectedYear)) return 0;
+          else return 0.75;
+        })
+        .attr('shape-rendering', 'crispEdges')
+        .style('cursor', 'pointer')
+        .on('mouseover', d => {
+          changeYear(d[0].toString());
+        })
+        .on('mouseout', d => {
+          changeYear(selectedYear);
+        })
+        .on('click', d => {
+          selectedYear = d[0].toString();
+          changeYear(selectedYear);
+        });
     }
 
     let features = topojson.feature(data, data.objects.countries).features;
