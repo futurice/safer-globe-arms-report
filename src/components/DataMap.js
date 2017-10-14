@@ -3000,7 +3000,7 @@ class DataMap extends Component {
       endYear = parseInt(
         d3
           .keys(data.objects.countries.geometries[0].properties.data)
-          .slice(-2)[0],
+          .slice(-1)[0],
         10,
       );
 
@@ -3008,12 +3008,12 @@ class DataMap extends Component {
     let currentYear = parseInt(
         d3
           .keys(data.objects.countries.geometries[0].properties.data)
-          .slice(-2)[0],
+          .slice(-1)[0],
         10,
       ),
       selectedYear = d3
         .keys(data.objects.countries.geometries[0].properties.data)
-        .slice(-2)[0];
+        .slice(-1)[0];
 
     for (let g = startYear; g <= endYear; g++) {
       let totalObject = {

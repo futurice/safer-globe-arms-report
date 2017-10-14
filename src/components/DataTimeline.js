@@ -19,7 +19,7 @@ const pauseSvg = require('./../assets/pause-icon.svg');
 class DataTimeline extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    console.log('hello', this.props);
     const startYear = parseInt(this.props.startYear, 10); //parseInt(d3.keys(saferGlobeJson[0].years)[0], 10);
     const endYear = parseInt(this.props.endYear, 10) + 1; // +1 fixes calculation to add defined year in the list too
 
