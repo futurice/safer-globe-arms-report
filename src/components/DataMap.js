@@ -10,6 +10,8 @@ import drawArc from '../utils/drawArcs';
 import commentLine from '../utils/commentLine';
 import makeBulletHtml from '../utils/makeBulletHtml';
 
+const Storysvg = require('./../assets/story.svg');
+
 /*
   This component builds the primary data map.
 
@@ -302,6 +304,15 @@ class DataMap extends Component {
           if (d[yrs]['Total'] === 0) y1 = 0;
           return hght - 42 - y1;
         });
+      gBar
+        .filter(d => d.properties.data[yrs].Comment.Total.Link === true)
+        .append('image')
+        .attr('xlink:href', Storysvg)
+        .attr('class', 'storyIcon')
+        .attr('width', 10)
+        .attr('x', d => d.properties.centroid[0] - 5)
+        .attr('y', d => d.properties.centroid[1] - 5)
+        .attr('opacity', 0.7);
 
       d3
         .selectAll('.land')
@@ -523,6 +534,17 @@ class DataMap extends Component {
 
     function redrawBars(val, yrs) {
       if (val === 'total') {
+        d3.selectAll('.storyIcon').remove();
+        d3
+          .selectAll('.countryGroup')
+          .filter(d => d.properties.data[yrs].Comment.Total.Link === true)
+          .append('image')
+          .attr('xlink:href', Storysvg)
+          .attr('class', 'storyIcon')
+          .attr('width', 10)
+          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('y', d => d.properties.centroid[1] - 5)
+          .attr('opacity', 0.7);
         d3
           .selectAll('.civBars')
           .transition()
@@ -820,6 +842,17 @@ class DataMap extends Component {
         }
       }
       if (val === 'CivilianArmsTotal') {
+        d3.selectAll('.storyIcon').remove();
+        d3
+          .selectAll('.countryGroup')
+          .filter(d => d.properties.data[yrs].Comment.Civilian.Link === true)
+          .append('image')
+          .attr('xlink:href', Storysvg)
+          .attr('class', 'storyIcon')
+          .attr('width', 10)
+          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('y', d => d.properties.centroid[1] - 5)
+          .attr('opacity', 0.7);
         d3
           .selectAll('.civBars')
           .transition()
@@ -1048,6 +1081,17 @@ class DataMap extends Component {
         }
       }
       if (val === 'CountryMilatary') {
+        d3.selectAll('.storyIcon').remove();
+        d3
+          .selectAll('.countryGroup')
+          .filter(d => d.properties.data[yrs].Comment.Military.Link === true)
+          .append('image')
+          .attr('xlink:href', Storysvg)
+          .attr('class', 'storyIcon')
+          .attr('width', 10)
+          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('y', d => d.properties.centroid[1] - 5)
+          .attr('opacity', 0.7);
         d3
           .selectAll('.civBars')
           .transition()
