@@ -107,7 +107,7 @@ class FullStory extends Component {
 
         {this.state.body ? (
           <div>
-            <ArticleNotification />
+            <ArticleNotification fromModal={isModal} />
             <section className="text-box full-story-container flex-container box-shadow">
               <div className="story-image">
                 <img src={this.state.image} alt={this.state.title} />

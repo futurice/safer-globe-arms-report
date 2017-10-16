@@ -25,9 +25,11 @@ export default class ArticleNotification extends Component {
   }
 
   render() {
+    const { fromModal } = this.props;
+
     return this.state.open && intl.options.currentLocale.includes('en') ? (
       <div
-        className="article-notification"
+        className={`article-notification ${fromModal && 'article-notification--from-modal'}`}
         onClick={this.closeNotification.bind(this)}
       >
         <span>{intl.get('ARTICLES_ONLY_IN_FINNISH')}</span>

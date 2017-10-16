@@ -3,7 +3,7 @@
 	margin: 0 0 16px 16px;
 	padding: 0.75rem 1rem;
 	position: fixed;
-	top:0;
+	top: 56px;
 	z-index:1000;
 	left:0;
 	color:#fff !important;
@@ -13,6 +13,10 @@
 	margin-left: 0;
   	box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
 	cursor: pointer !important;
+}
+
+.article-notification--from-modal {
+  top: 0;
 }
 
 .article-notification span {
