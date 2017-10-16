@@ -452,7 +452,7 @@ class AppRouter extends Component {
             </div>
           </div>
 
-          {isModal ? <Route path="/stories/:id" component={Modal} /> : null}
+          {isModal ? <Route path="/articles/:id" component={Modal} /> : null}
         </div>
       );
     } else {

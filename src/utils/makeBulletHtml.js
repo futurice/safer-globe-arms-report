@@ -1,7 +1,7 @@
 export default (bulletText, hasLink, storyId) =>
   hasLink && storyId > -1
     ? `
-      <a href="/stories/${storyId}">
+      <a href="/articles/${storyId}">
       ${bulletText}	→
       </a>
 `

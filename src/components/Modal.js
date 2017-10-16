@@ -54,7 +54,7 @@ class Modal extends Component {
 
           <Route
             exact
-            path="/stories/:id"
+            path="/articles/:id"
             render={props => <FullStory {...props} isModal={true} />}
           />
         </div>

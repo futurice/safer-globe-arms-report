@@ -60,7 +60,7 @@ class DataMap extends Component {
       if (ev.metaKey) return true;
 
       const { history } = this.props;
-      history.push(`/stories/${storyId}`, { modal: true });
+      history.push(`/articles/${storyId}`, { modal: true });
 
       ev.preventDefault();
     };
