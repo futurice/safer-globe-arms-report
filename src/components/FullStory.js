@@ -8,16 +8,11 @@ import { CircularProgress } from 'material-ui/Progress';
 
 import ArticleNotification from './ArticleNotification';
 import './../styles/components/FullStory.css';
+import resolveUrl from '../resolveUrl';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
-
-// This function resolves a local url agains the installation dir of the site
-// e.g. if the site is hosted at blah.com/arms/ it resolves /imgs/foo.jpg to /arms/imgs/foo.jpg
-function resolveUrl(path) {
-  return process.env.PUBLIC_URL + (path.startsWith('/') ? '' : '/') + path;
-}
 
 class FullStory extends Component {
   constructor(props) {

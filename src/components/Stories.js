@@ -15,6 +15,8 @@ import SelectMenu from './forms/SelectMenu';
 import stories from './../data/stories.csv';
 import './../styles/components/Stories.css';
 
+import resolveUrl from '../resolveUrl';
+
 class Stories extends Component {
   constructor(props) {
     super(props);
@@ -169,7 +171,7 @@ class Stories extends Component {
         title={x.title}
         body={x.body}
         date={x.date}
-        image={x.image}
+        image={resolveUrl(x.image)}
         id={parseInt(x.id, 10)}
         tags={x.tags}
       />
