@@ -8,12 +8,17 @@ export default class ArticleNotification extends Component {
   constructor(props) {
     super(props);
 
+    const isOpen = JSON.parse(
+      window.sessionStorage.getItem('showArticleNotification'),
+    );
     this.state = {
-      open: true,
+      open: isOpen !== null ? isOpen : true,
     };
   }
 
   closeNotification() {
+    window.sessionStorage.setItem('showArticleNotification', false);
+
     this.setState({
       open: false,
     });
