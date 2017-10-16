@@ -10,11 +10,33 @@ index d59e9d5..3b6dd22 100644
    "devDependencies": {
      "autoprefixer": "^7.1.1",
      "eslint": "^3.19.0",
+diff --git a/src/data/about/about_en.md b/src/data/about/about_en.md
+index a7e784e..e2f3001 100644
+--- a/src/data/about/about_en.md
++++ b/src/data/about/about_en.md
+@@ -93,4 +93,4 @@ We at [Futurice](http://futurice.com/) design and create innovative digital serv
+ 
+ ---
+ 
+-A project by <img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> and <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;">
+\ No newline at end of file
++A project by <img src="/armsreport/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> and <img src="/armsreport/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;">
+diff --git a/src/data/about/about_fi.md b/src/data/about/about_fi.md
+index d9dfe81..bf31f68 100644
+--- a/src/data/about/about_fi.md
++++ b/src/data/about/about_fi.md
+@@ -93,4 +93,4 @@ Me [Futuricella](http://futurice.com/) suunnittelemme ja toteutamme innovatiivis
+ 
+ ---
+ 
+-<img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projektti
+\ No newline at end of file
++<img src="/armsreport/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/armsreport/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projektti
 diff --git a/src/index.js b/src/index.js
-index 012aa5f..a76345b 100644
+index 4e13f26..a35fa76 100644
 --- a/src/index.js
 +++ b/src/index.js
-@@ -465,7 +465,7 @@ We have to wrap our main app component in a generic <Route /> like this
+@@ -466,7 +466,7 @@ We have to wrap our main app component in a generic <Route /> like this
  so we get the `location` in props
  */
  const AppRouterWrap = () => (
