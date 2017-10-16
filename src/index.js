@@ -172,12 +172,12 @@ const locales = {
     // Articles page
     SEARCH: 'Search articles',
     FILTER: 'Filter',
-    ARTICLE_TYPE: 'Article type',
-    YEAR: 'Year',
+    ARTICLE_TYPE: 'All Article Types',
+    YEAR: 'All Years',
     IMPORT_EXPORT: 'Export / Import',
-    REGION: 'Region',
-    THEME: 'Theme',
-    PRODUCT: 'Product',
+    REGION: 'All Regions',
+    THEME: 'All Themes',
+    PRODUCT: 'All Products',
     ARTICLES_ONLY_IN_FINNISH: 'Articles are available only in Finnish.',
 
     // Article page
@@ -311,12 +311,12 @@ const locales = {
     // Articles page
     SEARCH: 'Etsi artikkeleita',
     FILTER: 'Suodata',
-    YEAR: 'Vuosi',
+    YEAR: 'Kaikki vuosi',
     IMPORT_EXPORT: 'Tuonti / vienti',
-    REGION: 'Alue',
-    THEME: 'Teema',
-    PRODUCT: 'Tuote',
-    ARTICLE_TYPE: 'Artikkelityyppi',
+    REGION: 'Kaikki alue',
+    THEME: 'Kaikki teema',
+    PRODUCT: 'Kaikki tuote',
+    ARTICLE_TYPE: 'Kaikki artikkelityyppi',
 
     // Article page
     BACK_TO_ARTICLES: 'Takaisin artikkeleihin',
