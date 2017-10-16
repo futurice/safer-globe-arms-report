@@ -4291,7 +4291,11 @@ class DataMap extends Component {
       }
     });
   } // End drawMap()
-
+  componentWillUnmount() {
+    window.timeline = false;
+    window.nav = false;
+    window.sidebar = false;
+  }
   render() {
     if (
       window.timeline &&
@@ -4299,9 +4303,6 @@ class DataMap extends Component {
       window.sidebar &&
       this.state.saferGlobeData
     ) {
-      window.timeline = false;
-      window.nav = false;
-      window.sidebar = false;
       return <div>{this.drawMap(this.props.saferGlobeData)}</div>;
     } else {
       return <CircularProgress className="loading" />;
