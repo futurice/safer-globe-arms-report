@@ -73,7 +73,9 @@ class SelectMenu extends Component {
           <MenuItem
             selected={this.state.selectedIndex === null}
             onClick={event => this.handleClick(null, '')}
-          />
+          >
+            {this.props.label}
+          </MenuItem>
           {this.props.options.map((option, index) =>
             <MenuItem
               key={index}
