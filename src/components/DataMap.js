@@ -310,7 +310,7 @@ class DataMap extends Component {
         .attr('xlink:href', Storysvg)
         .attr('class', 'storyIcon')
         .attr('width', 10)
-        .attr('x', d => d.properties.centroid[0] - 5)
+        .attr('x', d => d.properties.centroid[0] + 2)
         .attr('y', d => d.properties.centroid[1] - 5)
         .attr('opacity', 0.7);
 
@@ -542,7 +542,7 @@ class DataMap extends Component {
           .attr('xlink:href', Storysvg)
           .attr('class', 'storyIcon')
           .attr('width', 10)
-          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('x', d => d.properties.centroid[0] + 2)
           .attr('y', d => d.properties.centroid[1] - 5)
           .attr('opacity', 0.7);
         d3
@@ -850,7 +850,7 @@ class DataMap extends Component {
           .attr('xlink:href', Storysvg)
           .attr('class', 'storyIcon')
           .attr('width', 10)
-          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('x', d => d.properties.centroid[0] + 2)
           .attr('y', d => d.properties.centroid[1] - 5)
           .attr('opacity', 0.7);
         d3
@@ -1089,7 +1089,7 @@ class DataMap extends Component {
           .attr('xlink:href', Storysvg)
           .attr('class', 'storyIcon')
           .attr('width', 10)
-          .attr('x', d => d.properties.centroid[0] - 5)
+          .attr('x', d => d.properties.centroid[0] + 2)
           .attr('y', d => d.properties.centroid[1] - 5)
           .attr('opacity', 0.7);
         d3
