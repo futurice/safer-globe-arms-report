@@ -213,7 +213,8 @@ const locales = {
     Futurice: 'Futurice',
 
     //DOWNLOAD_DATA: 'Download Data',
-    REPORT: 'Finnish Arms Exports Report ',
+    REPORT: 'Finnish Arms Control Report ',
+    REPORTOLD: 'Finnish Arms Exports ',
     DATAXLS: 'Finnish Arms Exports Data ',
     REPORTMETADATA: 'Arms Exports Report Metadata ',
     DATAMETADATA: 'Arms Exports Data Metadata ',
@@ -351,6 +352,7 @@ const locales = {
 
     //DOWNLOAD_DATA: 'Lataa tiedot',
     REPORT: 'Suomen asevalvontaraportti ',
+    REPORTOLD: 'Suomen asevienti ',
     DATAXLS: 'Suomen asevientidata ',
     REPORTMETADATA: 'Asevalvontaraportin laatuseloste',
     DATAMETADATA: 'Asevientitietokannan metadata',
@@ -364,7 +366,7 @@ class AppRouter extends Component {
     super();
     this.state = {
       initDone: false,
-      isLoggedIn: Boolean(sessionStorage.getItem("isLoggedIn")) | false,
+      isLoggedIn: Boolean(sessionStorage.getItem('isLoggedIn')) | false,
     };
   }
 
@@ -417,7 +419,7 @@ class AppRouter extends Component {
       return (
         <Login
           onLogin={() => {
-            sessionStorage.setItem("isLoggedIn", "true")
+            sessionStorage.setItem('isLoggedIn', 'true');
             this.setState({ isLoggedIn: true });
           }}
         />
