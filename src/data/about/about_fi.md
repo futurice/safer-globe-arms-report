@@ -45,7 +45,7 @@ Suomen asevalvontaraportin ja tämän verkkosivuston tietoja käytettäessä tai
 
 # Miten tiedot on esitetty
 
-Raportissa esitetään Suomen toteutunut asevienti. Viennille tarvitaan lupa Suomen viranomaisilta. Vientilupa on pääsääntöisesti voimassa vuoden tai kolme vuotta. Myönnetty vientilupa ei välttämättä tarkoita, että luvan saanut vienti toteutuisi. Vientiluvat kertovat kuitenkin Suomen valtion harjoittamasta asevientipolitiikasta: millaisen asekaupan katsotaan olevan ulko- ja turvallisuuspolitiikan linjausten mukaista. Poliittista vastuuta arvioitaessa on viennin toteutumishetken lisäksi arvioitava vientiluvan myöntämishetkellä vallinneita olosuhteita ja mahdollisesti jo ennen sitä annettua puoltoa kauppaneuvotteluiden aloittamiseksi. Vientilupajärjestelmästä kerrotaan enemmän artikkelissa(Suomen asevientilupajärjestelmä).
+Raportissa esitetään Suomen toteutunut asevienti. Viennille tarvitaan lupa Suomen viranomaisilta. Vientilupa on pääsääntöisesti voimassa vuoden tai kolme vuotta. Myönnetty vientilupa ei välttämättä tarkoita, että luvan saanut vienti toteutuisi. Vientiluvat kertovat kuitenkin Suomen valtion harjoittamasta asevientipolitiikasta: millaisen asekaupan katsotaan olevan ulko- ja turvallisuuspolitiikan linjausten mukaista. Poliittista vastuuta arvioitaessa on viennin toteutumishetken lisäksi arvioitava vientiluvan myöntämishetkellä vallinneita olosuhteita ja mahdollisesti jo ennen sitä annettua puoltoa kauppaneuvotteluiden aloittamiseksi. Vientilupajärjestelmästä kerrotaan enemmän artikkelissa[(Suomen asevientilupajärjestelmä)](../articles/18).
 
 Esitetty euromääräinen tilastoarvo ei välttämättä ole kauppasopimuksen mukainen summa. Se voi vaihdella esimerkiksi mukana olevien palveluiden tai verojen seurauksena. Jos kyse on lisenssistä eli valmistusoikeuden viennistä, ei tuotteiden myöhempi vienti lisenssin saaneesta valmistusmaasta tule näkymään Suomen viranomaisten raporteissa eikä myöskään SaferGloben julkaisemassa asevalvontaraportissa.
 
@@ -61,9 +61,9 @@ Vientitietoja verrataan [Globaaliin Rauhanindeksiin](http://visionofhumanity.org
 
 # Lue lisää
 
-Olemme koonneet [tausta-artikkeleihin](/articles) analyysejä asevalvonnasta ja eri sopimuksista, vientilupajärjestelmistä ja asekaupan yleisistä kehityskuluista. Sivulle[Sivulle](/articles) olemme koonneet artikkeleita yksittäisistä asekaupoista.
+Olemme koonneet [tausta-artikkeleihin](../articles) analyysejä asevalvonnasta ja eri sopimuksista, vientilupajärjestelmistä ja asekaupan yleisistä kehityskuluista. [Sivulle](../articles) olemme koonneet artikkeleita yksittäisistä asekaupoista.
 
-Mitä eroa on vientiluvalla ja siirtoluvalla tai mitä tarkoittaa kauttakuljetus? Entä mistä data on peräisin ja mitä tulliluokkia siviiliaseiden vientitiedot sisältävät? [Nämä asiat selviävät laatuselosteesta](/downloads).
+Mitä eroa on vientiluvalla ja siirtoluvalla tai mitä tarkoittaa kauttakuljetus? Entä mistä data on peräisin ja mitä tulliluokkia siviiliaseiden vientitiedot sisältävät? [Nämä asiat selviävät laatuselosteesta](../downloads).
 
 #### <a name="5" class="internalLink" />
 
@@ -79,7 +79,7 @@ Suomen asevalvontaraportti on SaferGloben työryhmän kehittämä tuote. Raportt
 
 Raporttien painattamista ja kehitystyötä ovat tukeneet vuosina 2010–2016 [Amnesty International Suomen osasto ry.](https://www.amnesty.fi/), [Suomen Rauhanliitto – Fredsförbundet ry.](http://www.rauhanliitto.fi/), [Kirkon ulkomaanavun nuorisoverkosto Changemaker](https://www.changemaker.fi), [Suomen Rauhanpuolustajat ry.](https://www.rauhanpuolustajat.org/), [Suomen Sadankomitea ry.](http://www.sadankomitea.fi/), [Lääkärin sosiaalinen vastuu ry.](https://lsv.fi/) ja [Leo Mechelin Säätiö](http://www.leomechelinsaatio.fi). SaferGlobe on käyttänyt raportin tekemiseen Ulkoasiainministeriöltä saatua yleisrahoitusta sekä Opetus- ja kulttuuriministeriön Rauhantyön edistämisen määrärahoista saamiaan varoja.
 
-Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](/downloads). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](/articles). 
+Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](../downloads). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](../articles). 
 
 Tämän tietokannan ja verkkosivuston on mahdollistanut [Futuricen](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
 
