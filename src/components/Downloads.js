@@ -37,8 +37,19 @@ class Downloads extends Component {
     });
   }
 
-  renderCards() {
-    return this.state.files.map((data, i) => {
+  renderSection(title, files) {
+    return (
+      <section>
+        <h3>{title}</h3>
+        <div className="downloads flex-container">
+          {this.renderCards(files)}
+        </div>
+      </section>
+    );
+  }
+
+  renderCards(files) {
+    return files.map((data, i) => {
       const filepath = require(`../data/downloads/${data.filename}`);
 
       return (
@@ -61,13 +72,50 @@ class Downloads extends Component {
   }
 
   render() {
+    const groupFiles = files => files.reduce((acc, value) => {
+      if (acc[value.section]) {
+        return {
+          ...acc,
+          [value.section]: acc[value.section].concat(value),
+        };
+      } else {
+        return {
+          ...acc,
+          [value.section]: [value],
+        };
+      }
+    }, {});
+
+    const makeSections = obj => {
+      const sectionTitles = [
+        'Report',
+        'Data',
+      ];
+
+      const keys = Object.keys(obj);
+      const values = Object.values(obj);
+
+      const sections = keys.map((k, index) => {
+        return {
+          title: sectionTitles[k - 1],
+          files: values[index],
+        };
+      });
+
+      return sections;
+    };
+
+    const sections = makeSections(groupFiles(this.state.files));
+
     return (
-      <section className="downloads flex-container">
+      <section>
         {this.state.loading ? <CircularProgress className="loading" /> : null}
         {this.state.error ? (
           <div className="not-found">{intl.get('LOADING_ERROR')}</div>
         ) : null}
-        {this.state.files ? this.renderCards() : null}
+        {this.state.files ? sections.map(section => (
+          this.renderSection(section.title, section.files)
+        )) : null}
       </section>
     );
   }
