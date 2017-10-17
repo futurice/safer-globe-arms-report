@@ -11,8 +11,8 @@ class Login extends Component {
   onSumbit = ev => {
     ev.preventDefault();
     const passwordInput = ev.target.password;
-    const password = passwordInput.value;
-    if (password === 'Transparency_Increases_Security') {
+    const password = passwordInput && passwordInput.value;
+    if (password === 'Transparency_Increases_Security' || process.env.REACT_APP_PASSWORD_PROTECTED !== 'true') {
       this.props.onLogin();
     } else {
       // do wobble animation
@@ -80,23 +80,27 @@ class Login extends Component {
         <hr className="sep" />
 
         <form className="login-form" onSubmit={this.onSumbit}>
-          <TextField
-            id="login-password"
-            className="password-field"
-            placeholder={intl.get('PASSWORD')}
-            name="password"
-            type="password"
-          />
+          {process.env.REACT_APP_PASSWORD_PROTECTED === 'true' ? ([
+            <TextField
+              id="login-password"
+              className="password-field"
+              placeholder={intl.get('PASSWORD')}
+              name="password"
+              type="password"
+            />,
 
-          <Button
-            type="submit"
-            className={`login-btn ${currentLocale === 'en-US'
+            <Button
+              type="submit"
+              className={`login-btn ${currentLocale === 'en-US'
               ? 'login-btn--eng'
               : 'login-btn--fi'}`}
-            label="Login"
-          >
-            {intl.get('LOGIN')}
-          </Button>
+              label="Login"
+            >
+              {intl.get('LOGIN')}
+            </Button>
+          ]) : (
+            <Button className="login-btn" type="submit">OK</Button>
+          )}
         </form>
       </Card>
     );

@@ -412,10 +412,7 @@ class AppRouter extends Component {
       this.previousLocation.key !== location.key
     ); // avoid modal on direct routes
 
-    if (
-      process.env.REACT_APP_PASSWORD_PROTECTED === 'true' &&
-      !this.state.isLoggedIn
-    ) {
+    if (!this.state.isLoggedIn) {
       return (
         <Login
           onLogin={() => {
