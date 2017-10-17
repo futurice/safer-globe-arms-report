@@ -1,15 +1,25 @@
 .downloads{
 	padding-left: 2rem !important;
 	padding-right: 0.5rem !important;
-
+	margin-bottom: 0.5rem;
   flex-wrap: wrap;
+}
+
+.download-heading:first-of-type{
+	margin-top: 0.25rem;
+}
+
+.download-heading{
+	padding-left: 2rem;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 600;
 }
 
 .downloads .card {
 	width: calc(33.33% - 24px) !important;
 	margin-right: 24px;
 	margin-bottom: 24px;
-  padding-right: 8px;
 	border-radius: 2px;
 }
 
@@ -35,15 +45,48 @@
 	color: #2D80B5;
 }
 
+.xls::before{
+  display: block;
+  content: ' ';
+	background-image: url('xls-icon.svg');
+	width:24px;
+	height: 27px;
+	margin-right: 0.5rem;
+	background-repeat: no-repeat;
+}
+
+.pdf::before{
+  display: block;
+  content: ' ';
+	background-image: url('pdf-icon.svg');
+	width:24px;
+	height: 27px;
+	margin-right: 0.5rem;
+	background-repeat: no-repeat;
+}
+.header::after{
+  display: block;
+  content: ' ';
+	background-image: url('download-icon.svg');
+	width:24px;
+	height: 27px;
+	background-repeat: no-repeat;
+	right:0px;
+}
+
 .downloads .header {
-  padding-top: 12px;
-  padding-bottom: 10px !important;
+	width: 100%;
+	padding-bottom: 1rem !important;
 }
 
 .downloads .header span {
   font-size: 0.875rem;
+	color: rgba(33,33,33,1) !important;
+	font-weight: 500;
+}
+
+.downloads .header span:hover {
 	color: #2D80B5 !important;
-	font-weight: 600;
 }
 
 .downloads .content {

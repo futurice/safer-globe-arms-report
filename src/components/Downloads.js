@@ -40,7 +40,7 @@ class Downloads extends Component {
   renderSection(title, files) {
     return (
       <section>
-        <h3>{title}</h3>
+        <h3 className="download-heading">{title}</h3>
         <div className="downloads flex-container">
           {this.renderCards(files)}
         </div>
@@ -61,10 +61,9 @@ class Downloads extends Component {
             download={data.filename}
           >
             <CardHeader
-              className="header"
+              className={`header ${data.filetype}`}
               title={intl.get(data.title) + data.year}
             />
-            <img className="download-icon" src={svgDownload} />
           </a>
         </Card>
       );
@@ -72,25 +71,23 @@ class Downloads extends Component {
   }
 
   render() {
-    const groupFiles = files => files.reduce((acc, value) => {
-      if (acc[value.section]) {
-        return {
-          ...acc,
-          [value.section]: acc[value.section].concat(value),
-        };
-      } else {
-        return {
-          ...acc,
-          [value.section]: [value],
-        };
-      }
-    }, {});
+    const groupFiles = files =>
+      files.reduce((acc, value) => {
+        if (acc[value.section]) {
+          return {
+            ...acc,
+            [value.section]: acc[value.section].concat(value),
+          };
+        } else {
+          return {
+            ...acc,
+            [value.section]: [value],
+          };
+        }
+      }, {});
 
     const makeSections = obj => {
-      const sectionTitles = [
-        'Report',
-        'Data',
-      ];
+      const sectionTitles = ['Report', 'Data'];
 
       const keys = Object.keys(obj);
       const values = Object.values(obj);
@@ -113,9 +110,11 @@ class Downloads extends Component {
         {this.state.error ? (
           <div className="not-found">{intl.get('LOADING_ERROR')}</div>
         ) : null}
-        {this.state.files ? sections.map(section => (
-          this.renderSection(section.title, section.files)
-        )) : null}
+        {this.state.files
+          ? sections.map(section =>
+              this.renderSection(section.title, section.files),
+            )
+          : null}
       </section>
     );
   }

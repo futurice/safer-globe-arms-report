@@ -18,7 +18,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 
 const svg = require('./../assets/reset-icon.svg');
 const svgFinland = require('./../assets/finland-icon.svg');
-const svgDownload = require('./../assets/download-icon.svg');
+const svgDownload = require('./../assets/download-map-icon.svg');
 
 /*
   This Data component controls the full Data page. This can be seen in the router in index.js
