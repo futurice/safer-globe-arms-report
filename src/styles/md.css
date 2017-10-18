@@ -14,6 +14,13 @@
   color:#212121;
 }
 
+.md h6{
+  margin-top: -1.5rem;
+  font-style: italic;
+  color: #999;
+  margin-bottom: 1.5rem;
+}
+
 .md p {    
   margin-bottom: 1.5rem;
   margin-top:0;
