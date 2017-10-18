@@ -72,7 +72,6 @@ class Stories extends Component {
 
   makeMenuObject(ary) {
     return ary.map(r => {
-      console.log(intl.get(r));
       return {
         text: intl.get(r),
         value: r,
@@ -187,8 +186,6 @@ class Stories extends Component {
 
   handleChange(id, value) {
     const filters = Object.assign(this.state.filters, { [id]: value });
-
-    console.log(filters);
     this.setState({ filters });
     this.props.history.replace(
       this.props.location.pathname + '?' + this.generateQueryString(),

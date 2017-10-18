@@ -85,7 +85,6 @@ class About extends Component {
     }
 
     try {
-      console.log(intl.determineLocale().includes('en'));
       const url = require(`../data/about/about_${lang}.md`);
 
       if (this.state.page === name) {

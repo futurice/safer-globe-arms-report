@@ -2588,7 +2588,6 @@ class DataMap extends Component {
     }
 
     function hover(cntryNm, xPos, yPos) {
-      console.log(active, mouseHover, finlandIsClicked, finlandIsHover);
       d3.selectAll('.connectorLine').style('display', 'none');
       d3.selectAll('.connectorLineIntl').style('display', 'none');
       d3
@@ -2699,7 +2698,6 @@ class DataMap extends Component {
     function mouseOut(data) {
       mouseHover.state = false;
       if (!active.state && !finlandIsClicked) {
-        console.log('helloworld');
         d3.selectAll('.connectorLine').style('display', 'none');
         d3.selectAll('.connectorLineIntl').style('display', 'none');
         d3
@@ -3946,7 +3944,6 @@ class DataMap extends Component {
       }
     }
     function hoverFinland() {
-      console.log(finlandIsClicked, finlandIsHover);
       d3.selectAll('.connectorLine').style('display', 'none');
       d3.selectAll('.connectorLineIntl').style('display', 'none');
       updateSidebar(
@@ -4099,7 +4096,6 @@ class DataMap extends Component {
             break;
         }
         d3.selectAll('.countryGroup').attr('opacity', d => {
-          console.log(d, selectedYear);
           if (d.properties.data[selectedYear][keyIndx] > 0) {
             return 1;
           } else return 0.15;

@@ -154,7 +154,6 @@ class Data extends Component {
 
   buildTopLists(data, type, count = 5) {
     const listItems = Object.keys(data.slice(0, count)).map(country => {
-      console.log(data);
       return 'data[country]';
     });
 
