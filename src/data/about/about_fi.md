@@ -93,4 +93,4 @@ Me [Futuricella](http://futurice.com/) suunnittelemme ja toteutamme innovatiivis
 
 ---
 
-<img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projektti
+<img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projekti

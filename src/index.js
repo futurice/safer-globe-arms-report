@@ -312,12 +312,12 @@ const locales = {
     // Articles page
     SEARCH: 'Etsi artikkeleita',
     FILTER: 'Suodata',
-    YEAR: 'Kaikki vuosi',
+    YEAR: 'Kaikki vuodet',
     IMPORT_EXPORT: 'Tuonti / vienti',
-    REGION: 'Kaikki alue',
-    THEME: 'Kaikki teema',
-    PRODUCT: 'Kaikki tuote',
-    ARTICLE_TYPE: 'Kaikki artikkelityyppi',
+    REGION: 'Kaikki alueet',
+    THEME: 'Kaikki teemat',
+    PRODUCT: 'Kaikki tuotteet',
+    ARTICLE_TYPE: 'Kaikki artikkelityypit',
 
     // Article page
     BACK_TO_ARTICLES: 'Takaisin artikkeleihin',
