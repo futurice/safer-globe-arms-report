@@ -3056,10 +3056,7 @@ class DataMap extends Component {
       for (let k = 0; k < data.objects.countries.geometries.length; k++) {
         totalObject.Military =
           data.objects.countries.geometries[k].properties.data[g.toString()]
-            .MilataryMaterielTotal +
-          data.objects.countries.geometries[k].properties.data[g.toString()]
-            .IntlMissionMilatary +
-          totalObject.Military;
+            .MilataryMaterielTotal + totalObject.Military;
         totalObject.Civilian =
           data.objects.countries.geometries[k].properties.data[g.toString()]
             .CivilianArmsTotal + totalObject.Civilian;
