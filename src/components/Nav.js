@@ -33,13 +33,13 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/articles">{intl.get('STORIES')}</NavLink>
+            <NavLink to="/articles/">{intl.get('STORIES')}</NavLink>
           </li>
           <li>
-            <NavLink to="/about">{intl.get('ABOUT')}</NavLink>
+            <NavLink to="/about/">{intl.get('ABOUT')}</NavLink>
           </li>
           <li>
-            <NavLink to="/downloads">{intl.get('DOWNLOADS')}</NavLink>
+            <NavLink to="/downloads/">{intl.get('DOWNLOADS')}</NavLink>
           </li>
         </ul>
         <span className="lang-selection">
