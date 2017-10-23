@@ -27,7 +27,6 @@ import Stories from './components/Stories';
 import FullStory from './components/FullStory';
 import About from './components/About';
 import Downloads from './components/Downloads';
-import Login from './components/Login';
 // import Footer from './components/Footer';
 
 /*
@@ -412,16 +411,7 @@ class AppRouter extends Component {
       this.previousLocation.key !== location.key
     ); // avoid modal on direct routes
 
-    if (!this.state.isLoggedIn) {
-      return (
-        <Login
-          onLogin={() => {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            this.setState({ isLoggedIn: true });
-          }}
-        />
-      );
-    } else if (this.state.initDone) {
+    if (this.state.initDone) {
       return (
         <div>
           <div
@@ -464,10 +454,9 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () => (
+const AppRouterWrap = () =>
   <Router>
     <Route component={AppRouter} />
-  </Router>
-);
+  </Router>;
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));
