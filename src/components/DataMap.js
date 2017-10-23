@@ -2577,6 +2577,16 @@ class DataMap extends Component {
         .transition()
         .duration(dur)
         .attr('opacity', 1);
+      d3
+        .selectAll('.civBars')
+        .transition()
+        .duration(dur)
+        .attr('opacity', 0.1);
+      d3
+        .selectAll('.milBars')
+        .transition()
+        .duration(dur)
+        .attr('opacity', 0.1);
       updateSidebar(
         'International Missions',
         selectedYear,
@@ -2657,6 +2667,16 @@ class DataMap extends Component {
         .transition()
         .duration(dur)
         .attr('opacity', 0.2);
+      d3
+        .selectAll('.civBars')
+        .transition()
+        .duration(dur)
+        .attr('opacity', 1);
+      d3
+        .selectAll('.milBars')
+        .transition()
+        .duration(dur)
+        .attr('opacity', 1);
       let keyIndx;
       switch (armstype) {
         case 'total':
@@ -2719,6 +2739,16 @@ class DataMap extends Component {
           .attr('opacity', 1);
         d3
           .selectAll('.intlMissionsGroup')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
+        d3
+          .selectAll('.civBars')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
+        d3
+          .selectAll('.milBars')
           .transition()
           .duration(dur)
           .attr('opacity', 1);
@@ -2861,6 +2891,16 @@ class DataMap extends Component {
               .transition()
               .duration(dur)
               .attr('opacity', 0.2);
+            d3
+              .selectAll('.civBars')
+              .transition()
+              .duration(dur)
+              .attr('opacity', 1);
+            d3
+              .selectAll('.milBars')
+              .transition()
+              .duration(dur)
+              .attr('opacity', 1);
             let keyIndx;
             switch (armstype) {
               case 'total':
@@ -2904,6 +2944,16 @@ class DataMap extends Component {
             .transition()
             .duration(dur)
             .attr('opacity', 1);
+          d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
 
           if (armstype === 'total' || armstype === 'CountryMilatary') {
             d3
@@ -2995,6 +3045,16 @@ class DataMap extends Component {
           .attr('opacity', 1);
         d3
           .selectAll('.intlMissionsGroup')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
+        d3
+          .selectAll('.civBars')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
+        d3
+          .selectAll('.milBars')
           .transition()
           .duration(dur)
           .attr('opacity', 1);
@@ -3763,6 +3823,16 @@ class DataMap extends Component {
             .duration(dur)
             .attr('opacity', 1);
           d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
+          d3
             .selectAll('.countryGroup')
             .transition()
             .duration(dur)
@@ -3839,6 +3909,16 @@ class DataMap extends Component {
           .transition()
           .duration(dur)
           .attr('opacity', 0.2);
+        d3
+          .selectAll('.civBars')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
+        d3
+          .selectAll('.milBars')
+          .transition()
+          .duration(dur)
+          .attr('opacity', 1);
         let keyIndx;
         switch (armstype) {
           case 'total':
@@ -3883,6 +3963,17 @@ class DataMap extends Component {
             .transition()
             .duration(dur)
             .attr('opacity', 1);
+          d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
+
           updateSidebar(
             'World',
             selectedYear,
@@ -3899,6 +3990,17 @@ class DataMap extends Component {
             .transition()
             .duration(dur)
             .attr('opacity', 1);
+
+          d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 0.1);
           if (armstype === 'total' || armstype === 'CountryMilatary') {
             d3
               .selectAll('.Finland')
@@ -4215,6 +4317,16 @@ class DataMap extends Component {
             .transition()
             .duration(dur)
             .attr('opacity', 1);
+          d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
           updateSidebar(
             'World',
             selectedYear,
@@ -4263,6 +4375,16 @@ class DataMap extends Component {
             .transition()
             .duration(dur)
             .attr('opacity', 0.2);
+          d3
+            .selectAll('.civBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
+          d3
+            .selectAll('.milBars')
+            .transition()
+            .duration(dur)
+            .attr('opacity', 1);
           updateSidebar(
             active.country,
             selectedYear,
