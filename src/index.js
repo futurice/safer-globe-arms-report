@@ -454,9 +454,10 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () =>
+const AppRouterWrap = () => (
   <Router>
     <Route component={AppRouter} />
-  </Router>;
+  </Router>
+);
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));
