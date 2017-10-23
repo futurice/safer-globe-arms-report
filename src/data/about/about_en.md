@@ -45,7 +45,7 @@ If using the Finnish Arms Control Report or the information on this www-page, ma
 
 # Presentation of Information
 
-The report shows the number of actual arms exports from Finland. Exports require an export licence issued by the Finnish authorities. These licences are typically valid for one or three years. A granted export licence does not necessarily mean that the export licence would be used. However, the export licences show the kind of export policies Finland has and what kind of arms trade is considered to be in line with Finnish foreign and security politics. In considerations of political responsibility, it is insufficient to focus on the actual exports, but rather evaluation should also include circumstances around the granting of the export licence including potential encouragement to begin negotiations. More detailed information on the Finnish Export Licensing system can be found here [(Suomen asevientilupajärjestelmä)](https://saferglobe.fi/armsreport/articles/18).
+The report shows the number of actual arms exports from Finland. Exports require an export licence issued by the Finnish authorities. These licences are typically valid for one or three years. A granted export licence does not necessarily mean that the export licence would be used. However, the export licences show the kind of export policies Finland has and what kind of arms trade is considered to be in line with Finnish foreign and security politics. In considerations of political responsibility, it is insufficient to focus on the actual exports, but rather evaluation should also include circumstances around the granting of the export licence including potential encouragement to begin negotiations. More detailed information on the Finnish Export Licensing system can be found here [(Suomen asevientilupajärjestelmä)](../articles/18).
 
 The euro total may not be the same as in the trade contract but may vary, for example, due to added services or taxes. When exporting licensing for production, the later exports from the country of production will not be shown in the reports of Finnish authorities, nor in this report. 
 
@@ -61,9 +61,9 @@ The export data is compared to the [Global Peace Index](http://visionofhumanity.
 
 # Read More
 
-[In the background section](https://saferglobe.fi/armsreport/articles/) we have collected analyses of arms control, different treaties, arms licensing systems and general development of arms trade. On the page “cases”, we have collected articles on individual arms exports.
+[In the background section](../articles) we have collected analyses of arms control, different treaties, arms licensing systems and general development of arms trade. On the page “cases”, we have collected articles on individual arms exports.
 
-[In the metadata](https://saferglobe.fi/armsreport/downloads/), you will find the differences between export licences, transfer licences, transhipments, information on the origin of the data used here, as well as the different customs classifications that include civilian arms.
+[In the metadata](../downloads), you will find the differences between export licences, transfer licences, transhipments, information on the origin of the data used here, as well as the different customs classifications that include civilian arms.
 
 #### <a name="5" class="internalLink" />
 
@@ -79,7 +79,7 @@ The Finnish Arms Control Report is developed by SaferGlobe. It has been publishe
 
 The printing and development of the report has been supported in 2010–2016 by the [Finnish Section of Amnesty International](https://www.amnesty.fi/), [Peace Union of Finland](http://www.rauhanliitto.fi/), [Changemaker Youth Network of the Finn Church Aid](https://www.changemaker.fi), [Finnish Peace Committee](https://www.rauhanpuolustajat.org/), [Committee of 100 in Finland](http://www.sadankomitea.fi/), [Physicians for Social Responsibility](https://lsv.fi/) and [the Leo Mechelin Foundation](http://www.leomechelinsaatio.fi). SaferGlobe has also used general funding from the Finnish Ministry of Education and Culture and the Ministry for Foreign Affairs of Finland to produce the report.
 
-Reports on arms trade from 2008–2015 are available [here](https://saferglobe.fi/armsreport/downloads/). Some of the articles from these reports are also featured on the [articles page](https://saferglobe.fi/armsreport/articles/). 
+Reports on arms trade from 2008–2015 are available [here](../downloads). Some of the articles from these reports are also featured on the [articles page](../articles). 
 
 This database and the website has been made possible by [Futurice's](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
 
