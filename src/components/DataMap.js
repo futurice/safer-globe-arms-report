@@ -1081,6 +1081,7 @@ class DataMap extends Component {
         }
       }
       if (val === 'CountryMilatary') {
+        console.log('hello');
         d3.selectAll('.storyIcon').remove();
         d3
           .selectAll('.countryGroup')
@@ -4291,11 +4292,6 @@ class DataMap extends Component {
       armstype = d3
         .select('input[name="countryList"]:checked')
         .property('value');
-      redrawBars(
-        d3.select('input[name="countryList"]:checked').property('value'),
-        selectedYear,
-      );
-
       if (!active.state) {
         if (finlandIsClicked) {
           updateSidebar(
@@ -4404,6 +4400,10 @@ class DataMap extends Component {
           );
         }
       }
+      redrawBars(
+        d3.select('input[name="countryList"]:checked').property('value'),
+        selectedYear,
+      );
     });
   } // End drawMap()
   componentWillUnmount() {

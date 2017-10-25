@@ -97,7 +97,7 @@ Me [Futuricella](http://futurice.com/) suunnittelemme ja toteutamme innovatiivis
 
 # Cookie Policy
 
-We are using cookies to provide usage statistics that help us give you the best experience of our site. You can decide not to use cookies and change your cookie settings at any time on your browser. Please see this link to see how: [http://www.aboutcookies.org/default.aspx](http://www.aboutcookies.org/default.aspx)
+Käytämme tällä sivustolla evästeitä saadaksemme tilastotietoa kävijöistä. Tämä tieto auttaa meitä parantamaan käyttökokemusta. Voit estää evästeiden käytön muokkaamalla selaimesi asetuksia. Lisää tietoa löydät osoitteesta [http://www.aboutcookies.org/default.aspx](http://www.aboutcookies.org/default.aspx)
 
 ---
 
