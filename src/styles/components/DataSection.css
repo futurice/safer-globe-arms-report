@@ -16,8 +16,7 @@
   padding: 0.5rem 1rem;
   position: fixed;
   z-index: 2;
-  min-height: 500px;
-  height:81%;
+  height:78%;
   max-height: 650px;
   overflow-y: auto;
   overflow-x: hidden;
