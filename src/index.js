@@ -210,6 +210,7 @@ const locales = {
     Lue_Lisää: 'Read More',
     SaferGlobe: 'SaferGlobe',
     Futurice: 'Futurice',
+    Cookies_Policy: 'Cookie Policy',
 
     //DOWNLOAD_DATA: 'Download Data',
     REPORT: 'Finnish Arms Control Report ',
@@ -348,6 +349,7 @@ const locales = {
     Lue_Lisää: 'Lue lisää',
     SaferGlobe: 'SaferGlobe',
     Futurice: 'Futurice',
+    Cookies_Policy: 'Cookie Policy',
 
     //DOWNLOAD_DATA: 'Lataa tiedot',
     REPORT: 'Suomen asevalvontaraportti ',

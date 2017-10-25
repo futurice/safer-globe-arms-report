@@ -51,6 +51,10 @@ class About extends Component {
               id: '6',
               name: 'Futurice',
             },
+            {
+              id: '7',
+              name: 'Cookies_Policy',
+            },
           ],
         },
       ],

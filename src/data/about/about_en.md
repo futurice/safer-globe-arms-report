@@ -91,6 +91,14 @@ This database and the website has been made possible by [Futurice's](http://futu
 
 We at [Futurice](http://futurice.com/) design and create innovative digital services for companies in wide variety of industries. Digitising this arms control report as a pro bono project let us apply our professional skills for a good cause. We invest a lot in social responsibility activities and our company culture is based on trust and transparency. These values we also want to promote in the society. The valuable work done by SaferGlobe reflects them well. We are proud to have helped.
 
+#### <a name="7" class="internalLink" />
+
+---
+
+# Cookie Policy
+
+We are using cookies to provide usage statistics that help us give you the best experience of our site. You can decide not to use cookies and change your cookie settings at any time on your browser. Please see this link to see how: [http://www.aboutcookies.org/default.aspx](http://www.aboutcookies.org/default.aspx)
+
 ---
 
 A project by <img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> and <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;">

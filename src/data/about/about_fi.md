@@ -91,6 +91,14 @@ Tämän tietokannan ja verkkosivuston on mahdollistanut [Futuricen](http://futur
 
 Me [Futuricella](http://futurice.com/) suunnittelemme ja toteutamme innovatiivisia digitaalisia palveluita asiakkaillemme. Asevalvontaraportin digitointi pro bono -hankkeena antoi meille mahdollisuuden käyttää ammattitaitoamme hyvän asian puolesta. Investoimme runsaasti yritysvastuuseen ja yrityskulttuurimme pohjaa luottamukseen ja läpinäkyvyyteen. Nämä ovat arvoja, joita haluamme myös edistää yhteiskunnassa, tässä tapauksessa tukemalla SaferGloben tekemää arvokasta työtä.
 
+#### <a name="7" class="internalLink" />
+
+---
+
+# Cookie Policy
+
+We are using cookies to provide usage statistics that help us give you the best experience of our site. You can decide not to use cookies and change your cookie settings at any time on your browser. Please see this link to see how: [http://www.aboutcookies.org/default.aspx](http://www.aboutcookies.org/default.aspx)
+
 ---
 
 <img src="/imgs/Logo/spice_logo.png" width="75" style="vertical-align:middle;"> ja <img src="/imgs/Logo/saferglobe_logo.png" width="150" style="vertical-align:middle;margin-left:8px;margin-right:8px;"> projekti
