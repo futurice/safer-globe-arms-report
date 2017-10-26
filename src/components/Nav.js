@@ -79,24 +79,47 @@ class Nav extends Component {
               {intl.get('DOWNLOADS')}
             </NavLink>
           </li>
+
+          <li className="mobile-lang-selection">
+            <span className="lang-selection">
+              <a
+                href="?lang=fi"
+                id="FI"
+                className={selectedLocale.includes('fi') ? 'selected' : null}
+              >
+                FI
+              </a>{' '}
+              |
+              <a
+                href="?lang=en-US"
+                id="EN"
+                className={selectedLocale.includes('en') ? 'selected' : null}
+              >
+                EN
+              </a>
+            </span>
+          </li>
         </ul>
 
         <span className="lang-selection">
-          <a
-            href="?lang=fi"
-            id="FI"
-            className={selectedLocale.includes('fi') ? 'selected' : null}
-          >
-            FI
-          </a>{' '}
-          |
-          <a
-            href="?lang=en-US"
-            id="EN"
-            className={selectedLocale.includes('en') ? 'selected' : null}
-          >
-            EN
-          </a>
+          <span className="desktop-lang-selection">
+            <a
+              href="?lang=fi"
+              id="FI"
+              className={selectedLocale.includes('fi') ? 'selected' : null}
+            >
+              FI
+            </a>{' '}
+            |
+            <a
+              href="?lang=en-US"
+              id="EN"
+              className={selectedLocale.includes('en') ? 'selected' : null}
+            >
+              EN
+            </a>
+          </span>
+
           <button className="menu-icon" onClick={this.handleMobileMenuClick}>
             <img src={mobileMenuOpen ? crossIcon : menuIcon} />
           </button>
