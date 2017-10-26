@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
+import { Helmet } from 'react-helmet';
 
 /*
 Non-Component-Specific Stylesheets
@@ -426,19 +427,29 @@ class AppRouter extends Component {
             <div className="content-wrapper">
               <Switch location={isModal ? this.previousLocation : location}>
                 <Route exact path="/" component={Data} />
-                <Route
-                  exact
-                  path="/articles"
-                  render={props => <Stories {...props} />}
-                />
-                <Route
-                  exact
-                  path="/articles/:id"
-                  render={props => <FullStory {...props} />}
-                />
-                <Route exact path="/about" component={About} />
-                <Route path="/about/:page" component={About} />
-                <Route exact path="/downloads" component={Downloads} />
+
+                <div>
+                  <Helmet>
+                    <meta
+                      name="viewport"
+                      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                    />
+                  </Helmet>
+
+                  <Route
+                    exact
+                    path="/articles"
+                    render={props => <Stories {...props} />}
+                  />
+                  <Route
+                    exact
+                    path="/articles/:id"
+                    render={props => <FullStory {...props} />}
+                  />
+                  <Route exact path="/about" component={About} />
+                  <Route path="/about/:page" component={About} />
+                  <Route exact path="/downloads" component={Downloads} />
+                </div>
               </Switch>
             </div>
           </div>
@@ -456,10 +467,9 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () => (
+const AppRouterWrap = () =>
   <Router>
     <Route component={AppRouter} />
-  </Router>
-);
+  </Router>;
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));

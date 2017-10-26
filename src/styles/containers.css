@@ -53,6 +53,7 @@
 }
 
 .left-menu {
+  display: none;
 	flex: 0 0 264px;
 }
 .left-menu > *:first-child {
@@ -63,4 +64,10 @@
 	padding: 16px;
 	position: fixed;
 	flex: 0 0 264px;
+}
+
+@media (min-width: 720px) {
+  .left-menu {
+    display: block;
+  }
 }

@@ -17,10 +17,16 @@
 }
 
 .downloads .card {
-	width: calc(33.33% - 24px) !important;
+  width: 100%;
 	margin-right: 24px;
 	margin-bottom: 24px;
 	border-radius: 2px;
+}
+
+@media (min-width: 640px) {
+  .downloads .card {
+	  width: calc(33.33% - 24px) !important;
+  }
 }
 
 @media (min-width: 1440px) {

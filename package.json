@@ -28,6 +28,7 @@
     "react": "^15.5.4",
     "react-csv": "^1.0.8",
     "react-dom": "^15.5.4",
+    "react-helmet": "^5.2.0",
     "react-intl-universal": "^1.2.1",
     "react-loaders": "^2.5.0",
     "react-markdown": "^2.5.0",
