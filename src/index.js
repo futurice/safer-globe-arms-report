@@ -33,6 +33,7 @@ import Downloads from './components/Downloads';
 Wrapper Components
 */
 import Modal from './components/Modal';
+import ScreenResolutionNotification from './components/ScreenResolutionNotification';
 
 /*
 Modifier stylesheet to override any preceeding styles when used
@@ -47,6 +48,9 @@ Docs can be found here: https://reacttraining.com/react-router/web/
 
 const locales = {
   'en-US': {
+    SCREEN_RESOLUTION_WARNING:
+      'We\'re sorry but due to the nature of the content, we\'ve restricted this website to be viewed on screens with resolutions larger than {minResolution}. Please view on a larger screen.',
+
     PASSWORD: 'Password',
     LOGIN: 'Login',
 
@@ -222,6 +226,9 @@ const locales = {
     //BACKGROUND: 'Background'
   },
   fi: {
+    SCREEN_RESOLUTION_WARNING:
+      'Sivuston sisällön ja sen esitystavan vuoksi joudumme rajoittamaan sivuston tarkastelun näytöille, joiden leveys on vähintään {minResolution} pikseliä. Pyydämme kokeilemaan uudestaan isommalla näytöllä.',
+
     PASSWORD: 'Salasana',
     LOGIN: 'Kirjaudu sisään',
 
@@ -415,36 +422,38 @@ class AppRouter extends Component {
 
     if (this.state.initDone) {
       return (
-        <div>
-          <div
-            className={classNames('container', {
-              'container--behind-a-modal': isModal,
-            })}
-          >
-            <Route path="/" render={props => <Nav {...props} />} />
+        <ScreenResolutionNotification minWidth={1024}>
+          <div>
+            <div
+              className={classNames('container', {
+                  'container--behind-a-modal': isModal,
+              })}
+            >
+              <Route path="/" render={props => <Nav {...props} />} />
 
-            <div className="content-wrapper">
-              <Switch location={isModal ? this.previousLocation : location}>
-                <Route exact path="/" component={Data} />
-                <Route
-                  exact
-                  path="/articles"
-                  render={props => <Stories {...props} />}
-                />
-                <Route
-                  exact
-                  path="/articles/:id"
-                  render={props => <FullStory {...props} />}
-                />
-                <Route exact path="/about" component={About} />
-                <Route path="/about/:page" component={About} />
-                <Route exact path="/downloads" component={Downloads} />
-              </Switch>
+              <div className="content-wrapper">
+                <Switch location={isModal ? this.previousLocation : location}>
+                  <Route exact path="/" component={Data} />
+                  <Route
+                    exact
+                    path="/articles"
+                    render={props => <Stories {...props} />}
+                  />
+                  <Route
+                    exact
+                    path="/articles/:id"
+                    render={props => <FullStory {...props} />}
+                  />
+                  <Route exact path="/about" component={About} />
+                  <Route path="/about/:page" component={About} />
+                  <Route exact path="/downloads" component={Downloads} />
+                </Switch>
+              </div>
             </div>
-          </div>
 
-          {isModal ? <Route path="/articles/:id" component={Modal} /> : null}
-        </div>
+            {isModal ? <Route path="/articles/:id" component={Modal} /> : null}
+          </div>
+        </ScreenResolutionNotification>
       );
     } else {
       return null;
