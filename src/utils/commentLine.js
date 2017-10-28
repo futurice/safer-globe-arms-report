@@ -35,17 +35,17 @@ export default function(
       if (parseInt(rank, 10) === 1) {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of Finnish ${arms} export)`;
+        )}%</span> of all Finnish ${arms} export)`;
       } else {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of Finnish ${arms} export)`;
+        )}%</span> of all Finnish ${arms} export)`;
       }
     } else {
       if (parseInt(rank, 10) === 1) {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
+        )}%</span> of all Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
           civ,
         )}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${formatEuros(
           def,
@@ -53,7 +53,7 @@ export default function(
       } else {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
+        )}%</span> of all Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
           civ,
         )}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${formatEuros(
           def,
@@ -82,22 +82,22 @@ export default function(
         case 1:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
             2,
-          )}%</span> of Finnish ${arms} export)`;
+          )}%</span> of all Finnish ${arms} export)`;
           break;
         case 2:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
             2,
-          )}%</span> of Finnish ${arms} export)`;
+          )}%</span> of all Finnish ${arms} export)`;
           break;
         case 3:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
             2,
-          )}%</span> of Finnish ${arms} export)`;
+          )}%</span> of all Finnish ${arms} export)`;
           break;
         default:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
             2,
-          )}%</span> of Finnish ${arms} export)`;
+          )}%</span> of all Finnish ${arms} export)`;
           break;
       }
     } else {
@@ -105,7 +105,7 @@ export default function(
         case 1:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>largest ${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
             2,
-          )}%</span> of Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
+          )}%</span> of all Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
             civ,
           )}</span></p><p>Military Arm import from Finland is <span class = "defComment">${formatEuros(
             def,
@@ -114,7 +114,7 @@ export default function(
         case 2:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}nd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style='font-weight:700'>${percent.toFixed(
             2,
-          )}%</span> of Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
+          )}%</span> of all Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
             civ,
           )}</span></p><p>Military Arm import from Finland is <span class = "defComment">${formatEuros(
             def,
@@ -123,7 +123,7 @@ export default function(
         case 3:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}rd</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style='font-weight:700'>${percent.toFixed(
             2,
-          )}%</span> of Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
+          )}%</span> of all Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
             civ,
           )}</span></p><p>Military Arm import from Finland is <span class = "defComment">${formatEuros(
             def,
@@ -132,7 +132,7 @@ export default function(
         default:
           text = `<span style="font-weight:700">${countryName}</span> was the <span style='font-weight:700'>${rank}th</span> largest <span style='font-weight:700'>${arms}</span> importer from Finland in <span style='font-weight:700'>${yrs}</span> (<span style='font-weight:700'>${percent.toFixed(
             2,
-          )}%</span> of Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
+          )}%</span> of all Finnish total arms export)<p>Civilian Arm import from Finland is <span class = "civComment">${formatEuros(
             civ,
           )}</span></p><p>Military Arm import from Finland is <span class = "defComment">${formatEuros(
             def,

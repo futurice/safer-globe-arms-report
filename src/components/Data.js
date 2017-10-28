@@ -142,10 +142,10 @@ class Data extends Component {
         a.properties.data[yrs].CivilianArmsTotal +
           a.properties.data[yrs].MilataryMaterielTotal,
       ) <
-        Number(
-          b.properties.data[yrs].CivilianArmsTotal +
-            b.properties.data[yrs].MilataryMaterielTotal,
-        )
+      Number(
+        b.properties.data[yrs].CivilianArmsTotal +
+          b.properties.data[yrs].MilataryMaterielTotal,
+      )
         ? 1
         : -1;
     });
@@ -199,15 +199,13 @@ class Data extends Component {
         <section className="data-map-container flex-container-column">
           <div style={{ height: '100%' }} className="flex-container-column">
             <section className="flex-one country-data-container">
-              {this.state.selectedCountry ? (
-                <CountryDataList country={this.state.selectedCountry} />
-              ) : (
-                <TopFiveCountries
-                  year={this.state.activeYear}
-                  countries={sortedListTotal}
-                  totals={this.state.totals}
-                />
-              )}
+              {this.state.selectedCountry
+                ? <CountryDataList country={this.state.selectedCountry} />
+                : <TopFiveCountries
+                    year={this.state.activeYear}
+                    countries={sortedListTotal}
+                    totals={this.state.totals}
+                  />}
             </section>
             <section className="flex-five map-container">
               <DataMap
@@ -224,14 +222,6 @@ class Data extends Component {
                 className="reset-icon"
                 alt="Reset Icon"
                 title="Fit to Screen"
-              />
-            </div>
-            <div className="map-container__finland box-shadow">
-              <img
-                src={svgFinland}
-                className="finland-icon"
-                alt="Select Finland"
-                title="Select Finland"
               />
             </div>
             <div className="map-container__download box-shadow">
