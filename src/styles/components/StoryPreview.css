@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 1rem;
   width: 100%;
 }
