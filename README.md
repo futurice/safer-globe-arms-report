@@ -421,6 +421,28 @@ Note that tests run much slower with coverage so it is recommended to run it sep
 
 Again, more documentation available [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+## Managing Articles
+
+As project doesn't have any CMS for managing articles it means a bit more work, but is quite straightforward.
+
+### Adding an Article
+
+All articles are stored in directory /src/data/stories/. They are text files and written in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). There're few exceptions worth of mentioning to getting them work.
+
+1. On first row are defined all tags related to that article. Separated with a comma (foo, bar, there will be dragons)
+2. On second row is defined date. The date is shown on page as "published date". It's shown as-defined in the file, so no formatting is done for it.
+3. On third row is defined name of the author.
+
+Starting on fifth row you can start to write actual article by using Markdown syntax.
+
+It is recommended to save file with a name that is a running integer. File must also have an extension ".md" (without quotes).
+
+### Getting Article to Show-up under "Artcles"
+
+All articles that show up in listing are defined in /src/data/stories.csv. The first row tells content for the columns, and column content is shown as it defined (no formatting is done). Most important thing to pay attention to is first column "id" must have value of name you saved the actual article. That value is added to URL and used to guide user to correct page to read the actual content. Column "body" is a teaser text for the article. It's recommended to keep this short, max 2 short sentences. Otherwise layout will look no-so-pretty.
+
+Articles are listed in the order as they're defined in the file. So put latest row on top of the list, so it will show up on top on the site also.
+
 ## License
 
 [See here](./LICENSE)
