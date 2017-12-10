@@ -3,13 +3,13 @@
   /* 64px - the height of the nav */
   /* Create space between the following Stats section to acommodate the active Timeline down arrow */
   position: relative;
-  background: rgba(250, 250, 250, 1);
+  background: #202020;
   margin-top: 56px;
   justify-content: space-between;
 }
 
 .country-data-container {
-  background: rgba(255, 255, 255, .85);
+  background: rgba(51, 51, 51, .85);
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
   margin: 1.5rem 0 0 1rem;

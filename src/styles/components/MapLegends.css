@@ -4,8 +4,9 @@
 	right: 1rem;
 	bottom: 4rem;
 	z-index: 9999;
-	background: rgba(255,255,255,0.3) !important;
+	background: rgba(51, 51, 51, .85) !important;
 	font-size: 9px;
+	color: #fff !important;
 }
 
 .map-legends .label {
@@ -30,11 +31,13 @@
 	font-size: 10px;
 	font-weight: 700;
 	margin-bottom: 0.2rem;
+	color: #fff !important;
 }
 
 .divider{
-	opacity:0.25;
+	opacity:0.5;
 	margin: 0.65rem -0.5rem;
+	shape-rendering: crispEdges;
 }
 
 .sub-text{

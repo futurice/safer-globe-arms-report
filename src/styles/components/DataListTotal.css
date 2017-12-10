@@ -6,15 +6,18 @@
 .data-list-total__value {
 	font-weight: 600;
 	font-size: 1rem;
+	color: #fff;
 }
 
 .data-list-total__name {
 	font-weight: 600;
 	font-size: 1rem;
+	color: #fff;
 }
 
 .data-list-total__year {
 	font-size: 1.5rem;
+	color: #fff;
 }
 
 .data-list-total__sparkline {

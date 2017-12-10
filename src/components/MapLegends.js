@@ -7,7 +7,7 @@ export default class Maplegends extends Component {
   constructor(props) {
     super(props);
 
-    this.colorList = ['#D5E1EC', '#B7BFD6', '#9F9CC1', '#89659F', '#82197C'];
+    this.colorList = ['#55d48d', '#00b099', '#008a93', '#316179', '#453c51'];
   }
 
   render() {
@@ -17,6 +17,7 @@ export default class Maplegends extends Component {
           <a
             href="http://visionofhumanity.org/indexes/global-peace-index/"
             target="_blank"
+            style={{ color: '#fff' }}
           >
             {intl.get('GPI')}
           </a>
@@ -32,21 +33,29 @@ export default class Maplegends extends Component {
               className="flex-container-row"
               style={{ justifyContent: 'space-between' }}
             >
-              <span>{intl.get('PEACEFUL')}</span>
-              <span>{intl.get('RESTLESS')}</span>
+              <span>
+                {intl.get('PEACEFUL')}
+              </span>
+              <span>
+                {intl.get('RESTLESS')}
+              </span>
             </div>
           </div>
           <div className="flex-column-column" style={{ marginLeft: '12px' }}>
             <ul>
-              <li style={{ background: '#dddddd' }} />
+              <li style={{ background: '#333333' }} />
             </ul>
-            <span>{intl.get('NOT_AVAILABLE')}</span>
+            <span>
+              {intl.get('NOT_AVAILABLE')}
+            </span>
           </div>
         </div>
         <hr className="divider" />
         <div className="GPI-head">
           {intl.get('HOWTOREAD')}
-          <span className="sub-text">{intl.get('HOWTOREADTEXT')}</span>
+          <span className="sub-text">
+            {intl.get('HOWTOREADTEXT')}
+          </span>
         </div>
       </div>
     );

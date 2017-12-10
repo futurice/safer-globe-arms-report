@@ -1563,7 +1563,7 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
-            .style('color', '#212121');
+            .style('color', '#fff');
           let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
             percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
           if (defenceVal + civilianVal == 0) {
@@ -1595,7 +1595,7 @@ class DataMap extends Component {
             d3
               .select('.top-countries__name--sum' + k)
               .html(formatEuros(arrSorted[k - 1].data[yrs].TotalCountry))
-              .style('color', '#212121')
+              .style('color', '#fff')
               .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
@@ -1891,7 +1891,7 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
-            .style('color', '#212121');
+            .style('color', '#fff');
           let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
             percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
           if (defenceVal + civilianVal == 0) {
@@ -2126,7 +2126,7 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
-            .style('color', '#212121');
+            .style('color', '#fff');
           let percentDef = defenceVal * 100 / (defenceVal + civilianVal),
             percentCiv = civilianVal * 100 / (defenceVal + civilianVal);
           if (defenceVal + civilianVal == 0) {
@@ -2160,7 +2160,7 @@ class DataMap extends Component {
               .html(
                 formatEuros(arrSorted[k - 1].data[selectedYear].TotalCountry),
               )
-              .style('color', '#212121')
+              .style('color', '#fff')
               .style('font-weight', '600');
             d3
               .select('#top-countries__graphs--defence' + k)
@@ -2478,7 +2478,7 @@ class DataMap extends Component {
           d3
             .selectAll('.data-list-total__value')
             .html(formatEuros(totalVal))
-            .style('color', '#212121');
+            .style('color', '#fff');
           let percentDef = 100,
             percentCiv = 0;
           d3
@@ -3169,15 +3169,15 @@ class DataMap extends Component {
       });
 
     let colorList = [
-      '#dddddd',
-      '#D5E1EC',
-      '#B7BFD6',
-      '#9F9CC1',
-      '#89659F',
-      '#82197C',
+      '#333333',
+      '#55d48d',
+      '#00b099',
+      '#008a93',
+      '#316179',
+      '#453c51',
     ];
-    let civilianColor = '#785ef0',
-      defenceColor = '#fe6100';
+    let civilianColor = '#FC491E',
+      defenceColor = '#d90013';
 
     let data = this.state.saferGlobeData;
     const startYear = parseInt(
@@ -3652,7 +3652,7 @@ class DataMap extends Component {
         .enter()
         .append('rect')
         .attr('class', d => `hoverArea hoverArea${d[0]}`)
-        .attr('fill', '#fff')
+        .attr('fill', 'rgba(51,51,51,0.5)')
         .attr('width', barWidth)
         .attr('x', (d, i) => {
           return barWidth * i;
@@ -3785,9 +3785,9 @@ class DataMap extends Component {
         if (d.properties.name === 'Somalia') {
           return 'none';
         }
-        return '#fff';
+        return '#202020';
       })
-      .attr('stroke-width', 0.5)
+      .attr('stroke-width', 0.25)
       .style('cursor', 'pointer')
       .attr('pointer-events', 'none')
       .on('mouseover', d => {

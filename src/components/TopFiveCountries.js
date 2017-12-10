@@ -47,11 +47,13 @@ class TopFiveCountries extends Component {
           <div className="top-countries__title">
             {intl.get('TOP5COUNTRIES')}
           </div>
-          {countries.map((data, i) => (
+          {countries.map((data, i) =>
             <div key={i} className="top-countries__country">
               <div className="top-countries__name">
                 <span className="top-countries__name--wrapper">
-                  <span>{i + 1}</span>
+                  <span>
+                    {i + 1}
+                  </span>
                   <span className={'top-countries__name' + (i + 1)}>
                     {data.Countries}
                   </span>
@@ -77,17 +79,22 @@ class TopFiveCountries extends Component {
                   }}
                 />
               </div>
-            </div>
-          ))}
+            </div>,
+          )}
         </div>
         <div
           className="country-bullet-point"
           style={{
             display: 'none',
+            color: '#fff',
           }}
         >
-          <div className="country-rank">{'Rank - 0'}</div>
-          <div className="key-points">{'Hello World'}</div>
+          <div className="country-rank">
+            {'Rank - 0'}
+          </div>
+          <div className="key-points">
+            {'Hello World'}
+          </div>
           <div className="bullet-point" />
         </div>
       </div>
