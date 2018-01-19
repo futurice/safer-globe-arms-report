@@ -35,17 +35,17 @@ export default function(
       if (parseInt(rank, 10) === 1) {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of all Finnish ${arms} export)`;
+        )}%</span> Suomen ${arms} viennistä)`;
       } else {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of all Finnish ${arms} export)`;
+        )}%</span> Suomen ${arms} viennistä)`;
       }
     } else {
       if (parseInt(rank, 10) === 1) {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>suurin ${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of all Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
+        )}%</span> Suomen ${arms} viennistä)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
           civ,
         )}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${formatEuros(
           def,
@@ -53,7 +53,7 @@ export default function(
       } else {
         return `<span style="font-weight:700">${countryName}</span> oli <span style='font-weight:700'>${rank}.</span> suurin <span style='font-weight:700'>${arms}</span> tuoja Suomesta vuonna <span style='font-weight:700'>${yrs}</span> (<span style="font-weight:700">${percent.toFixed(
           2,
-        )}%</span> of all Finnish ${arms} export)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
+        )}%</span> Suomen ${arms} viennistä)<p>Siviiliaseiden tuonti Suomesta <span class = "civComment">${formatEuros(
           civ,
         )}</span></p><p>Sotatuotteiden tuonti Suomesta <span class = "defComment">${formatEuros(
           def,
