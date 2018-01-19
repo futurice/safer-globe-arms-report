@@ -10,7 +10,7 @@
 
 ## Sotatuote
 Tuote tai palvelu, joka on suunniteltu, valmistettu tai myyty nimenomaan sotilaallisiin käyttötarkoituksiin. Suomen lainsäädännössä sotatuotteista käytetään termiä puolustustarvike. Sotatuotteita eivät ole asevoimien käyttämät kulutustuotteet kuten näkkileipä, kumisaappaat tai tietokoneet.
- 
+
 ## Siviiliase
 Tuote tai palvelu, joka on suunniteltu, valmistettu ja myyty nimenomaan kuluttajakäyttöön. Käyttökohteita ovat esimerkiksi metsästys, kilpaurheilu ja muut ammuntaharrastukset. Suomen siviiliaseviennissä on vientilupajärjestelmästä johtuen mukana myös aseita ja ammuksia, joita myydään eri maiden asevoimille ja muille viranomaisille.
 
@@ -33,7 +33,7 @@ Suomen asevalvontaraporttia julkaisee suomalainen SaferGlobe -ajatushautomo. Rap
 
 Kartassa esitetyt maat ovat tuotteiden loppukäyttäjävaltioita. Valtio, jonka maaperällä aseita käytetään, voi kuitenkin olla jokin muu. Aina, kun ostajana ovat valtion asevoimat tai muut viranomaiset, valtio päättää itse, missä sotilaallisissa operaatioissaan se aseita käyttää. Jos ostaja taas on ollut yritys, se voi jälleenmyydä tuotteet eteenpäin kolmanteen valtioon.
 
-Vuosittaiset vaihtelut aseviennin määrissä ovat huomattavia, koska asejärjestelmät ovat kalliita, niitä hankitaan harvoin ja toimitukset voivat osua yksittäisille vuosille. Tästä syystä viennin kehitystä arvioidaan yleensä viiden vuoden jaksoissa. Tällä tavoin on mahdollista havaita pidemmän aikavälin kehitystrendejä asevientipolitiikassa. 
+Vuosittaiset vaihtelut aseviennin määrissä ovat huomattavia, koska asejärjestelmät ovat kalliita, niitä hankitaan harvoin ja toimitukset voivat osua yksittäisille vuosille. Tästä syystä viennin kehitystä arvioidaan yleensä viiden vuoden jaksoissa. Tällä tavoin on mahdollista havaita pidemmän aikavälin kehitystrendejä asevientipolitiikassa.
 
 Raportin tiedot on esitetty euroina, mutta ne eivät kerro suoraan kyseisen viennin merkityksestä. Ensinnäkin on arvioitava, mitä tuotetta on viety. Toiseksi pitää huomioida, kenelle ja mihin käyttötarkoitukseen niitä vietiin. Kolmanneksi on syytä katsoa, kuinka suuri osa vienti oli ostajavaltion kyseisen tuotteen hankinnoista ja valtion asevarustelusta yleensä. On hyvä muistaa myös, että yksikin luoti voi tappaa, ja yhdellä rynnäkkökiväärillä voi ampua sen mahdollisesti yli 50 vuoden käyttöiän aikana tuhansia patruunoita.
 
@@ -49,7 +49,7 @@ Raportissa esitetään Suomen toteutunut asevienti. Viennille tarvitaan lupa Suo
 
 Esitetty euromääräinen tilastoarvo ei välttämättä ole kauppasopimuksen mukainen summa. Se voi vaihdella esimerkiksi mukana olevien palveluiden tai verojen seurauksena. Jos kyse on lisenssistä eli valmistusoikeuden viennistä, ei tuotteiden myöhempi vienti lisenssin saaneesta valmistusmaasta tule näkymään Suomen viranomaisten raporteissa eikä myöskään SaferGloben julkaisemassa asevalvontaraportissa.
 
-Sotatuotteiden toteutunut vienti on saatu niistä vastaavan vientilupaviranomaisen Puolustusministeriön julkaisemista [raporteista](http://www.defmin.fi/tehtavat_ja_toiminta/puolustushallinnon_voimavarat/puolustustarvikkeiden_vienti_siirto_kauttakuljetus_ja_valitys/tilastot). Sotatuotteiden vientiluvat ovat julkisia asiakirjoja ja ne on saatu tietopyynnöillä Puolustusministeriöstä. 
+Sotatuotteiden toteutunut vienti on saatu niistä vastaavan vientilupaviranomaisen Puolustusministeriön julkaisemista [raporteista](http://www.defmin.fi/tehtavat_ja_toiminta/puolustushallinnon_voimavarat/puolustustarvikkeiden_vienti_siirto_kauttakuljetus_ja_valitys/tilastot). Sotatuotteiden vientiluvat ovat julkisia asiakirjoja ja ne on saatu tietopyynnöillä Puolustusministeriöstä.
 
 Siviiliaseiden toteutunut vienti on saatu Tullin Ulkomaankauppatietojen [jakelujärjestelmästä](http://tulli.fi/tilastot/uljas-tietokanta). Siviiliaseiden vientilupien on katsottu olevan salaisia asiakirjoja. Siviiliaseista vastaava vientilupaviranomainen on Poliisihallitus. Se ei ole resurssipulasta ja tietojärjestelmän puutteista johtuen kyennyt keräämään viime vuosina tietoja siitä, kuinka monta vientilupaa kuhunkin valtioon on myönnetty. Kaksikäyttötuotteiden vientilupatiedot on saatu tietopyynnöllä ulkoasiainministeriöstä.
 
@@ -75,11 +75,11 @@ Suomen asevalvontaraporttia (ISSN 2342-3447) julkaisee ajatushautomo [SaferGlobe
 
 Suomen asevalvontaraportin tavoitteena on lisätä asekauppaan ja asevarusteluun liittyvän tiedon julkisuutta ja kehittää sekä ylläpitää ensi sijassa suomalaista, mutta myös kansainvälistä asevalvonnan tutkimusta ja osaamista. Raportin julkaiseminen takana on näkemys siitä, että konflikteja voidaan ennaltaehkäistä valvomalla ja rajoittamalla asekauppaa sekä sotilaallista toimintaa.
 
-Suomen asevalvontaraportti on SaferGloben työryhmän kehittämä tuote. Raporttia on julkaistu vuodesta 2010. Raporttien tekoon ovat tekstien kirjoittajina ja toimituskunnan jäseninä osallistuneet seuraavat henkilöt: Eekku Aromaa, Mikko Autti, Pamela Baarman, Mikko Branders, Tarja Cronberg, Tuuli Hongisto, Jouko Huru, Frank Johansson, Mira Kajo, Anne Koivula, Elli Kytömäki, Johannes Lehtinen, Honna Marttila, Maria Mekri, Henri Myrttinen, Kari Paasonen, Jarmo Pykälä, Mert Sasioglu, Eeva Simola, Eeva Suhonen, Milja Suihko, Paavo Teittinen, Timmy Trümpler, Hannele Tulkki, Hanna Tuulonen, Ville Uusitupa, Otso Vainio ja Nora Westerlund. 
+Suomen asevalvontaraportti on SaferGloben työryhmän kehittämä tuote. Raporttia on julkaistu vuodesta 2010. Raporttien tekoon ovat tekstien kirjoittajina ja toimituskunnan jäseninä osallistuneet seuraavat henkilöt: Eekku Aromaa, Mikko Autti, Pamela Baarman, Mikko Branders, Tarja Cronberg, Tuuli Hongisto, Jouko Huru, Frank Johansson, Mira Kajo, Anne Koivula, Elli Kytömäki, Johannes Lehtinen, Honna Marttila, Maria Mekri, Henri Myrttinen, Kari Paasonen, Jarmo Pykälä, Mert Sasioglu, Eeva Simola, Eeva Suhonen, Milja Suihko, Paavo Teittinen, Timmy Trümpler, Hannele Tulkki, Hanna Tuulonen, Ville Uusitupa, Otso Vainio ja Nora Westerlund.
 
 Raporttien painattamista ja kehitystyötä ovat tukeneet vuosina 2010–2016 [Amnesty International Suomen osasto ry.](https://www.amnesty.fi/), [Suomen Rauhanliitto – Fredsförbundet ry.](http://www.rauhanliitto.fi/), [Kirkon ulkomaanavun nuorisoverkosto Changemaker](https://www.changemaker.fi), [Suomen Rauhanpuolustajat ry.](https://www.rauhanpuolustajat.org/), [Suomen Sadankomitea ry.](http://www.sadankomitea.fi/), [Lääkärin sosiaalinen vastuu ry.](https://lsv.fi/) ja [Leo Mechelin Säätiö](http://www.leomechelinsaatio.fi). SaferGlobe on käyttänyt raportin tekemiseen Ulkoasiainministeriöltä saatua yleisrahoitusta sekä Opetus- ja kulttuuriministeriön Rauhantyön edistämisen määrärahoista saamiaan varoja.
 
-Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](../downloads/?lang=fi). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](../articles/?lang=fi). 
+Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](../downloads/?lang=fi). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](../articles/?lang=fi).
 
 Tämän tietokannan ja verkkosivuston on mahdollistanut [Futuricen](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
 
