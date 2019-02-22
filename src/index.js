@@ -202,6 +202,7 @@ const locales = {
     HOWTOREAD: 'Note: ',
     HOWTOREADTEXT: 'Exports are shown with the minimum value of 1 px.',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
+    ALL_ARTICLES: 'All Articles (only in Finnish)',
 
     // About page
     TERMS_EXPLAINED: 'About Us',
@@ -341,6 +342,7 @@ const locales = {
     HOWTOREAD: 'Huomautus: ',
     HOWTOREADTEXT: 'Viennin vähimmäiskorkeus kaaviossa on 1 px.',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
+    ALL_ARTICLES: 'Kaikki artikkelit',
 
     // About page
     TERMS_EXPLAINED: 'Meistä',
@@ -467,9 +469,10 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () =>
+const AppRouterWrap = () => (
   <Router>
     <Route component={AppRouter} />
-  </Router>;
+  </Router>
+);
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));

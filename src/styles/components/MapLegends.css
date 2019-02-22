@@ -1,8 +1,9 @@
 .map-legends {
-	padding: 0.5rem;
+	padding: 0 0.5rem 0.5rem 0.5rem;
 	position: absolute;
-	right: 1rem;
-	bottom: 4rem;
+	width:355px;
+	left: 1rem;
+	bottom: 3rem;
 	z-index: 9999;
 	background: rgba(255,255,255,0.3) !important;
 	font-size: 9px;
@@ -27,16 +28,21 @@
 }
 
 .GPI-head{
-	font-size: 10px;
+	font-size: 14px;
 	font-weight: 700;
 	margin-bottom: 0.2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .divider{
 	opacity:0.25;
 	margin: 0.65rem -0.5rem;
 }
-
+.MuiIconButton-root-17{
+	height: 36px !important;
+}
 .sub-text{
 	font-weight: 400;
 	font-style: italic;

@@ -14,9 +14,7 @@ class DataListTabs extends Component {
     };
   }
 
-  handleClick = value => {
-    this.props.onClick(value);
-  };
+  handleClick = value => {};
 
   render() {
     return (

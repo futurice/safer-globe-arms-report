@@ -121,7 +121,10 @@ class Nav extends Component {
           </span>
 
           <button className="menu-icon" onClick={this.handleMobileMenuClick}>
-            <img src={mobileMenuOpen ? crossIcon : menuIcon} />
+            <img
+              src={mobileMenuOpen ? crossIcon : menuIcon}
+              alt={'mobileMenu'}
+            />
           </button>
         </span>
       </nav>
