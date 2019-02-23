@@ -15,7 +15,7 @@ class DataMap extends Component {
       saferGlobeData: this.props.mapData,
       width: Math.max(1024, window.innerWidth),
       height: window.innerHeight - 65 - 30,
-      mapScale: (250 * Math.max(1024, window.innerWidth)) / 1440,
+      mapScale: (244 * Math.max(1024, window.innerWidth)) / 1440,
       intlMissionTableTitle: {
         EN: 'Countries where missions took place',
         FI: 'Maat, joissa tehtävät suoritettiin',
@@ -35,7 +35,7 @@ class DataMap extends Component {
     this.projection = d3GeoProjection
       .geoRobinson()
       .scale(this.state.mapScale)
-      .translate([this.state.width / 2.03, this.state.height / 1.63]);
+      .translate([this.state.width / 2.03, this.state.height / 1.68]);
     this.path = d3.geoPath().projection(this.projection);
     this.rScale = scaleSqrt()
       .domain([0, this.props.maxValue])
@@ -769,7 +769,7 @@ class DataMap extends Component {
     d3.select(this.svg).call(
       d3
         .zoom()
-        .scaleExtent([0.8, 8])
+        .scaleExtent([0.6, 8])
         .on('zoom', this.zoomed),
     );
 
