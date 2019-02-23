@@ -42,6 +42,18 @@ class DataMap extends Component {
     this.updateData();
     this.drawGraph();
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.selectedYear !== this.props.selectedYear) {
+      selectAll(`.rect`).attrs({
+        opacity: d => {
+          if (nextProps.selectedYear.toString(10) === d.Year) return 1;
+          return 0.4;
+        },
+      });
+      return false;
+    }
+    return true;
+  }
   updateData = () => {
     let keys = Object.keys(this.props.data),
       data = [];
@@ -59,6 +71,15 @@ class DataMap extends Component {
       ];
     });
     this.data = data;
+  };
+  click = d => {
+    this.props.changeActiveYear(d.Year);
+  };
+  mouseover = d => {
+    this.props.changeYear(d.Year);
+  };
+  mouseleave = () => {
+    this.props.resetYear();
   };
   drawGraph = () => {
     select('.areaGraph').remove();
@@ -96,7 +117,13 @@ class DataMap extends Component {
       .data(this.data)
       .enter()
       .append('g')
-      .attrs({ class: 'rect' });
+      .attrs({
+        class: 'rect',
+        opacity: d => {
+          if (this.props.selectedYear.toString(10) === d.Year) return 1;
+          return 0.4;
+        },
+      });
 
     let xAxis = svg
       .append('g')
@@ -158,10 +185,6 @@ class DataMap extends Component {
               return height - yScale(d['CivilianArmsTotal']);
           }
         },
-        opacity: d => {
-          if (this.props.selectedYear.toString(10) === d.Year) return 1;
-          return 0.4;
-        },
       })
       .style('fill', this.state.civilianColor);
 
@@ -202,12 +225,11 @@ class DataMap extends Component {
               return height - yScale(d['CountryMilatary']);
           }
         },
-        opacity: d => {
-          if (this.props.selectedYear.toString(10) === d.Year) return 1;
-          return 0.4;
-        },
       })
-      .style('fill', this.state.defenceColor);
+      .style('fill', this.state.defenceColor)
+      .on('mouseenter', this.mouseover)
+      .on('mouseleave', this.mouseleave)
+      .on('click', this.click);
 
     selectAll('.domain').remove();
   };

@@ -49,7 +49,8 @@ class DataTimeline extends Component {
     let node = selectAll('.timeline');
     node.selectAll('.timeline-item').attrs({
       class: d => {
-        if (d === this.props.activeYear) return 'timeline-item activeTab';
+        if (d.toString(10) === this.props.activeYear.toString(10))
+          return 'timeline-item activeTab';
         else return 'timeline-item';
       },
     });
