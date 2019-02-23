@@ -7,8 +7,24 @@
 }
 
 .top-countries__title {
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	margin-top:1rem;
+	align-items: center;
 }
+
+.show-all-button{
+	font-size: 12px;
+	font-weight: normal;
+	opacity: 0.8;
+	cursor: pointer;
+	background-color: #eee;
+	padding:10px;
+	font-weight: bold;
+	border: 0 solid #000;
+}
+
 .top-countries__name {
 	flex-direction: row;
 	flex-wrap: nowrap;

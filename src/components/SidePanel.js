@@ -16,6 +16,7 @@ class CountryDataList extends Component {
     this.worldData = {};
     this.state = {
       checked: 'TotalCountry',
+      noOfCountriesButton: 'Show All Countries',
     };
   }
   handleClick = value => {
@@ -49,6 +50,11 @@ class CountryDataList extends Component {
     this.props.checkedChange(value);
   };
 
+  changeNoOfCountries = d => {
+    this.setState({
+      noOfCountriesButton: d,
+    });
+  };
   render() {
     let lastSection = (
       <CountryDetails
@@ -118,6 +124,8 @@ class CountryDataList extends Component {
                 this.state.checked
               ]
             }
+            changeNoOfCountries={this.changeNoOfCountries}
+            noOfCountriesButton={this.state.noOfCountriesButton}
             checked={this.state.checked}
             selectedYear={this.props.selectedYear}
             articleList={this.props.articleList}
