@@ -190,7 +190,7 @@ const locales = {
     TOTAL: 'Total',
     DEFENCE: 'Military Material',
     CIVILIAN: 'Civilian Arms',
-    TOP5COUNTRIES: 'Top 5 Countries',
+    TOP5COUNTRIES: 'Top Importing Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
     PEACEFUL: 'More Peaceful',
@@ -203,6 +203,10 @@ const locales = {
     HOWTOREADTEXT: 'Exports are shown with the minimum value of 1 px.',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
     ALL_ARTICLES: 'All Articles (only in Finnish)',
+    HIGHLIGHT: 'Highlight countries to which Finland exports',
+    NOARTICLES: 'No articles available',
+    SHOWALLCOUNTRIES: 'Show All',
+    SHOWTOP5: 'Show Top 5',
 
     // About page
     TERMS_EXPLAINED: 'About Us',
@@ -330,7 +334,7 @@ const locales = {
     TOTAL: 'Yhteensä',
     DEFENCE: 'Sotatuotteet',
     CIVILIAN: 'Siviiliaseet',
-    TOP5COUNTRIES: '5 suurinta vientimaata',
+    TOP5COUNTRIES: 'Suosituimmat tuovat maat',
     WORLD: 'Maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
     PEACEFUL: 'Rauhallinen',
@@ -343,6 +347,10 @@ const locales = {
     HOWTOREADTEXT: 'Viennin vähimmäiskorkeus kaaviossa on 1 px.',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
     ALL_ARTICLES: 'Kaikki artikkelit',
+    HIGHLIGHT: 'Korosta Suomen vientimaat',
+    NOARTICLES: 'Ei artikkeleita saatavilla',
+    SHOWALLCOUNTRIES: 'Näytä kaikki',
+    SHOWTOP5: 'Näytä alkuun 5',
 
     // About page
     TERMS_EXPLAINED: 'Meistä',

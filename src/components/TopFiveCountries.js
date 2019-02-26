@@ -20,9 +20,9 @@ class TopFiveCountries extends Component {
       .range([0, 100]);
   }
   click = () => {
-    if (this.props.noOfCountriesButton === 'Show All Countries')
-      this.props.changeNoOfCountries('Show Top 5 Countries');
-    else this.props.changeNoOfCountries('Show All Countries');
+    if (this.props.noOfCountriesButton === 'SHOWALLCOUNTRIES')
+      this.props.changeNoOfCountries('SHOWTOP5');
+    else this.props.changeNoOfCountries('SHOWALLCOUNTRIES');
   };
   render() {
     this.data.sort((x, y) =>
@@ -48,7 +48,7 @@ class TopFiveCountries extends Component {
       );
     });
     let noOfCountries = 5;
-    if (this.props.noOfCountriesButton === 'Show Top 5 Countries')
+    if (this.props.noOfCountriesButton === 'SHOWTOP5')
       noOfCountries = this.data.filter(
         d => d.properties.data[this.props.selectedYear][this.props.checked] > 0,
       ).length;
@@ -99,7 +99,7 @@ class TopFiveCountries extends Component {
         <div className="top-countries__title bold">
           <div>{intl.get('TOP5COUNTRIES')}</div>
           <button className="show-all-button" onClick={this.click}>
-            {this.props.noOfCountriesButton}
+            {intl.get(this.props.noOfCountriesButton)}
           </button>
         </div>
         {this.list}

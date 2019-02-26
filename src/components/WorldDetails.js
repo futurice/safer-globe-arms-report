@@ -9,9 +9,16 @@ class TopFiveCountries extends Component {
     super(props);
     this.data = this.props.data;
     this.section = {
-      TotalCountry: 'total arms',
-      CivilianArmsTotal: 'civilian arms',
-      CountryMilatary: 'military arms',
+      EN: {
+        TotalCountry: 'arms',
+        CivilianArmsTotal: 'civilian arms',
+        CountryMilatary: 'military material',
+      },
+      FI: {
+        TotalCountry: 'yhteensä aseita',
+        CivilianArmsTotal: 'siviiliaseita',
+        CountryMilatary: 'sotatuotteita',
+      },
     };
     this.finnish = {
       TotalCountry: 'aseiden',
@@ -35,17 +42,15 @@ class TopFiveCountries extends Component {
     const noOfCountries = this.data.filter(
       d => d.properties.data[this.props.selectedYear][this.props.checked] > 0,
     ).length;
-    let countryList = this.data.map(d => d.properties.name);
-    let value = countryList.indexOf(this.props.selectedCountry);
     let text;
     if (this.props.countryData[this.props.checked] > 0) {
       text = (
         <div className="countryText">
           <div>
-            <span className="bold">{`${noOfCountries} countries`}</span>{' '}
-            imported{' '}
+            In total Finland exported {this.section['EN'][this.props.checked]}{' '}
+            worth{' '}
             <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
-            worth of {this.section[this.props.checked]} from Finland
+            to <span className="bold">{`${noOfCountries} countries`}</span>
           </div>
         </div>
       );
@@ -53,10 +58,11 @@ class TopFiveCountries extends Component {
     if (this.props.language === 'FI') {
       text = (
         <div className="countryText">
-          <span className="bold">{`${noOfCountries} countries`}</span> oli{' '}
-          <span className="bold">{`${value + 1}.`}</span> suurin{' '}
-          {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
-          <span className="bold">{this.props.selectedYear}</span>
+          <div>
+            Suomi vei {this.section['FI'][this.props.checked]}{' '}
+            <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+            arvosta <span className="bold">{`${noOfCountries} maahan`}</span>
+          </div>
         </div>
       );
     }

@@ -69,7 +69,7 @@ class Data extends Component {
       totalColor: '#212121',
       maxValue: 150000000,
       heightMaxValue: 150000000,
-      highlight: true,
+      highlight: false,
     };
   }
 
@@ -316,7 +316,7 @@ class Data extends Component {
             <div className="map-container__graph-highlight">
               <div className="box-shadow-opacity highlight-button">
                 <label className="checkboxHighlight">
-                  Highlight countries that import from Finland
+                  {intl.get('HIGHLIGHT')}
                   <input
                     type="checkbox"
                     onClick={this.handleChange}

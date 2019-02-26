@@ -16,7 +16,7 @@ class CountryDataList extends Component {
     this.worldData = {};
     this.state = {
       checked: 'TotalCountry',
-      noOfCountriesButton: 'Show All Countries',
+      noOfCountriesButton: 'SHOWALLCOUNTRIES',
     };
   }
   handleClick = value => {

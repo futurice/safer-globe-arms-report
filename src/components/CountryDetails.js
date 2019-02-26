@@ -104,69 +104,36 @@ class TopFiveCountries extends Component {
       );
     if (this.props.language === 'FI') {
       if (this.props.countryData[this.props.checked] > 0) {
-        text =
-          value > 0 ? (
-            <div className="countryText">
-              <div>
-                <span className="bold">{`${
-                  this.props.selectedCountryName['EN']
-                }`}</span>{' '}
-                imported{' '}
-                <span className="bold">{`${formatEuros(
-                  this.props.value,
-                )}`}</span>{' '}
-                worth of {this.section[this.props.checked]} from Finland (
-                <span className="bold">{`${percent}%`}</span> of all Finnish{' '}
-                {this.section[this.props.checked]} arms export) in{' '}
-                <span className="bold">{`${this.props.selectedYear}`}</span>
-              </div>
-              <br />
-              <div>
-                <span className="bold">{`${
-                  this.props.selectedCountryName['FI']
-                }`}</span>{' '}
-                oli <span className="bold">{`${value + 1}.`}</span> suurin{' '}
-                {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
-                <span className="bold">{this.props.selectedYear}</span> (
-                <span className="bold">{`${percent}%`}</span> Suomen{' '}
-                {this.finnish[this.props.checked]} viennistä)
-              </div>
+        text = (
+          <div className="countryText">
+            <div>
+              <span className="bold">{`${
+                this.props.selectedCountryName['FI']
+              }`}</span>{' '}
+              toi {this.finnish[this.props.checked]}{' '}
+              <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+              arvosta Suomesta (<span className="bold">{`${percent}%`}</span>{' '}
+              Suomen {this.finnish[this.props.checked]} viennistä) vuonna{' '}
+              <span className="bold">{`${this.props.selectedYear}`}</span>
             </div>
-          ) : (
-            <div className="countryText">
-              <div>
-                <span className="bold">{`${
-                  this.props.selectedCountryName['EN']
-                }`}</span>{' '}
-                imported{' '}
-                <span className="bold">{`${formatEuros(
-                  this.props.value,
-                )}`}</span>{' '}
-                worth of {this.section[this.props.checked]} from Finland (
-                <span className="bold">{`${percent}%`}</span> of all Finnish{' '}
-                {this.section[this.props.checked]} arms export) in{' '}
-                <span className="bold">{`${this.props.selectedYear}`}</span>
-              </div>
-              <br />
-              <div>
-                <span className="bold">{`${
-                  this.props.selectedCountryName['FI']
-                }`}</span>{' '}
-                oli <span className="bold">suurin</span>{' '}
-                {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
-                <span className="bold">{this.props.selectedYear}</span> (
-                <span className="bold">{`${percent}%`}</span> Suomen{' '}
-                {this.finnish[this.props.checked]} viennistä)
-              </div>
+            <br />
+            <div>
+              <span className="bold">{`${
+                this.props.selectedCountryName['FI']
+              }`}</span>{' '}
+              oli <span className="bold">{`${value + 1}.`}</span> suurin{' '}
+              {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
+              <span className="bold">{this.props.selectedYear}</span>
             </div>
-          );
+          </div>
+        );
       } else
         text = (
           <div className="countryText">
             <span className="bold">{`${
               this.props.selectedCountryName['FI']
             }`}</span>{' '}
-            did not import any {this.finnish[this.props.checked]} tuoja Suomesta
+            ei tuonut Suomesta {`${this.finnish[this.props.checked]} `}
             vuonna <span className="bold">{this.props.selectedYear}</span>
           </div>
         );
@@ -229,7 +196,7 @@ class TopFiveCountries extends Component {
           className="articlesubText"
           style={{ marginTop: '10px', marginBottom: '10px' }}
         >
-          No articles available
+          {intl.get('NOARTICLES')}
         </div>
       );
     }
