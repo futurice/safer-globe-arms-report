@@ -13,10 +13,8 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 
 const svg = require('./../assets/reset-icon.svg');
 const svgDownload = require('./../assets/download-map-icon.svg');
-const bubbleChart = require('./../assets/bubble-chart-active.svg');
 const barChart = require('./../assets/bar-chart-active.svg');
-const bubbleChartInactive = require('./../assets/bubble-chart-inactive.svg');
-const barChartInactive = require('./../assets/bar-chart-inactive.svg');
+const bubbleChart = require('./../assets/bubble-chart-active.svg');
 class Data extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +25,7 @@ class Data extends Component {
     this.state = {
       gpiData: null,
       barChartButtonIcon: barChart,
-      bubbleChartButtonIcon: bubbleChartInactive,
+      bubbleChartButtonIcon: bubbleChart,
       activeYear: parseInt(
         Object.keys(
           dataSheet.objects.countries.geometries[0].properties.data,
@@ -70,6 +68,8 @@ class Data extends Component {
       maxValue: 150000000,
       heightMaxValue: 150000000,
       highlight: false,
+      bubbleChartDiv: 'inactiveChartDiv',
+      barChartDiv: 'activeChartDiv',
     };
   }
 
@@ -238,15 +238,15 @@ class Data extends Component {
 
   changeBubbleIcon = () => {
     this.setState({
-      barChartButtonIcon: barChartInactive,
-      bubbleChartButtonIcon: bubbleChart,
+      bubbleChartDiv: 'activeChartDiv',
+      barChartDiv: 'inactiveChartDiv',
     });
   };
 
   changeBarIcon = () => {
     this.setState({
-      barChartButtonIcon: barChart,
-      bubbleChartButtonIcon: bubbleChartInactive,
+      bubbleChartDiv: 'inactiveChartDiv',
+      barChartDiv: 'activeChartDiv',
     });
   };
   handleChange = () => {
@@ -328,19 +328,23 @@ class Data extends Component {
             </div>
             <div className="map-container__graph-choice">
               <div
-                className="map-container__reset box-shadow-opacity"
+                className={`map-container__reset box-shadow-opacity ${
+                  this.state.barChartDiv
+                }`}
                 onClick={this.changeBarIcon}
               >
                 <img
                   src={this.state.barChartButtonIcon}
-                  className="reset-icon active"
+                  className="reset-icon activeChartSelection"
                   id="bar-chart"
                   alt="Bar Chart"
                   title="Swith to Bar Chart"
                 />
               </div>
               <div
-                className="map-container__reset box-shadow-opacity"
+                className={`map-container__reset box-shadow-opacity ${
+                  this.state.bubbleChartDiv
+                }`}
                 onClick={this.changeBubbleIcon}
               >
                 <img

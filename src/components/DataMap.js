@@ -73,8 +73,8 @@ class DataMap extends Component {
 
   changeToBars = () => {
     selectAll('.dataCircle').remove();
-    select('#bar-chart').classed('active', true);
-    select('#bubble-chart').classed('active', false);
+    select('#bar-chart').classed('activeChartSelection', true);
+    select('#bubble-chart').classed('activeChartSelection', false);
 
     selectAll('.arcs').remove();
     this.drawBars();
@@ -158,8 +158,8 @@ class DataMap extends Component {
 
   changeToBubbles = () => {
     selectAll('.dataBarChart').remove();
-    select('#bar-chart').classed('active', false);
-    select('#bubble-chart').classed('active', true);
+    select('#bar-chart').classed('activeChartSelection', false);
+    select('#bubble-chart').classed('activeChartSelection', true);
 
     selectAll('.graphZoom')
       .append('g')
