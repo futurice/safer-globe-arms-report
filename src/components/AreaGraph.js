@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { select, selectAll } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { max } from 'd3-array';
+import * as d3 from 'd3';
 import { format } from 'd3-format';
 require('d3-selection-multi');
 
@@ -110,7 +110,7 @@ class DataMap extends Component {
 
     let yScale = scaleLinear()
       .range([height, 0])
-      .domain([0, max(this.data, d => d[this.props.checked])]);
+      .domain([0, d3.max(this.data, d => d[this.props.checked])]);
 
     let barG = svg
       .selectAll('.rect')

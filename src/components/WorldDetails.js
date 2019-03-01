@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { descending } from 'd3-array';
+import * as d3 from 'd3';
 import formatEuros from '../utils/formatEuros';
 import intl from 'react-intl-universal';
 import './../styles/components/CountryDetails.css';
@@ -34,7 +34,7 @@ class TopFiveCountries extends Component {
 
   render() {
     this.data.sort((x, y) =>
-      descending(
+      d3.descending(
         x.properties.data[this.props.selectedYear][this.props.checked],
         y.properties.data[this.props.selectedYear][this.props.checked],
       ),

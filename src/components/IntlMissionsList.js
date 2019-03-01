@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { descending } from 'd3-array';
 import formatEuros from '../utils/formatEuros';
 import './../styles/components/CountryDetails.css';
+import * as d3 from 'd3';
 import Divider from 'material-ui/Divider';
 
 class TopFiveCountries extends Component {
@@ -29,7 +29,7 @@ class TopFiveCountries extends Component {
 
   render() {
     let data = this.props.operations.data[this.props.selectedYear];
-    data.Countries.sort((x, y) => descending(x.value, y.value));
+    data.Countries.sort((x, y) => d3.descending(x.value, y.value));
 
     let text;
     if (data[this.props.checked] > 0) {

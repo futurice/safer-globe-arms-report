@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { descending } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import formatEuros from '../utils/formatEuros';
 import intl from 'react-intl-universal';
@@ -26,7 +25,7 @@ class TopFiveCountries extends Component {
   };
   render() {
     this.data.sort((x, y) =>
-      descending(
+      d3.descending(
         x.properties.data[this.props.selectedYear][this.props.checked],
         y.properties.data[this.props.selectedYear][this.props.checked],
       ),
@@ -35,7 +34,7 @@ class TopFiveCountries extends Component {
       .nest()
       .key(d => d.ID)
       .entries(
-        this.props.articleList.sort((x, y) => descending(x.Year, y.Year)),
+        this.props.articleList.sort((x, y) => d3.descending(x.Year, y.Year)),
       );
     let articles = articleList.map((d, i) => {
       return (
@@ -97,7 +96,9 @@ class TopFiveCountries extends Component {
     return (
       <div>
         <div className="top-countries__title bold">
-          <div>{intl.get('TOP5COUNTRIES')}</div>
+          <div>
+            {intl.get('TOP5COUNTRIES')} in {this.props.selectedYear}
+          </div>
           <button className="show-all-button" onClick={this.click}>
             {intl.get(this.props.noOfCountriesButton)}
           </button>

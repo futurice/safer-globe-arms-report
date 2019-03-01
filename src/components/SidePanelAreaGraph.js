@@ -7,7 +7,8 @@ class CountryDataList extends Component {
     return (
       <div>
         <div className="data-list-total__name sideBartitle">
-          {this.props.selectedCountryName[this.props.language]}
+          <div>{this.props.selectedCountryName[this.props.language]}</div>
+          <div>{this.props.selectedYear}</div>
         </div>
         <AreaGraph
           data={this.props.graphData}

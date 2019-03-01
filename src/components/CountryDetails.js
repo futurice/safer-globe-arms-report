@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { descending } from 'd3-array';
 import formatEuros from '../utils/formatEuros';
 import Divider from 'material-ui/Divider';
 import intl from 'react-intl-universal';
@@ -30,7 +29,7 @@ class TopFiveCountries extends Component {
 
   render() {
     this.data.sort((x, y) =>
-      descending(
+      d3.descending(
         x.properties.data[this.props.selectedYear][this.props.checked],
         y.properties.data[this.props.selectedYear][this.props.checked],
       ),
@@ -177,7 +176,7 @@ class TopFiveCountries extends Component {
       .entries(
         this.props.articleList
           .filter(d => d.Country === this.props.selectedCountry)
-          .sort((x, y) => descending(x.Year, y.Year)),
+          .sort((x, y) => d3.descending(x.Year, y.Year)),
       );
     let articles = articleList.map((d, i) => {
       return (
