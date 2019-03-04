@@ -28,6 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
 ## Tooling setup
 
 This project uses ESLint integrated with [prettier](https://github.com/prettier/prettier), which verifies and formats your code so you don't have to do it manually. You should have your editor set up to display lint errors and automatically fix those which it is possible to
@@ -59,6 +60,12 @@ So the workflow should be roughly as follows:
 6. If you need to make changes, push them to the same branch and go back to step 5
 7. When changes are approved, merge into master
 
+After merging to the master the app should be first automatically deployed to [Heroku](https://safer-globe-arms-report.herokuapp.com/) and then to [SaferGlobe](www.saferglobe.fi/armsreport). 
+
+If there is some issue that the deployment didn't work for Heroku then log in [here](https://dashboard.heroku.com/apps) to find out the status and what went wrong. The username and password are in the password safe.
+
+If for reason the app get deployed to Heroku but not to saferglobe, then there should be some issue with building the app in [Travis](https://travis-ci.org/). To check the job logs, go to travis-ci.org and sign in with your github account (you must be a part of Futurice organization in GitHub). Once signed in go to https://travis-ci.org/futurice/safer-globe-arms-report to see the logs and identify the problem / error.
+
 ## Debugging in the Editor
 
 **This feature is currently only supported by [Visual Studio Code](https://code.visualstudio.com) editor.**
@@ -87,6 +94,15 @@ Then add the block below to your `launch.json` file and put it inside the `.vsco
 ```
 
 Start your app by running `yarn start`, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+
+## Patch File
+
+We use base-path.patch to resolve path issues in some of the files. So editting of following files might also require changing of patch file (otherwise the patch might not be applied successfully):
+
+* package.json
+* src/data/about/about_en.md
+* src/data/about/about_fi.md
+* src/index.js
 
 ## Adding a Stylesheet
 
