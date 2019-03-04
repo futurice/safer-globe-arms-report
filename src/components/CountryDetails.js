@@ -51,7 +51,9 @@ class TopFiveCountries extends Component {
                 this.props.selectedCountryName['EN']
               }`}</span>{' '}
               imported{' '}
-              <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+              <span className="bold euroValues">{`${formatEuros(
+                this.props.value,
+              )}`}</span>{' '}
               worth of {this.section[this.props.checked]} from Finland (
               <span className="bold">{`${percent}%`}</span> of all Finnish{' '}
               {this.section[this.props.checked]} arms export) in{' '}
@@ -74,7 +76,9 @@ class TopFiveCountries extends Component {
                 this.props.selectedCountryName['EN']
               }`}</span>{' '}
               imported{' '}
-              <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+              <span className="bold euroValues">{`${formatEuros(
+                this.props.value,
+              )}`}</span>{' '}
               worth of {this.section[this.props.checked]} from Finland (
               <span className="bold">{`${percent}%`}</span> of all Finnish{' '}
               {this.section[this.props.checked]} arms export) in{' '}
@@ -110,7 +114,9 @@ class TopFiveCountries extends Component {
                 this.props.selectedCountryName['FI']
               }`}</span>{' '}
               toi {this.finnish[this.props.checked]}{' '}
-              <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+              <span className="bold euroValues">{`${formatEuros(
+                this.props.value,
+              )}`}</span>{' '}
               arvosta Suomesta (<span className="bold">{`${percent}%`}</span>{' '}
               Suomen {this.finnish[this.props.checked]} viennistä) vuonna{' '}
               <span className="bold">{`${this.props.selectedYear}`}</span>

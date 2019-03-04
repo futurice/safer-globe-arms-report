@@ -160,7 +160,9 @@ class CountryDataList extends Component {
     return (
       <div>
         <h1>
-          <span className="is-strong">Finnish Arms Export</span>
+          <span className="is-strong">
+            Finnish Arms Export {this.props.selectedYear}
+          </span>
         </h1>
         <div>
           <RadioButton

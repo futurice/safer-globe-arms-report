@@ -27,3 +27,7 @@
 .titleIntl{
   margin-bottom: 10px;
 }
+
+.euroValues{
+  white-space: nowrap;
+}

@@ -47,9 +47,11 @@ class TopFiveCountries extends Component {
       text = (
         <div className="countryText">
           <div>
-            In total Finland exported {this.section['EN'][this.props.checked]}{' '}
-            worth{' '}
-            <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+            In <span className="bold">{this.props.selectedYear}</span> Finland
+            exported {this.section['EN'][this.props.checked]} worth{' '}
+            <span className="bold euroValues">{`${formatEuros(
+              this.props.value,
+            )}`}</span>{' '}
             to <span className="bold">{`${noOfCountries} countries`}</span>
           </div>
         </div>
@@ -59,8 +61,11 @@ class TopFiveCountries extends Component {
       text = (
         <div className="countryText">
           <div>
+            Vuonna <span className="bold">{`${this.props.selectedYear}`}</span>{' '}
             Suomi vei {this.section['FI'][this.props.checked]}{' '}
-            <span className="bold">{`${formatEuros(this.props.value)}`}</span>{' '}
+            <span className="bold euroValues">{`${formatEuros(
+              this.props.value,
+            )}`}</span>{' '}
             arvosta <span className="bold">{`${noOfCountries} maahan`}</span>
           </div>
         </div>
