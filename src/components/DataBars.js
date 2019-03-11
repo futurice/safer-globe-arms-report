@@ -126,7 +126,7 @@ class DataMap extends Component {
         'font-size': '16',
         'text-anchor': 'middle',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 20,
+        y: 30,
       })
       .text(this.props.selectedYear);
 
@@ -138,7 +138,7 @@ class DataMap extends Component {
         'text-anchor': 'middle',
         'font-weight': 'bold',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 50,
+        y: 60,
       })
       .text(this.props.countryActiveLang[this.props.language]);
     g.append('text')
@@ -148,7 +148,7 @@ class DataMap extends Component {
         'font-size': '16',
         'text-anchor': 'middle',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 120,
+        y: 100,
       })
       .text(intl.get('TOTALFROMFINLAND'));
 
@@ -160,7 +160,7 @@ class DataMap extends Component {
         'text-anchor': 'middle',
         'font-weight': 'bold',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 150,
+        y: 130,
       })
       .text(
         formatEuros(
@@ -176,7 +176,7 @@ class DataMap extends Component {
         'font-size': '16',
         'text-anchor': 'middle',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 190,
+        y: 170,
       })
       .text(intl.get('CivFROMFINLAND'));
 
@@ -188,7 +188,7 @@ class DataMap extends Component {
         'text-anchor': 'middle',
         'font-weight': 'bold',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 220,
+        y: 200,
       })
       .text(
         `${formatEuros(
@@ -205,7 +205,7 @@ class DataMap extends Component {
         'font-size': '16',
         'text-anchor': 'middle',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 260,
+        y: 240,
       })
       .text(intl.get('MilFROMFINLAND'));
 
@@ -217,7 +217,7 @@ class DataMap extends Component {
         'text-anchor': 'middle',
         'font-weight': 'bold',
         x: (window.innerWidth - 375 - 115) / 2,
-        y: 290,
+        y: 270,
       })
       .text(
         `${formatEuros(
