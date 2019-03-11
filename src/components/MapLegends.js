@@ -25,7 +25,13 @@ export default class Maplegends extends Component {
   };
   render() {
     return (
-      <div className="map-legends box-shadow">
+      <div
+        className={
+          this.props.barDiv === 'inactiveChartDiv'
+            ? 'map-legends box-shadow'
+            : 'map-legends box-shadow hiddenDiv'
+        }
+      >
         <div className="GPI-head">
           <a
             href="http://visionofhumanity.org/indexes/global-peace-index/"

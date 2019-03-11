@@ -16,9 +16,14 @@ class TopFiveCountries extends Component {
       CountryMilatary: 'military arms',
     };
     this.finnish = {
-      TotalCountry: 'aseiden',
-      CivilianArmsTotal: 'siviiliaseiden',
-      CountryMilatary: 'sotatuotteiden',
+      TotalCountry: 'aseita yhteensä',
+      CivilianArmsTotal: 'siviiliaseita',
+      CountryMilatary: 'sotatuotteita',
+    };
+    this.finnishMinor = {
+      TotalCountry: 'aseviennistä',
+      CivilianArmsTotal: 'siviiliaseviennistä',
+      CountryMilatary: 'sotatuotteviennistä',
     };
     this.extension = ['', 'nd', 'rd'];
     this.color = {
@@ -107,18 +112,20 @@ class TopFiveCountries extends Component {
       );
     if (this.props.language === 'FI') {
       if (this.props.countryData[this.props.checked] > 0) {
+        let val = `${value + 1}. `;
+        if (value === 0) val = '';
         text = (
           <div className="countryText">
             <div>
               <span className="bold">{`${
                 this.props.selectedCountryName['FI']
               }`}</span>{' '}
-              toi {this.finnish[this.props.checked]}{' '}
+              toi Suomesta {this.finnish[this.props.checked]} arvosta
               <span className="bold euroValues">{`${formatEuros(
                 this.props.value,
               )}`}</span>{' '}
-              arvosta Suomesta (<span className="bold">{`${percent}%`}</span>{' '}
-              Suomen {this.finnish[this.props.checked]} viennistä) vuonna{' '}
+              arvosta (<span className="bold">{`${percent}%`}</span> Suomen{' '}
+              {this.finnishMinor[this.props.checked]}) vuonna{' '}
               <span className="bold">{`${this.props.selectedYear}`}</span>
             </div>
             <br />
@@ -126,8 +133,8 @@ class TopFiveCountries extends Component {
               <span className="bold">{`${
                 this.props.selectedCountryName['FI']
               }`}</span>{' '}
-              oli <span className="bold">{`${value + 1}.`}</span> suurin{' '}
-              {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
+              oli <span className="bold">{val}</span>
+              suurin {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
               <span className="bold">{this.props.selectedYear}</span>
             </div>
           </div>

@@ -1,6 +1,6 @@
 .map-legends {
 	padding: 0 0.5rem 0.5rem 0.5rem;
-	position: absolute;
+	position: fixed;
 	width:355px;
 	left: 1rem;
 	bottom: 3rem;
@@ -46,4 +46,8 @@
 .sub-text{
 	font-weight: 400;
 	font-style: italic;
+}
+
+.hiddenDiv{
+  display: none;
 }

@@ -93,18 +93,26 @@ class TopFiveCountries extends Component {
         </div>
       );
     });
+    let countryList;
+    if (this.props.chartSelected !== 'barChart') {
+      countryList = (
+        <div>
+          <div className="top-countries__title bold">
+            <div>
+              {intl.get('TOP5COUNTRIES')} {this.props.selectedYear}
+            </div>
+            <button className="show-all-button" onClick={this.click}>
+              {intl.get(this.props.noOfCountriesButton)}
+            </button>
+          </div>
+          {this.list}
+          <Divider className="divider" />
+        </div>
+      );
+    }
     return (
       <div>
-        <div className="top-countries__title bold">
-          <div>
-            {intl.get('TOP5COUNTRIES')} in {this.props.selectedYear}
-          </div>
-          <button className="show-all-button" onClick={this.click}>
-            {intl.get(this.props.noOfCountriesButton)}
-          </button>
-        </div>
-        {this.list}
-        <Divider className="divider" />
+        {countryList}
         <div className="bold">{intl.get('ALL_ARTICLES')}</div>
         {articles}
       </div>

@@ -73,8 +73,6 @@ class DataMap extends Component {
 
   changeToBars = () => {
     selectAll('.dataCircle').remove();
-    select('#bar-chart').classed('activeChartSelection', true);
-    select('#bubble-chart').classed('activeChartSelection', false);
 
     selectAll('.arcs').remove();
     this.drawBars();
@@ -158,8 +156,6 @@ class DataMap extends Component {
 
   changeToBubbles = () => {
     selectAll('.dataBarChart').remove();
-    select('#bar-chart').classed('activeChartSelection', false);
-    select('#bubble-chart').classed('activeChartSelection', true);
 
     selectAll('.graphZoom')
       .append('g')
@@ -763,7 +759,7 @@ class DataMap extends Component {
 
     this.drawBars();
 
-    select('#bar-chart').on('click', this.changeToBars);
+    select('#map-bar-chart').on('click', this.changeToBars);
     select('#bubble-chart').on('click', this.changeToBubbles);
 
     d3.select(this.svg).call(

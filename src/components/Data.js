@@ -3,6 +3,7 @@ import SidePanel from './SidePanel';
 import DataMap from './DataMap';
 import DataTimeline from './DataTimeline';
 import MapLegends from './MapLegends';
+import DataBars from './DataBars';
 import intl from 'react-intl-universal';
 import dataSheet from './../data/data.json';
 import './../styles/components/DataSection.css';
@@ -15,6 +16,7 @@ const svg = require('./../assets/reset-icon.svg');
 const svgDownload = require('./../assets/download-map-icon.svg');
 const barChart = require('./../assets/bar-chart-active.svg');
 const bubbleChart = require('./../assets/bubble-chart-active.svg');
+const barChartIcon = require('./../assets/bar-chart.svg');
 class Data extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ class Data extends Component {
       gpiData: null,
       barChartButtonIcon: barChart,
       bubbleChartButtonIcon: bubbleChart,
+      barChartIcon: barChartIcon,
       activeYear: parseInt(
         Object.keys(
           dataSheet.objects.countries.geometries[0].properties.data,
@@ -67,9 +70,15 @@ class Data extends Component {
       totalColor: '#212121',
       maxValue: 150000000,
       heightMaxValue: 150000000,
-      highlight: false,
+      highlight: true,
       bubbleChartDiv: 'inactiveChartDiv',
+      barDiv: 'inactiveChartDiv',
       barChartDiv: 'activeChartDiv',
+      chartSelected: 'mapBarChart',
+      worldName: {
+        EN: 'World',
+        FI: 'Maailma',
+      },
     };
   }
 
@@ -237,16 +246,33 @@ class Data extends Component {
   };
 
   changeBubbleIcon = () => {
+    this.countryActive('World', this.worldData, this.state.worldName);
     this.setState({
+      highlight: true,
+      chartSelected: 'mapBubbleChart',
       bubbleChartDiv: 'activeChartDiv',
       barChartDiv: 'inactiveChartDiv',
+      barDiv: 'inactiveChartDiv',
     });
   };
 
   changeBarIcon = () => {
+    this.countryActive('World', this.worldData, this.state.worldName);
     this.setState({
+      highlight: true,
+      chartSelected: 'mapBarChart',
       bubbleChartDiv: 'inactiveChartDiv',
       barChartDiv: 'activeChartDiv',
+      barDiv: 'inactiveChartDiv',
+    });
+  };
+  changeBarChartIcon = () => {
+    this.countryActive('World', this.worldData, this.state.worldName);
+    this.setState({
+      chartSelected: 'barChart',
+      bubbleChartDiv: 'inactiveChartDiv',
+      barChartDiv: 'inactiveChartDiv',
+      barDiv: 'activeChartDiv',
     });
   };
   handleChange = () => {
@@ -256,11 +282,66 @@ class Data extends Component {
   };
 
   render() {
+    let graph = (
+      <DataBars
+        selectedYear={this.state.selectedYear}
+        mapData={this.state.countryShapeAndData}
+        language={this.state.language}
+        colorList={this.state.colorList}
+        checked={this.state.checked}
+        countrySelected={this.countrySelected}
+        worldData={this.worldData}
+        countryActive={this.countryActive}
+        countryActiveName={this.state.countryActive}
+        countryActiveData={this.state.countryActiveData}
+        countryActiveLang={this.state.countryActiveName}
+        peaceOperations={this.peaceOperations}
+        civilianColor={this.state.civilianColor}
+        defenceColor={this.state.defenceColor}
+        totalColor={this.state.totalColor}
+        width={Math.max(1024, window.innerWidth)}
+        height={window.innerHeight - 65 - 30}
+      />
+    );
+    if (this.state.barDiv !== 'activeChartDiv') {
+      graph = (
+        <DataMap
+          selectedYear={this.state.selectedYear}
+          mapData={this.state.countryShapeAndData}
+          language={this.state.language}
+          timeLineLoaded={this.state.timeLineLoaded}
+          colorList={this.state.colorList}
+          strokeColorList={this.state.strokeColorList}
+          checked={this.state.checked}
+          countrySelected={this.countrySelected}
+          countrySelectedName={this.state.countrySelected}
+          worldData={this.worldData}
+          countryActive={this.countryActive}
+          countryActiveName={this.state.countryActive}
+          countryActiveData={this.state.countryActiveData}
+          countryActiveLang={this.state.countryActiveName}
+          peaceOperations={this.peaceOperations}
+          GPIColorize={this.state.colorize}
+          civilianColor={this.state.civilianColor}
+          defenceColor={this.state.defenceColor}
+          totalColor={this.state.totalColor}
+          maxValue={this.state.maxValue}
+          heightMaxValue={this.state.heightMaxValue}
+          highlight={this.state.highlight}
+        />
+      );
+    }
     return (
       <div className="data-section-container">
         <div className="data-map-container flex-container-column">
           <div style={{ height: '100%' }} className="flex-container-column">
-            <div className="flex-one country-data-container">
+            <div
+              className={
+                this.state.barDiv === 'inactiveChartDiv'
+                  ? 'flex-one country-data-container'
+                  : 'flex-one country-data-container country-data-container-barChart'
+              }
+            >
               <SidePanel
                 countrySelected={this.state.countrySelected}
                 countrySelectedData={this.state.countrySelectedData}
@@ -285,75 +366,85 @@ class Data extends Component {
                 changeYear={this.changeYear}
                 changeActiveYear={this.changeActiveYear}
                 resetYear={this.resetYear}
+                chartSelected={this.state.chartSelected}
               />
             </div>
-            <div className="flex-five map-container">
-              <DataMap
-                selectedYear={this.state.selectedYear}
-                mapData={this.state.countryShapeAndData}
-                language={this.state.language}
-                timeLineLoaded={this.state.timeLineLoaded}
-                colorList={this.state.colorList}
-                strokeColorList={this.state.strokeColorList}
-                checked={this.state.checked}
-                countrySelected={this.countrySelected}
-                countrySelectedName={this.state.countrySelected}
-                worldData={this.worldData}
-                countryActive={this.countryActive}
-                countryActiveName={this.state.countryActive}
-                countryActiveData={this.state.countryActiveData}
-                countryActiveLang={this.state.countryActiveName}
-                peaceOperations={this.peaceOperations}
-                GPIColorize={this.state.colorize}
-                civilianColor={this.state.civilianColor}
-                defenceColor={this.state.defenceColor}
-                totalColor={this.state.totalColor}
-                maxValue={this.state.maxValue}
-                heightMaxValue={this.state.heightMaxValue}
-                highlight={this.state.highlight}
-              />
-            </div>
-            <div className="map-container__graph-highlight">
-              <div className="box-shadow-opacity highlight-button">
-                <label className="checkboxHighlight">
-                  {intl.get('HIGHLIGHT')}
-                  <input
-                    type="checkbox"
-                    onClick={this.handleChange}
-                    checked={this.state.highlight}
+            <div className="flex-five map-container">{graph}</div>
+            <div className="graph-option">
+              <div
+                className={
+                  this.state.barDiv === 'inactiveChartDiv'
+                    ? 'map-container__graph-highlight'
+                    : 'map-container__graph-highlight hiddenDiv'
+                }
+              >
+                <div className="box-shadow-opacity highlight-button">
+                  <label className="checkboxHighlight">
+                    {intl.get('HIGHLIGHT')}
+                    <input
+                      type="checkbox"
+                      onClick={this.handleChange}
+                      checked={this.state.highlight}
+                    />
+                    <span className="checkmark" />
+                  </label>
+                </div>
+              </div>
+              <div className="map-container__graph-choice">
+                <div
+                  className={`map-container__reset box-shadow-opacity ${
+                    this.state.barChartDiv
+                  }`}
+                  onClick={this.changeBarIcon}
+                >
+                  <img
+                    src={this.state.barChartButtonIcon}
+                    className={
+                      this.state.barChartDiv === 'inactiveChartDiv'
+                        ? 'reset-icon'
+                        : 'reset-icon activeChartSelection'
+                    }
+                    id="map-bar-chart"
+                    alt="Bar Chart"
+                    title="Swith to Map Bar Chart"
                   />
-                  <span className="checkmark" />
-                </label>
-              </div>
-            </div>
-            <div className="map-container__graph-choice">
-              <div
-                className={`map-container__reset box-shadow-opacity ${
-                  this.state.barChartDiv
-                }`}
-                onClick={this.changeBarIcon}
-              >
-                <img
-                  src={this.state.barChartButtonIcon}
-                  className="reset-icon activeChartSelection"
-                  id="bar-chart"
-                  alt="Bar Chart"
-                  title="Swith to Bar Chart"
-                />
-              </div>
-              <div
-                className={`map-container__reset box-shadow-opacity ${
-                  this.state.bubbleChartDiv
-                }`}
-                onClick={this.changeBubbleIcon}
-              >
-                <img
-                  src={this.state.bubbleChartButtonIcon}
-                  className="reset-icon"
-                  id="bubble-chart"
-                  alt="Bubble Chart"
-                  title="Swith to Bubble Chart"
-                />
+                </div>
+                <div
+                  className={`map-container__reset box-shadow-opacity ${
+                    this.state.bubbleChartDiv
+                  }`}
+                  onClick={this.changeBubbleIcon}
+                >
+                  <img
+                    src={this.state.bubbleChartButtonIcon}
+                    className={
+                      this.state.bubbleChartDiv === 'inactiveChartDiv'
+                        ? 'reset-icon'
+                        : 'reset-icon activeChartSelection'
+                    }
+                    id="bubble-chart"
+                    alt="Bubble Chart"
+                    title="Swith to Map Bubble Chart"
+                  />
+                </div>
+                <div
+                  className={`map-container__reset box-shadow-opacity ${
+                    this.state.barDiv
+                  }`}
+                  onClick={this.changeBarChartIcon}
+                >
+                  <img
+                    src={this.state.barChartIcon}
+                    className={
+                      this.state.barDiv === 'inactiveChartDiv'
+                        ? 'reset-icon'
+                        : 'reset-icon activeChartSelection'
+                    }
+                    id="bar-chart"
+                    alt="Bar Chart"
+                    title="Swith to Bar Chart"
+                  />
+                </div>
               </div>
             </div>
             <div className="map-container__buttons">
@@ -379,6 +470,7 @@ class Data extends Component {
             <MapLegends
               colorize={this.colorize}
               colorList={this.state.colorList}
+              barDiv={this.state.barDiv}
             />
             <div
               className="footnote"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import intl from 'react-intl-universal';
 
 import './../styles/components/ArticleList.css';
 
@@ -61,7 +62,7 @@ class TopFiveCountries extends Component {
         <div className="articleTitle">
           {this.props.data[0][this.props.language]}
         </div>
-        <div className="articlesubText">Read More</div>
+        <div className="articlesubText">{intl.get('READ_MORE')}</div>
       </div>
     );
   }

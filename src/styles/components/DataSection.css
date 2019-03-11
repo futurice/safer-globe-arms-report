@@ -22,7 +22,11 @@
   max-height:calc(100vh - 225px);
   overflow-y: auto;
   overflow-x: hidden;
-} 
+}
+.country-data-container-barChart{
+  max-height:calc(100vh - 225px + 84px) !important;
+}
+
 .time-series-graph{
   margin:2rem 0 1.5rem 0;
 }
@@ -34,19 +38,16 @@
   color: #2D80B5;
 }
 .map-container__graph-choice{
-  position: absolute;
-  right: 1rem;
-  top: 4.2rem;
   width: 5rem;
   display: flex;
   flex-wrap: wrap;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.8);    
+  align-self: flex-end;
+  pointer-events: auto !important;
 }
 .map-container__graph-highlight{
-  position: absolute;
-  right: 1rem;
-  top: 1.5rem;
-  display: flex;
+  margin-bottom: 1rem;
+  pointer-events: auto !important;
 }
 
 .highlight-button{
@@ -57,7 +58,7 @@
   background-color: rgba(255,255,255,0.8);
 }
 .map-container__buttons{
-  position: absolute;
+  position: fixed;
   right: 1rem;
   bottom: 4rem;
   width: 2.5rem;
@@ -180,4 +181,20 @@
 
 .activeChartDiv{
   background-color: #eee;
+}
+
+.graph-option{
+  position: fixed;
+  pointer-events:none;
+  margin: 1.5rem 0 0 0;
+  right: 1rem;
+  top: 3rem;
+  display: flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
+.hiddenDiv{
+  display: none;
 }

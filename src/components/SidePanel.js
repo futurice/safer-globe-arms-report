@@ -135,6 +135,7 @@ class CountryDataList extends Component {
             totalColor={this.props.totalColor}
             history={this.props.history}
             maxValue={this.props.maxValue}
+            chartSelected={this.props.chartSelected}
           />
         </div>
       );
@@ -161,7 +162,9 @@ class CountryDataList extends Component {
       <div>
         <h1>
           <span className="is-strong">
-            Finnish Arms Export {this.props.selectedYear}
+            {intl.get('TITLE')}
+            {` `}
+            {this.props.selectedYear}
           </span>
         </h1>
         <div>
