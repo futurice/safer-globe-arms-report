@@ -332,7 +332,6 @@ class DataMap extends Component {
         },
       });
     } else {
-      console.log(this.props.countryActiveData);
       let barG = g.append('g').attrs({
         class: 'barGraphG',
         transform: 'translate(20,340)',
@@ -447,7 +446,6 @@ class DataMap extends Component {
   };
 
   mouseenter = d => {
-    console.log('hello');
     this.props.countrySelected(
       d.properties.name,
       d.properties.data,
@@ -456,7 +454,6 @@ class DataMap extends Component {
   };
 
   mouseleave = () => {
-    console.log('leave');
     this.props.countrySelected(
       this.props.countryActiveName,
       this.props.countryActiveData,
@@ -473,7 +470,6 @@ class DataMap extends Component {
   };
 
   render() {
-    console.log(this.state, this.props);
     return (
       <div>
         <svg ref={svg => (this.svg = svg)} className="barGraph-container" />

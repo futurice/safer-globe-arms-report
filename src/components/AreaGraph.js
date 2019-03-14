@@ -186,7 +186,10 @@ class DataMap extends Component {
           }
         },
       })
-      .style('fill', this.state.civilianColor);
+      .style('fill', this.state.civilianColor)
+      .on('mouseenter', this.mouseover)
+      .on('mouseleave', this.mouseleave)
+      .on('click', this.click);
 
     barG
       .append('rect')

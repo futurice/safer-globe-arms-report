@@ -120,7 +120,8 @@ class TopFiveCountries extends Component {
               <span className="bold">{`${
                 this.props.selectedCountryName['FI']
               }`}</span>{' '}
-              toi Suomesta {this.finnish[this.props.checked]} arvosta
+              toi Suomesta {this.finnish[this.props.checked]}
+              {` `}
               <span className="bold euroValues">{`${formatEuros(
                 this.props.value,
               )}`}</span>{' '}

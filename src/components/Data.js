@@ -17,6 +17,8 @@ const svgDownload = require('./../assets/download-map-icon.svg');
 const barChart = require('./../assets/bar-chart-active.svg');
 const bubbleChart = require('./../assets/bubble-chart-active.svg');
 const barChartIcon = require('./../assets/bar-chart.svg');
+const downloadData = require('./../assets/download-data.svg');
+const filepath = require(`../data/downloads/saferglobe_arms_exports_dataset_v2-0.xlsx`);
 class Data extends Component {
   constructor(props) {
     super(props);
@@ -79,6 +81,7 @@ class Data extends Component {
         EN: 'World',
         FI: 'Maailma',
       },
+      chartOnMap: 'barChart',
     };
   }
 
@@ -247,27 +250,32 @@ class Data extends Component {
 
   changeBubbleIcon = () => {
     this.countryActive('World', this.worldData, this.state.worldName);
+    this.countrySelected('World', this.worldData, this.state.worldName);
     this.setState({
       highlight: true,
       chartSelected: 'mapBubbleChart',
       bubbleChartDiv: 'activeChartDiv',
       barChartDiv: 'inactiveChartDiv',
       barDiv: 'inactiveChartDiv',
+      chartOnMap: 'bubbleChart',
     });
   };
 
   changeBarIcon = () => {
     this.countryActive('World', this.worldData, this.state.worldName);
+    this.countrySelected('World', this.worldData, this.state.worldName);
     this.setState({
       highlight: true,
       chartSelected: 'mapBarChart',
       bubbleChartDiv: 'inactiveChartDiv',
       barChartDiv: 'activeChartDiv',
       barDiv: 'inactiveChartDiv',
+      chartOnMap: 'barChart',
     });
   };
   changeBarChartIcon = () => {
     this.countryActive('World', this.worldData, this.state.worldName);
+    this.countrySelected('World', this.worldData, this.state.worldName);
     this.setState({
       chartSelected: 'barChart',
       bubbleChartDiv: 'inactiveChartDiv',
@@ -328,6 +336,7 @@ class Data extends Component {
           maxValue={this.state.maxValue}
           heightMaxValue={this.state.heightMaxValue}
           highlight={this.state.highlight}
+          chartOnMap={this.state.chartOnMap}
         />
       );
     }
@@ -456,6 +465,21 @@ class Data extends Component {
                   alt="Reset Icon"
                   title="Fit to Screen"
                 />
+              </div>
+              <div className="map-container__reset box-shadow-opacity">
+                <a
+                  href={filepath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={'saferglobe_arms_exports_dataset_v2-0.xlsx'}
+                >
+                  <img
+                    src={downloadData}
+                    className="reset-icon"
+                    alt="Reset Icon"
+                    title="Fit to Screen"
+                  />
+                </a>
               </div>
               <div className="map-container__download box-shadow-opacity">
                 <img

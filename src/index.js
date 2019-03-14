@@ -359,9 +359,9 @@ const locales = {
     SHOWALLCOUNTRIES: 'Näytä kaikki',
     SHOWTOP5: 'Näytä alkuun 5',
     READ_MORE: 'Lue lisää',
-    TOTALFROMFINLAND: 'Suomen yhteensä asevienti',
-    CivFROMFINLAND: 'Suomen siviiliaseet asevienti',
-    MilFROMFINLAND: 'Suomen sotatuotteet asevienti',
+    TOTALFROMFINLAND: 'Suomen asevienti yhteensä',
+    CivFROMFINLAND: 'Suomen siviiliasevienti',
+    MilFROMFINLAND: 'Suomen sotatuotevienti',
     GOBACK: 'Klikkaa tästä palataksesi takaisin',
 
     // About page

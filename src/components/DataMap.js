@@ -15,7 +15,7 @@ class DataMap extends Component {
       saferGlobeData: this.props.mapData,
       width: Math.max(1024, window.innerWidth),
       height: window.innerHeight - 65 - 30,
-      mapScale: (244 * Math.max(1024, window.innerWidth)) / 1440,
+      mapScale: (240 * Math.max(1024, window.innerWidth)) / 1440,
       intlMissionTableTitle: {
         EN: 'Countries where missions took place',
         FI: 'Maat, joissa tehtävät suoritettiin',
@@ -73,7 +73,6 @@ class DataMap extends Component {
 
   changeToBars = () => {
     selectAll('.dataCircle').remove();
-
     selectAll('.arcs').remove();
     this.drawBars();
   };
@@ -156,7 +155,6 @@ class DataMap extends Component {
 
   changeToBubbles = () => {
     selectAll('.dataBarChart').remove();
-
     selectAll('.graphZoom')
       .append('g')
       .attrs({ class: 'arcs' }); // arc group
@@ -756,9 +754,8 @@ class DataMap extends Component {
         transform: d =>
           `translate(${d.properties.centroid[0]},${d.properties.centroid[1]})`,
       });
-
-    this.drawBars();
-
+    if (this.props.chartOnMap === 'barChart') this.drawBars();
+    else this.drawCircles();
     select('#map-bar-chart').on('click', this.changeToBars);
     select('#bubble-chart').on('click', this.changeToBubbles);
 
