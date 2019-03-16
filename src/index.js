@@ -213,6 +213,9 @@ const locales = {
     CivFROMFINLAND: 'Civilian Arms Exports from Finland',
     MilFROMFINLAND: 'Milatary Material Exports from Finland',
     GOBACK: 'Click here to go back',
+    FITTOSCREEN: 'Fit to screen',
+    DOWNLOADALLDATA: 'Download all data',
+    DOWNLOADMAP: 'Download map',
 
     // About page
     TERMS_EXPLAINED: 'About Us',
@@ -357,12 +360,15 @@ const locales = {
     HIGHLIGHT: 'Korosta Suomen vientimaat',
     NOARTICLES: 'Ei maahan liittyviä artikkeleita',
     SHOWALLCOUNTRIES: 'Näytä kaikki',
-    SHOWTOP5: 'Näytä alkuun 5',
+    SHOWTOP5: 'Näytä 5 suurinta',
     READ_MORE: 'Lue lisää',
     TOTALFROMFINLAND: 'Suomen asevienti yhteensä',
     CivFROMFINLAND: 'Suomen siviiliasevienti',
     MilFROMFINLAND: 'Suomen sotatuotevienti',
     GOBACK: 'Klikkaa tästä palataksesi takaisin',
+    FITTOSCREEN: 'Sovita näytölle',
+    DOWNLOADALLDATA: 'Lataa koko tietokanta',
+    DOWNLOADMAP: 'Lataa kartta',
 
     // About page
     TERMS_EXPLAINED: 'Meistä',

@@ -177,8 +177,8 @@ class Data extends Component {
       'sub-region-code': undefined,
       data: {},
       CountryName: {
-        EN: 'International Missions',
-        FI: 'Kansainväliset lähetystöt',
+        EN: 'International operations & missions',
+        FI: 'Kansainväliset operaatiot ja missiot',
       },
     };
     Object.keys(this.worldData).forEach(d => {
@@ -463,7 +463,7 @@ class Data extends Component {
                   className="reset-icon"
                   id="reset-zoom-button"
                   alt="Reset Icon"
-                  title="Fit to Screen"
+                  title={intl.get('FITTOSCREEN')}
                 />
               </div>
               <div className="map-container__reset box-shadow-opacity">
@@ -476,8 +476,8 @@ class Data extends Component {
                   <img
                     src={downloadData}
                     className="reset-icon"
-                    alt="Reset Icon"
-                    title="Fit to Screen"
+                    alt="Download all data"
+                    title={intl.get('DOWNLOADALLDATA')}
                   />
                 </a>
               </div>
@@ -485,8 +485,8 @@ class Data extends Component {
                 <img
                   src={svgDownload}
                   className="download"
-                  alt="Download"
-                  title="Download"
+                  alt="Download map"
+                  title={intl.get('DOWNLOADMAP')}
                   onClick={this.handleDownloadClick}
                 />
               </div>

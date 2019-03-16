@@ -11,12 +11,12 @@ class TopFiveCountries extends Component {
     super(props);
     this.data = this.props.data;
     this.section = {
-      TotalCountry: 'total arms',
+      TotalCountry: 'arms',
       CivilianArmsTotal: 'civilian arms',
       CountryMilatary: 'military arms',
     };
     this.finnish = {
-      TotalCountry: 'aseita yhteensä',
+      TotalCountry: 'aseita',
       CivilianArmsTotal: 'siviiliaseita',
       CountryMilatary: 'sotatuotteita',
     };
@@ -24,6 +24,11 @@ class TopFiveCountries extends Component {
       TotalCountry: 'aseviennistä',
       CivilianArmsTotal: 'siviiliaseviennistä',
       CountryMilatary: 'sotatuotteviennistä',
+    };
+    this.finnishPosition = {
+      TotalCountry: 'aseiden',
+      CivilianArmsTotal: 'siviiliaseiden',
+      CountryMilatary: 'sotatuotteiden',
     };
     this.extension = ['', 'nd', 'rd'];
     this.color = {
@@ -61,7 +66,7 @@ class TopFiveCountries extends Component {
               )}`}</span>{' '}
               worth of {this.section[this.props.checked]} from Finland (
               <span className="bold">{`${percent}%`}</span> of all Finnish{' '}
-              {this.section[this.props.checked]} arms export) in{' '}
+              {this.section[this.props.checked]} export) in{' '}
               <span className="bold">{`${this.props.selectedYear}`}</span>
             </div>
             <br />
@@ -135,8 +140,8 @@ class TopFiveCountries extends Component {
                 this.props.selectedCountryName['FI']
               }`}</span>{' '}
               oli <span className="bold">{val}</span>
-              suurin {this.finnish[this.props.checked]} tuoja Suomesta vuonna{' '}
-              <span className="bold">{this.props.selectedYear}</span>
+              suurin {this.finnishPosition[this.props.checked]} tuoja Suomesta
+              vuonna <span className="bold">{this.props.selectedYear}</span>
             </div>
           </div>
         );
