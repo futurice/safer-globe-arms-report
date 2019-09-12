@@ -43,4 +43,5 @@
 
 .about-stories-wrapper{
 	padding-bottom: 1.5rem !important;
+	justify-content: left !important;
 }

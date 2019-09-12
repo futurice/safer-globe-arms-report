@@ -10,7 +10,6 @@
 
 .stories-container article {
   max-width: 320px;
-  height:300px;
   margin-left: 24px;
   margin-bottom: 24px;
   box-sizing: content-box;
@@ -57,7 +56,7 @@
 
 .stories-container .story-text {
   position: relative;
-  padding: 0px 16px 16px 16px;
+  padding: 0px 16px;
 }
 
 .stories-container .story-text h3 {    
@@ -100,9 +99,10 @@
   margin:0 1rem;
   position: absolute;
   padding-bottom: 1rem;
-  bottom: 0px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .article-link{
-  height: 320px;
+  min-height: 330px;
 }

@@ -50,6 +50,7 @@ class Modal extends Component {
             src={cross}
             className="cross-icon"
             onClick={this.handleCrossClick}
+            alt={'coverImg'}
           />
 
           <Route

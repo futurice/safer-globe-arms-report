@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import intl from 'react-intl-universal';
-import { NavLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import Divider from 'material-ui/Divider';
@@ -84,7 +83,7 @@ class About extends Component {
   loadDocument(name, hash = null) {
     let lang = 'fi';
 
-    if (intl.get('STORIES') != 'Artikkelit') {
+    if (intl.get('STORIES') !== 'Artikkelit') {
       lang = 'en';
     }
 
@@ -136,7 +135,7 @@ class About extends Component {
 
   renderMenu() {
     const itemCount = this.state.navigation.length - 1;
-    const atRoot = this.props.location.pathname === '/about';
+    //const atRoot = this.props.location.pathname === '/about';
     //const hashDefined = this.props.location.hash;
 
     return (
