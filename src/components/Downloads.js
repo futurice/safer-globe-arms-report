@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { csv } from 'd3-request';
 import intl from 'react-intl-universal';
 import { CircularProgress } from 'material-ui/Progress';
-import Card, { CardHeader } from 'material-ui/Card';
+import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import FileDownload from 'material-ui-icons/FileDownload';
 
 import downloads from '../data/downloads.csv';
 import './../styles/components/Downloads.css';
+
+const svgDownload = require('./../assets/download-icon.svg');
 
 class Downloads extends Component {
   constructor(props) {

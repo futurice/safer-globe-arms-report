@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './../styles/components/DataTimeline.css';
-import { selectAll } from 'd3-selection';
-require('d3-selection-multi');
+import * as d3 from 'd3';
+
 const playSvg = require('./../assets/play-icon.svg');
 const pauseSvg = require('./../assets/pause-icon.svg');
+
+/*
+  This component builds the timeline that sits at the bottom of the screen on the data page.
+
+  It received one prop from the parent <Data> component. It is required and is called updateGPIYear. (See Proptypes at the bottom)
+  This prop is a method which exists on the parent <Data> component that we pass down to allow the timeline the ability to update
+  the gpiYear on the parent component.
+
+  This component contains a method called processNewGPIYear() which updates its own state before updating the parent state via the props method
+*/
 
 class DataTimeline extends Component {
   constructor(props) {
@@ -21,97 +32,57 @@ class DataTimeline extends Component {
       ),
       play: false,
     };
-    this.playAnimation = undefined;
+
+    this.processNewGPIYear = this.processNewGPIYear.bind(this);
   }
 
-  componentDidMount() {
-    let node = selectAll('.timeline'),
-      data = this.state.years;
-    node
-      .selectAll('.timeline-item')
-      .data(data)
-      .enter()
-      .append('div')
-      .attrs({
-        class: d => {
-          if (d === this.props.activeYear) {
-            return 'timeline-item activeTab';
-          } else return 'timeline-item';
-        },
-      })
-      .html(d => d)
-      .on('mouseover', this.updateMap)
-      .on('click', this.mouseClick);
-    node.on('mouseout', this.mouseOut);
+  processNewGPIYear(year) {
+    this.setState({ activeYear: year });
+    this.setState({ play: false });
+    this.props.updateGPIYear(year);
   }
 
-  componentDidUpdate() {
-    let node = selectAll('.timeline');
-    node.selectAll('.timeline-item').attrs({
-      class: d => {
-        if (d.toString(10) === this.props.activeYear.toString(10))
-          return 'timeline-item activeTab';
-        else return 'timeline-item';
-      },
-    });
+  processPlay(clck) {
+    this.setState({ play: clck });
   }
-
-  updateMap = year => {
-    this.props.changeYear(year);
-  };
-
-  mouseClick = year => {
-    this.props.changeActiveYear(year);
-  };
-
-  mouseOut = () => {
-    this.props.resetYear();
-  };
-
-  play = () => {
-    if (
-      parseInt(this.props.activeYear, 10) >= parseInt(this.props.endYear, 10)
-    ) {
-      this.props.changeActiveYear(parseInt(this.props.startYear, 10));
-      this.props.changeYear(parseInt(this.props.startYear, 10));
-    } else {
-      this.props.changeActiveYear(parseInt(this.props.activeYear, 10) + 1);
-      this.props.changeYear(parseInt(this.props.activeYear, 10));
-    }
-  };
-
-  handleClick = e => {
-    let play = !this.state.play;
-    if (!this.state.play) {
-      this.playAnimation = setInterval(this.play, 2000);
-    } else {
-      clearInterval(this.playAnimation);
-    }
-    this.setState({
-      play: play,
-    });
-  };
-
   render() {
+    window.timeline = true;
     return (
-      <div
-        className="flex-container flex-spread at-flex-end timeline"
-        ref={node => (this.node = node)}
-      >
-        <button
-          className={`play-button ${
-            this.state.play === true ? 'active-play' : ''
-          }`}
-          onClick={e => this.handleClick(e)}
+      <div className="flex-container flex-spread at-flex-end">
+        <div
+          className={`play-button ${this.state.play === true
+            ? 'active-play'
+            : ''}`}
+          onClick={() => {
+            this.processPlay(!this.state.play);
+          }}
         >
           <img
             src={this.state.play === true ? pauseSvg : playSvg}
             alt={this.state.play === true ? 'Pause Icon' : 'Play Icon'}
           />
-        </button>
+        </div>
+        {this.state.years.map((year, i) => (
+          <div
+            key={i}
+            className={`timeline-item ${year} ${this.state.activeYear === year
+              ? 'active'
+              : ''}`}
+            id={year}
+            onClick={() => {
+              this.processNewGPIYear(year);
+            }}
+          >
+            <span className="timeline-item-year">{year}</span>
+          </div>
+        ))}
       </div>
     );
   }
 }
+
+DataTimeline.propTypes = {
+  updateGPIYear: PropTypes.func.isRequired,
+};
 
 export default DataTimeline;

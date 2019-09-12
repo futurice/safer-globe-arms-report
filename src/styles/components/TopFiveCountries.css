@@ -7,24 +7,8 @@
 }
 
 .top-countries__title {
-	margin-bottom: 1rem;
-	display: flex;
-	justify-content: space-between;
-	margin-top:1rem;
-	align-items: center;
+	margin-bottom: 0.5rem;
 }
-
-.show-all-button{
-	font-size: 12px;
-	font-weight: normal;
-	opacity: 0.8;
-	cursor: pointer;
-	background-color: #eee;
-	padding:10px;
-	font-weight: bold;
-	border: 0 solid #000;
-}
-
 .top-countries__name {
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -56,18 +40,21 @@
 }
 
 .top-countries__graphs {
-	height: 4px;
+	background: #e9e9e9;
+	height: 2px;
 	position: relative;
 	display: flex;
 	flex-direction: row;
 }
 
 .top-countries__graphs--defence {
-	height: 4px;
+  	background: #fe6100;
+	height: 2px;
 }
 
 .top-countries__graphs--civilian {
-	height: 4px;
+	background: #785ef0;
+	height: 2px;
 }
 
 .top-countries {
@@ -79,6 +66,21 @@
 	line-height: 23px;
     margin-bottom: 1rem;
 }
+
+.civComment{
+	color: #785ef0 !important;
+	margin-top:0.75rem !important;
+	font-weight: 700 !important;
+	margin-bottom:0.75rem !important;
+}
+
+.defComment{
+	color: #fe6100 !important;
+	margin-top:0.75rem !important;
+	font-weight: 700 !important;
+	margin-bottom:0.75rem !important;
+}
+
 .bullet-point {
   font-size: 1rem !important;
   line-height: 23px !important;
@@ -94,16 +96,4 @@
 	text-transform: none !important;
 	border-top:0px;
 	border-bottom:0px;
-}
-
-.top-countries__name{
-  font-weight:600;
-  font-size:16px;
-}
-
-.sideBartitle{
-	font-size:16px;
-	font-weight: bold;
-	display:flex;
-	justify-content: space-between;
 }

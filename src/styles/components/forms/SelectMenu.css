@@ -16,13 +16,14 @@
 }
 
 .select-menu:after {
-  content: '▾';
+  content: '\2303';
   position: absolute;
   right: 0.5rem;
   font-size: 1.75rem;
   font-weight: 400;
-  top: 3px;
-  opacity: 0.3;
+  top: 14px;
+  transform: translateY(-50%) rotate(-180deg);
+  opacity: 0.5;
 }
 
 @supports (-ms-ime-align:auto) {

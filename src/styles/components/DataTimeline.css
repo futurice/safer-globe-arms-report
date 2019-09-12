@@ -7,23 +7,11 @@
   background: #c8c8c8;
   color: #ffffff;
   cursor: pointer;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 16px;
   flex: 1;
   position: relative;
   text-align: center;
   transition: background .25s ease;
   height: 2.5rem;
-}
-
-.timeline{
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-  bottom: 0;
 }
 
 .timeline-item:hover{
@@ -41,13 +29,6 @@
   color: #212121;
   font-weight: 700;
 }
-
-.activeTab{
-  background: #ffffff;
-  color: #212121;
-  font-weight: 700;
-}
-
 .timeline-item span {
   display: inline-block;
   margin-top: 0.5rem;
@@ -61,7 +42,6 @@
   height: 2.5rem;
   background-color:#c8c8c8;
   margin-right: 1px; 
-  border: 0 !important;
 }
 
 .play-button.active-play {

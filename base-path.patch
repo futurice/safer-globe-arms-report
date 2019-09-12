@@ -94,13 +94,12 @@ diff --git a/src/index.js b/src/index.js
 index 3e506d1..63a91f5 100644
 --- a/src/index.js
 +++ b/src/index.js
-@@ -496,7 +496,7 @@ We have to wrap our main app component in a generic <Route /> like this
+@@ -468,7 +468,7 @@ We have to wrap our main app component in a generic <Route /> like this
  so we get the `location` in props
  */
- const AppRouterWrap = () => (
+ const AppRouterWrap = () =>
 -  <Router>
 +  <Router basename="/armsreport">
      <Route component={AppRouter} />
-   </Router>
- );
-
+   </Router>;
+ 

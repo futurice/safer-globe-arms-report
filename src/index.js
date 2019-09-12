@@ -185,13 +185,12 @@ const locales = {
     TEXT_BY: 'Text by',
 
     // Map page
-    TITLE: 'Finnish Arms Exports',
     DOWNLOAD_DATA: 'Download Data',
     TOTALS: 'Totals',
     TOTAL: 'Total',
     DEFENCE: 'Military Material',
     CIVILIAN: 'Civilian Arms',
-    TOP5COUNTRIES: 'Top Exporting Countries in',
+    TOP5COUNTRIES: 'Top 5 Countries',
     WORLD: 'World',
     RESET_ZOOM: 'Reset zoom',
     PEACEFUL: 'More Peaceful',
@@ -203,19 +202,6 @@ const locales = {
     HOWTOREAD: 'Note: ',
     HOWTOREADTEXT: 'Exports are shown with the minimum value of 1 px.',
     FINNISH_ARMS_EXPORT: 'Finnish Arms Export',
-    ALL_ARTICLES: 'All Articles (only in Finnish)',
-    HIGHLIGHT: 'Highlight countries to which Finland exports',
-    NOARTICLES: 'No articles related to the country',
-    SHOWALLCOUNTRIES: 'Show All',
-    SHOWTOP5: 'Show Top 5',
-    READ_MORE: 'Read more',
-    TOTALFROMFINLAND: 'Total Exports from Finland',
-    CivFROMFINLAND: 'Civilian Arms Exports from Finland',
-    MilFROMFINLAND: 'Milatary Material Exports from Finland',
-    GOBACK: 'Click here to go back',
-    FITTOSCREEN: 'Fit to screen',
-    DOWNLOADALLDATA: 'Download all data',
-    DOWNLOADMAP: 'Download map',
 
     // About page
     TERMS_EXPLAINED: 'About Us',
@@ -339,36 +325,22 @@ const locales = {
     TEXT_BY: 'Teksti',
 
     // Map page
-    TITLE: 'Suomen asevienti',
     TOTALS: 'Kokonaissumma',
     TOTAL: 'Yhteensä',
     DEFENCE: 'Sotatuotteet',
     CIVILIAN: 'Siviiliaseet',
-    TOP5COUNTRIES: 'Suurimmat vientimaat',
+    TOP5COUNTRIES: '5 suurinta vientimaata',
     WORLD: 'Maailma',
     RESET_ZOOM: 'Nollaa tarkennus',
     PEACEFUL: 'Rauhallinen',
     RESTLESS: 'Rauhaton',
-    NOT_AVAILABLE: 'Ei tietoa',
+    NOT_AVAILABLE: 'Ei saatavilla',
     REMARKS: 'Huomioita',
     ALL_COUNTRY_ARTICLES: 'Kaikki {countryName} -artikkelit',
     GPI: 'Maailman rauhanindeksi',
     HOWTOREAD: 'Huomautus: ',
     HOWTOREADTEXT: 'Viennin vähimmäiskorkeus kaaviossa on 1 px.',
     FINNISH_ARMS_EXPORT: 'Suomen asevienti',
-    ALL_ARTICLES: 'Kaikki artikkelit',
-    HIGHLIGHT: 'Korosta Suomen vientimaat',
-    NOARTICLES: 'Ei maahan liittyviä artikkeleita',
-    SHOWALLCOUNTRIES: 'Näytä kaikki',
-    SHOWTOP5: 'Näytä 5 suurinta',
-    READ_MORE: 'Lue lisää',
-    TOTALFROMFINLAND: 'Suomen asevienti yhteensä',
-    CivFROMFINLAND: 'Suomen siviiliasevienti',
-    MilFROMFINLAND: 'Suomen sotatuotevienti',
-    GOBACK: 'Klikkaa tästä palataksesi takaisin',
-    FITTOSCREEN: 'Sovita näytölle',
-    DOWNLOADALLDATA: 'Lataa koko tietokanta',
-    DOWNLOADMAP: 'Lataa kartta',
 
     // About page
     TERMS_EXPLAINED: 'Meistä',
@@ -495,10 +467,9 @@ class AppRouter extends Component {
 We have to wrap our main app component in a generic <Route /> like this
 so we get the `location` in props
 */
-const AppRouterWrap = () => (
+const AppRouterWrap = () =>
   <Router>
     <Route component={AppRouter} />
-  </Router>
-);
+  </Router>;
 
 ReactDOM.render(<AppRouterWrap />, document.getElementById('root'));
