@@ -50,7 +50,7 @@
     "source-sans-pro": "^2.0.10",
     "start": "^5.1.0",
     "topojson": "^3.0.0",
-    "yarn": "^1.2.0"
+    "yarn": "^1.22.0"
   },
   "lint-staged": {
     "*.{js,jsx}": [
