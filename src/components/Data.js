@@ -18,7 +18,7 @@ const barChart = require('./../assets/bar-chart-active.svg');
 const bubbleChart = require('./../assets/bubble-chart-active.svg');
 const barChartIcon = require('./../assets/bar-chart.svg');
 const downloadData = require('./../assets/download-data.svg');
-const filepath = require(`../data/downloads/saferglobe_arms_exports_dataset_v2-1.xlsx`);
+const filepath = require(`../data/downloads/saferglobe_arms_exports_dataset_v2-2.xlsx`);
 class Data extends Component {
   constructor(props) {
     super(props);
@@ -471,7 +471,7 @@ class Data extends Component {
                   href={filepath}
                   target="_blank"
                   rel="noopener noreferrer"
-                  download={'saferglobe_arms_exports_dataset_v2-1.xlsx'}
+                  download={'saferglobe_arms_exports_dataset_v2-2.xlsx'}
                 >
                   <img
                     src={downloadData}
