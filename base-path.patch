@@ -14,7 +14,7 @@ diff --git a/src/data/about/about_en.md b/src/data/about/about_en.md
 index ca27cba..471ed71 100644
 --- a/src/data/about/about_en.md
 +++ b/src/data/about/about_en.md
-@@ -45,7 +45,7 @@ If using the Finnish Arms Control Report or the information on this www-page, ma
+@@ -40,7 +40,7 @@ If using the Finnish Arms Control Report or the information on this www-page, ma
  
  # Presentation of Information
  
@@ -23,7 +23,7 @@ index ca27cba..471ed71 100644
  
  The euro total may not be the same as in the trade contract but may vary, for example, due to added services or taxes. When exporting licensing for production, the later exports from the country of production will not be shown in the reports of Finnish authorities, nor in this report.
  
-@@ -61,9 +61,9 @@ The export data is compared to the [Global Peace Index](http://visionofhumanity.
+@@ -56,9 +56,9 @@ The export data is compared to the [Global Peace Index](http://visionofhumanity.
  
  # Read More
  
@@ -35,16 +35,16 @@ index ca27cba..471ed71 100644
  
  #### <a name="5" class="internalLink" />
  
-@@ -79,7 +79,7 @@ The Finnish Arms Control Report is developed by SaferGlobe. It has been publishe
+@@ -78,7 +78,7 @@ The Finnish Arms Control Report is developed by SaferGlobe. It has been publishe
  
- The printing and development of the report has been supported in 2010–2016 by the [Finnish Section of Amnesty International](https://www.amnesty.fi/), [Peace Union of Finland](http://www.rauhanliitto.fi/), [Changemaker Youth Network of the Finn Church Aid](https://www.changemaker.fi), [Finnish Peace Committee](https://www.rauhanpuolustajat.org/), [Committee of 100 in Finland](http://www.sadankomitea.fi/), [Physicians for Social Responsibility](https://lsv.fi/) and [the Leo Mechelin Foundation](http://www.leomechelinsaatio.fi). SaferGlobe has also used general funding from the Finnish Ministry of Education and Culture and the Ministry for Foreign Affairs of Finland to produce the report.
+ The printing and development of the report has been supported in 2010–2016 by the [Finnish Section of Amnesty International](https://www.amnesty.fi/), [Peace Union of Finland](http://www.rauhanliitto.fi/), [Changemaker Youth Network of the Finn Church Aid](https://www.changemaker.fi), [Finnish Peace Committee](https://www.rauhanpuolustajat.org/), [Committee of 100 in Finland](http://www.sadankomitea.fi/), [Oskar Öflunds Sitftelse](https://www.oskaroflund.fi/?lang=fi), [Kansan Sivistysrahasto](https://www.sivistysrahasto.fi/), [Physicians for Social Responsibility](https://lsv.fi/) and [the Leo Mechelin Foundation](http://www.leomechelinsaatio.fi). SaferGlobe has also used general funding from the Finnish Ministry of Education and Culture and the Ministry for Foreign Affairs of Finland to produce the report.
  
 -Reports on arms trade from 2008–2015 are available [here](../downloads). Some of the articles from these reports are also featured on the [articles page](../articles).
 +Reports on arms trade from 2008–2015 are available [here](/armsreport/downloads). Some of the articles from these reports are also featured on the [articles page](/armsreport/articles).
  
  This database and the website has been made possible by [Futurice's](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
  
-@@ -101,4 +101,4 @@ We are using cookies to provide usage statistics that help us give you the best
+@@ -100,4 +100,4 @@ We are using cookies to provide usage statistics that help us give you the best
  
  ---
  
@@ -54,7 +54,7 @@ diff --git a/src/data/about/about_fi.md b/src/data/about/about_fi.md
 index 670b01a..46bf8d5 100644
 --- a/src/data/about/about_fi.md
 +++ b/src/data/about/about_fi.md
-@@ -45,7 +45,7 @@ Suomen asevalvontaraportin ja tämän verkkosivuston tietoja käytettäessä tai
+@@ -40,7 +40,7 @@ Suomen asevalvontaraportin ja tämän verkkosivuston tietoja käytettäessä tai
  
  # Miten tiedot on esitetty
  
@@ -63,7 +63,7 @@ index 670b01a..46bf8d5 100644
  
  Esitetty euromääräinen tilastoarvo ei välttämättä ole kauppasopimuksen mukainen summa. Se voi vaihdella esimerkiksi mukana olevien palveluiden tai verojen seurauksena. Jos kyse on lisenssistä eli valmistusoikeuden viennistä, ei tuotteiden myöhempi vienti lisenssin saaneesta valmistusmaasta tule näkymään Suomen viranomaisten raporteissa eikä myöskään SaferGloben julkaisemassa asevalvontaraportissa.
  
-@@ -61,9 +61,9 @@ Vientitietoja verrataan [Globaaliin Rauhanindeksiin](http://visionofhumanity.org
+@@ -56,9 +56,9 @@ Vientitietoja verrataan [Globaaliin Rauhanindeksiin](http://visionofhumanity.org
  
  # Lue lisää
  
@@ -75,16 +75,16 @@ index 670b01a..46bf8d5 100644
  
  #### <a name="5" class="internalLink" />
  
-@@ -79,7 +79,7 @@ Suomen asevalvontaraportti on SaferGloben työryhmän kehittämä tuote. Raportt
+@@ -78,7 +78,7 @@ Suomen asevalvontaraportti on SaferGloben työryhmän kehittämä tuote. Raportt
  
- Raporttien painattamista ja kehitystyötä ovat tukeneet vuosina 2010–2016 [Amnesty International Suomen osasto ry.](https://www.amnesty.fi/), [Suomen Rauhanliitto – Fredsförbundet ry.](http://www.rauhanliitto.fi/), [Kirkon ulkomaanavun nuorisoverkosto Changemaker](https://www.changemaker.fi), [Suomen Rauhanpuolustajat ry.](https://www.rauhanpuolustajat.org/), [Suomen Sadankomitea ry.](http://www.sadankomitea.fi/), [Lääkärin sosiaalinen vastuu ry.](https://lsv.fi/) ja [Leo Mechelin Säätiö](http://www.leomechelinsaatio.fi). SaferGlobe on käyttänyt raportin tekemiseen Ulkoasiainministeriöltä saatua yleisrahoitusta sekä Opetus- ja kulttuuriministeriön Rauhantyön edistämisen määrärahoista saamiaan varoja.
+ Asevalvontarportin painattamista, julkaisua ja kehitystyötä ovat tukeneet [Amnesty International Suomen osasto ry.](https://www.amnesty.fi/), [Suomen Rauhanliitto – Fredsförbundet ry.](http://www.rauhanliitto.fi/), [Kirkon ulkomaanavun nuorisoverkosto Changemaker](https://www.changemaker.fi), [Suomen Rauhanpuolustajat ry.](https://www.rauhanpuolustajat.org/), [Suomen Sadankomitea ry.](http://www.sadankomitea.fi/), [Oskar Öflunds Sitftelse](https://www.oskaroflund.fi/?lang=fi), [Kansan Sivistysrahasto](https://www.sivistysrahasto.fi/), [Lääkärin sosiaalinen vastuu ry.](https://lsv.fi/) ja [Leo Mechelin Säätiö](http://www.leomechelinsaatio.fi). SaferGlobe on käyttänyt raportin tekemiseen ulkoministeriöltä saatua yleisrahoitusta sekä opetus- ja kulttuuriministeriön rauhantyön edistämisen määrärahoista saamiaan varoja.
  
 -Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](../downloads/?lang=fi). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](../articles/?lang=fi).
 +Vuosien 2008–2015 asevientiä käsitteleviä raportteja voit lukea [materiaalit-sivulta](/armsreport/downloads/?lang=fi). Osa niissä olleissa jutuista löytyy myös [artikkelit-sivulta](/armsreport/articles/?lang=fi).
  
  Tämän tietokannan ja verkkosivuston on mahdollistanut [Futuricen](http://futurice.com/) [Chilicorn Fund](https://spiceprogram.org/chilicorn-fund/).
  
-@@ -101,4 +101,4 @@ Käytämme tällä sivustolla evästeitä saadaksemme tilastotietoa kävijöist
+@@ -100,4 +100,4 @@ Käytämme tällä sivustolla evästeitä saadaksemme tilastotietoa kävijöist
  
  ---
  
