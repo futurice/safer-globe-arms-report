@@ -17,7 +17,8 @@
     opacity: 0.5;
     font-size: 0.75rem;
 	margin-top: 0.5rem;
-	display: flex;
+	display: flex;    
+	flex-wrap: wrap;
 }
 
 .meta-data{
