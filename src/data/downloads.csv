@@ -1,12 +1,12 @@
 filename,title,year,section,filetype,desc
-Suomen-asevienti-2008.pdf,REPORTOLD,2008,1,pdf,
-Suomen-asevienti-2009.pdf,REPORTOLD,2009,1,pdf,
-Suomen-asevienti-2010.pdf,REPORTOLD,2010,1,pdf,
-Suomen-asevienti-2011.pdf,REPORTOLD,2011,1,pdf,
-Suomen-asevienti-2012.pdf,REPORTOLD,2012,1,pdf,
-Suomen-asevienti-2014.pdf,REPORT,2014,1,pdf,
-Suomen-asevienti-2015.pdf,REPORT,2015,1,pdf,
-Suomen-asevienti-2016.pdf,REPORT,2016,1,pdf,
-laatuseloste_vuosien_2008-2016_raportit.pdf,REPORTMETADATA,,1,pdf,
-saferglobe_arms_exports_dataset_v2-2.xlsx,DATAXLS,2002 - 2019,2,xls,
-saferglobe_asevientitietokannan_metadata_v2-3.pdf,DATAMETADATA,,2,pdf,
+Suomen-asevienti-2008.pdf,"REPORTOLD",2008,1,pdf,""
+Suomen-asevienti-2009.pdf,"REPORTOLD",2009,1,pdf,""
+Suomen-asevienti-2010.pdf,"REPORTOLD",2010,1,pdf,""
+Suomen-asevienti-2011.pdf,"REPORTOLD",2011,1,pdf,""
+Suomen-asevienti-2012.pdf,"REPORTOLD",2012,1,pdf,""
+Suomen-asevienti-2014.pdf,"REPORT",2014,1,pdf,""
+Suomen-asevienti-2015.pdf,"REPORT",2015,1,pdf,""
+Suomen-asevienti-2016.pdf,"REPORT",2016,1,pdf,""
+laatuseloste_vuosien_2008-2016_raportit.pdf,"REPORTMETADATA","",1,pdf,""
+saferglobe_arms_exports_dataset_v2-2.xlsx,"DATAXLS",2002 - 2019,2,xls,""
+saferglobe_asevientitietokannan_metadata_v2-2.pdf,"DATAMETADATA","",2,pdf,""
